@@ -31,6 +31,8 @@ set undofile
 set undodir=~/.config/nvim/undodir
 set undolevels=1000
 set ai
+filetype plugin indent on
+set showmatch
 set completeopt=longest,menuone
 set number
 set noshiftround
@@ -40,6 +42,7 @@ set notimeout
 set wildignore+=**/node_modules/*
 set wildignore+=**/.git/*
 set wildignore+=*.pyc
+set wildignore=*.o,*.obj,*.bak,*.exe,*.hi,*.dyn_hi,*.dyn_o,*.zip,*.pdf
 set incsearch
 set ignorecase
 set smartcase
@@ -80,7 +83,7 @@ let loaded_matchparen = 1
 let g:netrw_banner = 0
 let g:bracey_refresh_on_save = 1
 let g:asyncrun_open = 15
-
+let g:asyncrun_trim = 1
 
 " mapings
 nmap <silent><C-l> :noh<CR>
@@ -181,7 +184,7 @@ hi CodeActionMenuDetailsChangedFile ctermbg=16 ctermfg=blue
 let &t_ut=''
 highlight clear SignColumn
 highlight clear TabLineFill
-autocmd FileType qf 15wincmd_
+autocmd FileType qf 10wincmd_
 autocmd colorscheme * hi clear cursorline
 autocmd VimEnter * set autochdir
 au FocusGained,BufEnter * checktime
@@ -232,15 +235,25 @@ autocmd CursorHold,CursorHoldI * lua require'nvim-lightbulb'.update_lightbulb()
 func! CompileRun()
   exec "w"
   if &filetype == 'c'
-    exec "AsyncRun gcc % -o %< && ./%<"
+    exec "AsyncRun -strip gcc % -o %< && ./%<"
   elseif &filetype == 'cpp'
-    exec "AsyncRun g++ % -o %< && !./%<"
+    exec "AsyncRun -strip g++ % -o %< && ./%<"
   elseif &filetype == 'sh'
-    exec "AsyncRun bash %"
+    exec "AsyncRun -strip bash % && cp % %< && chmod +x %<"
   elseif &filetype == 'python'
-    exec "AsyncRun python3 %"
+    exec "AsyncRun -strip python3 %"
   elseif &filetype == 'go'
-    exec "AsyncRun go build %< && go run %"
+    exec "AsyncRun -strip go build %< && go run %"
+  elseif &filetype == 'javascript'
+    exec "AsyncRun -strip node %"
+  elseif &filetype == 'typescript'
+    exec "AsyncRun -strip tsc % && node %<.js"
+  elseif &filetype == 'julia'
+    exec "AsyncRun -strip julia %"
+  elseif &filetype == 'rust'
+    exec "AsyncRun -strip rustc % && ./%<"
+  elseif &filetype == 'haskell'
+    exec "AsyncRun -strip ghc % && ./%<"
   endif
 endfunc
 
