@@ -1,0 +1,22 @@
+# General Settings
+format = """
+$directory$git_branch$character"""
+add_newline = false
+
+[package]
+disabled = true
+
+[directory]
+format = "[$path]($style)[$read_only]($read_only_style) " 
+truncation_length = 1
+truncate_to_repo = true
+home_symbol = "~"
+truncation_symbol = ""
+read_only_style = "red"
+fish_style_pwd_dir_length = 1
+
+[character]
+success_symbol = "[❱](bold blue)"
+error_symbol = "[❱](bold blue)"
+
+

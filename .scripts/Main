@@ -1,0 +1,6 @@
+if [ -z "$TMUX" ]
+then
+    tmux attach -t Main || tmux new -s Main
+fi
+
+

@@ -1,0 +1,6 @@
+inputbar {
+    spacing: 0px;
+    padding: 0px;
+    children:   [ ];
+}
+

@@ -1,0 +1,150 @@
+
+configuration {
+  show-icons:         true;
+  font:               "Fantasque Sans Mono 14";
+  window-format: 					"{w} ··· {t}";
+
+}
+* {
+    font: "SF Mono Semibold 8 ";
+    foreground: #ffffff;
+    background-color: #000000;
+    active-background:  #323433;
+    urgent-background: #323433;
+    selected-background: @active-background;
+    selected-urgent-background: @urgent-background;
+    selected-active-background: @active-background;
+    separatorcolor: @active-background;
+    bordercolor: @active-background;
+    show-icons: true;
+    show-match: true;
+    fixed-num-lines: true;
+    sidebar-mode: true;
+    separator-style: 				"none";
+    padding:0;
+
+}
+
+window {
+    background-color: @background;
+    border:           1px;
+    border-radius:    7;
+    border-color:     @bordercolor;
+    padding:          5;
+}
+mainbox {
+    border:  0;
+    padding: 0;
+}
+message {
+    border:        0px 0px 0px 0px ;
+    border-color:  @bg;
+    border-radius: 0px;
+    border:        5px;
+    padding:       5px ;
+}
+textbox {
+    text-color: @foreground;
+}
+listview {
+    fixed-height: 0;
+    border:       0px 0px 0px 0px ;
+    border-color: @bordercolor;
+    spacing:      5px ;
+    scrollbar:    false;
+    padding:      5px 5px 5px 5px ;
+}
+element {
+    border-radius:  5;
+    padding:        3px ;
+}
+element.normal.normal {
+    text-color:       @foreground;
+}
+
+element.normal.active {
+      text-color:       @foreground;
+}
+element.normal.urgent{
+    text-color:     @foreground;
+  }
+element.selected.normal {
+    background-color: #3281ea;
+    text-color:       #000000;
+}
+element.selected.urgent {
+    background-color: #3281ea;
+    text-color:       #000000;
+}
+element.selected.active {
+    background-color: #3281ea;
+    text-color:       #000000;
+}
+element.alternate.normal {
+    background-color: @background;
+    text-color:       @foreground;
+}
+element.alternate.urgent {
+    background-color: #000000;
+    text-color:       #ffffff;
+}
+element.alternate.active {
+    background-color: #000000;
+    text-color:       #ffffff;
+}
+sidebar {
+    border:       0px 0px 0px 0px ;
+    border-color: @separatorcolor;
+}
+
+#case-indicator {
+    spacing:    0;
+    text-color: @foreground;
+}
+entry {
+    spacing:    5;
+    text-color: @foreground;
+    padding:    0% 0% 0% 0%;
+}
+#prompt {
+    spacing:    0;
+    text-color: @foreground;
+}
+inputbar {
+    spacing: 10px;
+    padding: 10px;
+    children:   [ prompt,textbox-prompt-colon,entry,case-indicator ];
+}
+textbox-prompt-colon {
+    expand:     false;
+    str:        ":";
+    margin:     0px 0.3em 0em 0em ;
+    text-color: @foreground;
+}
+element-icon {
+    background-color: 				inherit;
+    text-color:       				inherit;
+    horizontal-align:               0.5;
+    vertical-align:                 0.5;
+    size:                           20px;
+    border:                         0px;
+}
+
+element selected {
+    background-color:               @ac;
+    text-color:                     #000000;
+	border:							0% 0% 0% 0%;
+    border-radius:                  7px;
+    border-color:                  	@bg;
+}
+
+element-text {
+    text-color:       				inherit;
+    expand:                         true;
+    horizontal-align:               0;
+    vertical-align:                 0.5;
+    margin:                         0% 0.25% 0% 0.25%;
+}
+
+
+

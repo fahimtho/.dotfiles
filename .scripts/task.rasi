@@ -1,0 +1,142 @@
+/** Basic config file **/
+
+configuration {
+  show-icons:         true;
+  icon-theme:         "Kora";
+  font:               "Fantasque Sans Mono 14";
+  window-format: 					" ··· {t} ··· {c} ";
+
+}
+* {
+    lines: 5;
+    font: "SF Mono Semibold 8";
+    foreground: #f8f8f2;
+    background-color: #000000;
+    active-background: #323433;
+    urgent-background: #ff5555;
+    selected-background: @active-background;
+    selected-urgent-background: @urgent-background;
+    selected-active-background: @active-background;
+    separatorcolor: @active-background;
+    bordercolor: @active-background;
+    show-icons: true;
+    show-match: true;
+    fixed-num-lines: false;
+    sidebar-mode: false;
+    separator-style: 				"none";
+    padding: 0px;
+    columns: 2;
+
+}
+
+window {
+    transparency:       "real";
+    background-color: @background;
+    border:           1px;
+    border-radius: 7;
+    border-color: @bordercolor;
+    padding: 2;
+    width:  500px;
+}
+mainbox {
+    border:  0;
+    padding: 5;
+
+}
+message {
+    border:       0px 0px 0px 0px ;
+    border-color:  #FD082D;
+    border-radius: 0px;
+    padding:      5px ;
+}
+textbox {
+    text-color: @foreground;
+}
+listview {
+    fixed-height: 0;
+    border:       0px 0px 0px 0px ;
+    border-color: @bordercolor;
+    spacing:      5px ;
+    scrollbar:    false;
+    padding:     5px 5px 5px 5px ;
+}
+element {
+    border:  0;
+    border-radius: 5px;
+    padding: 3px ;
+}
+element.normal.normal {
+    text-color:       @foreground;
+}
+element.normal.urgent {
+    background-color: @urgent-background;
+    text-color:       @urgent-foreground;
+}
+element.normal.active {
+    text-color:       @foreground;
+}
+element.selected.urgent {
+    background-color: @selected-urgent-background;
+    text-color:       @foreground;
+}
+element.selected.active {
+    background-color: @selected-background; 
+    text-color:       @foreground;
+}
+element.alternate.normal {
+    background-color: @background;
+    text-color:       @foreground;
+}
+element.alternate.urgent {
+    background-color: @urgent-background;
+    text-color:       @foreground;
+}
+element.alternate.active {
+    text-color:       @foreground;
+}
+sidebar {
+    border:       0px 0px 0px 0px ;
+    border-color: @separatorcolor;
+}
+button.selected {
+    background-color: #000000;
+    text-color:       #000000;
+}
+#inputbar {
+    spacing:    0;
+    text-color: @foreground;
+    padding:    5px ;
+}
+
+
+
+
+#case-indicator {
+    spacing:    0;
+    text-color: @foreground;
+}
+entry {
+    spacing:    0px;
+    text-color: @foreground;
+    padding: 0.20% 0% 0% 0%;
+}
+#prompt {
+    spacing:    0;
+    text-color: @foreground;
+}
+inputbar {
+    spacing: 10px;
+    padding: 10px;
+    children:   [ prompt,textbox-prompt-colon,entry,case-indicator ];
+}
+textbox-prompt-colon {
+    expand:     false;
+    str:        ":";
+    margin:     0px 0em 0em 0em ;
+    text-color: @foreground;
+    padding: 1px;
+}
+element-icon {
+    size:                           18px;
+    border:                         0px;
+}

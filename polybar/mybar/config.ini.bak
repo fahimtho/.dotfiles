@@ -1,0 +1,149 @@
+##### Global WM Settings
+
+[global/wm]
+margin-bottom = 0
+margin-top = 0
+
+##### File Inclusion
+include-file = ~/.config/polybar/mybar/modules.ini
+
+#### Global Settings Per Bar
+
+[bar/main]
+monitor = eDP1
+monitor-strict = false
+
+override-redirect = false
+fixed-center = true
+
+width = 100%
+height = 30
+
+offset-x = 0
+offset-y = 0
+
+background = ${color.background-alt}
+foreground = ${color.foreground}
+
+radius-top = 0 
+radius-bottom = 0 
+
+line-size = 2
+line-color = ${color.primary}
+
+order-size = 0
+border-color = #171717
+
+padding = 0
+
+module-margin-left = 0
+module-margin-right = 0
+
+### Text Fonts
+font-0 = "JetBrains Mono Medium Nerd Font:pixelsize=10;3"
+font-1 = "Noto Color Emoji:style=Regular:scale=13;3"
+
+
+##### Date and Time
+[bar/top]
+inherit = bar/main
+modules-center = date  
+enable-ipc = true
+wm-restack = bspwm
+width = 15%
+offset-x = 42.7%
+offset-y = 3
+radius-bottom = 5
+radius-top = 5
+
+###### Music
+
+[bar/mpd]
+inherit = bar/main
+bottom = false
+modules-center = mpc
+enable-ipc = true
+wm-restack = bspwm
+width = 14% 
+offset-x = 16.8%
+radius-top = 7
+radius-bottom = 7 
+offset-y = 3
+
+##### System Stats
+
+[bar/stats]
+inherit = bar/main
+bottom = false
+modules-center = cpu memory disk temp 
+enable-ipc = true
+wm-restack = bspwm
+width = 13.5% 
+offset-x = 71.8%
+radius-top = 5
+radius-bottom = 5 
+offset-y = 3
+
+##### Workspaces
+
+[bar/workspace]
+inherit = bar/main
+bottom = false
+modules-center = bspwm
+enable-ipc = true
+wm-restack = bspwm
+width = 16% 
+offset-x = .4%
+radius-top = 5
+radius-bottom =  
+offset-y = 3
+
+##### Bar with info of the system
+[bar/info]
+enable-ipc = true
+inherit = bar/main
+bottom = false
+modules-center = battery  network bluetooth up  pulseaudio-control 
+width = 14%
+pseudo-transparency = true
+offset-x = 85.6%
+radius-bottom = 5
+radius-top = 5
+offset-y = 3
+label-empty-background = #50ffffff
+tray-position = right
+wm-restack = bspwm
+
+##### Options
+wm-name = bspwm
+
+; Available positions:
+;   left
+;   center
+;   right
+;   none
+
+tray-detached = false
+tray-maxsize = 14
+tray-offset-x = 0
+tray-offset-y = 0
+tray-padding = 1
+tray-scale = 1
+
+#### Global Options
+
+[settings]
+
+throttle-output = 5
+throttle-output-for = 10
+screenchange-reload = false
+
+compositing-background = source
+compositing-foreground = over
+compositing-overline = over
+compositing-underline = over
+compositing-border = over
+
+pseudo-transparency = false
+
+; vim:ft=dosini

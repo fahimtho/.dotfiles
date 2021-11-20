@@ -1,0 +1,48 @@
+[
+  {
+    "name": "1. Daily comic",
+    "command": "xkcd"
+  },
+  {
+    "name": "2. Random comic",
+    "command": "xkcd -r"
+  },
+  {
+    "name": "3. TODOs",
+    "command": "notify-send 'TODOs' 'What do you want do ?' && kitty --class=TODO -1 nvim .todo.md"
+  },
+
+  {
+    "name": "4. Restart music",
+    "command": "notify-send 'Behold' 'Restarting Music !!!' && pkill mopidy && mopidy"
+  },
+  {
+    "name": "5. Restart Dunst",
+    "command": "notify-send 'Behold' 'Restarting Notification Deamon' && pkill dunst && ~/.config/dunst/reload"
+  },
+  {
+    "name": "6. Fetch database",
+    "command": "notify-send 'Fetching' 'Package Database' && yay -Sy"
+  },
+  
+  {
+    "name": "7. Clipboard Actions",
+    "command": "notify-send 'Clipboard' 'Pick a action' && ~/.scripts/clipboard.sh"
+  },
+  
+  {
+    "name": "8. Tmux Sessions",
+    "command": "notify-send 'Tmux' 'Tinker with sessions' && ~/.scripts/tmux.sh"
+  },
+  
+  {
+    "name": "9. Test Fonts",
+    "command": "notify-send 'Font' 'Beauty is in the font' && kitty -1 ~/.scripts/fontpreview"
+  },
+{
+    "name": "10. Lofi Music",
+    "command": "notify-send 'Lofi' 'Lets chill and stuff' && ~/.scripts/beats"
+  }
+
+
+]

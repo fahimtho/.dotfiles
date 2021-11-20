@@ -1,0 +1,273 @@
+# Web-Browser
+alt + w 
+   chromium
+
+# File-manager
+alt + f 
+  nemo
+
+# Ranger
+super + f
+ kitty -1 --class=ranger ./.scripts/ranger/ranger.py
+  
+# Rofi-File Manager
+alt + o
+   rofi  -yoffset "-300" -no-fixed-num-lines -show file-browser-extended -display-file-browser-extended "files"
+
+# Switch Windows Active with Rofi
+alt + Escape
+ ~/.scripts/workspace.sh
+
+# Mpd Play (wireless)
+XF86AudioPlay 
+  mpc play
+
+# Mpd Pause (wireless)
+XF86AudioPause
+  mpc pause
+
+# Mpd Previous Song (Wireless)
+XF86AudioNext 
+  mpc prev
+
+# Mpd Next Song (Wireless)
+XF86AudioPrev
+  mpc next
+
+# Mpd Pause Music (Keyboard)
+control + space
+  mpc toggle
+
+# Mpd Next song (Keyboard)
+control + Left
+  mpc prev
+
+# Mpd Previous song (Keyboard)
+control + Right
+  mpc next 
+
+# Increase Volumn by 5 (mpd)
+control + Up
+  mpc volume +5
+
+# Decrease Volumn by 5 (mpd)
+control + Down
+  mpc volume -5
+
+# Skip 5 second ahead (mpd)
+control + shift + Right
+  mpc seek +5
+
+# Skip 5 second previous (mpd)
+control + shift + Left
+  mpc seek -5
+
+# Pause Media (mpris)
+Menu 
+  playerctl play-pause
+
+# Next Track (mpris)
+ctrl + period
+  playerctl next
+
+# Previous Track (mpris)
+ctrl + comma
+  playerctl previous
+ 
+# What Are Playing
+alt + p
+   ~/.scripts/players
+
+# Rofi-Youtube Menu
+alt + y
+  ytfzf -N -D -l 
+
+# Clipboard History
+alt + c
+  rofi  -yoffset "-200" -no-fixed-num-lines -modi "clipboard:greenclip print" -show clipboard -run-command '{cmd}'
+ 
+# Mpd Menu
+alt + m
+  rofi-mpc
+
+# Things to Read
+alt + b
+  ~/.scripts/books-search.sh
+
+# Dotfiles
+super + c
+  /home/fh1m/.scripts/dmscripts/scripts/dm-confedit
+
+# Notes in Markdown
+alt + n
+   /home/fh1m/.scripts/note-search_markdown.sh  
+
+# Books
+super + b
+  /home/fh1m/.scripts/Books.sh 
+
+# Notes in Latex
+super + n
+  /home/fh1m/.scripts/notes_latex.sh
+
+# Notes in Pdf
+super + shift + n
+  /home/fh1m/.scripts/notes_pdf.sh
+
+# Terminal with Tmux
+super + Return
+	kitty --class=Tmux -1 ~/.scripts/Main 
+
+# Program Launcher
+shift + space
+	 ~/.config/rofi/launchers/colorful/launcher.sh
+
+# Reload Sxhkd
+control + Escape
+	pkill -USR1 -x sxhkd
+
+# Restart Bspwm
+super + r
+	bspc wm -r
+
+# Close Windows
+alt + F1
+	bspc node -c
+
+# Make Current Window Full
+super + m
+	bspc desktop -l next
+
+# Set the window state
+super + {t,shift + t,s,shift+f}
+	bspc node -t {tiled,pseudo_tiled,floating,fullscreen}
+
+# Set the node flags (marked,locked,sticky,private)
+super + ctrl + {m,x,y,z}
+	bspc node -g {marked,locked,sticky,private}
+
+# Focus the node in the given direction
+super + {_,shift + }{Left,Down,Up,Right}
+	bspc node -{f,s} {west,south,north,east}
+
+# Move to Next Window
+super + Tab 
+  bspc desktop -f 'next.occupied'
+
+# Move to Previous Window
+super + grave
+  bspc desktop -f 'prev.occupied'
+
+# Switch to last node/desktop
+alt + {grave,Tab}
+	bspc {node,desktop} -f last
+
+# Send Window to the given desktop
+super + {_,shift + }{1-9,0}
+  bspc {desktop -f,node -d} '^{1-9,10}' 
+
+# Move focused window to the next or previous workspace and then switch to that workspace
+alt + shift + {Left,Right}
+    id=$(bspc query --nodes --node); bspc node --to-desktop {prev,next}; bspc desktop --focus next; bspc node --focus ${id}
+
+# Hide curent focused window
+super + h
+  ~/.scripts/hide
+
+# Powermenu
+super + p
+  powermenu
+
+# List windows as searchable 
+super + l
+  rofi -show window -no-fixed-num-lines -yoffset "-100"
+
+# Go to next empty workspace
+super + e
+  bspc desktop -f 'next.!occupied'
+
+# Goto Previous empty workspace
+super + q
+  bspc desktop -f 'prev.!occupied'
+
+# Watch youtube with mpv
+super + y
+ ~/.scripts/youtube
+ 
+# Mpd Full-on Mode
+ctrl + m
+  chromium http://localhost:6680/iris/kiosk-mode
+
+# Take screenshot 
+Print
+  flameshot gui
+
+# Full Window Screen shot
+shift + Print
+  flameshot full -p ~/Pictures/Screenshots
+
+# Terminal
+alt + Return
+  kitty 
+
+# Search last copyed text on google
+alt + s
+  ~/.local/bin/clip
+
+# Help Menu
+alt + h
+  ~/.scripts/help
+
+# Twitch Channels
+control + alt + s
+  rofi-ttv
+
+# Turn down volumn
+XF86AudioLowerVolume
+  ponymix decrease 5 --max-volume 200 && dunstify -a System -t 10000 -h string:x-dunst-stack-tag:volume -h int:value:$( ponymix get-volume) "  Volume: $(ponymix get-volume)% "
+
+# Turn up volum
+XF86AudioRaiseVolume
+  ponymix increase 5  --max-volume 200 && dunstify -a System -t 10000 -h string:x-dunst-stack-tag:volume -h int:value:$( ponymix get-volume) "  Volume: $(ponymix get-volume)% " 
+
+# Mute Mic
+XF86AudioMicMute
+  amixer set Capture toggle && amixer get Capture | grep '\[off\]' && notify-send "MIC switched OFF" || notify-send "MIC switched ON"
+
+# Swap the Current Window with Biggest one
+super + space
+  bspc node -s biggest.window
+
+# Go to Specefic Workspaces
+super + Escape
+  ~/.scripts/go.sh
+
+# Tasks
+ctrl + Return
+  ~/.scripts/tasks/task.sh
+
+# Change orientation
+super + equal
+  bspc node -n last.automatic
+
+# Jump to mpv
+super + v
+  raise mpv
+
+# Jump to Pdf reader
+alt + d
+  raise sioyek
+
+# Raise Terminal
+alt + space
+  raise Tmux
+
+# Raise Browser
+super + w 
+  raise chromium
+
+# lofi-beats
+alt + l
+  ~/.scripts/beats
+
+

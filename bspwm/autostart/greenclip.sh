@@ -1,0 +1,3 @@
+pkill greenclip
+greenclip daemon
+

@@ -1,0 +1,94 @@
+
+configuration {
+  font:               "SF Mono 14";
+  window-format: 					"{w}   ···   {c}";
+  show-icons:         false;
+
+
+}
+* {
+    font: "SF Mono Semibold 8";
+    foreground: #f8f8f2;
+    background-color: #000000;
+    active-background: #323433;
+    urgent-background: #323433;
+    selected-background: @active-background;
+    selected-urgent-background: @urgent-background;
+    selected-active-background: @active-background;
+    separatorcolor: @active-background;
+    bordercolor: @active-background;
+    show-match: true;
+    sidebar-mode: false;
+    separator-style: 				"none";
+    padding: 0px;
+    columns: 5;
+    lines:5;
+
+}
+
+window {
+    background-color: @background;
+    border:           1px;
+    border-radius: 10;
+    padding:       0;
+    border-color:       #323433;
+    width: 240;
+
+}
+mainbox {
+    border:  0;
+    padding: 0;
+}
+message {
+    border:       0px 0px 0px 0px ;
+    border-color:  #FD082D;
+    border-radius: 5px;
+    padding:       0px ;
+}
+textbox {
+    text-color: @foreground;
+}
+listview {
+    border:       0px 0px 0px 0px ;
+    border-color: @bordercolor;
+    spacing:      0px ;
+    scrollbar:    false;
+    padding:     5px 5px 5px 5px ;
+    dynamic: true;
+    layout: horizontal;
+}
+element {
+    border:  0;
+    border-radius: 0;
+    padding: 4px ;
+}
+inputbar {
+    spacing:    0;
+    text-color: @foreground;
+    padding:    0px ;
+}
+#case-indicator {
+    spacing:    0;
+    text-color: @foreground;
+}
+prompt {
+    spacing:    0;
+    text-color: @foreground;
+}
+textbox-prompt-colon {
+    expand:     false;
+    str:        ":";
+    margin:     0em 0em 0em 0em ;
+    text-color: @foreground;
+}
+element selected {
+    text-color:                     #000000;
+	border:							0% 0% 0% 0%;
+    border-radius:                  5px;
+    border-color:                  	@bg;
+}
+inputbar {
+    spacing: 0px;
+    padding: 0px;
+    children:   [ ];
+}

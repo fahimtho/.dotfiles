@@ -1,0 +1,80 @@
+#! /bin/sh
+
+#starting Sxhkd
+pgrep -x sxhkd > /dev/null || sxhkd &
+
+#defining workspaces
+bspc monitor -d code watch study ext apps    
+
+#border and gap
+bspc config border_width         0
+bspc config window_gap           8
+
+#split,border color
+bspc config split_ratio          0.5
+bspc config borderless_monocle   false
+bspc config gapless_monocle      false
+bspc config focus_follows_pointer true
+bspc config auto_alternate true
+bspc config auto_cancel true
+bspc config normal_frame_opacity 0.0
+bspc config focused_border_color "#ff0d41"
+bspc config ignore_ewmh_focus true 
+bspc config removal_adjustment   true
+
+#window rules
+bspc rule -a Gcolor3 state=floating
+bspc rule -a TODO state=floating
+bspc rule -a music state=floating
+bspc rule -a Blueman-manager state=floating
+bspc rule -a qBittorrent  desktop=^5 follow=off
+bspc rule -a mpv  desktop=^2 follow=on
+bspc rule -a ranger  desktop=^2 follow=on
+bspc rule -a notes  desktop=^3 follow=on
+bspc rule -a sioyek  desktop=^3 follow=on
+bspc rule -a discord  desktop=^5 follow=off
+bspc rule -a xdman-Main  desktop=^5 follow=on
+bspc rule -a Com.github.sgpthomas.hourglass  desktop=^5 follow=on
+bspc rule -a obs  desktop=^5 follow=on
+bspc rule -a ranger state=floating
+bspc rule -a Pavucontrol state=floating
+bspc config external_rules_command  ~/.config/bspwm/rule.sh
+bspc rule -a "VirtualBox Manager"  desktop=^5 follow=on
+
+##starting apps
+
+# Screenshot
+pkill flameshot
+flameshot &
+
+# Sudo manager
+lxpolkit &
+
+# Power manager
+xfce4-power-manager &
+
+# Cursor
+xsetroot -cursor_name left_ptr &
+
+# Wallpaper
+$HOME/.config/bspwm/autostart/wallpaper.sh
+
+#notification 
+dunst &
+
+# Polyabr
+$HOME/.config/polybar/mybar/launch.sh
+
+#Picom
+$HOME/.config/bspwm/autostart/picom.sh
+
+# Clip-Board Manager 
+$HOME/.config/bspwm/autostart/greenclip.sh
+
+# no empty
+pkill empty
+$HOME/.scripts/empty&
+
+
+# Remapping Capslock
+xmodmap ~/.Xmodmap
