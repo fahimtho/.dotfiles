@@ -20,7 +20,6 @@ Plug 'nvim-telescope/telescope.nvim'
 Plug 'neovim/nvim-lspconfig'
 Plug 'nvim-telescope/telescope-fzy-native.nvim'
 Plug 'sbdchd/neoformat'
-
 Plug 'onsails/lspkind-nvim'
 Plug 'hrsh7th/nvim-cmp'
 Plug 'hrsh7th/cmp-path'
@@ -30,8 +29,6 @@ Plug 'honza/vim-snippets'
 Plug 'quangnguyen30192/cmp-nvim-ultisnips'
 Plug 'hrsh7th/cmp-calc'
 Plug 'kdheepak/cmp-latex-symbols'
-
-
 call plug#end()
 
 " setting options(internal)
@@ -304,8 +301,8 @@ require'lspconfig'.tsserver.setup{
 -- Check Code for mess ups
 require("trouble").setup {
   height = 20,
-  fold_open = "", -- icon used for open folds
-  fold_closed = "", -- icon used for closed folds
+  fold_open = "", 
+  fold_closed = "", 
   group = true
 }
 
@@ -322,7 +319,6 @@ require('telescope').load_extension('fzy_native')
 
   experimental = {
     ghost_text = true,
-    native_menu = true,
     },
     
     completion = {
@@ -330,7 +326,6 @@ require('telescope').load_extension('fzy_native')
     },
 
     documentation = {
-
       border = {"╭", "─", "╮", "│", "╯", "─", "╰", "│"},
       winhighlight = 'NormalFloat:NormalFloat,FloatBorder:NormalFloat',
       maxwidth = 1000,
@@ -349,7 +344,7 @@ require('telescope').load_extension('fzy_native')
       ['<C-b>'] = cmp.mapping(cmp.mapping.scroll_docs(-4), { 'i', 'c' }),
       ['<C-f>'] = cmp.mapping(cmp.mapping.scroll_docs(4), { 'i', 'c' }),
       ['<S-Tab>'] = cmp.mapping(cmp.mapping.complete(), { 'i', 'c' }),
-      ['<C-y>'] = cmp.config.disable, -- Specify `cmp.config.disable` if you want to remove the default `<C-y>` mapping.
+      ['<C-y>'] = cmp.config.disable,
       ['<C-e>'] = cmp.mapping({
         i = cmp.mapping.abort(),
         c = cmp.mapping.close(),
