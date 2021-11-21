@@ -20,6 +20,18 @@ Plug 'nvim-telescope/telescope.nvim'
 Plug 'neovim/nvim-lspconfig'
 Plug 'nvim-telescope/telescope-fzy-native.nvim'
 Plug 'sbdchd/neoformat'
+
+Plug 'onsails/lspkind-nvim'
+Plug 'hrsh7th/nvim-cmp'
+Plug 'hrsh7th/cmp-path'
+Plug 'hrsh7th/cmp-nvim-lsp'
+Plug 'SirVer/ultisnips'
+Plug 'honza/vim-snippets'
+Plug 'quangnguyen30192/cmp-nvim-ultisnips'
+Plug 'hrsh7th/cmp-calc'
+Plug 'kdheepak/cmp-latex-symbols'
+
+
 call plug#end()
 
 " setting options(internal)
@@ -32,9 +44,8 @@ set undodir=~/.config/nvim/undodir
 set undolevels=1000
 set ai
 filetype plugin indent on
-set showmatch
-set completeopt=longest,menuone
 set number
+set completeopt=menu,menuone,noselect
 set noshiftround
 set cmdheight=1
 set updatetime=300
@@ -84,6 +95,10 @@ let g:netrw_banner = 0
 let g:bracey_refresh_on_save = 1
 let g:asyncrun_open = 15
 let g:asyncrun_trim = 1
+let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsJumpForwardTrigger="<c-b>"
+let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+let g:UltiSnipsEditSplit="vertical"
 
 " mapings
 nmap <silent><C-l> :noh<CR>
@@ -138,7 +153,6 @@ nnoremap <leader>s <cmd>Telescope lsp_document_symbols<cr>
 nnoremap <leader><space> <cmd>Telescope buffers<cr>
 nnoremap <silent> <Leader><CR> :so ~/.config/nvim/init.vim<CR>
 nnoremap <silent> <Leader>x :cclose<CR>
-inoremap <silent><S-TAB> <C-x><C-o>
 map <silent><C-c> <plug>NERDCommenterToggle
 
 " Ui Configuration
@@ -169,6 +183,7 @@ hi Visual cterm=NONE ctermbg=234 ctermfg=NONE
 hi VertSplit ctermbg=none cterm=none ctermfg=0
 hi IncSearch cterm=NONE ctermbg=234 ctermfg=NONE
 hi SignColumn ctermbg=16
+hi NormalFloat ctermfg=blue
 hi TabLine ctermfg=0 ctermbg=232
 hi TabLineSel ctermfg=blue ctermbg=16
 hi TelescopeBorder ctermfg=8 ctermbg=none
@@ -264,33 +279,26 @@ lua << EOF
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities.textDocument.completion.completionItem.snippetSupport = true
 
+-- use | capabilities = capabilities | to use snippet from lsp
+
 -- LSPs
 require'lspconfig'.pyright.setup{
-capabilities = capabilities,
 }
 require'lspconfig'.clangd.setup{
-capabilities = capabilities,
 }
 require'lspconfig'.rust_analyzer.setup{
-capabilities = capabilities,
 }
 require'lspconfig'.gopls.setup{
-capabilities = capabilities,
 }
 require'lspconfig'.julials.setup{
-capabilities = capabilities,
 }
 require'lspconfig'.texlab.setup{
-capabilities = capabilities,
 }
 require'lspconfig'.hls.setup{
-capabilities = capabilities,
 }
 require'lspconfig'.graphql.setup{
-capabilities = capabilities,
 }
 require'lspconfig'.tsserver.setup{
-capabilities = capabilities,
 }
 
 -- Check Code for mess ups
@@ -306,6 +314,97 @@ require('telescope').setup{}
 
 -- Telescope Extentions
 require('telescope').load_extension('fzy_native')
+
+-- Setup nvim-cmp.
+  local cmp = require'cmp'
+
+  cmp.setup({
+
+  experimental = {
+    ghost_text = true,
+    native_menu = true,
+    },
+    
+    completion = {
+        autocomplete = false,
+    },
+
+    documentation = {
+
+      border = {"╭", "─", "╮", "│", "╯", "─", "╰", "│"},
+      winhighlight = 'NormalFloat:NormalFloat,FloatBorder:NormalFloat',
+      maxwidth = 1000,
+      maxheight = 1000,
+      minwidth = 1000,
+      minheight = 1000,
+    }, 
+
+    snippet = {
+      expand = function(args)
+        vim.fn["UltiSnips#Anon"](args.body)
+      end,
+    },
+
+    mapping = {
+      ['<C-b>'] = cmp.mapping(cmp.mapping.scroll_docs(-4), { 'i', 'c' }),
+      ['<C-f>'] = cmp.mapping(cmp.mapping.scroll_docs(4), { 'i', 'c' }),
+      ['<S-Tab>'] = cmp.mapping(cmp.mapping.complete(), { 'i', 'c' }),
+      ['<C-y>'] = cmp.config.disable, -- Specify `cmp.config.disable` if you want to remove the default `<C-y>` mapping.
+      ['<C-e>'] = cmp.mapping({
+        i = cmp.mapping.abort(),
+        c = cmp.mapping.close(),
+      }),
+      ['<CR>'] = cmp.mapping.confirm({ select = false }),
+    },
+
+    sources = cmp.config.sources({
+      { name = 'nvim_lsp' },
+      { name = 'calc' },
+      { name = 'ultisnips' },
+      { name = "latex_symbols" },
+    }, {
+    })
+  })
+
+-- icons for cmp
+require('lspkind').init({
+    with_text = true,
+    preset = 'codicons',
+    symbol_map = {
+      Text = "",
+      Method = "",
+      Function = "",
+      Constructor = "",
+      Field = "ﰠ",
+      Variable = "",
+      Class = "ﴯ",
+      Interface = "",
+      Module = "",
+      Property = "ﰠ",
+      Unit = "塞",
+      Value = "",
+      Enum = "",
+      Keyword = "",
+      Snippet = " ",
+      Color = "",
+      File = "",
+      Reference = "",
+      Folder = "",
+      EnumMember = "",
+      Constant = "",
+      Struct = "פּ",
+      Event = "",
+      Operator = "",
+      TypeParameter = ""
+    },
+})
+
+local lspkind = require('lspkind')
+cmp.setup {
+  formatting = {
+    format = lspkind.cmp_format({with_text = false, maxwidth = 50})
+  }
+}
 
 EOF
 
