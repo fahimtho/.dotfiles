@@ -21,12 +21,11 @@ Plug 'neovim/nvim-lspconfig'
 Plug 'nvim-telescope/telescope-fzy-native.nvim'
 Plug 'sbdchd/neoformat'
 Plug 'onsails/lspkind-nvim'
+Plug 'L3MON4D3/LuaSnip'
+Plug 'saadparwaiz1/cmp_luasnip'
 Plug 'hrsh7th/nvim-cmp'
 Plug 'hrsh7th/cmp-path'
 Plug 'hrsh7th/cmp-nvim-lsp'
-Plug 'SirVer/ultisnips'
-Plug 'honza/vim-snippets'
-Plug 'quangnguyen30192/cmp-nvim-ultisnips'
 Plug 'hrsh7th/cmp-calc'
 Plug 'kdheepak/cmp-latex-symbols'
 call plug#end()
@@ -42,7 +41,7 @@ set undolevels=1000
 set ai
 filetype plugin indent on
 set number
-set completeopt=menu,menuone,noselect
+set completeopt=menuone,noselect
 set noshiftround
 set cmdheight=1
 set updatetime=300
@@ -92,10 +91,6 @@ let g:netrw_banner = 0
 let g:bracey_refresh_on_save = 1
 let g:asyncrun_open = 15
 let g:asyncrun_trim = 1
-let g:UltiSnipsExpandTrigger="<tab>"
-let g:UltiSnipsJumpForwardTrigger="<c-b>"
-let g:UltiSnipsJumpBackwardTrigger="<c-z>"
-let g:UltiSnipsEditSplit="vertical"
 
 " mapings
 nmap <silent><C-l> :noh<CR>
@@ -133,10 +128,10 @@ nnoremap <silent> <space>rn :lua vim.lsp.buf.rename()<CR>
 nnoremap <silent> <space>ca :lua vim.lsp.buf.code_action()<CR>
 nnoremap <silent> gr :lua vim.lsp.buf.references()<CR>
 nnoremap <silent> <space>e :lua vim.lsp.diagnostic.show_line_diagnostics()<CR>
-nnoremap <silent> [d :lua vim.lsp.diagnostic.goto_prev()<CR>
-nnoremap <silent> ]d :lua vim.lsp.diagnostic.goto_next()<CR>
+nnoremap <silent> d[ :lua vim.lsp.diagnostic.goto_prev()<CR>
+nnoremap <silent> d] :lua vim.lsp.diagnostic.goto_next()<CR>
 nnoremap <silent> <space>q :lua vim.lsp.diagnostic.set_loclist()<CR>
-nnoremap <silent> <space>f :lua vim.lsp.buf.formatting()<CR>
+nnoremap <silent> <space>f :Neoformat<CR>
 nnoremap @ :AsyncRun
 nnoremap <silent><M-a> <esc>:%y+<cr>
 nnoremap <leader>r :call CompileRun()<CR>
@@ -181,6 +176,8 @@ hi VertSplit ctermbg=none cterm=none ctermfg=0
 hi IncSearch cterm=NONE ctermbg=234 ctermfg=NONE
 hi SignColumn ctermbg=16
 hi NormalFloat ctermfg=blue
+hi conceal ctermbg=none
+hi FloatBorder ctermfg=blue
 hi TabLine ctermfg=0 ctermbg=232
 hi TabLineSel ctermfg=blue ctermbg=16
 hi TelescopeBorder ctermfg=8 ctermbg=none
@@ -272,35 +269,68 @@ endfunc
 " Lua Code
 lua << EOF
 
+-- LSP UI
+vim.lsp.handlers['textDocument/publishDiagnostics'] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
+  virtual_text = false,
+  signs = false,
+  underline = false,
+  update_in_insert = true,
+})
+
+-- Border for Documentation
+local border = {
+      {"╭", "FloatBorder"},
+      {"─", "FloatBorder"},
+      {"╮", "FloatBorder"},
+      {"│", "FloatBorder"},
+      {"╯", "FloatBorder"},
+      {"─", "FloatBorder"},
+      {"╰", "FloatBorder"},
+      {"│", "FloatBorder"},
+}
+
+local handlers =  {
+  ["textDocument/hover"] =  vim.lsp.with(vim.lsp.handlers.hover, {border = border}),
+  ["textDocument/signatureHelp"] =  vim.lsp.with(vim.lsp.handlers.signature_help, {border = border }),
+}
+
 -- LSP Snippets
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities.textDocument.completion.completionItem.snippetSupport = true
-
 -- use | capabilities = capabilities | to use snippet from lsp
 
 -- LSPs
 require'lspconfig'.pyright.setup{
+  handlers=handlers,
 }
 require'lspconfig'.clangd.setup{
+  handlers=handlers,
 }
 require'lspconfig'.rust_analyzer.setup{
+  handlers=handlers,
 }
 require'lspconfig'.gopls.setup{
+  handlers=handlers,
 }
 require'lspconfig'.julials.setup{
+  handlers=handlers,
 }
 require'lspconfig'.texlab.setup{
+  handlers=handlers,
 }
 require'lspconfig'.hls.setup{
+  handlers=handlers,
 }
 require'lspconfig'.graphql.setup{
+  handlers=handlers,
 }
 require'lspconfig'.tsserver.setup{
+  handlers=handlers,
 }
 
 -- Check Code for mess ups
 require("trouble").setup {
-  height = 20,
+  height = 10,
   fold_open = "", 
   fold_closed = "", 
   group = true
@@ -317,10 +347,6 @@ require('telescope').load_extension('fzy_native')
 
   cmp.setup({
 
-  experimental = {
-    ghost_text = true,
-    },
-    
     completion = {
         autocomplete = false,
     },
@@ -336,7 +362,7 @@ require('telescope').load_extension('fzy_native')
 
     snippet = {
       expand = function(args)
-        vim.fn["UltiSnips#Anon"](args.body)
+        require('luasnip').lsp_expand(args.body)
       end,
     },
 
@@ -355,7 +381,7 @@ require('telescope').load_extension('fzy_native')
     sources = cmp.config.sources({
       { name = 'nvim_lsp' },
       { name = 'calc' },
-      { name = 'ultisnips' },
+      { name = 'luasnip' },
       { name = "latex_symbols" },
     }, {
     })
@@ -402,4 +428,9 @@ cmp.setup {
 }
 
 EOF
+
+
+
+
+
 
