@@ -6,28 +6,12 @@ Plug 'mbbill/undotree'
 Plug 'wakatime/vim-wakatime'
 Plug 'turbio/bracey.vim'
 Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'  }
-Plug 'jiangmiao/auto-pairs'
 Plug 'preservim/nerdcommenter'
-Plug 'neovim/nvim-lspconfig'
 Plug 'skywind3000/asyncrun.vim'
-Plug 'kyazdani42/nvim-web-devicons'
-Plug 'folke/trouble.nvim'
-Plug 'weilbith/nvim-code-action-menu'
-Plug 'kosayoda/nvim-lightbulb'
 Plug 'tpope/vim-eunuch'
-Plug 'nvim-lua/plenary.nvim'
-Plug 'nvim-telescope/telescope.nvim'
-Plug 'neovim/nvim-lspconfig'
-Plug 'nvim-telescope/telescope-fzy-native.nvim'
 Plug 'sbdchd/neoformat'
-Plug 'onsails/lspkind-nvim'
-Plug 'L3MON4D3/LuaSnip'
-Plug 'saadparwaiz1/cmp_luasnip'
-Plug 'hrsh7th/nvim-cmp'
-Plug 'hrsh7th/cmp-path'
-Plug 'hrsh7th/cmp-nvim-lsp'
-Plug 'hrsh7th/cmp-calc'
-Plug 'kdheepak/cmp-latex-symbols'
+Plug 'SirVer/ultisnips'
+Plug 'honza/vim-snippets'
 call plug#end()
 
 " setting options(internal)
@@ -91,6 +75,11 @@ let g:netrw_banner = 0
 let g:bracey_refresh_on_save = 1
 let g:asyncrun_open = 15
 let g:asyncrun_trim = 1
+let g:asyncrun_stdin = 1
+let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsJumpForwardTrigger="<c-b>"
+let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+let g:UltiSnipsEditSplit="vertical"
 
 " mapings
 nmap <silent><C-l> :noh<CR>
@@ -113,36 +102,10 @@ nnoremap <C-w>\ <C-w>v
 nnoremap <C-w>- <C-w>s
 nnoremap <silent><leader>q :call QuickfixToggle()<cr>
 nnoremap <silent> <leader>yy "+yy
-nnoremap <leader>d <cmd>TroubleToggle<cr>
-nnoremap <silent><leader>a :CodeActionMenu<CR>
-nnoremap <silent> gd :lua vim.lsp.buf.definition()<CR>
-nnoremap <silent> gD :lua vim.lsp.buf.declaration()<CR>
-nnoremap <silent> K :lua vim.lsp.buf.hover()<CR>
-nnoremap <silent> gi :lua vim.lsp.buf.implementation()<CR>
-nnoremap <silent> <C-k> :lua vim.lsp.buf.signature_help()<CR>
-nnoremap <silent> <space>wa :lua vim.lsp.buf.add_workspace_folder()<CR>
-nnoremap <silent> <space>wr :lua vim.lsp.buf.remove_workspace_folder()<CR>
-nnoremap <silent> <space>wl :lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>
-nnoremap <silent> <space>D :lua vim.lsp.buf.type_definition()<CR>
-nnoremap <silent> <space>rn :lua vim.lsp.buf.rename()<CR>
-nnoremap <silent> <space>ca :lua vim.lsp.buf.code_action()<CR>
-nnoremap <silent> gr :lua vim.lsp.buf.references()<CR>
-nnoremap <silent> <space>e :lua vim.lsp.diagnostic.show_line_diagnostics()<CR>
-nnoremap <silent> d[ :lua vim.lsp.diagnostic.goto_prev()<CR>
-nnoremap <silent> d] :lua vim.lsp.diagnostic.goto_next()<CR>
-nnoremap <silent> <space>q :lua vim.lsp.diagnostic.set_loclist()<CR>
 nnoremap <silent> <space>f :Neoformat<CR>
 nnoremap @ :AsyncRun
 nnoremap <silent><M-a> <esc>:%y+<cr>
 nnoremap <leader>r :call CompileRun()<CR>
-nnoremap <leader>f <cmd>Telescope find_files<cr>
-nnoremap <leader>e <cmd>Telescope file_browser<cr>
-nnoremap <leader>g <cmd>Telescope git_files<cr>
-nnoremap <leader>gc <cmd>Telescope git_commits<cr>
-nnoremap <leader>h <cmd>Telescope oldfiles<cr>
-nnoremap <leader>fg <cmd>Telescope live_grep<cr>
-nnoremap <leader>s <cmd>Telescope lsp_document_symbols<cr>
-nnoremap <leader><space> <cmd>Telescope buffers<cr>
 nnoremap <silent> <Leader><CR> :so ~/.config/nvim/init.vim<CR>
 nnoremap <silent> <Leader>x :cclose<CR>
 map <silent><C-c> <plug>NERDCommenterToggle
@@ -180,14 +143,6 @@ hi conceal ctermbg=none
 hi FloatBorder ctermfg=blue
 hi TabLine ctermfg=0 ctermbg=232
 hi TabLineSel ctermfg=blue ctermbg=16
-hi TelescopeBorder ctermfg=8 ctermbg=none
-hi CodeActionMenuDetailsDeletedLinesCount ctermfg=blue ctermbg=16
-hi CodeActionMenuDetailsDeletedLine ctermfg=blue ctermbg=16
-hi CodeActionMenuDetailsPreferred ctermfg=blue ctermbg=0
-hi CodeActionMenuDetailsPrefer ctermfg=blue ctermbg=0
-hi CodeActionMenuDetailsAddedLine ctermbg=16 ctermfg=blue
-hi CodeActionMenuDetailsAddedLinesCount ctermbg=16 ctermfg=blue
-hi CodeActionMenuDetailsChangedFile ctermbg=16 ctermfg=blue
 
 " Actions
 let &t_ut=''
@@ -211,9 +166,7 @@ function! QuickfixToggle()
   if g:quickfix_is_open
     cclose
     let g:quickfix_is_open = 0
-    execute g:quickfix_return_to_window . "wincmd w"
   else
-    let g:quickfix_return_to_window = winnr()
     copen
     let g:quickfix_is_open = 1
   endif
@@ -237,8 +190,8 @@ autocmd BufReadPost *
       \   exe "normal! g`\"" |
       \ endif
 
-" CodeActionMenu Bulb
-autocmd CursorHold,CursorHoldI * lua require'nvim-lightbulb'.update_lightbulb()
+" Close Asyncrun Window after
+let g:asyncrun_exit = 'call timer_start(4000, {-> execute("cclose")})'
 
 " Run Code
 func! CompileRun()
@@ -265,172 +218,5 @@ func! CompileRun()
     exec "AsyncRun -strip ghc % && ./%<"
   endif
 endfunc
-
-" Lua Code
-lua << EOF
-
--- LSP UI
-vim.lsp.handlers['textDocument/publishDiagnostics'] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
-  virtual_text = false,
-  signs = false,
-  underline = false,
-  update_in_insert = true,
-})
-
--- Border for Documentation
-local border = {
-      {"╭", "FloatBorder"},
-      {"─", "FloatBorder"},
-      {"╮", "FloatBorder"},
-      {"│", "FloatBorder"},
-      {"╯", "FloatBorder"},
-      {"─", "FloatBorder"},
-      {"╰", "FloatBorder"},
-      {"│", "FloatBorder"},
-}
-
-local handlers =  {
-  ["textDocument/hover"] =  vim.lsp.with(vim.lsp.handlers.hover, {border = border}),
-  ["textDocument/signatureHelp"] =  vim.lsp.with(vim.lsp.handlers.signature_help, {border = border }),
-}
-
--- LSP Snippets
-local capabilities = vim.lsp.protocol.make_client_capabilities()
-capabilities.textDocument.completion.completionItem.snippetSupport = true
--- use | capabilities = capabilities | to use snippet from lsp
-
--- LSPs
-require'lspconfig'.pyright.setup{
-  handlers=handlers,
-}
-require'lspconfig'.clangd.setup{
-  handlers=handlers,
-}
-require'lspconfig'.rust_analyzer.setup{
-  handlers=handlers,
-}
-require'lspconfig'.gopls.setup{
-  handlers=handlers,
-}
-require'lspconfig'.julials.setup{
-  handlers=handlers,
-}
-require'lspconfig'.texlab.setup{
-  handlers=handlers,
-}
-require'lspconfig'.hls.setup{
-  handlers=handlers,
-}
-require'lspconfig'.graphql.setup{
-  handlers=handlers,
-}
-require'lspconfig'.tsserver.setup{
-  handlers=handlers,
-}
-
--- Check Code for mess ups
-require("trouble").setup {
-  height = 10,
-  fold_open = "", 
-  fold_closed = "", 
-  group = true
-}
-
--- Telescope
-require('telescope').setup{}
-
--- Telescope Extentions
-require('telescope').load_extension('fzy_native')
-
--- Setup nvim-cmp.
-  local cmp = require'cmp'
-
-  cmp.setup({
-
-    completion = {
-        autocomplete = false,
-    },
-
-    documentation = {
-      border = {"╭", "─", "╮", "│", "╯", "─", "╰", "│"},
-      winhighlight = 'NormalFloat:NormalFloat,FloatBorder:NormalFloat',
-      maxwidth = 1000,
-      maxheight = 1000,
-      minwidth = 1000,
-      minheight = 1000,
-    }, 
-
-    snippet = {
-      expand = function(args)
-        require('luasnip').lsp_expand(args.body)
-      end,
-    },
-
-    mapping = {
-      ['<C-b>'] = cmp.mapping(cmp.mapping.scroll_docs(-4), { 'i', 'c' }),
-      ['<C-f>'] = cmp.mapping(cmp.mapping.scroll_docs(4), { 'i', 'c' }),
-      ['<S-Tab>'] = cmp.mapping(cmp.mapping.complete(), { 'i', 'c' }),
-      ['<C-y>'] = cmp.config.disable,
-      ['<C-e>'] = cmp.mapping({
-        i = cmp.mapping.abort(),
-        c = cmp.mapping.close(),
-      }),
-      ['<CR>'] = cmp.mapping.confirm({ select = false }),
-    },
-
-    sources = cmp.config.sources({
-      { name = 'nvim_lsp' },
-      { name = 'calc' },
-      { name = 'luasnip' },
-      { name = "latex_symbols" },
-    }, {
-    })
-  })
-
--- icons for cmp
-require('lspkind').init({
-    with_text = true,
-    preset = 'codicons',
-    symbol_map = {
-      Text = "",
-      Method = "",
-      Function = "",
-      Constructor = "",
-      Field = "ﰠ",
-      Variable = "",
-      Class = "ﴯ",
-      Interface = "",
-      Module = "",
-      Property = "ﰠ",
-      Unit = "塞",
-      Value = "",
-      Enum = "",
-      Keyword = "",
-      Snippet = " ",
-      Color = "",
-      File = "",
-      Reference = "",
-      Folder = "",
-      EnumMember = "",
-      Constant = "",
-      Struct = "פּ",
-      Event = "",
-      Operator = "",
-      TypeParameter = ""
-    },
-})
-
-local lspkind = require('lspkind')
-cmp.setup {
-  formatting = {
-    format = lspkind.cmp_format({with_text = false, maxwidth = 50})
-  }
-}
-
-EOF
-
-
-
-
 
 

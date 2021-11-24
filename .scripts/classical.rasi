@@ -1,0 +1,4 @@
+listview {
+	lines: 9;
+	columns: 2;
+}

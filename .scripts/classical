@@ -1,0 +1,137 @@
+#!/bin/sh
+
+# add more args here according to preference
+ARGS="--volume=75 --no-video"
+
+notification(){
+# change the icon to whatever you want. Make sure your notification server 
+# supports it and already configured.
+
+# Now it will receive argument so the user can rename the radio title
+# to whatever they want
+
+	notify-send "Playing now: " "$@" --icon=media-tape
+}
+
+menu(){
+	printf "1. The Best of Classical Music\n"
+	printf "2. Mozart\n"
+	printf "3. Mozart II\n"
+	printf "4. Piano\n"
+	printf "5. Beethoven\n"
+	printf "6. Beethoven II\n"
+	printf "7. Beethoven III\n"
+	printf "8. Beethoven Symphonies\n"
+	printf "9. 50 Best of Beethoven\n"
+	printf "10. The Best of Bach\n"
+	printf "11. The Best of Chopin\n"
+	printf "12. The Best of Brahms\n"
+	printf "13. The Best of Debussy\n"
+	printf "14. The Best of Debussy II\n"
+	printf "15. Four Seasons - Vivaldi\n"
+	printf "16. The Best of Vivaldi\n"
+	printf "17. The Best of Smetana\n"
+	printf "18. Relax"
+}
+
+main() {
+	choice=$(menu | rofi -theme ~/.scripts/classical.rasi -dmenu -p "listen to" -no-fixed-num-lines -i -width "600" -yoffset "-160" | cut -d. -f1)
+
+	case $choice in
+		1)
+			notification "The Best of Classical Music  🎻🎼";
+            URL="https://www.youtube.com/watch?v=jgpJVI3tDbY"
+			break
+			;;
+		2)
+			notification "Mozart 🎻🎼";
+            URL="https://www.youtube.com/watch?v=7JmprpRIsEY"
+			break
+			;;
+		3)
+			notification "Mozart II  🎻🎼";
+            URL="https://www.youtube.com/watch?v=shoVsQhou-8"
+			break
+			;;
+		4)
+			notification "Piano 🎻🎼";
+            URL="https://www.youtube.com/watch?v=t_i_Dq2GjAI"
+			break
+			;;
+		5)
+			notification "Beethoven 🎻🎼";
+            URL="https://www.youtube.com/watch?v=W-fFHeTX70Q"
+			break
+			;;
+		6)
+			notification "Beethoven II 🎻🎼";
+            URL="https://www.youtube.com/watch?v=yajdlBZSw3Y"
+			break
+			;;
+		7)
+			notification "Beethoven III";
+            URL="https://www.youtube.com/watch?v=sDn-aK71Cp4"
+			break
+			;;
+    8)
+			notification "Beethoven Symphonies 🎻🎼";
+            URL="https://www.youtube.com/watch?v=PY8f1Z3nARo"
+			break
+			;;
+    9)
+			notification "50 Best of Beethoven  🎻🎼";
+            URL="https://www.youtube.com/watch?v=EKTdpobiRmE"
+			break
+			;;
+    10)
+			notification "The Best of Bach  🎻🎼";
+            URL="https://www.youtube.com/watch?v=6JQm5aSjX6g"
+			break
+			;;
+    11)
+			notification "The Best of Chopin  🎻🎼";
+            URL="https://www.youtube.com/watch?v=wygy721nzRc"
+			break
+			;;
+    12)
+			notification "The Best of Brahms 🎻🎼";
+            URL="https://www.youtube.com/watch?v=zKrxesI3ziE"
+			break
+			;;
+    13)
+			notification "The Best of Debussy  🎻🎼";
+            URL="https://www.youtube.com/watch?v=OUx6ZY60uiI"
+			break
+			;;
+    14)
+			notification "Best of Debussy II  🎻🎼";
+            URL="https://www.youtube.com/watch?v=T3AuplcGNyo"
+			break
+			;;
+		15)
+			notification "Four Seasons - Vivaldi  🎻🎼";
+            URL="https://www.youtube.com/watch?v=GRxofEmo3HA"
+			break
+			;;
+		16)
+			notification "The Best of Vivaldi  🎻🎼";
+            URL="https://www.youtube.com/watch?v=O6NRLYUThrY"
+			break
+			;;
+		17)
+			notification "The Best of Smetana  🎻🎼";
+            URL="https://www.youtube.com/watch?v=P7kJp6suBMw"
+			break
+			;;
+		18)
+			notification "Relax  🎻🎼";
+            URL="https://www.youtube.com/watch?v=0Tmo3KIH31c"
+			break
+			;;
+	esac
+    # run mpv with args and selected url
+    # added title arg to make sure the pkill command kills only this instance of mpv
+    mpv $ARGS --title="radio-mpv" $URL
+}
+
+pkill -f radio-mpv || main
