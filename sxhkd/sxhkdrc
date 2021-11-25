@@ -270,4 +270,7 @@ super + w
 alt + l
   ~/.scripts/beats
 
+# Classicla Music
+alt + control + c
+  ~/.scripts/classical
 

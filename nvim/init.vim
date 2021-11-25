@@ -24,6 +24,7 @@ Plug 'hrsh7th/cmp-nvim-lsp'
 Plug 'hrsh7th/cmp-calc'
 Plug 'kdheepak/cmp-latex-symbols'
 Plug 'mattn/emmet-vim'
+Plug 'lukas-reineke/indent-blankline.nvim'
 call plug#end()
 
 " setting options(internal)
@@ -50,9 +51,9 @@ set incsearch
 set ignorecase
 set smartcase
 set encoding=utf-8
-set tabstop=4
-set shiftwidth=4
-set softtabstop=4
+set tabstop=2
+set shiftwidth=2
+set softtabstop=2
 set backspace=indent,eol,start
 set matchpairs+=<:>
 set wrap
@@ -127,7 +128,6 @@ nnoremap <silent> d[ :lua vim.lsp.diagnostic.goto_prev()<CR>
 nnoremap <silent> d] :lua vim.lsp.diagnostic.goto_next()<CR>
 nnoremap <silent> <space>q :lua vim.lsp.diagnostic.set_loclist()<CR>
 nnoremap <silent> <space>f :Neoformat<CR>
-nnoremap @ :AsyncRun
 nnoremap <silent><M-a> <esc>:%y+<cr>
 nnoremap <leader>r :call CompileRun()<CR>
 nnoremap <leader>g <cmd>Telescope git_files<cr>
@@ -137,7 +137,10 @@ nnoremap <leader>s <cmd>Telescope lsp_document_symbols<cr>
 nnoremap <leader><space> <cmd>Telescope buffers<cr>
 nnoremap <silent> <Leader><CR> :so ~/.config/nvim/init.vim<CR>
 nnoremap <silent> <Leader>x :cclose<CR>
-nnoremap <silent> <Leader>gc :AsyncRun -strip git add . 
+nnoremap <silent> gp :AsyncRun -strip git push -u origin main<CR>
+nnoremap gc :AsyncRun git commit -m ""<left>
+nnoremap <silent> ga :AsyncRun -strip git add . && echo "Files has been added to commit !!!"<CR>
+nnoremap <silent> gf :AsyncRun -strip git add % && echo "Current file has been added for commit !!!"<CR>
 map <silent><C-c> <plug>NERDCommenterToggle
 
 
@@ -146,7 +149,7 @@ hi linenr ctermfg=8
 hi pmenusbar ctermbg=0
 hi pmenuthumb ctermbg=16
 hi matchparen ctermbg=black ctermfg=NONE
-hi search cterm=NONE ctermbg=234 ctermfg=NONE
+hi search cterm=NONE ctermbg=0 ctermfg=NONE
 hi Directory ctermfg=4
 hi CursorLine cterm=none
 hi CursorLineNr    term=bold cterm=bold ctermfg=4 gui=bold
@@ -174,12 +177,15 @@ hi conceal ctermbg=none
 hi FloatBorder ctermfg=blue
 hi TabLine ctermfg=0 ctermbg=232
 hi TabLineSel ctermfg=blue ctermbg=16
-hi TelescopeBorder ctermfg=8 ctermbg=none
+hi TelescopeBorder ctermfg=0 ctermbg=none
+hi DiffChange ctermfg=16 ctermbg=blue
+hi IndentBlanklineChar ctermfg=0
 
 " Actions
 let &t_ut=''
 highlight clear SignColumn
 highlight clear TabLineFill
+highlight clear Error
 autocmd FileType qf 10wincmd_
 autocmd colorscheme * hi clear cursorline
 autocmd VimEnter * set autochdir
@@ -219,7 +225,7 @@ endfunction
 " Hide Command after some time
 augroup cmdline
   autocmd!
-  autocmd CmdlineLeave : lua vim.defer_fn(function() vim.cmd('echo ""') end, 1000)
+  autocmd CmdlineLeave : lua vim.defer_fn(function() vim.cmd('echo ""') end, 1500)
 augroup END
 
 " highlight yanked area
@@ -260,6 +266,8 @@ func! CompileRun()
     exec "AsyncRun -strip rustc % && ./%<"
   elseif &filetype == 'haskell'
     exec "AsyncRun -strip ghc % && ./%<"
+  elseif &filetype == 'arduino'
+    exec "AsyncRun -strip arduino-cli compile -b arduino:avr:uno %<"
   endif
 endfunc
 
@@ -348,6 +356,18 @@ require'lspconfig'.julials.setup{
 require'lspconfig'.vimls.setup{
   handlers=handlers,
 }
+require'lspconfig'.arduino_language_server.setup({
+cmd =  {
+		-- Required
+		"arduino-language-server",
+		"-cli-config", "/home/fh1m/.arduino15/arduino-cli.yaml",
+		-- Optional
+		"-cli", "/usr/bin/arduino-cli",
+		"-clangd", "/usr/bin/clangd"
+	},
+
+handlers=handlers,
+})
 
 -- Check Code for mess ups
 require("trouble").setup {
@@ -356,6 +376,9 @@ require("trouble").setup {
   fold_closed = "", 
   group = true
 }
+
+-- Indentline
+require("indent_blankline").setup {}
 
 -- Telescope
 require('telescope').setup{}
@@ -397,10 +420,11 @@ require('telescope').setup{}
     },
 
     sources = cmp.config.sources({
-      { name = 'nvim_lsp' ,  max_item_count = 8 },
+      { name = 'nvim_lsp'},
       { name = 'calc' },
       { name = 'luasnip' },
-      { name = "latex_symbols" , max_item_count = 8  },
+      { name = "latex_symbols"},
+      { name = 'path' },
     }, {
     })
   })

@@ -36,8 +36,8 @@
   },
   
   {
-    "name": "9. Test Fonts",
-    "command": "notify-send 'Font' 'Beauty is in the font' && kitty -1 ~/.scripts/fontpreview"
+    "name": "9. Classical Music",
+    "command": "notify-send 'Music' 'Beauty is in Symphonies' && ~/.scripts/classical"
   },
 {
     "name": "10. Lofi Music",

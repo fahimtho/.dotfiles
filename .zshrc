@@ -9,15 +9,17 @@ export PATH="$PATH:/home/fh1m/.local/share/gem/ruby/3.0.0/bin "
 export PATH="$PATH:/home/fh1m/.local/bin"
 export PATH="$PATH:/home/fh1m/.platformio/penv/bin"
 export PATH="$PATH:/home/fh1m/.local/bin"
+export PATH="$PATH:/home/fh1m/.local/share/gem/ruby/3.0.0/bin"
 export EDITOR="nvim"
 export VISUAL="nvim"
 export TERM=screen-256color
 export KEYTIMEOUT=1
 export FZF_DEFAULT_COMMAND='fd --type file --hidden --no-ignore'
 export FZF_DEFAULT_OPTS='--height 60% --layout=reverse --prompt="❱ "'
+fpath=($HOME/.oh-my-zsh/plugins/arduino_completion_zsh $fpath) 
                                                         
 # Plugins
-plugins=(sudo fzf fzf-tab last-working-dir)
+plugins=(sudo fzf fzf-tab last-working-dir zsh-autosuggestions)
 
 # this line
 source $ZSH/oh-my-zsh.sh
@@ -93,7 +95,6 @@ alias rr="ranger"
 alias y="mpsyt"
 alias key="~/.scripts/key"
 alias up="uptime -p"
-alias do="dunstify '$(cat ~/.todo.md)'"
 alias sudo='sudo '
 alias get="yay -S"
 alias yeet="sudo pacman -Rsn"
@@ -105,13 +106,11 @@ alias pf="pacman -Si"
 alias yf="yay -Si"
 alias clean="sudo pacman -Qtdq | sudo pacman -Rns -"
 alias g="gitui"
-
-# Use vim as man pager
-if [[ "$(command -v nvim)" ]]; then
-    export EDITOR='nvim'
-    export MANPAGER='nvim +Man!'
-    export MANWIDTH=999
-fi
+alias serial="picocom -b 9600 /dev/ttyACM0"
+alias arls="arduino-cli board list"
+alias acom="arduino-cli compile -b arduino:avr:uno"
+alias aup="arduino-cli upload -p /dev/ttyACM0 -b arduino:avr:uno"
+alias anew="arduino-cli sketch new"
 
 # Cool cd
 eval "$(zoxide init zsh)"
@@ -119,5 +118,11 @@ eval "$(zoxide init zsh)"
 # Custom prompt
 eval "$(starship init zsh)"
 
+export MANPAGER="sh -c 'col -bx | bat -l man -p'"
 
+# launch without text
+function launch {
+    nohup "$@" >/dev/null 2>/dev/null & disown
+}
+complete -F _command launch
 

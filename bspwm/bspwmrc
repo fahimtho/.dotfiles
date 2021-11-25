@@ -57,7 +57,7 @@ xfce4-power-manager &
 xsetroot -cursor_name left_ptr &
 
 # Wallpaper
-$HOME/.config/bspwm/autostart/wallpaper.sh
+$HOME/.config/bspwm/autostart/Desktop.sh
 
 #notification 
 dunst &
@@ -70,11 +70,6 @@ $HOME/.config/bspwm/autostart/picom.sh
 
 # Clip-Board Manager 
 $HOME/.config/bspwm/autostart/greenclip.sh
-
-# no empty
-pkill empty
-$HOME/.scripts/empty&
-
 
 # Remapping Capslock
 xmodmap ~/.Xmodmap
