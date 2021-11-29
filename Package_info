@@ -1,0 +1,17 @@
+##  Arch Linux Packge Info
+## -------------------------
+
+# explicitly installed Packges [I installed them by typing command]
+pacman -Qe >> package_info/explicitly_installed
+
+# Yay Packages [User Repos]
+pacman -Qm >> package_info/yay_installed
+
+# Pacman Packages [Official]
+pacman -Qn >> package_info/pacman_installed
+
+# Packages That a orphan [Not needed By any other Package]
+pacman -Qt >> package_info/Not_needed_by_others
+
+# All Packages Installed 
+pacman -Q >> package_info/All_Packages
