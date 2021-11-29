@@ -1,13 +1,10 @@
 # General Settings
-format = """
-$directory$git_branch$character"""
+format = """$directory$jobs$git_branch$character"""
 add_newline = false
 
-[package]
-disabled = true
 
 [directory]
-format = "[$path]($style)[$read_only]($read_only_style) " 
+format = " [$path]($style)[$read_only]($read_only_style) " 
 truncation_length = 1
 truncate_to_repo = true
 home_symbol = "~"

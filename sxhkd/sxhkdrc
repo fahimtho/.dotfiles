@@ -158,6 +158,14 @@ super + Tab
 super + grave
   bspc desktop -f 'prev.occupied'
 
+# Move Next
+super + Next
+ bspc desktop -f 'next.local'
+
+# Move Previous
+super + Prior
+  bspc desktop -f 'prev.local'
+
 # Switch to last node/desktop
 alt + {grave,Tab}
 	bspc {node,desktop} -f last
@@ -234,6 +242,11 @@ XF86AudioRaiseVolume
 XF86AudioMicMute
   amixer set Capture toggle && amixer get Capture | grep '\[off\]' && notify-send "MIC switched OFF" || notify-send "MIC switched ON"
 
+
+# Mute Sound
+XF86AudioMute
+  pulseaudio-control togmute
+
 # Swap the Current Window with Biggest one
 super + space
   bspc node -s biggest.window
@@ -273,4 +286,8 @@ alt + l
 # Classicla Music
 alt + control + c
   ~/.scripts/classical
+
+# Tasks
+alt + control + w
+   rofi -modi tasks:rofi-taskwarrior -no-fixed-num-lines -show tasks
 

@@ -24,7 +24,7 @@ Plug 'hrsh7th/cmp-nvim-lsp'
 Plug 'hrsh7th/cmp-calc'
 Plug 'kdheepak/cmp-latex-symbols'
 Plug 'mattn/emmet-vim'
-Plug 'lukas-reineke/indent-blankline.nvim'
+Plug 'https://gitlab.com/yorickpeterse/nvim-pqf.git'
 call plug#end()
 
 " setting options(internal)
@@ -76,7 +76,7 @@ let &fcs='eob: '
 let mapleader = "\\"
 set noshowmode
 set nolist
-set laststatus=1
+set laststatus=2
 set mouse=ar
 
 " setting-options(Plugings)
@@ -86,7 +86,7 @@ let g:undotree_HelpLine = 0
 let loaded_matchparen = 1
 let g:netrw_banner = 0
 let g:bracey_refresh_on_save = 1
-let g:asyncrun_open = 15
+let g:asyncrun_open = 30
 let g:asyncrun_trim = 1
 
 " mapings
@@ -109,6 +109,7 @@ nnoremap ~ <C-w><C-w>
 nnoremap <C-w>\ <C-w>v
 nnoremap <C-w>- <C-w>s
 nnoremap <silent><leader>q :call QuickfixToggle()<cr>
+nnoremap <silent><leader>l :call LocalistToggle()<cr>
 nnoremap <silent> <leader>yy "+yy
 nnoremap <leader>d <cmd>TroubleToggle<cr>
 nnoremap <silent> gd :lua vim.lsp.buf.definition()<CR>
@@ -142,7 +143,8 @@ nnoremap gc :AsyncRun git commit -m ""<left>
 nnoremap <silent> ga :AsyncRun -strip git add . && echo "Files has been added to commit !!!"<CR>
 nnoremap <silent> gf :AsyncRun -strip git add % && echo "Current file has been added for commit !!!"<CR>
 map <silent><C-c> <plug>NERDCommenterToggle
-
+map <silent> <space>n :bNext<CR>
+map <silent> <space>p :bprevious<CR> 
 
 " Ui Configuration
 hi linenr ctermfg=8
@@ -153,7 +155,6 @@ hi search cterm=NONE ctermbg=0 ctermfg=NONE
 hi Directory ctermfg=4
 hi CursorLine cterm=none
 hi CursorLineNr    term=bold cterm=bold ctermfg=4 gui=bold
-hi QuickFixLine ctermfg=4 cterm=bold guifg=NONE gui=bold
 hi TermCursor ctermbg=4  cterm=NONE ctermfg=0
 hi MoreMsg ctermbg=none  cterm=NONE ctermfg=197
 hi Question ctermbg=none  cterm=NONE ctermfg=197
@@ -179,16 +180,16 @@ hi TabLine ctermfg=0 ctermbg=232
 hi TabLineSel ctermfg=blue ctermbg=16
 hi TelescopeBorder ctermfg=0 ctermbg=none
 hi DiffChange ctermfg=16 ctermbg=blue
-hi IndentBlanklineChar ctermfg=0
+hi QuickFixLine ctermfg=none ctermbg=none
 
 " Actions
 let &t_ut=''
 highlight clear SignColumn
 highlight clear TabLineFill
 highlight clear Error
-autocmd FileType qf 10wincmd_
 autocmd colorscheme * hi clear cursorline
 autocmd VimEnter * set autochdir
+autocmd FileType qf 10wincmd_
 au FocusGained,BufEnter * checktime
 au TermOpen * setlocal listchars= nonumber norelativenumber
 au TermOpen * startinsert
@@ -207,6 +208,18 @@ function! QuickfixToggle()
   else
     copen
     let g:quickfix_is_open = 1
+  endif
+endfunction
+
+" Toggle Localist Window
+let g:localist_is_open = 0
+function! LocalistToggle()
+  if g:localist_is_open
+    lclose
+    let g:localist_is_open = 0
+  else
+    lopen
+    let g:localist_is_open = 1
   endif
 endfunction
 
@@ -243,7 +256,7 @@ autocmd BufReadPost *
 " Close Asyncrun Window after
 let g:asyncrun_exit = 'call timer_start(4000, {-> execute("cclose")})'
 
-" Run Code
+" Compile & Run Code
 func! CompileRun()
   exec "w"
   if &filetype == 'c'
@@ -255,7 +268,7 @@ func! CompileRun()
   elseif &filetype == 'python'
     exec "AsyncRun -strip python3 %"
   elseif &filetype == 'go'
-    exec "AsyncRun -strip go build %< && go run %"
+    exec "AsyncRun -strip go build % && ./%<"
   elseif &filetype == 'javascript'
     exec "AsyncRun -strip node %"
   elseif &filetype == 'typescript'
@@ -268,6 +281,8 @@ func! CompileRun()
     exec "AsyncRun -strip ghc % && ./%<"
   elseif &filetype == 'arduino'
     exec "AsyncRun -strip arduino-cli compile -b arduino:avr:uno %<"
+  elseif &filetype == 'r'
+    exec "AsyncRun -strip Rscript % && echo 'No Errors' && sioyek Rplots.pdf  >/dev/null 2>&1"
   endif
 endfunc
 
@@ -356,6 +371,12 @@ require'lspconfig'.julials.setup{
 require'lspconfig'.vimls.setup{
   handlers=handlers,
 }
+require'lspconfig'.r_language_server.setup{
+  handlers=handlers,
+}
+require'lspconfig'.cmake.setup{
+handlers=handlers,
+}
 require'lspconfig'.arduino_language_server.setup({
 cmd =  {
 		-- Required
@@ -377,8 +398,15 @@ require("trouble").setup {
   group = true
 }
 
--- Indentline
-require("indent_blankline").setup {}
+-- Fix Formatting of Quickfix Window
+require('pqf').setup({
+  signs = {
+    error = ' ',
+    warning = '',
+    info = '',
+    hint = ''
+  }
+})
 
 -- Telescope
 require('telescope').setup{}
@@ -471,8 +499,49 @@ cmp.setup {
 
 EOF
 
+hi User1 ctermfg=0 ctermbg=blue
+hi User2 ctermfg=blue ctermbg=0
+hi User3 ctermfg=blue ctermbg=none
+
+function! ReadOnly()
+  if &readonly || !&modifiable
+    return ' '
+  else
+    return ''
+endfunction
+
+let g:currentmode={
+      \ 'n'  : 'NORMAL ',
+      \ 'no' : 'N·Operator Pending ',
+      \ 'v'  : 'VISUAL ',
+      \ 'V'  : 'V·Line ',
+      \ 'x22' : 'V·Block ',
+      \ 's'  : 'Select ',
+      \ 'S'  : 'S·Line ',
+      \ 'x19' : 'S·Block ',
+      \ 'i'  : 'INSERT ',
+      \ 'R'  : 'REPLACE ',
+      \ 'Rv' : 'V·Replace ',
+      \ 'c'  : 'Command ',
+      \ 'cv' : 'Vim Ex ',
+      \ 'ce' : 'Ex ',
+      \ 'r'  : 'Prompt ',
+      \ 'rm' : 'More ',
+      \ 'r?' : 'Confirm ',
+      \ '!'  : 'Shell ',
+      \ 't'  : 'Terminal '
+      \}
 
 
+set statusline=
+set statusline+=\%1*\ %{toupper(g:currentmode[mode()])}                                   
+set statusline+=%3*\ %<%f\%{ReadOnly()}                                
+set statusline+=%3*\ %<%m\                                
+set statusline+=%8*\ %=\          
+set statusline+=%3*\%l            
+set statusline+=%3*\ of                       
+set statusline+=%3*\ %L\                        
+set statusline+=%1*\ line\      
 
 
 

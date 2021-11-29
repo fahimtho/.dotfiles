@@ -12,5 +12,6 @@ while pgrep -u $UID -x polybar >/dev/null; do sleep 1; done
 
 # Launch the bar
 polybar -q workspace -c "$DIR"/config.ini & 2>/dev/null
-polybar -q Music -c "$DIR"/config.ini & 2>/dev/null
+polybar -q date -c "$DIR"/config.ini & 2>/dev/null
 polybar -q info -c "$DIR"/config.ini & 2>/dev/null
+polybar -q stats -c "$DIR"/config.ini & 2>/dev/null

@@ -1,2 +1,2 @@
-sleep 35
-mpc random
+sleep 1m
+mpc random true

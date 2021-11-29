@@ -19,7 +19,7 @@ export FZF_DEFAULT_OPTS='--height 60% --layout=reverse --prompt="❱ "'
 fpath=($HOME/.oh-my-zsh/plugins/arduino_completion_zsh $fpath) 
                                                         
 # Plugins
-plugins=(sudo fzf fzf-tab last-working-dir zsh-autosuggestions)
+plugins=(sudo fzf fzf-tab last-working-dir copy-pasta zsh-autosuggestions)
 
 # this line
 source $ZSH/oh-my-zsh.sh
@@ -111,6 +111,8 @@ alias arls="arduino-cli board list"
 alias acom="arduino-cli compile -b arduino:avr:uno"
 alias aup="arduino-cli upload -p /dev/ttyACM0 -b arduino:avr:uno"
 alias anew="arduino-cli sketch new"
+alias tt="taskwarrior-tui"
+alias mkcd='take'
 
 # Cool cd
 eval "$(zoxide init zsh)"
