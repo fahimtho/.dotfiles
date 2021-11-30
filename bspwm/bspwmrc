@@ -4,7 +4,7 @@
 pgrep -x sxhkd > /dev/null || sxhkd &
 
 #defining workspaces
-bspc monitor -d I II III IV V    
+bspc monitor -d 1 2 3 4     
 
 #border and gap
 bspc config border_width         0
@@ -24,20 +24,23 @@ bspc config removal_adjustment   true
 
 #window rules
 bspc rule -a Gcolor3 state=floating
-bspc rule -a TODO state=floating
+bspc rule -a float state=floating
 bspc rule -a Blueman-manager state=floating
-bspc rule -a qBittorrent  desktop=^5 follow=off
+bspc rule -a Pavucontrol state=floating
+# -------------------------
+bspc rule -a qBittorrent  desktop=^4 follow=off
 bspc rule -a mpv  desktop=^2 follow=on
 bspc rule -a ranger  desktop=^2 follow=on
-bspc rule -a discord  desktop=^5 follow=off
-bspc rule -a xdman-Main  desktop=^5 follow=on
-bspc rule -a obs  desktop=^5 follow=on
-bspc rule -a ranger state=floating
-bspc rule -a Pavucontrol state=floating
+bspc rule -a discord  desktop=^4 follow=off
+bspc rule -a xdman-Main  desktop=^4 follow=on
+bspc rule -a obs  desktop=^4 follow=on
+bspc rule -a "VirtualBox Manager"  desktop=^4 follow=on
+# --------------------------
 bspc config external_rules_command  ~/.config/bspwm/rule.sh
-bspc rule -a "VirtualBox Manager"  desktop=^5 follow=on
 
-##starting apps
+
+## starting apps
+## -------------
 
 # Screenshot
 pkill flameshot

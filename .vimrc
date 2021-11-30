@@ -1,6 +1,8 @@
 " plugins.
 call plug#begin(has('nvim') ? stdpath('data') . '/plugged' : '~/.vim/plugged')
 Plug 'lervag/vimtex'
+Plug 'SirVer/ultisnips'
+Plug 'honza/vim-snippets'
 call plug#end()
 
 " setting options(internal)
@@ -79,19 +81,11 @@ set shm+=I
 set laststatus=0
 
 " setting-options(Plugings)
-let g:pandoc#command#autoexec_on_writes = 1
-let g:pandoc#command#autoexec_command = "Pandoc pdf"
-let g:pandoc#command#prefer_pdf = 0
-let g:pandoc#command#custom_open = "zathura"
-let g:pandoc#filetypes#pandoc_markdown = 0
-let NERDTreeMinimalUI=1
-let g:rainbow_active = 1
 let g:tex_flavor='latex'
-let NERDTreeHighlightCursorline=0
-let g:NERDTreeChDirMode = 2
-let g:NERDTreeDirArrowExpandable = ''
-let g:NERDTreeDirArrowCollapsible = ''
-let g:NERDTreeStatusline = '%#NonText#'
+let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsJumpForwardTrigger="<c-b>"
+let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+let g:UltiSnipsEditSplit="vertical"
 
 " misc
 autocmd BufEnter * if tabpagenr('$') == 1 && winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree() |
@@ -205,5 +199,6 @@ nnoremap r :redo<cr>
 nnoremap <leader>q :wq<CR>
 nnoremap <leader>q :qa<CR>
 nnoremap S :%s///gI<Left><Left><Left><Left>
+
 
 

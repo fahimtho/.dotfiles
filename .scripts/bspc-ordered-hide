@@ -1,0 +1,203 @@
+#!/bin/sh
+
+usage() {
+    cat <<EOM
+usage: $(basename $0) [help] {hide [pid]}|{unhide [desktop] [--focus]}|{count [desktop]}|{peek [desktop]}
+  help     Displays this message
+  hide     Hides the focused window, or the window with the pid passed
+  unhide   Unhides a window on the focused desktop or on the desktop with the name passed. If "--focus" is passed, the unhidden node will be focused
+  count    Counts the number of hidden windows on the focused desktop or on the desktop with the name passed
+  peek     Returns window information about the most recently hidden window on the focused desktop or on the desktop with the name passed
+EOM
+    exit 0
+}
+
+[ "$1" = "help" ] && usage
+
+
+DIR="/tmp/hidden"
+
+# Sends the user a message (terminal or notification)
+msg() {
+    echo "$1"
+}
+
+# Returns the focused desktop or the desktop of a particular node
+dsk() {
+    [ -z "$1" ] && {
+        bspc query -D -d --names
+    } || {
+        bspc query -D -n $1 --names
+    }
+}
+
+node_info() {
+    # Get window information
+    info=$(xwininfo -id $1 | awk -F\" 'NR==2')
+
+    # Continue if no information is provided (no actual window)
+    [ -z "$info" ] && {
+        echo ""
+    } || {
+        # Parse everything between the double quotes. 
+        # This will be the name of the window
+        info=${info#*\"}
+        info=${info%\"*}
+
+        echo "$info"
+    }
+}
+
+hide() {
+    # Create temporary directory if it does not exist
+    [ ! -d $DIR ] && mkdir $DIR
+
+    # Get window and desktop of window to hide
+    [ -z "$1" ] && {
+        node=$(bspc query -N -n)
+    } || {
+        node=$1
+    }
+
+    desktop=$(dsk $node)
+
+    # Create file for desktop if it does not exist
+    FILE=$DIR/$desktop
+    [ ! -f $FILE ] && touch $FILE
+
+    # Check if window is already hidden
+    if bspc query -N -n "$node.hidden" > /dev/null; then
+        # Exit, do not try to hide window again
+        exit 0
+    fi
+
+    # Prepend (push) to file
+    echo -e "$node\n$(cat $FILE)" > $FILE
+
+    # Hide file
+    bspc node $node --flag hidden=on
+    info=$(node_info $node)
+    notify-send -u low "Window hidden: \"$info\""
+}
+
+unhide() {
+    focus=0
+    notify=0
+    [ "$1" = "--focus" ] && {
+        focus=1
+        # Get desktop
+        desktop=$(bspc query -D -d --names)
+    } || {
+        [ "$2" = "--focus" ] && focus=1
+        # Get desktop
+        desktop=$(bspc query -D -d $1 --names)
+
+        # Notification should be sent if the unhidden node is not immediately focused
+        notify=1
+    }
+
+    # Check if corresponding file exists 
+    FILE="$DIR/$desktop"
+
+    no_window_msg="No window hidden on desktop"
+    [ ! -f $FILE ] && {
+        msg "$no_window_msg $desktop"
+        exit 0
+    }
+
+    # Read first entry from file, i.e the most recently 
+    # hidden node.
+    node=$(head -n 1 $FILE)
+
+    [ -z $node ] && {
+        msg "$no_window_msg $desktop"
+        exit 0
+    }
+
+    # Pop the first line of the file
+    echo "$(tail -n +2 $FILE)" > $FILE
+
+    # Check if window actually is hidden
+    if bspc query -N -n "$node.hidden" > /dev/null; then
+        # If yes, unhide window
+        bspc node $node --flag hidden=off
+
+        # Focus node
+        [ "$focus"  -eq "1" ] && bspc node -f $node
+
+        # Send notification
+        [ "$notify" -eq "1" ] && { 
+            info=$(node_info $node)
+            notify-send -u low "Node unhidden on desktop $desktop:" "\"$info\""
+        }
+    else
+        # If not, the window has been unhidden in some other way. 
+        # Then try to unhide the next window
+        unhide $@
+    fi
+}
+
+count() {
+    # Get file path based on focused desktop or user input
+    [ -z "$1" ] && {
+        FILE="$DIR/$(dsk)"
+    } || {
+        FILE="$DIR/$1"
+    }
+
+    # Check if file exists for that directory    
+    [ ! -f $FILE ] && {
+        echo 0 # If not, return 0
+    } || {
+        grep -vc ^$ $FILE # If yes, count non-empty lines of file
+    }
+}
+
+peek() {
+    # Get intended desktop
+    desktop=$(dsk $1)
+    
+    # Check if corresponding file exists 
+    FILE="$DIR/$desktop"
+
+    no_window_msg="[No window hidden]"
+    [ ! -f $FILE ] && {
+        echo "$no_window_msg"
+        exit 0
+    }
+
+    # Read first entry from file, i.e the most recently 
+    # hidden node.
+    node=$(head -n 1 $FILE)
+
+    [ -z $node ] && {
+        echo "$no_window_msg"
+        exit 0
+    }
+
+    # Get node info
+    info=$(node_info $node)
+    echo "$info"
+}
+
+case $1 in 
+    hide)
+        shift
+        hide $@
+    ;;
+    unhide)
+        shift
+        unhide $@
+    ;;
+    count)
+        shift
+        count $@
+    ;;
+    peek)
+        shift
+        peek $@
+    ;;
+    *)
+        usage
+    ;;
+esac

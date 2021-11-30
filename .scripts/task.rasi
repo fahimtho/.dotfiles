@@ -8,7 +8,7 @@ configuration {
 
 }
 * {
-    lines: 5;
+    lines: 6;
     font: "SF Mono Semibold 8";
     foreground: #f8f8f2;
     background-color: #000000;

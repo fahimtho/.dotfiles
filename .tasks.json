@@ -9,7 +9,7 @@
   },
   {
     "name": "3. TODOs",
-    "command": "notify-send 'TODOs' 'What do you want do ?' && kitty --class=TODO -1 nvim .todo.md"
+    "command": "notify-send 'TODOs' 'What do you want do ?' && kitty --class=TODO -1 taskwarrior-tui"
   },
 
   {
@@ -24,25 +24,30 @@
     "name": "6. Fetch database",
     "command": "notify-send 'Fetching' 'Package Database' && yay -Sy"
   },
-  
   {
-    "name": "7. Clipboard Actions",
-    "command": "notify-send 'Clipboard' 'Pick a action' && ~/.scripts/clipboard.sh"
-  },
-  
-  {
-    "name": "8. Tmux Sessions",
+    "name": "7. Tmux Sessions",
     "command": "notify-send 'Tmux' 'Tinker with sessions' && ~/.scripts/tmux.sh"
   },
   
   {
-    "name": "9. Classical Music",
-    "command": "notify-send 'Music' 'Beauty is in Symphonies' && ~/.scripts/classical"
+    "name": "8. Things to Read",
+    "command": "notify-send 'Things to Read' 'What do you wanna read ?' && ~/.scripts/things_to_read.sh"
   },
 {
-    "name": "10. Lofi Music",
-    "command": "notify-send 'Lofi' 'Lets chill and stuff' && ~/.scripts/beats"
+    "name": "9. Books",
+    "command": "notify-send 'Books' 'Only Friends' && ~/.scripts/books.sh"
+  },
+{
+    "name": "10. Latex Notes",
+    "command": "notify-send 'Notes' 'Written in Latex' && ~/.scripts/notes_latex.sh"
+  },
+{
+    "name": "11. Markdown Notes",
+    "command": "notify-send 'Notes' 'Written in Markdown' && ~/.scripts/notes_markdown.sh"
+  },
+{
+    "name": "12. Pdf Notes",
+    "command": "notify-send 'Notes' 'Compiled notes in PDF' && ~/.scripts/notes_pdf.sh"
   }
-
 
 ]

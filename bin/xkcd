@@ -1,0 +1,31 @@
+#!/usr/bin/env sh
+
+viewer="sxiv -b"
+
+while getopts hrv: flag
+do
+	case "${flag}" in
+		h)  printf "Usage: xkcd [OPTION]\ndefault: fetch last comic\n    -r fetch a random comic\n    -h show this message\n    -v select a different image viewer\n"; exit;
+			;;
+		r)	wget https://xkcd.com/info.0.json -P /tmp > /dev/null 2>&1
+			number="$(jq '.num' /tmp/info.0.json)";
+			rm /tmp/info.0.json
+			randnum="$(shuf -i 1-"$number" -n 1)"
+			wget https://xkcd.com/"$randnum"/info.0.json -P /tmp > /dev/null 2>&1
+			;;
+		v) viewer=${OPTARG}
+			;;
+		*) echo "Invalid option: -$flag" ;;
+	esac
+done
+
+if [ ! -e /tmp/info.0.json ]; then
+	wget https://xkcd.com/info.0.json -P /tmp > /dev/null 2>&1
+fi
+
+imgurl="$(jq '.img' /tmp/info.0.json | sed 's/\"//g')"
+filename="$(echo "$imgurl" | sed 's:.*/::')"
+rm /tmp/info.0.json
+wget "$imgurl" -P /tmp> /dev/null 2>&1
+$viewer "/tmp/$filename"
+rm "/tmp/$filename"

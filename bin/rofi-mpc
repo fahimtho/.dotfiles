@@ -1,0 +1,79 @@
+#!/usr/bin/env python
+from subprocess import Popen, PIPE, STDOUT, check_output, check_call
+from pathlib import Path
+from os import listdir
+from os.path import isfile, join
+import sys
+
+
+def getCurrent():
+    return check_output(["mpc", "current"])
+
+
+current = getCurrent().decode()
+if not current:
+    current = "No Chill"
+else:
+    current = " " + current.rstrip()
+commands = b"List\nRandom\nVolume 50%\nVolume 75%\n"
+rofi = Popen(["rofi", "-theme", "/home/fh1m/.scripts/mpd.rasi", "-width", "23", "-no-fixed-num-lines",
+             "-yoffset", "-80", "1", "-mesg", current, "-i", "-dmenu", "-p", "Controls"], stdout=PIPE, stdin=PIPE)
+tmp = rofi.communicate(input=commands)[0].decode().rstrip()
+if tmp == "Play/Pause":
+    check_call(["mpc", "toggle"])
+if tmp == "Next":
+    check_call(["mpc", "next"])
+if tmp == "Prev":
+    check_call(["mpc", "prev"])
+if tmp == "Random":
+    check_call(["mpc", "random"])
+if tmp == "Repeat":
+    check_call(["mpc", "repeat"])
+if tmp == "Stop":
+    check_call(["mpc", "stop"])
+if tmp == "Volume 50%":
+    check_call(["mpc", "volume", "50"])
+if tmp == "Volume 75%":
+    check_call(["mpc", "volume", "75"])
+if tmp == "Volume 100%":
+    check_call(["mpc", "volume", "100"])
+if tmp == "List":
+    titles = check_output(["mpc", "playlist"])
+    track = 0
+    tlist = ""
+    for line in titles.splitlines():
+        track += 1
+        tlist = tlist + "[" + str(track) + "] " + line.decode() + "\n"
+    if track > 1:
+        tlist.rstrip()
+        tlist = "[SOURCES]\n" + tlist
+        rofi = Popen(["rofi", "-width", "30", "-lines", "20", "-yoffset", "-350",
+                     "-no-fixed-num-lines", "1", "-i", "-dmenu", "-p", "Play"], stdout=PIPE, stdin=PIPE)
+        tmp = rofi.communicate(input=tlist.encode())[0].decode().rstrip()
+        tmp = tmp[tmp.find("[")+1:tmp.find("]")]
+    else:
+        tmp = "SOURCES"
+    if not tmp:
+        sys.exit(0)
+    if tmp == "SOURCES":
+        commands = ""
+        playlists = check_output(["mpc", "lsplaylists"])
+        for line in playlists.splitlines():
+            commands = commands + line.decode() + "\n"
+        rofi = Popen(["rofi", "-width", "30","-yoffset","-350","-lines","20","-no-fixed-num-lines", current, "-i", "-dmenu", "-p", "Select Source"], stdout=PIPE, stdin=PIPE)
+        tmp = rofi.communicate(input=commands.encode())[0].decode().rstrip()
+        if not tmp:
+            sys.exit(0)
+        elif tmp == "Local ~/Music":
+            check_call(["mpc", "clear"])
+            check_call(["mpc", "update"])
+            files = check_output(["mpc", "listall"])
+            add = Popen(["mpc", "add"], stdin=PIPE)
+            add.communicate(files)
+            Popen(["mpc", "play"])
+        else:
+            check_call(["mpc", "clear"])
+            check_call(["mpc", "load", tmp])
+            check_call(["mpc", "play"])
+    else:
+        check_call(["mpc", "play", tmp])

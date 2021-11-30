@@ -1,7 +1,10 @@
 tmux start-server
 tmux new-session -d -s Main
-
 mopidy &
+bash ~/.scripts/empty &
+bash ~/.scripts/shuffle &
+
+
 
 
 
