@@ -25,6 +25,14 @@ Plug 'hrsh7th/cmp-calc'
 Plug 'kdheepak/cmp-latex-symbols'
 Plug 'mattn/emmet-vim'
 Plug 'https://gitlab.com/yorickpeterse/nvim-pqf.git'
+Plug 'liuchengxu/vista.vim'
+Plug 'nacro90/numb.nvim'
+Plug 'lewis6991/gitsigns.nvim'
+Plug 'rafamadriz/friendly-snippets'
+Plug 'lukas-reineke/indent-blankline.nvim'
+Plug 'blackCauldron7/surround.nvim'
+Plug 'steelsojka/pears.nvim'
+Plug 'frazrepo/vim-rainbow'
 call plug#end()
 
 " setting options(internal)
@@ -65,7 +73,6 @@ set cursorline
 set noruler
 colorscheme ron
 set shortmess+=FIaosc
-set signcolumn=number
 set hlsearch
 set nobackup
 set nowritebackup
@@ -79,6 +86,50 @@ set nolist
 set laststatus=2
 set mouse=ar
 
+" Statusline
+hi User1 ctermfg=0 ctermbg=blue
+hi User2 ctermfg=blue ctermbg=0
+hi User3 ctermfg=blue ctermbg=none
+
+function! ReadOnly()
+  if &readonly || !&modifiable
+    return ' '
+  else
+    return ''
+endfunction
+
+let g:currentmode={
+      \ 'n'  : 'NORMAL ',
+      \ 'no' : 'N·Operator Pending ',
+      \ 'v'  : 'VISUAL ',
+      \ 'V'  : 'V·Line ',
+      \ 'x22' : 'V·Block ',
+      \ 's'  : 'Select ',
+      \ 'S'  : 'S·Line ',
+      \ 'x19' : 'S·Block ',
+      \ 'i'  : 'INSERT ',
+      \ 'R'  : 'REPLACE ',
+      \ 'Rv' : 'V·Replace ',
+      \ 'c'  : 'Command ',
+      \ 'cv' : 'Vim Ex ',
+      \ 'ce' : 'Ex ',
+      \ 'r'  : 'Prompt ',
+      \ 'rm' : 'More ',
+      \ 'r?' : 'Confirm ',
+      \ '!'  : 'Shell ',
+      \ 't'  : 'Terminal '
+      \}
+
+set statusline=
+set statusline+=\%1*\ %{toupper(g:currentmode[mode()])}                                   
+set statusline+=%3*\ %<%f\%{ReadOnly()}                                
+set statusline+=%3*\ %<%m\                                
+set statusline+=%8*\ %=\          
+set statusline+=%3*\%l            
+set statusline+=%3*\ of                       
+set statusline+=%3*\ %L\                        
+set statusline+=%1*\ line\ 
+
 " setting-options(Plugings)
 let g:vimtex_view_general_viewer = 'sioyek'
 let g:undotree_SetFocusWhenToggle = 1
@@ -88,6 +139,10 @@ let g:netrw_banner = 0
 let g:bracey_refresh_on_save = 1
 let g:asyncrun_open = 30
 let g:asyncrun_trim = 1
+let g:vista_default_executive = 'nvim_lsp'
+let g:vista#renderer#enable_icon = 1
+let g:rainbow_active = 1
+let g:rainbow_ctermfgs = ['blue', 'lightblue', 'red', 'magenta']
 
 " mapings
 nmap <silent><C-l> :noh<CR>
@@ -145,6 +200,10 @@ nnoremap <silent> gf :AsyncRun -strip git add % && echo "Current file has been a
 map <silent><C-c> <plug>NERDCommenterToggle
 map <silent> <space>n :bNext<CR>
 map <silent> <space>p :bprevious<CR> 
+nnoremap <silent> <space>o :Vista!!<CR>
+nnoremap <silent> <leader>bl :lua require"gitsigns".blame_line{full=true}<CR>
+nnoremap <silent> <leader>hp <cmd>lua require"gitsigns".preview_hunk()<CR>
+
 
 " Ui Configuration
 hi linenr ctermfg=8
@@ -176,11 +235,16 @@ hi SignColumn ctermbg=16
 hi NormalFloat ctermfg=blue
 hi conceal ctermbg=none
 hi FloatBorder ctermfg=blue
-hi TabLine ctermfg=0 ctermbg=232
-hi TabLineSel ctermfg=blue ctermbg=16
+hi TabLine ctermfg=0 ctermbg=none
+hi TabLineSel ctermfg=blue ctermbg=none
 hi TelescopeBorder ctermfg=0 ctermbg=none
 hi DiffChange ctermfg=16 ctermbg=blue
 hi QuickFixLine ctermfg=none ctermbg=none
+hi GitSignsChange ctermfg=red ctermbg=none
+hi GitSignsAdd ctermfg=blue ctermbg=none
+hi Git ctermfg=blue ctermbg=none
+hi DiffDelete ctermfg=red ctermbg=none
+hi IndentBlanklineChar ctermbg=none ctermfg=0
 
 " Actions
 let &t_ut=''
@@ -197,7 +261,7 @@ au BufEnter,BufWinEnter,WinEnter term://* startinsert
 au BufLeave term://* stopinsert
 au TermClose * call feedkeys(" ")
 au TermOpen * set laststatus=0
-au TermClose * set laststatus=1
+au TermClose * set laststatus=2
 
 " Toggle Quickfix Window
 let g:quickfix_is_open = 0
@@ -238,7 +302,7 @@ endfunction
 " Hide Command after some time
 augroup cmdline
   autocmd!
-  autocmd CmdlineLeave : lua vim.defer_fn(function() vim.cmd('echo ""') end, 1500)
+  autocmd CmdlineLeave : lua vim.defer_fn(function() vim.cmd('echo ""') end, 3000)
 augroup END
 
 " highlight yanked area
@@ -411,6 +475,24 @@ require('pqf').setup({
 -- Telescope
 require('telescope').setup{}
 
+-- Auto Complete Puncuation 
+require "pears".setup(function(conf)
+  conf.pair("<", ">")
+  conf.expand_on_enter(true)
+end)
+
+-- show Indent
+require("indent_blankline").setup()
+
+-- Surround Stuff
+require"surround".setup{}
+
+-- Git Change in file
+require('gitsigns').setup()
+
+-- Peek Lines
+require('numb').setup()
+
 -- Setup nvim-cmp.
   local cmp = require'cmp'
 
@@ -473,7 +555,7 @@ require('lspkind').init({
       Module = "",
       Property = "ﰠ",
       Unit = "塞",
-      Value = "",
+      Value = "",
       Enum = "",
       Keyword = "",
       Snippet = " ",
@@ -486,7 +568,7 @@ require('lspkind').init({
       Struct = "פּ",
       Event = "",
       Operator = "",
-      TypeParameter = ""
+      TypeParameter = ""
     },
 })
 
@@ -498,52 +580,3 @@ cmp.setup {
 }
 
 EOF
-
-hi User1 ctermfg=0 ctermbg=blue
-hi User2 ctermfg=blue ctermbg=0
-hi User3 ctermfg=blue ctermbg=none
-
-function! ReadOnly()
-  if &readonly || !&modifiable
-    return ' '
-  else
-    return ''
-endfunction
-
-let g:currentmode={
-      \ 'n'  : 'NORMAL ',
-      \ 'no' : 'N·Operator Pending ',
-      \ 'v'  : 'VISUAL ',
-      \ 'V'  : 'V·Line ',
-      \ 'x22' : 'V·Block ',
-      \ 's'  : 'Select ',
-      \ 'S'  : 'S·Line ',
-      \ 'x19' : 'S·Block ',
-      \ 'i'  : 'INSERT ',
-      \ 'R'  : 'REPLACE ',
-      \ 'Rv' : 'V·Replace ',
-      \ 'c'  : 'Command ',
-      \ 'cv' : 'Vim Ex ',
-      \ 'ce' : 'Ex ',
-      \ 'r'  : 'Prompt ',
-      \ 'rm' : 'More ',
-      \ 'r?' : 'Confirm ',
-      \ '!'  : 'Shell ',
-      \ 't'  : 'Terminal '
-      \}
-
-
-set statusline=
-set statusline+=\%1*\ %{toupper(g:currentmode[mode()])}                                   
-set statusline+=%3*\ %<%f\%{ReadOnly()}                                
-set statusline+=%3*\ %<%m\                                
-set statusline+=%8*\ %=\          
-set statusline+=%3*\%l            
-set statusline+=%3*\ of                       
-set statusline+=%3*\ %L\                        
-set statusline+=%1*\ line\      
-
-
-
-
-
