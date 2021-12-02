@@ -1,5 +1,6 @@
 # General Settings
-format = """$directory$jobs$git_branch$character"""
+format = """$directory$jobs$git_branch$git_status$character"""
+right_format = """$cmd_duration"""
 add_newline = false
 
 
@@ -7,13 +8,23 @@ add_newline = false
 format = " [$path]($style)[$read_only]($read_only_style) " 
 truncation_length = 1
 truncate_to_repo = true
+style = "bold blue"
 home_symbol = "~"
 truncation_symbol = ""
-read_only_style = "red"
+read_only = " "
+read_only_style = "blue"
 fish_style_pwd_dir_length = 1
 
 [character]
 success_symbol = "[❱](bold blue)"
 error_symbol = "[❱](bold blue)"
+
+
+[cmd_duration]
+min_time = 60000
+format = "took [$duration]($style) "
+style = "bold cyan"
+show_notifications	= true
+min_time_to_notify = 600000
 
 
