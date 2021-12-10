@@ -1,6 +1,5 @@
 # General Settings
-format = """$directory$jobs$git_branch$git_status$character"""
-right_format = """$cmd_duration"""
+format = """$directory$jobs$git_branch$character"""
 add_newline = false
 
 
@@ -20,11 +19,5 @@ success_symbol = "[❱](bold blue)"
 error_symbol = "[❱](bold blue)"
 
 
-[cmd_duration]
-min_time = 60000
-format = "took [$duration]($style) "
-style = "bold cyan"
-show_notifications	= true
-min_time_to_notify = 600000
 
 

@@ -77,7 +77,7 @@ hide() {
     # Hide file
     bspc node $node --flag hidden=on
     info=$(node_info $node)
-    notify-send -u low "Window hidden: \"$info\""
+    notify-send -u low "Window hidden: $info"
 }
 
 unhide() {

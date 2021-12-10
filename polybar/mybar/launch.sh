@@ -15,3 +15,6 @@ polybar -q workspace -c "$DIR"/config.ini & 2>/dev/null
 polybar -q date -c "$DIR"/config.ini & 2>/dev/null
 polybar -q info -c "$DIR"/config.ini & 2>/dev/null
 polybar -q stats -c "$DIR"/config.ini & 2>/dev/null
+polybar -q music -c "$DIR"/config.ini & 2>/dev/null
+polybar -q todos -c "$DIR"/config.ini & 2>/dev/null
+polybar -q wins -c "$DIR"/config.ini & 2>/dev/null

@@ -88,7 +88,7 @@ alias t="tmux attach -t Main"
 alias tc="tmux new -s Main"
 alias tk="tmux kill-server"
 alias o="devour xdg-open"
-alias cal="pcalc"
+alias calc="pcalc"
 alias reload="exec zsh"
 alias la="ls -A "
 alias rr="ranger"
@@ -113,6 +113,7 @@ alias aup="arduino-cli upload -p /dev/ttyACM0 -b arduino:avr:uno"
 alias anew="arduino-cli sketch new"
 alias tt="taskwarrior-tui"
 alias mkcd='take'
+alias et="nvim -t"
 
 # Cool cd
 eval "$(zoxide init zsh)"
@@ -120,11 +121,11 @@ eval "$(zoxide init zsh)"
 # Custom prompt
 eval "$(starship init zsh)"
 
+# Man Page with Bat
 export MANPAGER="sh -c 'col -bx | bat -l man -p'"
 
 # launch without text
 function launch {
     nohup "$@" >/dev/null 2>/dev/null & disown
 }
-complete -F _command launch
 

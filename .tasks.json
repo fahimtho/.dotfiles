@@ -14,7 +14,7 @@
 
   {
     "name": "4. Restart music",
-    "command": "notify-send 'Behold' 'Restarting Music !!!' && pkill mopidy && mopidy"
+    "command": "notify-send 'Behold' 'Restarting Music !!!' && killall mopidy && mopidy &"
   },
   {
     "name": "5. Restart Dunst",

@@ -3,28 +3,24 @@
 ##########
 
 # Web-Browser
-alt + w 
+alt + w
    chromium
 
 # Ranger
 alt + f
  kitty -1 --class=float ./.scripts/ranger/ranger.py
-  
+
 # Rofi-File Manager
 alt + o
-   rofi  -yoffset "-300" -no-fixed-num-lines -show file-browser-extended -display-file-browser-extended "files"
+   rofi -theme ~/.scripts/files.rasi -yoffset "-200" -no-fixed-num-lines -show file-browser-extended -display-file-browser-extended "files"
 
 # Terminal with Tmux
 super + Return
-	kitty --class=Tmux -1 ~/.scripts/Main 
+	kitty --class=Tmux -1 ~/.scripts/Main
 
 # Mpd Full-on Mode
 ctrl + m
   chromium http://localhost:6680/iris/kiosk-mode
-
-# Terminal
-alt + Return
-  kitty 
 
 ###########
 ## Lists ##
@@ -37,7 +33,7 @@ alt + p
 # Clipboard History
 alt + c
   rofi  -yoffset "-200" -no-fixed-num-lines -modi "clipboard:greenclip print" -show clipboard -run-command '{cmd}'
- 
+
 # Mpd Menu
 alt + m
   rofi-mpc
@@ -58,7 +54,7 @@ super + m
 super + p
   powermenu
 
-# List windows as searchable 
+# List windows as searchable
 super + l
   rofi -show window -no-fixed-num-lines -yoffset "-100"
 
@@ -66,13 +62,13 @@ super + l
 super + s
   rofi-ttv
 
-# Run Tasks 
-ctrl + Return
+# Run Tasks
+alt + Return
   ~/.scripts/task.sh
 
 # Todos
 super + w
-   rofi -modi tasks:rofi-taskwarrior -offset '-100' -no-fixed-num-lines -show tasks
+   rofi -modi tasks:rofi-taskwarrior -yoffset '-40' -width "600" -no-fixed-num-lines -show tasks
 
 ##############
 ## One Task ##
@@ -95,7 +91,7 @@ super + f
 	bspc desktop -l next
 
 # Set the window state
-super + {t,shift + p,space,shift+f}
+super + {shift+space,shift + p,space,shift+f}
 	bspc node -t {tiled,pseudo_tiled,floating,fullscreen}
 
 # Focus the node in the given direction
@@ -103,7 +99,7 @@ super + {_,shift + }{Left,Down,Up,Right}
 	bspc node -{f,s} {west,south,north,east}
 
 # Move to Next Window
-super + F1 
+super + F1
   bspc desktop -f 'next.occupied'
 
 # Move to Previous Window
@@ -120,7 +116,7 @@ super + grave
 
 # Send Window to the given desktop without focus
 super + {_,shift + }{1-9,0}
-  bspc {desktop -f,node -d} '^{1-9,10}' 
+  bspc {desktop -f,node -d} '^{1-9,10}'
 
 # Move focused window to the next or previous workspace and then switch to that workspace
 alt + control + {Left,Right}
@@ -152,9 +148,9 @@ super + y
 
 # Rofi-Youtube Menu
 alt + y
-  ytfzf -N -D -l 
+  ytfzf -N -D -l
 
-# Take screenshot 
+# Take screenshot
 Print
   flameshot gui
 
@@ -172,7 +168,7 @@ XF86AudioLowerVolume
 
 # Turn up volum
 XF86AudioRaiseVolume
-  ponymix increase 5  --max-volume 200 && dunstify -a System -t 10000 -h string:x-dunst-stack-tag:volume -h int:value:$( ponymix get-volume) "  Volume: $(ponymix get-volume)% " 
+  ponymix increase 5  --max-volume 200 && dunstify -a System -t 10000 -h string:x-dunst-stack-tag:volume -h int:value:$( ponymix get-volume) "  Volume: $(ponymix get-volume)% "
 
 # Mute Mic
 XF86AudioMicMute
@@ -190,21 +186,21 @@ super + equal
 ## Control Sound ##
 ###################
 
-# Mpd Play (wireless)
-XF86AudioPlay 
-  mpc play
+# Play (wireless)
+XF86AudioPlay
+  playerctl play
 
 # Mpd Pause (wireless)
 XF86AudioPause
-  mpc pause
+  playerctl pause
 
 # Mpd Previous Song (Wireless)
-XF86AudioNext 
-  mpc prev
+XF86AudioNext
+  playerctl previous
 
 # Mpd Next Song (Wireless)
 XF86AudioPrev
-  mpc next
+  playerctl next
 
 # Mpd Pause Music (Keyboard)
 control + space
@@ -216,7 +212,7 @@ control + Left
 
 # Mpd Previous song (Keyboard)
 control + Right
-  mpc next 
+  mpc next
 
 # Increase Volumn by 5 (mpd)
 control + Up
@@ -235,7 +231,7 @@ control + shift + Left
   mpc seek -5
 
 # Pause Media (mpris)
-Menu 
+Menu
   playerctl play-pause
 
 # Next Track (mpris)
@@ -245,4 +241,3 @@ ctrl + period
 # Previous Track (mpris)
 ctrl + comma
   playerctl previous
- 

@@ -11,8 +11,8 @@ configuration {
     lines: 6;
     font: "SF Mono Semibold 8";
     foreground: #f8f8f2;
-    background-color: #000000;
-    active-background: #323433;
+    background-color: #05050a;
+    active-background: #202333;
     urgent-background: #ff5555;
     selected-background: @active-background;
     selected-urgent-background: @urgent-background;
@@ -80,7 +80,7 @@ element.selected.urgent {
     text-color:       @foreground;
 }
 element.selected.active {
-    background-color: @selected-background; 
+    background-color: @selected-background;
     text-color:       @foreground;
 }
 element.alternate.normal {

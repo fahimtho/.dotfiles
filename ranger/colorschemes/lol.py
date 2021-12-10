@@ -154,4 +154,3 @@ class base(ColorScheme):
                 fg = 11
 
         return fg, bg, attr
-

@@ -1,17 +1,17 @@
 #! /bin/sh
 
-#starting Sxhkd
+# starting Sxhkd
 pgrep -x sxhkd > /dev/null || sxhkd &
 
-#defining workspaces
-bspc monitor -d 1 2 3 4     
+# defining workspaces
+bspc monitor -d code watch study ext apps
 
-#border and gap
+# border and gap
 bspc config border_width         0
 bspc config window_gap           8
 
-#split,border color
-bspc config split_ratio          0.5
+# split,border color
+bspc config split_ratio          0.55
 bspc config borderless_monocle   false
 bspc config gapless_monocle      false
 bspc config focus_follows_pointer true
@@ -19,10 +19,10 @@ bspc config auto_alternate true
 bspc config auto_cancel true
 bspc config normal_frame_opacity 0.0
 bspc config focused_border_color "#ff0d41"
-bspc config ignore_ewmh_focus true 
+bspc config ignore_ewmh_focus true
 bspc config removal_adjustment   true
 
-#window rules
+# window rules
 bspc rule -a Gcolor3 state=floating
 bspc rule -a float state=floating
 bspc rule -a Blueman-manager state=floating
@@ -39,8 +39,8 @@ bspc rule -a "VirtualBox Manager"  desktop=^4 follow=on
 bspc config external_rules_command  ~/.config/bspwm/rule.sh
 
 
-## starting apps
-## -------------
+# starting apps
+# ------------
 
 # Screenshot
 pkill flameshot
@@ -49,29 +49,26 @@ flameshot &
 # Sudo manager
 lxpolkit &
 
-# Power manager
-xfce4-power-manager &
-
 # Cursor
 xsetroot -cursor_name left_ptr &
 
 # Wallpaper
 $HOME/.config/bspwm/autostart/Desktop.sh
 
-#notification 
+# notification
 dunst &
 
-# Polyabr
+# Polyabr [statusbar]
 $HOME/.config/polybar/mybar/launch.sh
 
-#Picom
+# Picom [compositor]
 $HOME/.config/bspwm/autostart/picom.sh
 
-# Clip-Board Manager 
+# Clip-Board Manager
 $HOME/.config/bspwm/autostart/greenclip.sh
 
 # Remapping Capslock
 xmodmap ~/.Xmodmap
 
-# Control mpris Player
-playerctld &
+# Mpris Players
+$HOME/.config/bspwm/autostart/mpris.sh

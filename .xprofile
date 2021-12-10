@@ -1,12 +1,6 @@
 tmux start-server
 tmux new-session -d -s Main
 mopidy &
+playerctld &
 bash ~/.scripts/empty &
 bash ~/.scripts/shuffle &
-
-
-
-
-
-
-

@@ -8,9 +8,9 @@ configuration {
 * {
     font: "SF Mono Semibold 8 ";
     foreground: #ffffff;
-    background-color: #000000;
-    active-background:  #323433;
-    urgent-background: #323433;
+    background-color: #05050a;
+    active-background:  #202333;
+    urgent-background: #0f0f0f;
     selected-background: @active-background;
     selected-urgent-background: @urgent-background;
     selected-active-background: @active-background;
@@ -69,15 +69,15 @@ element.normal.urgent{
     text-color:     @foreground;
   }
 element.selected.normal {
-    background-color: #3281ea;
+    background-color: #7196e6;
     text-color:       #000000;
 }
 element.selected.urgent {
-    background-color: #3281ea;
+    background-color: #7196e6;
     text-color:       #000000;
 }
 element.selected.active {
-    background-color: #3281ea;
+    background-color: #7196e6;
     text-color:       #000000;
 }
 element.alternate.normal {
@@ -145,6 +145,3 @@ element-text {
     vertical-align:                 0.5;
     margin:                         0% 0.25% 0% 0.25%;
 }
-
-
-
