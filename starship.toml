@@ -4,7 +4,7 @@ add_newline = false
 
 
 [directory]
-format = " [$path]($style)[$read_only]($read_only_style) " 
+format = "[$path]($style)[$read_only]($read_only_style) " 
 truncation_length = 1
 truncate_to_repo = true
 style = "bold blue"

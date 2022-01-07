@@ -39,7 +39,7 @@ node_info() {
     [ -z "$info" ] && {
         echo ""
     } || {
-        # Parse everything between the double quotes. 
+        # Parse everything between the double quotes.
         # This will be the name of the window
         info=${info#*\"}
         info=${info%\"*}
@@ -77,7 +77,6 @@ hide() {
     # Hide file
     bspc node $node --flag hidden=on
     info=$(node_info $node)
-    notify-send -u low "Window hidden: $info"
 }
 
 unhide() {
@@ -96,7 +95,7 @@ unhide() {
         notify=1
     }
 
-    # Check if corresponding file exists 
+    # Check if corresponding file exists
     FILE="$DIR/$desktop"
 
     no_window_msg="No window hidden on desktop"
@@ -105,7 +104,7 @@ unhide() {
         exit 0
     }
 
-    # Read first entry from file, i.e the most recently 
+    # Read first entry from file, i.e the most recently
     # hidden node.
     node=$(head -n 1 $FILE)
 
@@ -126,12 +125,12 @@ unhide() {
         [ "$focus"  -eq "1" ] && bspc node -f $node
 
         # Send notification
-        [ "$notify" -eq "1" ] && { 
+        [ "$notify" -eq "1" ] && {
             info=$(node_info $node)
             notify-send -u low "Node unhidden on desktop $desktop:" "\"$info\""
         }
     else
-        # If not, the window has been unhidden in some other way. 
+        # If not, the window has been unhidden in some other way.
         # Then try to unhide the next window
         unhide $@
     fi
@@ -145,7 +144,7 @@ count() {
         FILE="$DIR/$1"
     }
 
-    # Check if file exists for that directory    
+    # Check if file exists for that directory
     [ ! -f $FILE ] && {
         echo 0 # If not, return 0
     } || {
@@ -156,8 +155,8 @@ count() {
 peek() {
     # Get intended desktop
     desktop=$(dsk $1)
-    
-    # Check if corresponding file exists 
+
+    # Check if corresponding file exists
     FILE="$DIR/$desktop"
 
     no_window_msg="[No window hidden]"
@@ -166,7 +165,7 @@ peek() {
         exit 0
     }
 
-    # Read first entry from file, i.e the most recently 
+    # Read first entry from file, i.e the most recently
     # hidden node.
     node=$(head -n 1 $FILE)
 
@@ -180,7 +179,7 @@ peek() {
     echo "$info"
 }
 
-case $1 in 
+case $1 in
     hide)
         shift
         hide $@

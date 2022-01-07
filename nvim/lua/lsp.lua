@@ -1,10 +1,10 @@
--- LSP UI
-vim.lsp.handlers['textDocument/publishDiagnostics'] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
-  virtual_text = false,
-  signs = false,
-  underline = false,
-  update_in_insert = true,
-})
+-- linting format
+vim.diagnostic.config({
+    virtual_text = false,
+    underline = false,
+    signs = false,
+    update_in_insert = true,
+  })
 
 -- Border for Documentation
 local border = {
@@ -28,58 +28,25 @@ local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities.textDocument.completion.completionItem.snippetSupport = true
 -- use | capabilities = capabilities | to use snippet from lsp
 
--- LSPs
+-- Python
 require'lspconfig'.pyright.setup{
   handlers=handlers,
+  capabilities = capabilities,
 }
+
+-- C,CPP
 require'lspconfig'.clangd.setup{
   handlers=handlers,
+  capabilities = capabilities,
 }
-require'lspconfig'.rust_analyzer.setup{
-  handlers=handlers,
-}
-require'lspconfig'.gopls.setup{
-  handlers=handlers,
-}
-require'lspconfig'.julials.setup{
-  handlers=handlers,
-}
+
+-- latex
 require'lspconfig'.texlab.setup{
   handlers=handlers,
-}
-require'lspconfig'.tsserver.setup{
-  handlers=handlers,
-}
-require'lspconfig'.bashls.setup{
-  handlers=handlers,
-}
-require'lspconfig'.hls.setup{
-  handlers=handlers,
-}
-require'lspconfig'.cssls.setup{
-  handlers=handlers,
   capabilities = capabilities,
 }
-require'lspconfig'.html.setup {
-  capabilities = capabilities,
-  handlers=handlers,
-}
-require'lspconfig'.jsonls.setup {
-  capabilities = capabilities,
-  handlers=handlers,
-}
-require'lspconfig'.julials.setup{
-  handlers=handlers,
-}
-require'lspconfig'.vimls.setup{
-  handlers=handlers,
-}
-require'lspconfig'.r_language_server.setup{
-  handlers=handlers,
-}
-require'lspconfig'.cmake.setup{
-handlers=handlers,
-}
+
+-- Arduino
 require'lspconfig'.arduino_language_server.setup({
 cmd =  {
 		-- Required
@@ -91,4 +58,71 @@ cmd =  {
 	},
 
 handlers=handlers,
+capabilities = capabilities,
 })
+
+-- Bash
+require'lspconfig'.bashls.setup{
+  handlers=handlers,
+  capabilities = capabilities,
+}
+
+-- Go
+require'lspconfig'.gopls.setup{
+  handlers=handlers,
+  capabilities = capabilities,
+}
+
+-- Haskell
+require'lspconfig'.hls.setup{
+  handlers=handlers,
+  capabilities = capabilities,
+}
+
+-- Rust
+require'lspconfig'.rust_analyzer.setup{
+  handlers=handlers,
+  capabilities = capabilities,
+}
+
+-- typescript and javascript
+require'lspconfig'.tsserver.setup{
+  handlers=handlers,
+  capabilities = capabilities,
+}
+
+-- Javascript
+require'lspconfig'.eslint.setup{
+   handlers=handlers,
+  capabilities = capabilities,
+}
+
+-- Markdown
+require'lspconfig'.grammarly.setup{
+  handlers=handlers,
+  capabilities = capabilities,
+}
+
+-- Html
+require'lspconfig'.html.setup{
+  handlers=handlers,
+  capabilities = capabilities,
+}
+
+-- CSS
+require'lspconfig'.cssls.setup{
+  handlers=handlers,
+  capabilities = capabilities,
+}
+
+-- JSON
+require'lspconfig'.jsonls.setup{
+  handlers=handlers,
+  capabilities = capabilities,
+}
+
+-- Lua
+require'lspconfig'.sumneko_lua.setup{
+  handlers=handlers,
+  capabilities = capabilities,
+}

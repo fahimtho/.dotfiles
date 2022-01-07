@@ -3,7 +3,7 @@
 eval "$4"
 
 if [[ -n $manage && $state != @(floating|fullscreen) ]]; then
-    max_per_desktop=2
+    max_per_desktop=3
     if [[ -n $node ]]
         then target_desktop=$(bspc query -D -n "$node")
     elif [[ -n $desktop ]]

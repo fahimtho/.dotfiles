@@ -1,1 +1,0 @@
-devour mpv --no-osc --ytdl-format=bestvideo+bestaudio/best  --speed=1 "$(xclip -o)"

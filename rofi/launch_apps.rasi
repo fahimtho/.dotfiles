@@ -1,0 +1,88 @@
+configuration {
+    show-icons:                     true;
+    display-drun: 					"";
+    drun-display-format:            "{name}";
+    disable-history:                false;
+	  sidebar-mode: 					false;
+}
+
+
+window {
+    transparency:                   "real";
+	border:							1px;
+	border-color:					#202333;
+    border-radius:                  10px;
+	width:							26%;
+    location:                       center;
+    x-offset:                       0;
+    y-offset:                       -100;
+}
+
+prompt {
+    enabled: 						true;
+	padding: 						0.15% 0.3% 0.0% 0.3%;
+}
+
+entry {
+    expand:                         true;
+    horizontal-align:               0;
+    placeholder:                    "Search";
+    padding:                        0.10% 0% 0% 0%;
+    blink:                          true;
+}
+
+inputbar {
+	children: 						[ prompt, entry ];
+    expand:                         false;
+	border:							0% 0% 0% 0%;
+    border-radius:                  0px;
+	border-color:					@ac;
+    margin:                         0% 0% 0% 0%;
+    padding:                        15;
+}
+
+listview {
+    padding:                        5px;
+    columns:                        2;
+    lines:                          5;
+    spacing:                        1%;
+    cycle:                          false;
+    dynamic:                        true;
+    layout:                         vertical;
+}
+
+mainbox {
+	border:							0% 0% 0% 0%;
+    border-radius:                  0% 0% 0% 0%;
+    children:                       [ inputbar, listview ];
+    spacing:                       	0%;
+    padding:                        0%;
+}
+
+element {
+    orientation:                    horizontal;
+    border-radius:                  0%;
+    padding:                        4;
+}
+
+element-icon {
+    background-color: 				inherit;
+    text-color:       				inherit;
+    horizontal-align:               0.5;
+    vertical-align:                 0.5;
+    size:                           16px;
+    border:                         0px;
+}
+
+element-text {
+    text-color:       				inherit;
+    expand:                         true;
+    horizontal-align:               0;
+    vertical-align:                 0.5;
+    margin:                         0% 0.25% 0% 0.25%;
+}
+
+element selected {
+	border:							0% 0% 0% 0%;
+    border-radius:                  7px;
+}

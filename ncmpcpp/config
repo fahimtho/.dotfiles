@@ -2,7 +2,7 @@
 visualizer_type = "spectrum"
 visualizer_look = "∙│"
 visualizer_color = yellow
-song_list_format = " {{%t}|{%f}}{$R%l} "
+song_list_format = "{{%t}|{%f}}{$R%l}"
 current_item_prefix = "$b$7"
 current_item_inactive_column_prefix = $b$(white)$r
 now_playing_prefix = "$b$5"
@@ -15,7 +15,7 @@ statusbar_visibility = "yes"
 titles_visibility = "yes"
 follow_now_playing_lyrics = yes
 fetch_lyrics_for_current_song_in_background = yes
-progressbar_look = "━━ "
+progressbar_look = " ━━"
 progressbar_elapsed_color = "blue"
 progressbar_color = "black"
 song_status_format = "$b$5%t by $7%A"

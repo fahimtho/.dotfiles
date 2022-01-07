@@ -8,7 +8,7 @@ configuration {
 * {
     font: "SF Mono Semibold 8 ";
     foreground: #ffffff;
-    background-color: #05050a;
+    background-color: #000000;
     active-background:  #202333;
     urgent-background: #0f0f0f;
     selected-background: @active-background;
@@ -28,9 +28,9 @@ configuration {
 window {
     background-color: @background;
     border:           1px;
-    border-radius:    7;
+    border-radius:    10px;
     border-color:     @bordercolor;
-    padding:          5;
+    padding:          3;
 }
 mainbox {
     border:  0;
@@ -69,15 +69,15 @@ element.normal.urgent{
     text-color:     @foreground;
   }
 element.selected.normal {
-    background-color: #7196e6;
+    background-color: #296dd9;
     text-color:       #000000;
 }
 element.selected.urgent {
-    background-color: #7196e6;
+    background-color: #296dd9;
     text-color:       #000000;
 }
 element.selected.active {
-    background-color: #7196e6;
+    background-color: #296dd9;
     text-color:       #000000;
 }
 element.alternate.normal {
@@ -126,7 +126,7 @@ element-icon {
     text-color:       				inherit;
     horizontal-align:               0.5;
     vertical-align:                 0.5;
-    size:                           20px;
+    size:                           18px;
     border:                         0px;
 }
 

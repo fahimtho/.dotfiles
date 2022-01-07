@@ -6,21 +6,21 @@
 alt + w
    chromium
 
-# Ranger
+# Gui File Manager
 alt + f
- kitty -1 --class=float ./.scripts/ranger/ranger.py
+  nemo
 
-# Rofi-File Manager
-alt + o
-   rofi -theme ~/.scripts/files.rasi -yoffset "-200" -no-fixed-num-lines -show file-browser-extended -display-file-browser-extended "files"
+# Ranger
+super + f
+	kitty -1 --class=float ./.scripts/ranger/ranger.py ~/See 
 
 # Terminal with Tmux
 super + Return
-	kitty --class=Tmux -1 ~/.scripts/Main
+	kitty -1 ~/.scripts/Main
 
 # Mpd Full-on Mode
 ctrl + m
-  chromium http://localhost:6680/iris/kiosk-mode
+  chromium http://localhost:6680/iris/
 
 ###########
 ## Lists ##
@@ -32,23 +32,19 @@ alt + p
 
 # Clipboard History
 alt + c
-  rofi  -yoffset "-200" -no-fixed-num-lines -modi "clipboard:greenclip print" -show clipboard -run-command '{cmd}'
+  rofi  -lines "6" -width "1904" -yoffset "419" -modi "clipboard:greenclip print" -show clipboard -run-command '{cmd}'
 
 # Mpd Menu
 alt + m
   rofi-mpc
 
-# Dotfiles
-super + c
-  /home/fh1m/.scripts/confedit
-
-# Program Launcher
+# Program Launcher Quick
 shift + space
-	 ~/.config/rofi/launchers/colorful/launcher.sh
+	rofi -theme ~/.config/rofi/launch_apps.rasi -no-fixed-num-lines -no-lazy-grab -show drun -modi drun
 
-# Set the node flags (marked,locked,sticky,private)
+# Make Current Window full
 super + m
-	~/.scripts/bspc-flag-menu
+  bspc desktop -l next
 
 # Powermenu
 super + p
@@ -56,19 +52,7 @@ super + p
 
 # List windows as searchable
 super + l
-  rofi -show window -no-fixed-num-lines -yoffset "-100"
-
-# Twitch Channels
-super + s
-  rofi-ttv
-
-# Run Tasks
-alt + Return
-  ~/.scripts/task.sh
-
-# Todos
-super + w
-   rofi -modi tasks:rofi-taskwarrior -yoffset '-40' -width "600" -no-fixed-num-lines -show tasks
+  rofi -show window -no-fixed-num-lines -yoffset "-498" -width "1904"
 
 ##############
 ## One Task ##
@@ -86,12 +70,8 @@ super + r
 alt + F1
 	bspc node -c
 
-# Make Current Window Full
-super + f
-	bspc desktop -l next
-
 # Set the window state
-super + {shift+space,shift + p,space,shift+f}
+super + {t,s,space,shift+f}
 	bspc node -t {tiled,pseudo_tiled,floating,fullscreen}
 
 # Focus the node in the given direction
@@ -99,11 +79,11 @@ super + {_,shift + }{Left,Down,Up,Right}
 	bspc node -{f,s} {west,south,north,east}
 
 # Move to Next Window
-super + F1
+super + period
   bspc desktop -f 'next.occupied'
 
 # Move to Previous Window
-super + Escape
+super + comma
   bspc desktop -f 'prev.occupied'
 
 # Switch to last active desktop
@@ -119,11 +99,11 @@ super + {_,shift + }{1-9,0}
   bspc {desktop -f,node -d} '^{1-9,10}'
 
 # Move focused window to the next or previous workspace and then switch to that workspace
-alt + control + {Left,Right}
+super + alt + {Left,Right}
     id=$(bspc query --nodes --node); bspc node --to-desktop {prev,next}; bspc desktop --focus next; bspc node --focus ${id}
 
 # Unhide Menu
-alt + h
+alt + control + h
   ~/.scripts/bspc-unhide-menu
 
 # Hide curent focused window
@@ -142,25 +122,21 @@ super + e
 super + q
   bspc desktop -f 'prev.!occupied'
 
-# Watch youtube with mpv
-super + y
- ~/.scripts/youtube
-
-# Rofi-Youtube Menu
-alt + y
-  ytfzf -N -D -l
-
 # Take screenshot
 Print
-  flameshot gui
+  ~/.scripts/rofi-screenshot
 
 # Full Window Screen shot
 shift + Print
-  flameshot full -p ~/Pictures/Screenshots
+  ~/scripts/rofi-screenshot -s
 
 # Search last copyed text on google
 alt + s
-  ~/.local/bin/clip
+  ~/.scripts/clip
+
+# Snip to Clipboard
+super + alt + s
+  ~/.scripts/snip
 
 # Turn down volumn
 XF86AudioLowerVolume
@@ -176,11 +152,7 @@ XF86AudioMicMute
 
 # Mute Sound
 XF86AudioMute
-  pulseaudio-control togmute
-
-# Change orientation
-super + equal
-  bspc node -n last.automatic
+  pulseaudio-control togmute && notify-send "No Sound" "Enjoy The Peace or Whatever"
 
 ###################
 ## Control Sound ##
@@ -241,3 +213,9 @@ ctrl + period
 # Previous Track (mpris)
 ctrl + comma
   playerctl previous
+
+# Change Orientation
+super + o
+	bspc node '@parent.vertical' -R  90 \
+	    || bspc node '@parent' -R -90
+

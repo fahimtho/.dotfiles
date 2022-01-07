@@ -2,11 +2,9 @@
 source /home/fh1m/.config/nvim/vim/settings.vim
 source /home/fh1m/.config/nvim/vim/mappings.vim
 source /home/fh1m/.config/nvim/vim/theme.vim
-source /home/fh1m/.config/nvim/vim/doing_stuff.vim
+source /home/fh1m/.config/nvim/vim/utils.vim
 
 " Lua files
 lua require('statusline')
-lua require('lsp')
-lua require('codecomplete')
-lua require('others')
 lua require('plugins')
+lua require('lsp')

@@ -4,7 +4,6 @@ LS_COLORS='rs=0:di=1;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd
 # Exporting
 export LS_COLORS
 export ZSH="/home/fh1m/.oh-my-zsh"
-export PATH="$PATH:/home/fh1m/bin"
 export PATH="$PATH:/home/fh1m/.local/share/gem/ruby/3.0.0/bin "
 export PATH="$PATH:/home/fh1m/.local/bin"
 export PATH="$PATH:/home/fh1m/.platformio/penv/bin"
@@ -14,12 +13,20 @@ export EDITOR="nvim"
 export VISUAL="nvim"
 export TERM=screen-256color
 export KEYTIMEOUT=1
-export FZF_DEFAULT_COMMAND='fd --type file --hidden --no-ignore'
-export FZF_DEFAULT_OPTS='--height 60% --layout=reverse --prompt="❱ "'
-fpath=($HOME/.oh-my-zsh/plugins/arduino_completion_zsh $fpath) 
-                                                        
+export FZF_DEFAULT_COMMAND='fd --type file --hidden --no-ignore --follow --exclude .git'
+export FZF_DEFAULT_OPTS='--height 10% --layout=reverse --prompt="❱ "'
+export FZF_DEFAULT_OPTS=$FZF_DEFAULT_OPTS'
+ --color=bg:-1,hl:#0084ff
+ --color=fg+:#1f6dff,bg+:#141f33,hl+:#006fff
+ --color=info:#006fff,prompt:#ff002f,pointer:#ff002f
+ --color=marker:#87ff00,spinner:#ff002f,header:#0044ff'
+
+
+# Arduino-cli tab completion
+fpath=($HOME/.oh-my-zsh/plugins/arduino_completion_zsh $fpath)
+
 # Plugins
-plugins=(sudo fzf fzf-tab last-working-dir copy-pasta zsh-autosuggestions)
+plugins=(sudo fzf fzf-tab copy-pasta)
 
 # this line
 source $ZSH/oh-my-zsh.sh
@@ -30,7 +37,7 @@ zstyle ':completion' menu select
 zmodload zsh/complist
 compinit
 _comp_options+=(globdots)
-autoload -U colors && colors                         
+autoload -U colors && colors
 DISABLE_UPDATE_PROMPT="true"
 DISABLE_MAGIC_FUNCTIONS="true"
 DISABLE_AUTO_TITLE="true"
@@ -67,18 +74,16 @@ alias pp="gotop"
 alias cdir="pwd | xclip -selection clipboard"
 alias ls="lsd"
 alias e="nvim"
-alias ytt="rlwrap ytfzf --thumbnail-quality=0 -t"
 alias s="ncmpcpp -q"
 alias r="python ~/.scripts/ranger/ranger.py"
 alias space="diskonaut"
 alias sizeof="sudo du -sh"
 alias cd="z"
-alias ':q'='exit'
+alias ':q'='echo "you are not in vim, Sensei"'
+alias ':q!'='echo "you are not in vim, Sensi"'
 alias fileinfo="exiftool"
 alias hex="hexyl"
-alias listen="ytfzf -m"
-alias watch="devour mpv"
-alias search="rga"
+alias watch="gobble mpv"
 alias ping="gping"
 alias irc="irssi"
 alias cls="clear"
@@ -87,12 +92,10 @@ alias pt="btop"
 alias t="tmux attach -t Main"
 alias tc="tmux new -s Main"
 alias tk="tmux kill-server"
-alias o="devour xdg-open"
+alias o="gobble xdg-open"
 alias calc="pcalc"
 alias reload="exec zsh"
-alias la="ls -A "
-alias rr="ranger"
-alias y="mpsyt"
+alias la="ls -A"
 alias key="~/.scripts/key"
 alias up="uptime -p"
 alias sudo='sudo '
@@ -102,7 +105,6 @@ alias yeeet="sudo pacman -Rsnc"
 alias update="yay -Syu"
 alias pup="pacman -Qu"
 alias yup="yay -Qum"
-alias pf="pacman -Si"
 alias yf="yay -Si"
 alias clean="sudo pacman -Qtdq | sudo pacman -Rns -"
 alias g="gitui"
@@ -111,8 +113,6 @@ alias arls="arduino-cli board list"
 alias acom="arduino-cli compile -b arduino:avr:uno"
 alias aup="arduino-cli upload -p /dev/ttyACM0 -b arduino:avr:uno"
 alias anew="arduino-cli sketch new"
-alias tt="taskwarrior-tui"
-alias mkcd='take'
 alias et="nvim -t"
 
 # Cool cd
@@ -128,4 +128,3 @@ export MANPAGER="sh -c 'col -bx | bat -l man -p'"
 function launch {
     nohup "$@" >/dev/null 2>/dev/null & disown
 }
-

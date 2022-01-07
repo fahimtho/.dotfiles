@@ -15,9 +15,9 @@ if not current:
     current = "No Chill"
 else:
     current = " " + current.rstrip()
-commands = b"List\nRandom\nVolume 50%\nVolume 75%\n"
-rofi = Popen(["rofi", "-theme", "/home/fh1m/.scripts/mpd.rasi", "-width", "23", "-no-fixed-num-lines",
-             "-yoffset", "-80", "1", "-mesg", current, "-i", "-dmenu", "-p", "Controls"], stdout=PIPE, stdin=PIPE)
+commands = b"List\nRandom\n"
+rofi = Popen(["rofi", "-theme", "/home/fh1m/.config/rofi/mpd.rasi", "-width", "20", 
+             "-yoffset", "490", "1", "-mesg", current, "-i", "-dmenu", "-xoffset","-760"], stdout=PIPE, stdin=PIPE)
 tmp = rofi.communicate(input=commands)[0].decode().rstrip()
 if tmp == "Play/Pause":
     check_call(["mpc", "toggle"])
@@ -46,21 +46,20 @@ if tmp == "List":
         tlist = tlist + "[" + str(track) + "] " + line.decode() + "\n"
     if track > 1:
         tlist.rstrip()
-        tlist = "[SOURCES]\n" + tlist
-        rofi = Popen(["rofi", "-width", "30", "-lines", "20", "-yoffset", "-350",
-                     "-no-fixed-num-lines", "1", "-i", "-dmenu", "-p", "Play"], stdout=PIPE, stdin=PIPE)
+        tlist = "[Playlists]\n" + tlist
+        rofi = Popen(["rofi", "-width", "30", "-lines", "7", "-yoffset", "399", "-xoffset", "-663", "1", "-i", "-dmenu", "-p", "Play"], stdout=PIPE, stdin=PIPE)
         tmp = rofi.communicate(input=tlist.encode())[0].decode().rstrip()
         tmp = tmp[tmp.find("[")+1:tmp.find("]")]
     else:
-        tmp = "SOURCES"
+        tmp = "Playlists"
     if not tmp:
         sys.exit(0)
-    if tmp == "SOURCES":
+    if tmp == "Playlists":
         commands = ""
         playlists = check_output(["mpc", "lsplaylists"])
         for line in playlists.splitlines():
             commands = commands + line.decode() + "\n"
-        rofi = Popen(["rofi", "-width", "30","-yoffset","-350","-lines","20","-no-fixed-num-lines", current, "-i", "-dmenu", "-p", "Select Source"], stdout=PIPE, stdin=PIPE)
+        rofi = Popen(["rofi", "-width", "30","-yoffset","399" , "-xoffset","-663","-lines","7", current, "-i", "-dmenu", "-p", "Select Playlist"], stdout=PIPE, stdin=PIPE)
         tmp = rofi.communicate(input=commands.encode())[0].decode().rstrip()
         if not tmp:
             sys.exit(0)
