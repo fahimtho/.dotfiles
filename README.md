@@ -1,2 +1,2 @@
 # .dotfiles
-![](https://user-images.githubusercontent.com/93471702/145655638-649166f4-0b0e-4dec-b8fb-a641296122e5.png)
+![](https://user-images.githubusercontent.com/93471702/148606734-d7691c8b-6cb3-410a-aa5c-365da5057b7b.png)
