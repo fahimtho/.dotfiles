@@ -1,0 +1,15 @@
+export SPOTIPY_CLIENT_ID='bf90bb3c376a4f24945ad7857061c865'
+export SPOTIPY_CLIENT_SECRET='e97a86fa80ca43e495390d283f8856ec'
+
+link=$(rofi -dmenu -p 螺 -no-fixed-num-lines -i -width "800" -yoffset "-50")
+
+if [[ -z "$link" ]];
+then
+  exit 1
+fi
+
+location=$(zenity --file-selection --directory --filename=/home/fh1m/Music/)
+spotify_dl -k -l "$link" -o "$location"
+mpc update
+
+notify-send "System Status" "Sensei, Music download has been finished." -i ~/Pictures/.icons/ai.png

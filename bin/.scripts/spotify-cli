@@ -1,0 +1,10 @@
+#!/usr/bin/env sh
+
+alive=$(pgrep -x spotifyd)
+
+if [[ -z "$alive" ]];
+then
+  spotifyd && dunstify -r 1337 'System Status' 'Sensei, Spotifyd Started' -i ~/Pictures/.icons/ai.png
+else
+  pkill -f spotifyd && dunstify -r 1337 'System Status' 'Sensei, Spotifyd Stopped' -i ~/Pictures/.icons/ai.png
+fi

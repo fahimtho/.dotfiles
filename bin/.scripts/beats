@@ -1,0 +1,114 @@
+#!/bin/sh
+
+# add more args here according to preference
+ARGS="--volume=60 --no-video"
+
+notification(){
+# change the icon to whatever you want. Make sure your notification server
+# supports it and already configured.
+
+# Now it will receive argument so the user can rename the radio title
+# to whatever they want
+
+	notify-send "Playing now: " "$@" --icon=media-tape
+}
+
+menu(){
+	printf "1. Lofi Girl\n"
+	printf "2. Chillhop\n"
+	printf "3. Box Lofi\n"
+	printf "4. The Bootleg Boy\n"
+	printf "5. Radio Spinner\n"
+	printf "6. SmoothChill\n"
+	printf "7. lofi hip hop radio\n"
+	printf "8. chill lofi beats to code\n"
+	printf "9. coffee shop radio\n"
+	printf "10. Japanese Lofi Radio\n"
+	printf "11. Lofi Space Station\n"
+	printf "12. ＣＨＩＬＬ　ＲＡＤＩＯ\n"
+	printf "13. Autumn Lofi\n"
+	printf "14. Nature Sounds"
+}
+
+main() {
+	choice=$(menu | rofi -dmenu -p "" -no-fixed-num-lines -i -width "300" -xoffset "-795" -yoffset "-490" -lines 7 | cut -d. -f1)
+
+	case $choice in
+		1)
+			notification "Lofi Girl  ☕️🎶";
+            URL="https://play.streamafrica.net/lofiradio"
+			break
+			;;
+		2)
+			notification "Chillhop  ☕️🎶";
+            URL="http://stream.zeno.fm/fyn8eh3h5f8uv"
+			break
+			;;
+		3)
+			notification "Box Lofi  ☕️🎶";
+            URL="http://stream.zeno.fm/f3wvbbqmdg8uv"
+			break
+			;;
+		4)
+			notification "The Bootleg Boy  ☕️🎶";
+            URL="http://stream.zeno.fm/0r0xa792kwzuv"
+			break
+			;;
+		5)
+			notification "Radio Spinner  ☕️🎶";
+            URL="https://live.radiospinner.com/lofi-hip-hop-64"
+			break
+			;;
+		6)
+			notification "SmoothChill  ☕️🎶";
+            URL="https://media-ssl.musicradio.com/SmoothChill"
+			break
+			;;
+		7)
+			notification "lofi hip hop  ☕️🎶";
+            URL="https://www.youtube.com/watch?v=5qap5aO4i9A"
+			break
+			;;
+    8)
+			notification "chill lofi beats to code  ☕️🎶";
+            URL="https://www.youtube.com/watch?v=PY8f1Z3nARo"
+			break
+			;;
+    9)
+			notification "coffee shop radio  ☕️🎶";
+            URL="https://www.youtube.com/watch?v=-5KAN9_CzSA"
+			break
+			;;
+    10)
+			notification "Japanese Lofi Radio  ☕️🎶";
+            URL="https://www.youtube.com/watch?v=-9gEgshJUuY"
+			break
+			;;
+    11)
+			notification "Lofi Space Station  ☕️🎶";
+            URL="https://www.youtube.com/watch?v=pDv6y6txivM"
+			break
+			;;
+    12)
+			notification "ＣＨＩＬＬ　ＲＡＤＩＯ ☕️🎶";
+            URL="https://www.youtube.com/watch?v=21qNxnCS8WU"
+			break
+			;;
+    13)
+			notification "Autumn Lofi  ☕️🎶";
+            URL="https://www.youtube.com/watch?v=PZCRmwCNgEQ"
+			break
+			;;
+    14)
+			notification "Nature Sounds  ☕️🎶";
+            URL="https://www.youtube.com/watch?v=lE6RYpe9IT0"
+			break
+			;;
+
+	esac
+    # run mpv with args and selected url
+    # added title arg to make sure the pkill command kills only this instance of mpv
+    mpv $ARGS --title="radio-mpv" $URL
+}
+
+pkill -f radio-mpv || main

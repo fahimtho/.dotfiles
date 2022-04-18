@@ -1,0 +1,28 @@
+[player]
+font_width      = 10
+font_height     = 22
+volume_step     = 5
+auto_close      = false
+album_art_only  = false
+show_playlist   = true
+
+[art]
+image_method    = ueberzug
+music_directory = ~/Music
+
+[mpd]
+host   = localhost
+port   = 6600
+
+[keybindings]
+left     = next_track
+right    = last_track
+space    = play_pause
+q        = quit
+
+[theme]
+accent_color = blue
+bar_color = blue
+time_color = blue
+bar_body = ━
+bar_head = 

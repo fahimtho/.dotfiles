@@ -1,0 +1,180 @@
+/*
+ *
+ * Author  : Aditya Shakya
+ * Mail    : adi1090x@gmail.com
+ * Github  : @adi1090x
+ * Twitter : @adi1090x
+ *
+ */
+
+configuration {
+    font: 							"SF Mono 9";
+    fixed-num-lines: 				true;
+    show-icons: 					false;
+    sidebar-mode: 					true;
+    scroll-method: 					0;
+    window-format: 					"[{w}] ··· {c}";
+    click-to-exit: 					true;
+    combi-hide-mode-prefix: 		false;
+    display-window: 				" ";
+    display-windowcd: 				" ";
+    display-run: 					" ";
+    display-ssh: 					"  ";
+    display-drun: 					" ";
+    display-combi: 					"  ";
+    drun-display-format:            "{name}";
+    location:                       1;
+}
+
+
+* {
+    background-color:             	#000000;
+}
+
+window {
+    border: 					1px;
+    border-color: 					#000d4d;
+    border-radius: 					5px;
+    padding: 						8;
+    width: 							15%;
+    x-offset:                       15;
+    y-offset:                       48;
+}
+
+prompt {
+    spacing: 						5;
+    border: 						0;
+    text-color: 					#004eff;
+}
+
+textbox-prompt-colon {
+    expand: 						false;
+    str: 							" ";
+    margin:							0px 4px 0px 0px;
+    text-color: 					inherit;
+}
+
+entry {
+    spacing:    					0;
+    text-color: 					#8bb9f6;
+}
+
+case-indicator {
+    spacing:    					0;
+    text-color: 					#004eff;
+}
+
+inputbar {
+    spacing:    					0px;
+    text-color: 					#004eff;
+    padding:    					5px;
+    children: 						[ prompt,textbox-prompt-colon,entry,case-indicator ];
+}
+
+mainbox {
+    border: 						0px;
+    border-color: 					#004eff;
+    padding: 						6;
+}
+
+listview {
+    lines:							10;
+    columns:						1;
+    fixed-height: 					0;
+    border: 						0px;
+    border-color: 					#004eff;
+    spacing: 						4px;
+    scrollbar: 						false;
+    padding: 						5px 5px 5px 5px;
+}
+
+element-text, element-icon {
+    background-color: #00000000;
+    text-color:       inherit;
+}
+
+element {
+    border: 						0px;
+    border-radius: 					4px;
+    padding: 						5px;
+}
+element normal.normal {
+    background-color: 				#000000;
+    text-color:       				#8bb9f6;
+}
+element normal.urgent {
+    background-color: 				#000000;
+    text-color:       				@red;
+}
+element normal.active {
+    background-color: 				#000000;
+    text-color:       				#8bb9f6;
+}
+element selected.normal {
+    background-color: 				#004eff;
+    text-color:       				#000000;
+}
+element selected.urgent {
+    background-color: 				#000000;
+    text-color:       				@red;
+}
+element selected.active {
+    background-color: 				#004eff;
+    text-color:       				#000000;
+}
+element alternate.normal {
+    background-color: 				#000000;
+    text-color:       				#8bb9f6;
+}
+element alternate.urgent {
+    background-color: 				#000000;
+    text-color:       				#004eff;
+}
+element alternate.active {
+    background-color: 				#000000;
+    text-color:       				#004eff;
+}
+
+sidebar {
+    border:       					0px;
+    border-color: 					#004eff;
+    border-radius: 					0px;
+}
+
+button {
+    horizontal-align:               0.5;
+    vertical-align:                 0.5;
+    background-color:             	#000000;
+    margin: 						4px;
+    padding: 						4px;
+    text-color: 					#004eff;
+    border: 						0px;
+    border-radius: 					2px;
+    border-color: 					#004eff;
+}
+
+button selected {
+    background-color:             	#004eff;
+    text-color: 					#000000;
+    border: 						0px;
+    border-radius: 					2px;
+    border-color: 					#004eff;
+}
+
+scrollbar {
+    width:        					4px;
+    border:       					0px;
+    handle-color: 					#004eff;
+    handle-width: 					8px;
+    padding:      					0;
+}
+
+message {
+    border: 						0px;
+    border-color: 					#004eff;
+    padding: 						1px;
+}
+
+textbox {
+    text-color: 					#004eff;
+}

@@ -1,0 +1,10 @@
+dunst &
+
+lxpolkit &
+
+xsetroot -cursor_name left_ptr &
+
+xmodmap ~/.Xmodmap &
+
+tmux start-server &
+tmux new-session -d -s Main &

@@ -1,0 +1,96 @@
+#!/bin/bash
+# requires:
+# https://github.com/OmarCastro/rofi-blocks
+# jq (https://github.com/stedolan/jq)
+#
+## realtime suggestions for rofi
+## Author: https://github.com/BelkaDev
+
+############# SETTINGS
+refreshrate=100 # refresh suggestions every n characters hit
+ddg_api=$(dirname $0)/APIs/ddg # path to ddg API script
+baidu_api=$(dirname $0)/APIs/baidu # path to baidu API script
+lastfm_api=$(dirname $0)/APIs/lastfm # path to lastfm API script
+deezer_api=$(dirname $0)/APIs/deezer # path to deezer API script
+google_api=$(dirname $0)/APIs/google # path to google API script
+amazon_api=$(dirname $0)/APIs/amazon # path to amazon API script
+youtube_api=$(dirname $0)/APIs/youtube # path to youtube API script
+archwiki_api=$(dirname $0)/APIs/archwiki # path to archwiki API script
+wikipedia_api=$(dirname $0)/APIs/wikipedia # path to wikipedia API script
+googlebooks_api=$(dirname $0)/APIs/googlebooks # path to googlebooks API script
+##################################################
+
+
+logfile="$(dirname $0)/logfile.tmp"
+[ ! -f "$logfile" ] && echo "run the wrapper script instead" && exit 1
+API=$(cat $logfile)
+rm "$logfile"
+case "$API" in
+"ddg") search="$ddg_api" ; allowExcess=true ;;
+"deezer") search="$deezer_api" ;;
+"youtube") search="$youtube_api" ; allowExcess=true ;;
+"google") search="$google_api" ; allowExcess=true ;;
+"books") search="$googlebooks_api" ;;
+"lastfm") search="$lastfm_api" ;;
+"wikipedia") search="$wikipedia_api" allowExcess=true ;;
+"amazon") search="$amazon_api"  ; allowExcess=true ;;
+"archwiki") search="$archwiki_api"  ; allowExcess=true ;;
+"baidu") search="$baidu_api"  ; allowExcess=true ;;
+*) echo "unrecognized api" && exit 1 ;; # unreachable
+esac
+
+suggestions=""
+default_custom_format="{{name_enum}}:{{value}}"
+custom_format="${format:-$default_custom_format}"
+
+urlencode() {
+echo ${1// /"%20"}
+}
+
+convertJson(){
+	echo "$1" | sed -e 's/\\/\\\\/g' -e 's/\"/\\"/g' -e 's/.*/"&"/' | paste -sd "," -
+}
+
+removeIllegal(){
+##### https://github.com/fogine/rofi-blocks/commit/9f45da637baf0f0d342c2e2957535564aa622164
+##### if you care about special characters, the patch above
+##### fixes the issue in which they break rofi
+##### once installed you can omit this function
+echo "$1" | tr -dc '[:alnum:][:space:]-\n\r'
+}
+
+fill_menu(){
+
+	JSON_LINES="$(convertJson "$suggestions")"
+
+ 	TEXT=$(cat <<EOF | tr -d "\n" | tr -d "\t"
+{
+	"event format":"${custom_format}",
+	"lines":[
+	${JSON_LINES}
+	]
+}
+EOF
+)
+	printf '%s\n' "$TEXT"
+}
+
+echo '{"input action":"send"}'
+
+unset length i
+while IFS= read -r line; do
+((i++))
+[[ "$line" = 'SELECT'* ]] && selected=$(echo "$line" | cut -d':' -f2-) && break;
+print=$(echo "$line" | cut -d':' -f2-)
+#custom algorithm to reduce Api calls
+[[ "${#print}" < $length ]] && length="${#print}" && continue;
+length="${#print}"
+if (( i%refreshrate == 0 )) || [ ! -z $allowExcess ]; then suggestions="$(removeIllegal "$(bash $search $print)")"
+
+[[ "${line:0:1}" != '{' ]] && suggestions="${print}"$'\n'"$suggestions"
+fill_menu "$print"
+fi
+done
+selected="$(tr '[:lower:]' '[:upper:]' <<< ${selected:0:1})${selected:1}"
+[ -z "$selected" ] && rm $logfile || printf "$selected" >"$logfile"
+exit 0

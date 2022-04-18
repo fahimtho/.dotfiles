@@ -1,2 +1,0 @@
-player=$(playerctl -l | rofi -dmenu -lines "1" -i -yoffset "493" -xoffset "-802" -width "300" -p "ﰝ")
-playerctl play-pause --player=$player 

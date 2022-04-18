@@ -1,0 +1,59 @@
+[
+  {
+    "name": "  Daily comic",
+    "command": "xkcd"
+  },
+  {
+    "name": "  Random comic",
+    "command": "xkcd -r"
+  },
+  {
+    "name": " Spotifyd",
+    "command": "bash ~/.scripts/spotify-cli"
+  },
+  {
+    "name": " Lyrics",
+    "command": "bash ~/.config/polybar/scripts/lyrics"
+  },
+  {
+    "name": " Download Songs",
+    "command": "bash ~/.scripts/download_songs.sh"
+  },
+    {
+    "name": " Lofi Beats",
+    "command": "bash ~/.scripts/beats"
+  },
+  {
+    "name": " Classical",
+    "command": "bash ~/.scripts/classical"
+  },
+  {
+    "name": " Music Video",
+    "command": "pkill -f float || kitty --class=float -e ytfzf -t \"$(mpc current)\""
+  },
+  {
+    "name": "  Typing Test",
+    "command": "kitty --class=float -e ttyper"
+  },
+  {
+    "name": " Check Fonts",
+    "command": "pkill -f float || kitty --class=float -e ~/.scripts/fontpreview"
+  },
+  {
+    "name": "  New Window Focus",
+    "command": "bash ~/.scripts/new-win"
+  },
+  {
+    "name": "  Nerdfonts",
+    "command": "bash ~/.scripts/nerdfonts/rofi-nerdfonts.sh"
+  },
+  {
+    "name": "😄 Emojis",
+    "command": "rofi -show emoji -lines 6 -no-fixed-num-lines -xoffset -463 -yoffset -493"
+  },
+  {
+    "name": "  Headphone Charge",
+    "command": "bash ~/.scripts/headphone-charge"
+  }
+
+]

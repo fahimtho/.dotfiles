@@ -1,0 +1,25 @@
+# Ncmpcpp Config
+song_list_format = "{{%t}|{%f}}{$R%l}                                                 "
+current_item_prefix = "$b$7"
+current_item_inactive_column_prefix = $b$(white)$r
+now_playing_prefix = "$b$5"
+now_playing_suffix = "$b$9"
+main_window_color = white
+playlist_display_mode = "classic"
+browser_display_mode = "columns"
+centered_cursor = "yes"
+startup_screen = "playlist"
+user_interface = alternative
+follow_now_playing_lyrics = yes
+fetch_lyrics_for_current_song_in_background = yes
+progressbar_look = "▃▃ "
+progressbar_elapsed_color = "blue"
+progressbar_color = "red"
+song_status_format = "$b$5%t by $6%a"
+browser_playlist_prefix = "蘿"
+autocenter_mode = "yes"
+cyclic_scrolling = "yes"
+lines_scrolled = "1"
+mouse_list_scroll_whole_page = "yes"
+message_delay_time = "1"
+execute_on_song_change="~/.config/ncmpcpp/ncmpcpp-ueberzug/ncmpcpp_cover_art.sh"

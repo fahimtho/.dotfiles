@@ -1,0 +1,10 @@
+#!/usr/bin/env sh
+
+text=$(~/.scripts/Search/suggest google)
+
+if [[ -z "$text" ]];
+then
+  echo ""
+else
+  vivaldi-stable https://www.google.com/search?q="$text"
+fi

@@ -1,0 +1,12 @@
+#!/usr/bin/env sh
+
+playlist=$(mpc lsplaylists | rofi -dmenu -p 蘿 -i -no-fixed-num-lines -width "20" -yoffset "-492" -xoffset "-754")
+
+if [[ -z $playlist ]];
+then
+  mpc clear
+else
+  mpc clear
+  mpc load "$playlist"
+  mpc play
+fi

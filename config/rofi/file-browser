@@ -1,0 +1,8 @@
+cmd        "xdg-open"
+oc-cmd     "nemo;icon:folder;name:Open Folder in Nemo"
+oc-cmd     "trash;icon:folder;name:Delete"
+oc-cmd     "kitty -1 --class=watch ./.scripts/ranger/ranger.py;icon:Terminal;name:Open Folder in Ranger"
+oc-cmd     "tmux neww nvim;icon:nvim;name:Edit in tmux"
+oc-cmd     "kitty -e nvim;icon:terminal;name:Edit in terminal"
+
+# vi: ft=rasi

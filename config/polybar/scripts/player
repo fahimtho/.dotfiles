@@ -1,0 +1,10 @@
+#!/usr/bin/env sh
+
+alive=$(wmctrl -lx | grep 'music' | awk 'NR==1{print $3}')
+
+if [[ -z $alive ]];
+then
+  kitty --class=music miniplayer
+else
+  pkill -f music
+fi

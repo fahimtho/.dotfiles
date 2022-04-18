@@ -178,14 +178,11 @@ toggle_trust() {
     fi
 }
 
-
-
 # Prints a short string with the current bluetooth status
 # Useful for status bars like polybar, etc.
 print_status() {
     if power_on; then
-        printf ""
-
+        printf ''
 
         mapfile -t paired_devices < <(bluetoothctl paired-devices | grep Device | cut -d ' ' -f 2)
         counter=0
@@ -195,9 +192,9 @@ print_status() {
                 device_alias=$(bluetoothctl info $device | grep "Alias" | cut -d ' ' -f 2-)
 
                 if [ $counter -gt 0 ]; then
-                    printf  " $device_alias "
+                    printf ", %s" "$device_alias"
                 else
-                    printf  " $device_alias "
+                    printf " %s" "$device_alias"
                 fi
 
                 ((counter++))
@@ -225,7 +222,7 @@ device_menu() {
     fi
     paired=$(device_paired $mac)
     trusted=$(device_trusted $mac)
-    options="$connected\n$paired\n$trusted\n$goback"
+    options="$connected\n$paired\n$trusted\n$goback\nExit"
 
     # Open rofi menu, read chosen option
     chosen="$(echo -e "$options" | $rofi_command "$device_name")"
@@ -301,7 +298,8 @@ show_menu() {
 }
 
 # Rofi command to pipe into, can add any options here
-rofi_command="rofi  -no-fixed-num-lines -theme /home/fh1m/.config/polybar/scripts/bluetoothmenu.rasi -dmenu -p "Bluetooth" "
+rofi_command="rofi -no-fixed-num-lines -theme /home/fh1m/.config/polybar/scripts/bluetoothmenu.rasi -dmenu -p "Bluetooth" "
+
 
 case "$1" in
     --status)

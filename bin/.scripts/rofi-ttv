@@ -1,0 +1,269 @@
+#!/bin/sh
+#             __ _       _   _
+#  _ __ ___  / _(_)     | |_| |___   __
+# | '__/ _ \| |_| |_____| __| __\ \ / /
+# | | | (_) |  _| |_____| |_| |_ \ V /
+# |_|  \___/|_| |_|      \__|\__| \_/
+
+# exit when any command fails
+set -e
+
+# TTV_USERNAME=""
+ROFI_TTV_DIR="${XDG_CONFIG_HOME:-$HOME/.config}/rofi-ttv"
+USERNAME_FILE="${ROFI_TTV_DIR}/username"
+TOKEN_FILE="${ROFI_TTV_DIR}/access_token"
+TOKEN_EXPIRY_FILE="${ROFI_TTV_DIR}/access_token_expiry"
+
+# Please don't use and/or abuse this client-id/secret-id, don't be the reason we
+# can't have nice things.
+# If you really want a twitch client-id/secret-id just go make your own
+# here: https://dev.twitch.tv/console/apps/create
+CLIENT_ID="703gzdr4b7lxupwtgsmqd9zp8ribnu"
+CLIENT_SECRET="3mdyiw306f56t6yxq5o95yp7ug18io"
+
+# Menu entry format
+FORMAT='"\(.user_name) |\t\(.game_name) |\t\(.title[:50])\tוֹ \(.viewer_count)"'
+# available keys: see response keys at https://dev.twitch.tv/docs/api/reference#get-streams
+
+echoexit() {
+    # Print to stderr and exit
+    printf "%s\n" "$*" 1>&2
+    exit 1
+}
+
+# Checking dependencies:
+whereis curl > /dev/null || echoexit "'curl' not found."
+whereis jq > /dev/null || echoexit "'jq' not found."
+whereis rofi > /dev/null || echoexit "'rofi' not found."
+whereis youtube-dl > /dev/null || echoexit "'youtube-dl' not found."
+whereis mpv > /dev/null || echoexit "'mpv' not found."
+
+menu (){
+    # Dynamic menu command. Should read from stdin and output to stdout.
+
+    rofi -dmenu -p " " -width "100%" -yoffset "-507"  -lines "6" -i -theme ~/.config/rofi/reverse.rasi -no-fixed-num-lines
+}
+
+input (){
+    # Prompt for user input. Should output to stdout.
+
+    rofi -dmenu -p "Search" -lines 0
+}
+
+viewer (){
+    # View the twitch channel's stream.
+    # Args:
+    #    $1: channel name.
+
+    local channel
+    local url
+    local resolutions
+    local resolution
+    channel="$1"
+    url="https://twitch.tv/$channel"
+    resolutions="$(youtube-dl -F "$url" | grep -v "\[" | tail -n +2)"
+    resolution="$(printf "%s" "$resolutions" | menu | cut -d " " -f 1)"
+    [ -n "$resolution" ] && youtube-dl "$url" -f "$resolution" -o - | mpv -
+}
+
+usage() {
+    printf "Dynamic menu interface for Twitch.tv
+
+To set your twitch username, either use the 'TTV_USERNAME'
+environment variable or write it to \"$USERNAME_FILE\":
+
+\$ echo \"your_username\" > %s
+
+Usage:
+  rofi-ttv [-h]
+    -h                                 Display this help message.
+  rofi-ttv search QUERY...             Search channels.
+    QUERY                              Search query.
+  rofi-ttv followed                    Show followed channels." "$USERNAME_FILE"
+}
+
+get_access_token (){
+    # Get application access token.
+    # Returns:
+    #    string, Bearer token.
+    local current_date
+    local token
+    local token_expiry
+    current_date=$(date +%s)
+    [ -f "$TOKEN_FILE" ] && [ -f "$TOKEN_EXPIRY_FILE" ] && token="$(cat "$TOKEN_FILE")" && token_expiry=$(cat "$TOKEN_EXPIRY_FILE")
+
+    # if the token variables are populated and we are not past the expiry date
+    [ -n "$token_expiry" ] && [ -n "$token" ] && [ "$current_date" -lt "$token_expiry" ] && printf "%s" "$token" && return
+
+    # otherwise generate a new one
+    local response
+    local token
+    local expiring
+    response="$(curl -s --location -X POST "https://id.twitch.tv/oauth2/token?client_id=$CLIENT_ID&client_secret=$CLIENT_SECRET&grant_type=client_credentials")"
+    token="$(printf "%s" "$response" | jq -r '.access_token')"
+    expiring="$(printf "%s" "$response" | jq -r '.expires_in')"
+    # write to file
+    printf "%s" "$token" > "$TOKEN_FILE"
+    printf "%s" "$((current_date + expiring))" > "$TOKEN_EXPIRY_FILE"
+    printf "%s" "$token"
+}
+
+get_user_id (){
+    # Get user id.
+    # Returns:
+    #    string, user id.
+
+    local response
+    response="$(curl -s --location -G "https://api.twitch.tv/helix/users?login=$TTV_USERNAME"\
+        --header "client-id: $CLIENT_ID"\
+        --header "Authorization: Bearer $TOKEN")"
+    printf "%s" "$response" | jq  -r '.data | .[].id'
+}
+
+get_user_follows (){
+    # Get user's follows.
+    # Args:
+    #    $1: user id.
+    # Returns:
+    #    string of user ids.
+
+    local id
+    local response
+    local pagination
+    id="$1"
+    response="$(curl -s --location -G "https://api.twitch.tv/helix/users/follows?from_id=$id&first=100"\
+        --header "client-id: $CLIENT_ID"\
+        --header "Authorization: Bearer $TOKEN")"
+    printf "%s" "$response" | jq  -r '.data | .[].to_id'
+    pagination="$(printf "%s" "$response" | jq -r '.pagination.cursor')"
+    while [ "$pagination" != "null" ]
+    do
+        response="$(curl -s --location -G "https://api.twitch.tv/helix/users/follows?from_id=$id&first=100&after=$pagination"\
+            --header "client-id: $CLIENT_ID"\
+            --header "Authorization: Bearer $TOKEN")"
+        pagination="$(printf "%s" "$response" | jq -r '.pagination.cursor')"
+        printf "%s" "$response" | jq -r '.data | .[].to_id'
+    done
+}
+
+search (){
+    # Search for twitch channels
+    # Args:
+    #    $1: query.
+    # Returns:
+    #    string of user ids.
+
+    local query
+    local response
+    query="$1"
+    response="$(curl -s --location -G "https://api.twitch.tv/helix/search/channels?live_only=true&first=20"\
+        --data-urlencode "query=$query"\
+        --header "client-id: $CLIENT_ID"\
+        --header "Authorization: Bearer $TOKEN")"
+    printf "%s" "$response" | jq -r '.data | .[].id'
+}
+
+format_live (){
+    # Formats the live channels into strings ready for selection.
+    # Args:
+    #    $1: string of user ids
+    # Returns:
+    #    string, each line is a channel.
+
+    local follows
+    local end
+    local slice
+    local follows_url
+    local response
+    local data
+    follows=($1)
+    end=$((1 + ${#follows[@]}/100))
+    for ((i = 0; i<end; i++));
+    do
+        slice="${follows[*]:$((i*100)):100}"
+        follows_url="user_id=$(printf "%s" "$slice" | sed 's/ /\&user_id=/g')"
+        # get live channels
+        response="$(curl -s --location -G "https://api.twitch.tv/helix/streams?$follows_url"\
+            --header "client-id: $CLIENT_ID"\
+            --header "Authorization: Bearer $TOKEN")"
+        data="$(printf "%s" "$response" | jq -r '.data')"
+        # remove \n in titles
+        printf "%s" "$data" | sed -e 's/\\n//g' | jq -r ". [] | $FORMAT"
+    done
+}
+
+
+# Parse options to the `rofi-ttv` command
+while getopts ":h" opt; do
+    case ${opt} in
+        h )
+            usage
+            exit 0
+            ;;
+        \? )
+            printf "Invalid Option: -%s\n" "$OPTARG" 1>&2
+            usage
+            exit 1
+            ;;
+    esac
+done
+shift $((OPTIND -1))
+
+subcommand="$1"
+# Remove 'rofi-ttv' from the argument list
+[ -n "$subcommand" ] && shift
+case "$subcommand" in
+    # Parse options to the sub command
+    search )
+        QUERY="$*"
+        # No search query
+        [ -z "$QUERY" ] && QUERY="$(input)"
+        selected="Search"
+        ;;
+
+    followed )
+        [ "$#" -gt 0 ] && ( printf "Invalid number of arguments\n" 1>&2; usage ) && exit 1
+        selected="Followed"
+        ;;
+
+    "" )
+        # Let the user chose
+        selected="$(printf "Search\nFollowed" | menu)"
+        # User input search query
+        [ "$selected" = "Search" ] && QUERY="$(input)"
+        ;;
+
+    * )
+        printf "Invalid argument \"%s\" should be either 'search' or 'followed'.\n" "$subcommand" 1>&2
+        usage
+        exit 1
+        ;;
+esac
+
+# Make the directory if it does not exist.
+[ ! -d "$ROFI_TTV_DIR" ] && mkdir "$ROFI_TTV_DIR"
+
+# Access token
+TOKEN="$(get_access_token)"
+
+# Get ids of searched/followed channels
+if [ "$selected" = "Followed" ]; then
+    if [ -z "$TTV_USERNAME" ]; then
+        if [ -f "$USERNAME_FILE" ]; then
+            TTV_USERNAME="$(cat "$USERNAME_FILE")"
+        else
+            echoexit "Can't find username, try \"echo 'your_username' > $USERNAME_FILE\""
+        fi
+    fi
+    IDS="$(get_user_follows "$(get_user_id)")"
+
+elif [ "$selected" = "Search" ]; then
+    IDS="$(search "$QUERY")"
+fi
+
+# Create menu entries
+CHOICES="$(format_live "$IDS" | column -t -s "$(printf '\t')")"  # make nice columns
+# Select channel
+CHANNEL="$(printf "%s" "$CHOICES" | menu | cut -d " " -f 1)"
+# View stream
+[ -n "$CHANNEL" ] && viewer "$CHANNEL"

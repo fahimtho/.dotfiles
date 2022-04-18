@@ -1,0 +1,10 @@
+#!/bin/bash
+
+i=$(bspc rule -l | sed -n '/\*:\*:\* => focus=off/=')
+if [ -n "$i" ]; then
+    bspc rule -r "^${i}" &&
+    notify-send "System Status" "Sensei, We are back to being normal." -i ~/Pictures/.icons/ai.png
+else
+    bspc rule -a \* focus=off &&
+    notify-send "System Status" "Sensei, We are ignoring new windows." -i ~/Pictures/.icons/ai.png
+fi

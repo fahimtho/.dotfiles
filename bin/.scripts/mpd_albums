@@ -1,0 +1,24 @@
+#!/usr/bin/env sh
+
+mpc update >/dev/null 2>/dev/null
+
+top=~/Music/Albums/
+artist=$(ls $top | rofi -dmenu -p ﴁ -i -no-fixed-num-lines -width "250" -yoffset "-491" -xoffset "-818" )
+
+if [[ -z "$artist" ]];
+then
+  exit 1
+else
+  album=$(ls $top"$artist" | rofi -dmenu -p  -i -no-fixed-num-lines -width "400" -yoffset "-491" -xoffset "-743")
+  if [[ -z "$album" ]];
+  then
+    exit 1
+  else
+  find $top | grep "$artist" | grep "$album" | grep ".mp3" | cut -c 18- | sort -V >> ~/.config/mpd/playlists/album.m3u
+  mpc clear
+  mpc load album
+  mpc random false
+  rm ~/.config/mpd/playlists/album.m3u
+  mpc play
+  fi
+fi

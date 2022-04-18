@@ -1,0 +1,10 @@
+#!/usr/bin/env sh
+
+text=$(~/.scripts/Search/suggest youtube)
+
+if [[ -z "$text" ]];
+then
+  echo ""
+else
+  vivaldi-stable https://www.youtube.com/results?search_query="$text"
+fi

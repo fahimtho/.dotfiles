@@ -1,0 +1,13 @@
+#!/usr/bin/env sh
+
+alive=$(wmctrl -lx | grep 'calendar' | awk 'NR==1{print $3}')
+
+if [[ -z $alive ]];
+then
+  kitty --class=calendar calcure
+else
+  pkill -f calendar
+fi
+
+
+# vi: ft=sh

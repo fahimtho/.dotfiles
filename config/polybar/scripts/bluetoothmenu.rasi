@@ -1,0 +1,33 @@
+inputbar {
+    spacing:                         0px;
+    padding:                         0px;
+    children:                        [ ];
+}
+
+window {
+    border: 					1px;
+    border-color: 					#000d4d;
+    border-radius: 					5px;
+    padding: 						2;
+    width: 							8%;
+    x-offset:                       840;
+    y-offset:                       -507;
+}
+
+listview {
+    fixed-height:                 0;
+    border:                       0px 0px 0px 0px ;
+    border-color:                 @bordercolor;
+    spacing:                      5px;
+    scrollbar:                    false;
+    padding:                      5px 5px 5px 5px ;
+}
+
+element-icon {
+    background-color: 				     inherit;
+    text-color:       				     inherit;
+    horizontal-align:              0.5;
+    vertical-align:                0.5;
+    size:                          0px;
+    border:                        0px;
+}

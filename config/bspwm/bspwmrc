@@ -1,0 +1,101 @@
+#!/usr/bin/env sh
+
+# starting Sxhkd
+pgrep -x sxhkd > /dev/null || sxhkd &
+
+# defining workspaces
+bspc monitor -d Code Web Watch Note Read Write Design Work Chat Music Apps Run
+
+# border and gap
+bspc config border_width             0
+bspc config window_gap               6
+
+# split,border color
+bspc config split_ratio              0.50
+bspc config borderless_monocle       true
+bspc config gapless_monocle          true
+bspc config focus_follows_pointer    true
+bspc config single_monocle	 	       true
+bspc config paddingless_monocle      true
+bspc config presel_feedback	 	       true
+bspc config pointer_follows_focus 	 false
+bspc config initial_polarity 		     second_child
+bspc config automatic_scheme 		     alternate
+bspc config normal_frame_opacity     1.0
+bspc config focused_frame_opacity    0.05
+bspc config focused_border_color     "#00126f"
+bspc config normal_border_color      "#000000"
+bspc config presel_feedback_color    "#000000"
+bspc config ignore_ewmh_focus         true
+bspc config ignore_ewmh_fullscreen    true
+bspc config click_to_focus            any
+bspc config external_rules_command   ~/.config/bspwm/rule.sh
+
+# Remove rules
+bspc rule -r *:*
+
+# window/class rules --> Only States
+bspc rule -a Gcolor3                  state=floating border=off
+bspc rule -a float                    state=floating
+bspc rule -a Rofi                     state=floating
+bspc rule -a watch                    desktop=^3 state=floating rectangle=661x406+18+49
+bspc rule -a music                    state=floating rectangle=816x378+15+47
+bspc rule -a lyrics                   state=floating rectangle=519x536+1131+58
+bspc rule -a ncmpcpp                  state=floating rectangle=1909x510+6+37
+bspc rule -a calendar                 state=floating rectangle=709x301+631+34
+bspc rule -a Blueman-manager          state=floating
+bspc rule -a Pavucontrol              state=floating border=off
+bspc rule -a Sxiv                     state=floating
+bspc rule -a '*:*:Picture in picture' state=floating
+
+# Specefic
+bspc rule -a tmux                     desktop=^1 follow=on
+bspc rule -a qBittorrent              desktop=^12 follow=off
+bspc rule -a mpv                      desktop=^3 follow=on state=floating
+bspc rule -a discord                  desktop=^9 follow=off
+bspc rule -a obs                      desktop=^11 follow=off
+bspc rule -a Audacity                 desktop=^11 follow=off
+bspc rule -a "VirtualBox Manager"     desktop=^12 follow=on
+bspc rule -a Vivaldi-stable           desktop=^2 follow=off
+bspc rule -a Chromium                 desktop=^2 follow=off
+bspc rule -a Pyroom                   desktop=^6 follow=on
+bspc rule -a libreoffice-writer       desktop=^6 follow=on
+bspc rule -a notion-app-enhanced      desktop=^4 follow=on
+bspc rule -a Inkscape                 desktop=^7 follow=on
+bspc rule -a Gimp-2.10                desktop=^7 follow=on
+bspc rule -a krita                    desktop=^7 follow=on
+bspc rule -a Mpdevil                  desktop=^10 follow=on
+bspc rule -a Ymuse                    desktop=^10 follow=off
+bspc rule -a Easytag                  desktop=^10 follow=off
+bspc rule -a Nemo                     desktop=^11 follow=on border=off
+bspc rule -a Zathura                  desktop=^5 state=tiled follow=on
+bspc rule -a sioyek                   desktop=^5 state=tiled follow=on
+bspc rule -a Atril                    desktop=^5 state=tiled follow=on
+bspc rule -a Evince                   desktop=^5 state=tiled follow=on
+bspc rule -a Blender                  desktop=^7 state=tiled follow=on
+
+# Spcefic States
+bspc desktop '^7'  -l monocle
+bspc desktop '^8'  -l monocle
+bspc desktop '^9'  -l monocle
+bspc desktop '^11'  -l monocle
+bspc desktop '^12'  -l monocle
+
+# Same type of apps
+declare -a apps=(Lxappearance Nitrogen Gprename stacer qt5ct)
+for i in ${apps[@]}; do
+   bspc rule -a $i desktop='^11' follow=on focus=on; done
+
+declare -a office=(libreoffice-calc libreoffice-impress \
+libreoffice-startcenter libreoffice Soffice *:libreofficedev *:soffice)
+for i in ${office[@]}; do
+   bspc rule -a $i desktop='^8' follow=on focus=on; done
+
+# Startup Scirpts
+/home/fh1m/.config/bspwm/startup/clipboard.sh
+/home/fh1m/.config/bspwm/startup/compositor.sh
+/home/fh1m/.config/bspwm/startup/desktop.sh
+/home/fh1m/.config/bspwm/startup/mpd.sh
+/home/fh1m/.config/bspwm/startup/mpris.sh
+/home/fh1m/.config/bspwm/startup/statusbar.sh
+/home/fh1m/.config/bspwm/startup/mpd-mpris.sh

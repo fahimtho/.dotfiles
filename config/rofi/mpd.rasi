@@ -1,0 +1,14 @@
+inputbar {
+    spacing:                         0px;
+    padding:                         0px;
+    children:                        [ ];
+}
+
+listview {
+    columns:                         4;
+    lines:                        	 1;
+    spacing:                         5px;
+    cycle:                           true;
+    dynamic:                         true;
+    layout:                          vertical;
+}

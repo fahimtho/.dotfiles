@@ -1,0 +1,11 @@
+#!/usr/bin/env sh
+
+text="$(xclip -out -selection clipboard)"
+
+if [[ -z "$text" ]];
+then
+  echo ""
+else
+  notify-send "System Status" "Sensei , Searching <b>$text</b>" -i ~/Pictures/.icons/google.png
+  vivaldi-stable https://www.google.com/search?q="$text"
+fi

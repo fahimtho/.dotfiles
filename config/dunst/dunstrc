@@ -1,0 +1,98 @@
+[global]
+    monitor = 0
+    follow = mouse
+
+# Notification placement
+    width = (0, )
+    height = (0, )
+    origin = top-right
+    offset = 16x48
+    scale = 0
+    notification_limit = 0
+
+# Progress Bar Settings
+    progress_bar = true
+    progress_bar_height = 15
+    progress_bar_frame_width = 1
+    progress_bar_min_width = 300
+    progress_bar_max_width = 600
+
+# Notification indicators
+    indicate_hidden = yes
+    transparency = 0
+    separator_height = 1
+    stack_duplicates = true
+    hide_duplicate_count = false
+    show_indicators = no
+
+# Padding
+    padding = 13
+    horizontal_padding = 13
+    text_icon_padding = 20
+
+# Frame & Misc
+    frame_width = 1
+    frame_color = "#000d4d"
+    separator_color = frame
+    sort = yes
+    show_age_threshold = 120
+    ellipsize = middle
+    ignore_newline = no
+
+# Font
+    font = Iosevka 11
+    line_height = 0
+
+# Markup and text
+    markup = full
+    format = "<b>%s</b>\n\n%b"
+    alignment = center
+    vertical_alignment = center
+
+# Icons
+    icon_position = left
+    min_icon_size = 30
+    max_icon_size = 40
+    icon_path = /usr/share/icons/Reversal-blue/apps/scalable:/usr/share/icons/Adwaita/256x256/legacy/
+
+# History
+    sticky_history = no
+    history_length = 30
+    dmenu = /usr/bin/rofi -dmenu -p dunst:
+    browser = /usr/bin/xdg-open
+    always_run_script = true
+
+# Window
+    title = Dunst
+    class = Dunst
+    corner_radius = 5
+    ignore_dbusclose = false
+    force_xwayland = false
+    force_xinerama = false
+
+# Action
+    mouse_left_click = close_current
+    mouse_middle_click = do_action, close_current
+    mouse_right_click = close_all
+
+## Colors
+
+[experimental]
+    per_monitor_dpi = false
+
+[urgency_low]
+    background = "#000000"
+    foreground = "#8bb9f6"
+    timeout = 4
+
+[urgency_normal]
+    background = "#000000"
+    foreground = "#8bb9f6"
+    timeout = 4
+
+[urgency_critical]
+    background = "#000000"
+    foreground = "#8bb9f6"
+    timeout = 5
+
+# vim: ft=cfg

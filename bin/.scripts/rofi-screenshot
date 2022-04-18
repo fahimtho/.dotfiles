@@ -1,0 +1,195 @@
+#!/usr/bin/env bash
+
+## rofi-screenshot
+## Author: ceuk @ github
+## Licence: WTFPL
+## Usage:
+##    show the menu with rofi-screenshot
+##    stop recording with rofi-screenshot -s
+
+# Screenshot directory
+screenshot_directory="$HOME/Pictures/Screenshots"
+
+# set ffmpeg defaults
+ffmpeg() {
+    command ffmpeg -hide_banner -loglevel error -nostdin "$@"
+}
+
+video_to_gif() {
+    ffmpeg -i "$1" -vf palettegen -f image2 -c:v png - |
+    ffmpeg -i "$1" -i - -filter_complex paletteuse "$2"
+}
+
+countdown() {
+  notify-send "System Sttaus" "Sensei, We're recording in 3 seconds" -t 1000 -i ~/Pictures/.icons/screenshot.png
+  sleep 1
+  notify-send "System Status" "Sensei, We're recording in 2 seconds" -t 1000 -i ~/Pictures/.icons/screenshot.png
+  sleep 1
+  notify-send "System Status" "Sensei, We're recording in 1 seconds" -t 1000 -i ~/Pictures/.icons/screenshot.png
+  sleep 1
+}
+
+crtc() {
+  notify-send "System status" "Sensei, select a region to capture" -i ~/Pictures/.icons/screenshot.png
+  sleep 1
+  ffcast -q $(slop -o -n -f '-g %g ') png /tmp/screenshot_clip.png
+  xclip -selection clipboard -t image/png /tmp/screenshot_clip.png
+  rm /tmp/screenshot_clip.png
+  notify-send "System status" "Sensei, the region copied to Clipboard" -i ~/Pictures/.icons/screenshot.png
+  canberra-gtk-play -i screen-capture
+}
+
+crtf() {
+  notify-send "System status" "Sensei, select a region to capture" -i ~/Pictures/.icons/screenshot.png
+  dt=$(date '+%d-%m-%Y %H:%M:%S')
+  sleep 1
+  ffcast -q $(slop -o -n -f '-g %g ') png "$screenshot_directory/$dt.png"
+  notify-send "System status" "Sensei, the region saved to $screenshot_directory" -i ~/Pictures/.icons/screenshot.png
+  canberra-gtk-play -i screen-capture
+}
+
+cstc() {
+  sleep 1
+  ffcast -q png /tmp/screenshot_clip.png
+  xclip -selection clipboard -t image/png /tmp/screenshot_clip.png
+  rm /tmp/screenshot_clip.png
+  notify-send "System status" "Sensei, the screenshot copied to Clipboard" -i ~/Pictures/.icons/screenshot.png
+  canberra-gtk-play -i screen-capture
+}
+
+cstf() {
+  dt=$(date '+%d-%m-%Y %H:%M:%S')
+  sleep 1
+  ffcast -q png "$screenshot_directory/$dt.png"
+  notify-send "System status" "Sensei, the screenshot saved to $screenshot_directory" -i ~/Pictures/.icons/screenshot.png
+  canberra-gtk-play -i screen-capture
+}
+
+rgrtf() {
+  notify-send "System status" "Sensei, select a region to record" -i ~/Pictures/.icons/screenshot.png
+  dt=$(date '+%d-%m-%Y %H:%M:%S')
+  sleep 1
+  ffcast -q $(slop -o -n -f '-g %g ' && countdown) rec /tmp/screenshot_gif.mp4
+  notify-send "Screenshot" "Converting to gif... (this can take a while)" -i ~/Pictures/.icons/screenshot.png
+  video_to_gif /tmp/screenshot_gif.mp4 "$screenshot_directory/$dt.gif"
+  rm /tmp/screenshot_gif.mp4
+  notify-send "System Status" "Sensei, the recording saved to $screenshot_directory" -i ~/Pictures/.icons/screenshot.png
+}
+
+rgstf() {
+  countdown
+  dt=$(date '+%d-%m-%Y %H:%M:%S')
+  sleep 1
+  ffcast -q rec /tmp/screenshot_gif.mp4
+  notify-send "System status" "Sensei, We're converting to gif... (this can take a while)" -i ~/Pictures/.icons/screenshot.png
+  video_to_gif /tmp/screenshot_gif.mp4 "$screenshot_directory/$dt.gif"
+  rm /tmp/screenshot_gif.mp4
+  notify-send "System status" "Sensei, the recording saved to $screenshot_directory" -i ~/Pictures/.icons/screenshot.png
+}
+
+rvrtf() {
+  notify-send "System status" "Sensei, select a region to record" -i ~/Pictures/.icons/screenshot.png
+  dt=$(date '+%d-%m-%Y %H:%M:%S')
+  sleep 1
+  ffcast -q $(slop -o -n -f '-g %g ' && countdown) rec "$screenshot_directory/$dt.mp4"
+  notify-send "System status" "the recording saved to $screenshot_directory" -i ~/Pictures/.icons/screenshot.png
+}
+
+rvstf() {
+  countdown
+  dt=$(date '+%d-%m-%Y %H:%M:%S')
+  sleep 1
+  ffcast -q rec "$screenshot_directory/$dt.mp4"
+  notify-send "System status" "the recording saved to $screenshot_directory" -i ~/Pictures/.icons/screenshot.png
+}
+
+get_options() {
+  echo "  Capture Region   Clipboard"
+  echo "  Capture Region   File"
+  echo "  Capture Screen   Clipboard"
+  echo "  Capture Screen   File"
+  echo "  Record Region   File (GIF)"
+  echo "  Record Screen   File (GIF)"
+  echo "  Record Region   File (MP4)"
+  echo "  Record Screen   File (MP4)"
+}
+
+check_deps() {
+  if ! hash $1 2>/dev/null; then
+    echo "Error: This script requires $1"
+    exit 1
+  fi
+}
+
+main() {
+  # check dependencies
+  check_deps slop
+  check_deps ffcast
+  check_deps ffmpeg
+  check_deps xclip
+  check_deps rofi
+
+  if [[ $1 == '--help' ]] || [[ $1 = '-h' ]]
+  then
+    echo ### rofi-screenshot
+    echo USAGE: rofi-screenshot [OPTION]
+    echo \(no option\)
+    echo "    show the screenshot menu"
+    echo -s, --stop
+    echo "    stop recording"
+    echo -h, --help
+    echo "    this screen"
+    exit 1
+  fi
+
+  if [[ $1 = '--stop' ]] || [[ $1 = '-s' ]]
+  then
+    pkill -fxn '(/\S+)*ffmpeg\s.*\sx11grab\s.*'
+    exit 1
+  fi
+
+  # Get choice from rofi
+  choice=$( (get_options) | rofi -xoffset "-794" -yoffset "-342" -width "300" -lines "8" -dmenu -i -fuzzy -p " " )
+
+  # If user has not picked anything, exit
+  if [[ -z "${choice// }" ]]; then
+      exit 1
+  fi
+
+  # run the selected command
+  case $choice in
+    '  Capture Region   Clipboard')
+      crtc
+      ;;
+    '  Capture Region   File')
+      crtf
+      ;;
+    '  Capture Screen   Clipboard')
+      cstc
+      ;;
+    '  Capture Screen   File')
+      cstf
+      ;;
+    '  Record Region   File (GIF)')
+      rgrtf
+      ;;
+    '  Record Screen   File (GIF)')
+      rgstf
+      ;;
+    '  Record Region   File (MP4)')
+      rvrtf
+      ;;
+    '  Record Screen   File (MP4)')
+      rvstf
+      ;;
+  esac
+
+  # done
+  set -e
+}
+
+main $1 &
+
+exit 0
+
+!/bin/bash

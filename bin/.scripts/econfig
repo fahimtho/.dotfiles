@@ -1,0 +1,60 @@
+#!/usr/bin/env bash
+MENU="rofi -dmenu -no-fixed-num-lines -i -columns 2 -width "350" -xoffset  "-769" -yoffset "-491" -l 8 -p "
+
+declare -A confedit_list
+confedit_list[  bash]="$HOME/.bashrc"
+confedit_list[  bspwm]="$HOME/.config/bspwm/bspwmrc"
+confedit_list[  dunst]="$HOME/.config/dunst/dunstrc"
+confedit_list[  ncmpcpp]="$HOME/.config/ncmpcpp/config"
+confedit_list[  neovim]="$HOME/.config/nvim/init.vim"
+confedit_list[  picom]="$HOME/.config/picom/picom.conf"
+confedit_list[  polybar]="$HOME/.config/polybar/config"
+confedit_list[  sxhkd]="$HOME/.config/sxhkd/sxhkdrc"
+confedit_list[  vim]="$HOME/.vimrc"
+confedit_list[  xresources]="$HOME/.Xresources"
+confedit_list[  zsh]="$HOME/.zshrc"
+
+
+confedit_list[  launcher]="/home/fh1m/.config/rofi/launch_apps.rasi"
+confedit_list[  prompt]="/home/fh1m/.config/starship.toml"
+confedit_list[  awesome]="/home/fh1m/.config/awesome/rc.lua"
+confedit_list[  dunst]="/home/fh1m/.config/dunst/dunstrc"
+confedit_list[  terminal]="/home/fh1m/.config/kitty/kitty.conf"
+confedit_list[  zsh]="/home/fh1m/.config/rofi/config.rasi"
+confedit_list[  ncmpcpp]="/home/fh1m/.config/ncmpcpp/config"
+confedit_list[  player]="/home/fh1m/.config/miniplayer/config"
+confedit_list[  zathura]="/home/fh1m/.config/zathura/zathurarc"
+confedit_list[  zsh]="$HOME/.zshrc"
+confedit_list[  zsh]="$HOME/.zshrc"
+confedit_list[  zsh]="$HOME/.zshrc"
+confedit_list[  zsh]="$HOME/.zshrc"
+confedit_list[  zsh]="$HOME/.zshrc"
+confedit_list[  zsh]="$HOME/.zshrc"
+confedit_list[  zsh]="$HOME/.zshrc"
+confedit_list[  zsh]="$HOME/.zshrc"
+
+main() {
+  # Clean options array making sure that the files exist
+  declare -A _clean_list
+  # As this is loaded from other file it is technically not defined
+  # shellcheck disable=SC2154
+  for i in "${!confedit_list[@]}"; do
+    [[ -f ${confedit_list["${i}"]} ]] && _clean_list["${i}"]=${confedit_list["${i}"]}
+  done
+
+  # Piping the above array (cleaned) into dmenu.
+  # We use "printf '%s\n'" to format the array one item to a line.
+  choice=$(printf '%s\n' "${!_clean_list[@]}" | sort | ${MENU} 'Edit config:' "$@")
+
+  # What to do when/if we choose a file to edit.
+  if [ "$choice" ]; then
+    cfg=$(printf '%s\n' "${_clean_list["${choice}"]}")
+    # shellcheck disable=SC2154
+    tmux neww nvim "$cfg"
+  # What to do if we just escape without choosing anything.
+  else
+      echo "Program terminated." && exit 0
+  fi
+}
+
+[[ "${BASH_SOURCE[0]}" == "${0}" ]] && main "$@"

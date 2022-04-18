@@ -1,0 +1,16 @@
+#!/usr/bin/env sh
+notify-send "System Status" "Sensei, Select a region to capture" -i ~/Pictures/.icons/screenshot.png
+sleep 1
+
+size=$(slop -o -q -n -f '-g %g ')
+
+if [[ -z "$size" ]];
+then
+  echo ""
+else
+  ffcast -q $size png /tmp/screenshot_clip.png
+  xclip -selection clipboard -t image/png /tmp/screenshot_clip.png
+  canberra-gtk-play -i screen-capture
+  notify-send "System Status" "Sensei, the screenshot we took" -i /tmp/screenshot_clip.png
+  rm /tmp/screenshot_clip.png
+fi

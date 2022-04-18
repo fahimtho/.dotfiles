@@ -1,0 +1,31 @@
+#!/bin/bash
+# Requires:
+# rofi-blocks : https://github.com/OmarCastro/rofi-blocks
+# Author https://github.com/Belkadev
+
+[ -z "$1" ] && echo "suggest google|youtube|ddg|wikipedia|deezer|lastfm|books" && exit 1
+API="$1"
+#Full path to the handler script
+handler=$(dirname $0)/handler
+
+ [ ! -f "$handler" ] && echo "invalid path to handler script" && exit 1
+case "$API" in
+"google") prompt="" ;;
+"deezer") prompt="Music: " ;;
+"youtube") prompt="" ;;
+"lastfm") prompt="Music: " ;;
+"books") prompt="Books: " ;;
+"wikipedia") prompt="Wikipedia: " ;;
+"ddg") prompt="Ddg: " ;;
+"amazon") prompt="Amazon: " ;;
+"archwiki") prompt="Archwiki: " ;;
+"baidu") prompt="Baidu: " ;;
+*) echo "unrecognized API" && exit 1 ;;
+esac
+###############
+logfile="$(dirname $handler)/logfile.tmp" # logfile to communicate between two ends
+printf "$API" > "$logfile"
+rofi -xoffset "-744" -yoffset "-491" -no-fixed-num-lines -width "400" -lines "10" -modi blocks -show blocks -blocks-wrap $handler -display-blocks "$prompt" 2>/dev/null
+[ -f $logfile ] && selection="$(cat "$logfile")" || exit 0
+echo "$selection"
+exit 0
