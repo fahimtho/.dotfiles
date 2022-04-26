@@ -1,3 +1,4 @@
 # .dotfiles
-![](https://user-images.githubusercontent.com/93471702/163859626-235fa4b6-a64f-44eb-8738-60e6cda2e09d.png)
-![](https://user-images.githubusercontent.com/93471702/163860039-97c33976-7bb3-480e-9c86-7fd0e7a5ab42.png)
+
+![27-04-2022 02:39:17](https://user-images.githubusercontent.com/93471702/165388784-a3298b6f-1622-47ea-9c3a-fd9256bbf657.png)
+![27-04-2022 02:40:15](https://user-images.githubusercontent.com/93471702/165388790-a4d10e97-7b3a-4313-a2b0-efddcc285698.png)
