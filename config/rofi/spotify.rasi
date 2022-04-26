@@ -1,7 +1,8 @@
 configuration {
   mymenu-display-format: "{icon} {name}";
   modi: "spotify";
-  show-icons: true;
+  show-icons: false;
+
 }
 
 * {

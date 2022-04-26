@@ -44,13 +44,84 @@ cmp.setup({
     { name = 'nvim_lsp' },
     { name = 'snippy' },
     { name = 'latex_symbols' },
-    { name = 'buffer' }
+    { name = 'cmp_tabnine' },
+    { name = 'buffer' },
+    { name = 'nvim_lua' },
+    { name = 'path' }
   }, {
   })
 })
 
--- icons for cmp
+for _, cmd_type in ipairs({':', '/', '?', '@'}) do
+  cmp.setup.cmdline(cmd_type, {
+    sources = {
+      { name = 'cmdline_history' },
+    },
+  })
+end
 
+require'cmp'.setup.cmdline(':', {
+  sources = {
+    { name = 'cmdline' }
+  }
+})
+
+require'cmp'.setup.cmdline('/', {
+  sources = {
+    { name = 'buffer' }
+  }
+})
+
+local cmp = require "cmp"
+cmp.setup {
+    -- ... rest of your setup ...
+
+    sorting = {
+        comparators = {
+            require('cmp_tabnine.compare'),
+            cmp.config.compare.offset,
+            cmp.config.compare.exact,
+            cmp.config.compare.score,
+            require "cmp-under-comparator".under,
+            cmp.config.compare.kind,
+            cmp.config.compare.sort_text,
+            cmp.config.compare.length,
+            cmp.config.compare.order,
+        },
+    },
+}
+
+local lspkind = require('lspkind')
+
+local source_mapping = {
+	buffer = " [Buffer]",
+	nvim_lsp = " [LSP]",
+	nvim_lua = " [Api]",
+	snippy = " [Snip]",
+	latex_symbols = " [Tex]",
+	cmp_tabnine = " [TN]",
+	path = " [Path]",
+}
+
+require'cmp'.setup {
+	formatting = {
+		format = function(entry, vim_item)
+			vim_item.kind = lspkind.presets.default[vim_item.kind]
+			local menu = source_mapping[entry.source.name]
+			if entry.source.name == 'cmp_tabnine' then
+				if entry.completion_item.data ~= nil and entry.completion_item.data.detail ~= nil then
+					menu = entry.completion_item.data.detail .. ' ' .. menu
+				end
+				vim_item.kind = ''
+			end
+			vim_item.menu = menu
+			return vim_item
+		end
+	},
+}
+
+
+-- icons for cmp
 local kind_icons = {
       Text = "",
       Method = "",
@@ -78,14 +149,3 @@ local kind_icons = {
       Operator = "",
       TypeParameter = ""
     }
-
-local cmp = require('cmp')
-local lspkind = require('lspkind')
-cmp.setup {
-  formatting = {
-    format = lspkind.cmp_format({
-      mode = 'symbol',
-      maxwidth = 500,
-    }),
-  },
-}

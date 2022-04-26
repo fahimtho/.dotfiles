@@ -29,7 +29,7 @@
   },
   {
     "name": " Music Video",
-    "command": "pkill -f float || kitty --class=float -e ytfzf -t \"$(mpc current)\""
+    "command": "ytfzf -DN \"$(mpc current) music video\""
   },
   {
     "name": "  Typing Test",
@@ -54,6 +54,19 @@
   {
     "name": "  Headphone Charge",
     "command": "bash ~/.scripts/headphone-charge"
+  },
+  {
+    "name": "  Wireless Headphone Charge",
+    "command": "bash ~/.scripts/wireless-headphone-charge"
+  },
+  {
+    "name": "﬜ Dictionary",
+    "command": "bash ~/.scripts/dictionary"
+  },
+  {
+    "name": "爵 Urban-Dictionary",
+    "command": "bash ~/.scripts/urban-dictionary"
   }
+
 
 ]

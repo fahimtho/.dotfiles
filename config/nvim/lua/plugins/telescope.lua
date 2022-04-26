@@ -4,10 +4,8 @@ local action_layout = require("telescope.actions.layout")
 
 require('telescope').setup{
 defaults = {
-    theme = "ivy",
     layout_config = {
       horizontal = { width = 0.9 , height = 0.9},
-      preview_cutoff = 60
     },
     pickers = {
       find_files = {
@@ -27,3 +25,5 @@ defaults = {
 require('telescope').load_extension('media_files')
 require('telescope').load_extension('gh')
 require("telescope").load_extension('file_browser')
+require'telescope'.load_extension('zoxide')
+require("telescope").load_extension("notify")

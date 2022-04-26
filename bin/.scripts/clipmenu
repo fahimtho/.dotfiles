@@ -1,3 +1,3 @@
 #!/usr/bin/env sh
 
-greenclip print | grep . | rofi -dmenu -i -theme ~/.config/rofi/reverse.rasi -lines "10" -width 100% -yoffset "-507" -p   -no-fixed-num-lines | xargs -r -d'\n' -I '{}' greenclip print '{}'
+greenclip print | grep . | rofi -dmenu -i -theme ~/.config/rofi/reverse.rasi -lines "10" -width 1907 -yoffset "-497" -p   -no-fixed-num-lines | xargs -r -d'\n' -I '{}' greenclip print '{}'

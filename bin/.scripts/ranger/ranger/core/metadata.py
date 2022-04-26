@@ -32,7 +32,7 @@ class MetadataManager(object):
         self.deep_search = DEEP_SEARCH_DEFAULT
 
     def reset(self):
-        self.metadata_cache.clear()
+        self.metadata_cache.copy()
         self.metafile_cache.clear()
 
     def get_metadata(self, filename):

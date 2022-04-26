@@ -36,7 +36,7 @@ require'nvim-tree'.setup {
     timeout = 500,
   },
   view = {
-    width = 25,
+    width = 26,
     height = 30,
     hide_root_folder = true,
     side = 'left',
@@ -70,6 +70,19 @@ require'nvim-tree'.setup {
         },
       },
     },
+  renderer = {
+    indent_markers = {
+      enable = true,
+      icons = {
+        corner = "└ ",
+        edge = "│ ",
+        none = "  ",
+      },
+    },
+    icons = {
+      webdev_colors = true,
+    },
+  },
   trash = {
     cmd = "trash",
     require_confirm = true

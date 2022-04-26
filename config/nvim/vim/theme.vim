@@ -14,8 +14,8 @@ hi PmenuSel guibg=#101824 guifg=#004eff
 hi Directory guifg=#004eff
 hi CursorLine gui=none guibg=none
 hi CursorLineNr guifg=#004eff gui=none
-hi Visual guibg=#002766 guifg=NONE
-hi IncSearch guibg=#25364d guifg=none
+hi Visual guibg=#10171a guifg=NONE
+hi IncSearch guibg=#10171a guifg=none
 hi NormalFloat guibg=none guifg=#004eff
 hi String guifg=#ff1767
 hi Search guibg=#142633 guifg=none
@@ -43,6 +43,7 @@ hi dosiniLabel guifg=#368dff
 hi dosiniHeader guifg=#368dff
 hi VertSplit guifg=#002766
 hi BufferLineFill guifg=none guibg=none
+hi NvimTreeWindowPicker guifg=#000000 guibg=#004eff
 
 " Change treesitter Elements
 hi TSKeyword guifg=#004eff
@@ -93,7 +94,3 @@ highlight! link CmpItemKindVariable Pmenu
 highlight! link CmpItemAbbrMatchFuzzy Pmenu
 highlight! link CmpItemAbbrMatch Pmenu
 highlight! link CmpItemAbbrDeprecated Pmenu
-
-" Renamer
-hi default link RenamerBorder FloatBorder
-hi default link RenamerTitle NormalFloat

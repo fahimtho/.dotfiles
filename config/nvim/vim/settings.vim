@@ -31,7 +31,7 @@ set expandtab                                             " tab in insert mode
 set cursorline                                            " highlight current line number
 set noruler                                               " show no ruler
 set termguicolors                                         " use true colors
-set shortmess+=FIaosc                                     " No message
+set shortmess+=ItxrnmaqoscF                               " No message
 set lazyredraw                                            " time
 set nobackup                                              " live fearless
 set nowritebackup                                         " live fearless
@@ -47,6 +47,7 @@ set laststatus=3                                          " Show global statusli
 set mouse=ar                                              " mouse as it should be
 set conceallevel=1                                        " magic
 set completeopt=menu,menuone,noselect                     " autocomplete format
+set noshowcmd                                             " Do not show keys pressed
 filetype plugin indent on                                 " filetype Plugin to set filetype
 
 " ignore Files
@@ -70,19 +71,17 @@ let g:netrw_banner = 0
 let g:asyncrun_trim = 1
 let g:asyncrun_save = 1
 let g:asyncrun_open = 13
+let g:asyncrun_qfid = 0
 
 " Nvim Tree Settings
 let g:nvim_tree_git_hl = 1
 let g:nvim_tree_highlight_opened_files = 1
-" let g:nvim_tree_quit_on_open = 1
 let g:nvim_tree_group_empty = 1
-" let g:nvim_tree_disable_window_picker = 1
 let g:nvim_tree_icon_padding = ' '
 let g:nvim_tree_symlink_arrow = ' >> '
 let g:nvim_tree_respect_buf_cwd = 0
 let g:nvim_tree_refresh_wait = 500
 let g:nvim_tree_special_files = { 'README.md': 1, 'Makefile': 1, 'MAKEFILE': 1 }
-let g:nvim_tree_indent_markers = 1
 let g:nvim_tree_show_icons = {
       \ 'git': 1,
       \ 'folders': 1,
@@ -147,3 +146,46 @@ let g:python3_host_prog=expand('/usr/bin/python')
 let g:code_action_menu_window_border = 'rounded'
 let g:code_action_menu_show_details = v:true
 let g:code_action_menu_show_diff = v:true
+
+" Matchit
+let g:loaded_matchit = 1
+let g:matchup_matchparen_enabled = 0
+let g:matchup_transmute_enabled = 1
+
+" Bug
+let g:cursorhold_updatetime = 100
+
+" ui
+let g:popui_border_style = "rounded"
+
+" Enhance <C-a> and <C-x>
+let g:increment_activator_filetype_candidates = {
+  \   '_' : [
+  \     ['Pythonista', 'PHPer', 'Gopher'],
+  \     ['info', 'warning', 'notice', 'error'],
+  \   ],
+  \   'cucumber': [
+  \     ['Given', 'And', 'When', 'Then'],
+  \   ],
+  \   'erlang': [
+  \     ['module', 'export'],
+  \     [
+  \       'is_alive', 'is_atom', 'is_binary', 'is_bitstring',
+  \       'is_boolean', 'is_float', 'is_function',
+  \       'is_integer', 'is_list', 'is_number',
+  \       'is_pid', 'is_port', 'is_process_alive',
+  \       'is_record', 'is_reference', 'is_tuple',
+  \     ],
+  \   ],
+  \   'git-rebase-todo': [
+  \     ['pick', 'reword', 'edit', 'squash', 'fixup', 'exec'],
+  \   ],
+  \   'go': [
+  \     ['true', 'false', 'iota', 'nil'],
+  \     ['byte', 'complex64', 'complex128'],
+  \     ['int', 'int8', 'int16', 'int32', 'int64'],
+  \     ['uint', 'uint8', 'uint16', 'uint32', 'uint64'],
+  \     ['float32', 'float64'],
+  \     ['interface', 'struct'],
+  \   ],
+  \ }

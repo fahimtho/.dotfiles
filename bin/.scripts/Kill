@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-MENU="rofi -theme ~/.config/rofi/reverse.rasi -dmenu -i  -width "100%" -yoffset "-507"  -l 15 -p   -no-fixed-num-lines -selected-row 1"
+MENU="rofi -theme ~/.config/rofi/reverse.rasi -dmenu -i  -width "1906" -yoffset "-497"  -l 15 -p   -no-fixed-num-lines -selected-row 1"
 
 main() {
     selected="$(ps aux --user "$USER" --sort -rss | \

@@ -1,0 +1,9 @@
+#!/usr/bin/env sh
+
+num=$(bash ~/.scripts/num_of_packages)
+
+if [[ $num < 200 ]]; then
+  notify-send "System Status" "Sensei, We have $num of packages that has of be updated" -i ~/Pictures/.icons/ai.png
+else
+  echo ""
+fi

@@ -23,7 +23,7 @@ super + w
   jump 'mpv' 'kitty -1 --class=watch ./.scripts/ranger/ranger.py /home/fh1m/See/'
 
 # File Manager
-super + f
+super + r
   kitty -1 --class=float ./.scripts/ranger/ranger.py
 
 # Terminal with Tmux
@@ -80,19 +80,15 @@ alt + m
 
 # Spotify Menu
 alt + shift + m
-  rofi -modi spotify:"python -m rofify" -show spotify -theme ~/.config/rofi/spotify.rasi -no-fixed-num-lines -xoffset -560 -yoffset -491 2> /dev/null
+  rofi -modi spotify:"python -m rofify" -show spotify -theme ~/.config/rofi/spotify.rasi -no-fixed-num-lines -xoffset -560 -yoffset -488 2> /dev/null
 
 # Program Launcher Quick
 shift + space
-	 rofi -normal-window -theme ~/.config/rofi/launch_apps.rasi -no-fixed-num-lines -no-lazy-grab -modi run,drun,window -show drun -modi drun
+	 rofi -theme ~/.config/rofi/launch_apps.rasi -no-fixed-num-lines -no-lazy-grab -show drun
 
 # Kill Menu
 super + k
   ~/.scripts/Kill
-
-# Killall Menu
-alt + k
-  pkill -f $(ps --format=comm --sort -rss --user "$USER" | sort | uniq | sed '1d' | rofi -i -dmenu -width 500 -lines 8 -columns 2 -p   -no-fixed-num-lines -yoffset -491 -xoffset -693)
 
 # Twitch
 alt + control + s
@@ -103,7 +99,7 @@ alt + control + h
   ~/.scripts/bspc-unhide-menu
 
 # Tasks
-super + t
+control + Return
   ~/.scripts/tasks
 
 # Power Menu
@@ -123,7 +119,7 @@ control + Escape
 	pkill -USR1 -x sxhkd && notify-send "System Status" "Sensei, We are restarting <i><b>Sxhkd</b></i>" -i ~/Pictures/.icons/ai.png
 
 # Restart Bspwm
-super + r
+super + shift + r
 	bspc wm -r && notify-send "System Status" "Sensei, We are restarting <i><b>Bspwm</b></i>" -i ~/Pictures/.icons/ai.png
 
 # Make Current Window full
@@ -143,7 +139,7 @@ super + l
   sudo betterlockscreen -l
 
 # Set the window state to tiled
-super + shift + t
+super + t
 	bspc node -t tiled
 
 # Focus the node in the given direction
@@ -167,7 +163,7 @@ super + control + {Left,Down,Up,Right}
 	bspc node -v {-20 0,0 20,0 -20,20 0}
 
 # swap the current node and the biggest window
-super + shift + g
+super + g
 	bspc node -s biggest.window
 
 # Switch to Next Desktop
@@ -269,7 +265,7 @@ alt + space
 
 # Open Files with Rofi
 super + o
-  rofi -show file-browser-extended -file-browser-dir ~ -lines 29 -xoffset -694 -yoffset -491 -width 500 -no-fixed-num-lines
+  rofi -show file-browser-extended -file-browser-dir ~ -lines 29 -xoffset -694 -yoffset -488 -width 500 -no-fixed-num-lines
 
 super + c
   ~/.scripts/econfig
@@ -289,6 +285,15 @@ super + y
 # Google Suggest Stuff
 alt + g
   ~/.scripts/Search/google-suggest
+
+# Look words [dictionary]
+alt + d
+  notify-send "$(~/.scripts/dict $(xclip -selection clipboard -out) | sed 's/\x1b\[[0-9;]*m//g' )" -i "lol" -t 1000000
+
+# Look words [urban Dictionary]
+super + u
+  notify-send "$(ud $(xclip -selection clipboard -out) | sed 's/\x1b\[[0-9;]*m//g' )" -i "lol" -t 1000000
+
 
 # Turn down volumn
 XF86AudioLowerVolume
@@ -315,12 +320,9 @@ XF86AudioMicMute
 XF86AudioMute
   pulseaudio-control togmute;dunstify -r 1337 "System Status" "Sensei, Sound is being managed" -i ~/Pictures/.icons/audio.png
 
-# hide bar
+# toggle bar
 super + x
-     polybar-msg cmd hide;bspc config bottom_padding 0;bspc config top_padding 0
-# Unhide bar
-super + shift + x
-  polybar-msg cmd show
+  ~/.scripts/focus_mode
 
 ############
 ## States ##
@@ -335,7 +337,7 @@ super + space
     fi
 
 # Toggle Fullscreen
-super + shift + f
+super + f
     if [ -z "$(bspc query -N -n focused.fullscreen)" ]; then \
         bspc node focused -t fullscreen; \
     else \

@@ -5,8 +5,10 @@ highlight clear TabLineFill " Transparent Tabline Background
 highlight clear Error " Dont need Error highlight
 autocmd VimEnter * set autochdir " set vim pwd as the file
 autocmd FileType qf set nonumber " Hide line numbers in qf
+autocmd FileType harpoon set nonumber " Hide line numbers in harpoon
 autocmd FileType qf set nobuflisted " Hide Qucikfix window from bufferlist
 autocmd FileType dap-repl set nobuflisted " Hide dap-repl window from bufferlist
+autocmd FileType dap-repl startinsert " start dap-repl insertmode
 au TermOpen * setlocal listchars= nonumber norelativenumber " hide numbers in Terminal
 au TermOpen * startinsert " open Terminal in insert mode
 au BufEnter,BufWinEnter,WinEnter term://* startinsert " Enter Terminal in insert mode
@@ -20,10 +22,10 @@ autocmd CursorHold,CursorHoldI * lua require'nvim-lightbulb'.update_lightbulb()
 let g:quickfix_is_open = 0
 function! QuickfixToggle()
   if g:quickfix_is_open
-    cclose
+    botright cclose
     let g:quickfix_is_open = 0
   else
-    copen
+    botright copen
     let g:quickfix_is_open = 1
   endif
 endfunction
@@ -59,7 +61,7 @@ autocmd BufReadPost *
       \ endif
 
 " Close Asyncrun Window after 3 seconds
-let g:asyncrun_exit = 'call timer_start(2000, {-> execute("cclose")})'
+let g:asyncrun_exit = 'call timer_start(1000, {-> execute("cclose")})'
 
 " Compile & Run Code in Quickfix non-interective
 func! CompileRun()
@@ -69,7 +71,7 @@ func! CompileRun()
   elseif &filetype == 'cpp'
     exec "AsyncRun -strip g++ -Wall % -o %< && ./%<"
   elseif &filetype == 'sh'
-    exec "AsyncRun -strip bash % && cp % %< && chmod +x %<"
+    exec "AsyncRun -strip bash %"
   elseif &filetype == 'python'
     exec "AsyncRun -strip python3 %"
   elseif &filetype == 'go'
@@ -100,7 +102,7 @@ func! Run()
   elseif &filetype == 'cpp'
     exec "AsyncRun -strip -mode=term -pos=floaterm -position=bottomright -width=0.6 -height=0.3 g++ -Wall % -o %< && ./%<"
   elseif &filetype == 'sh'
-    exec "AsyncRun -strip -mode=term -pos=floaterm -position=bottomright -width=0.6 -height=0.3 bash % && cp % %< && chmod +x %<"
+    exec "AsyncRun -strip -mode=term -pos=floaterm -position=bottomright -width=0.6 -height=0.3 bash %"
   elseif &filetype == 'python'
     exec "AsyncRun -strip -mode=term -pos=floaterm -position=bottomright -width=0.6 -height=0.3 python3 %"
   elseif &filetype == 'go'

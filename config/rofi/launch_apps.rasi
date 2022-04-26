@@ -11,17 +11,12 @@ configuration {
     font: 							"SF Mono 9";
     fixed-num-lines: 				true;
     show-icons: 					false;
-    sidebar-mode: 					true;
+    sidebar-mode: 					false;
     scroll-method: 					0;
     window-format: 					"[{w}] ··· {c}";
     click-to-exit: 					true;
-    combi-hide-mode-prefix: 		false;
-    display-window: 				" ";
-    display-windowcd: 				" ";
-    display-run: 					" ";
-    display-ssh: 					"  ";
+    combi-hide-mode-prefix: 		true;
     display-drun: 					" ";
-    display-combi: 					"  ";
     drun-display-format:            "{name}";
     location:                       1;
 }
@@ -38,7 +33,7 @@ window {
     padding: 						8;
     width: 							15%;
     x-offset:                       15;
-    y-offset:                       48;
+    y-offset:                       51;
 }
 
 prompt {
@@ -68,7 +63,7 @@ inputbar {
     spacing:    					0px;
     text-color: 					#004eff;
     padding:    					5px;
-    children: 						[ prompt,textbox-prompt-colon,entry,case-indicator ];
+    children: 						[ prompt,textbox-prompt-colon,entry ];
 }
 
 mainbox {
@@ -139,26 +134,6 @@ sidebar {
     border:       					0px;
     border-color: 					#004eff;
     border-radius: 					0px;
-}
-
-button {
-    horizontal-align:               0.5;
-    vertical-align:                 0.5;
-    background-color:             	#000000;
-    margin: 						4px;
-    padding: 						4px;
-    text-color: 					#004eff;
-    border: 						0px;
-    border-radius: 					2px;
-    border-color: 					#004eff;
-}
-
-button selected {
-    background-color:             	#004eff;
-    text-color: 					#000000;
-    border: 						0px;
-    border-radius: 					2px;
-    border-color: 					#004eff;
 }
 
 scrollbar {

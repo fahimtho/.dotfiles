@@ -5,6 +5,4 @@ source /home/fh1m/.config/nvim/vim/theme.vim
 source /home/fh1m/.config/nvim/vim/utils.vim
 
 " Lua files
-lua require('statusline')
 lua require('plugins')
-lua require('lsp')

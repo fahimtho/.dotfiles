@@ -11,7 +11,7 @@ return require('packer').startup(
      display = {
       non_interactive = false,
       open_fn  = nil,
-      open_cmd = '65vnew \\[packer\\]',
+      open_cmd = '50vnew \\[packer\\]',
       working_sym = '',
       error_sym = '✗',
       done_sym = '✓',
@@ -341,23 +341,13 @@ use {
   end
 }
 
+-- Dap UI
 use {
   "rcarriga/nvim-dap-ui",
   requires = {"mfussenegger/nvim-dap"},
   config = function()
     require "plugins.dapui"
   end
-}
-
-
--- Lsp Rename
-use {
-  'filipdutescu/renamer.nvim',
-  branch = 'master',
-  requires = { {'nvim-lua/plenary.nvim'} },
-  config = function()
-    require('renamer').setup()
-  end,
 }
 
 -- Peek Lines
@@ -374,14 +364,7 @@ use {
   cmd = 'CodeActionMenu'
 }
 
--- Notifications
-use {
-  'rcarriga/nvim-notify',
-  config = function()
-    require "plugins.notify"
-  end
-}
-
+-- DAP Text
 use {
   'theHamsta/nvim-dap-virtual-text',
   config = function ()
@@ -389,28 +372,121 @@ use {
   end
 }
 
--- Plugins
-use 'folke/tokyonight.nvim' -- Colorscheme
-use 'kyazdani42/nvim-web-devicons' -- icons
-use 'windwp/windline.nvim' -- Statusline
-use 'neovim/nvim-lspconfig' -- Neovim Language Server protocol
-use 'lewis6991/impatient.nvim' -- Start Quickly
-use "nathom/filetype.nvim" -- Filetype Faster
+-- Statusbar
+use {
+  'windwp/windline.nvim',
+  config = function()
+    require "plugins.statusline"
+  end
+}
+
+-- Neovim language Server
+use {
+  'neovim/nvim-lspconfig',
+  config = function()
+    require "plugins.lsp"
+  end
+}
+
+-- Toggle chars
+use {
+  "saifulapm/chartoggle.nvim",
+  config = function()
+    require('chartoggle').setup ({
+      leader = '<localleader>',
+      keys = {',',';','[',']','(',')','{','}','.','"'}
+    })
+  end
+}
+
+-- Markdown
+use {
+  'iamcco/markdown-preview.nvim',
+  run = 'cd app && yarn install',
+  ft = {"markdown"}
+
+}
+
+-- Nice UI
+use {
+  'stevearc/dressing.nvim',
+  config = function()
+    require "plugins.ui"
+  end
+}
+
+-- Buffer switcher
+use {
+  'matbme/JABS.nvim',
+  config = function()
+    require "plugins.jabs"
+  end
+}
+
+-- Cool notifications
+use {
+  'rcarriga/nvim-notify',
+  config = function()
+    require "plugins.notify"
+  end
+}
+
+-- git diff view
+use {
+  'sindrets/diffview.nvim',
+  config = function()
+    require "plugins.diff"
+  end
+}
+
+
+-- Telescope
+use 'nvim-telescope/telescope-media-files.nvim' -- Preview Media
+use 'nvim-telescope/telescope-github.nvim' -- telescope Github
+use 'jvgrootveld/telescope-zoxide' -- Folder DB
+use "nvim-telescope/telescope-file-browser.nvim" -- nicer file picker
+
+-- Cmp
 use 'hrsh7th/cmp-nvim-lsp' -- cmp lsp source
-use 'voldikss/vim-floaterm' -- Floating Terminal
+use 'dcampos/nvim-snippy' -- snippet manager
 use 'dcampos/cmp-snippy' -- snippet for cmp
 use 'onsails/lspkind-nvim' -- icons for menu
-use 'mbbill/undotree' -- undo Tree
 use 'honza/vim-snippets' -- Snippets
-use 'dcampos/nvim-snippy' -- snippet manager
-use 'nvim-telescope/telescope-media-files.nvim' -- Preview Media
-use 'sindrets/winshift.nvim' -- Move Windows
-use 'nvim-telescope/telescope-github.nvim' -- telescope Github
 use 'hrsh7th/cmp-buffer' -- cmp buffer source
-use "nvim-telescope/telescope-file-browser.nvim" -- nicer file picker
+use "lukas-reineke/cmp-under-comparator" -- Sort good
+use 'hrsh7th/cmp-path' -- Cmp path source
+use 'dmitmel/cmp-cmdline-history' -- Cmp cmd source
+use 'hrsh7th/cmp-nvim-lua' -- cmp lua nvim source
+use 'hrsh7th/cmp-cmdline' -- cmp cmdline source
+use {'tzachar/cmp-tabnine', run='./install.sh', requires = 'hrsh7th/nvim-cmp'} -- cmp tabnine source
+
+-- UI
+use 'folke/tokyonight.nvim' -- Colorscheme
+use 'kyazdani42/nvim-web-devicons' -- icons
+use 'hood/popui.nvim' -- Nice UI
+use 'RishabhRD/popfix' -- Nice UI
+
+-- Fix
+use 'lewis6991/impatient.nvim' -- Start Quickly
+use "nathom/filetype.nvim" -- Filetype Faster
+use 'antoinemadec/FixCursorHold.nvim' -- Fix
+
+-- Utils
+use 'voldikss/vim-floaterm' -- Floating Terminal
+use 'mbbill/undotree' -- undo Tree
+use 'sindrets/winshift.nvim' -- Move Windows
 use 'troydm/zoomwintab.vim' -- kinda like bspwm moncle
-use 'kosayoda/nvim-lightbulb' -- Code Actions Indicator
+use 'pbrisbin/vim-mkdir' -- Make directory if non-existent
+use 'wakatime/vim-wakatime' -- meaning full insight
+use 'andymass/vim-matchup' -- Enhance Matchit
+use 'terryma/vim-expand-region' -- Cool
 use 'tpope/vim-surround' -- Surround Stuff
+use 'nishigori/increment-activator' -- good enhance
+
+-- Lsp, Treesitter
+use 'kosayoda/nvim-lightbulb' -- Code Actions Indicator
 use 'David-Kunz/treesitter-unit' -- Select quickly
+use 'sbdchd/neoformat' -- Format Code
+use 'mizlan/iswap.nvim' -- Swap Args and stuff
 
 end)

@@ -2,8 +2,8 @@ configuration {
     show-icons:                   true;
     icon-theme:                   "Kora";
     window-format: 				        "{w} ··· {t}";
-    display-window: 				"";
-    display-emoji: 				"";
+    display-window: 				" ";
+    display-emoji: 				" ";
     display-file-browser-extended:   " ";
 
 }

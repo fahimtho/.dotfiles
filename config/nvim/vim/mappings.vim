@@ -43,7 +43,7 @@ nnoremap <silent><leader>a :CodeActionMenu<CR>
 nnoremap <silent><leader>\ :Telescope file_browser<CR>
 nnoremap <silent><leader>bf :Telescope current_buffer_fuzzy_find<CR>
 nnoremap <silent>q: :Telescope command_history<CR>
-nnoremap <silent><Tab> :Telescope buffers<CR>
+nnoremap <silent><Tab> :JABSOpen<CR>
 
 " Move between Buffers
 nnoremap <silent><M-.> :BufferLineCycleNext<CR>
@@ -59,12 +59,6 @@ nnoremap <silent><F3> :TSHighlightCapturesUnderCursor<CR>
 " Show Problem With code
 nnoremap <silent> <leader>D :TroubleToggle<CR>
 nnoremap <silent> <leader>L :TroubleToggle lsp_references<CR>
-
-" Separate Delete and cut [ m -> cut , d -> delete ]
-nnoremap m d
-xnoremap m d
-nnoremap mm dd
-nnoremap M D
 
 " Cool Snippets using TAB & Shift-TAB
 imap <expr> <Tab> snippy#can_expand_or_advance() ? '<Plug>(snippy-expand-or-next)' : '<Tab>'
@@ -115,14 +109,14 @@ nnoremap <silent> <space>D :lua vim.lsp.buf.type_definition()<CR>
 nnoremap <silent> <space>rn :lua vim.lsp.buf.rename()<CR>
 nnoremap <silent> <space>ca :lua vim.lsp.buf.code_action()<CR>
 nnoremap <silent> gr :lua vim.lsp.buf.references()<CR>
-nnoremap <silent> <space>e :lua vim.lsp.diagnostic.show_line_diagnostics()<CR>
-nnoremap <silent> d[ :lua vim.lsp.diagnostic.goto_prev()<CR>
-nnoremap <silent> d] :lua vim.lsp.diagnostic.goto_next()<CR>
-nnoremap <silent> <space>q :lua vim.lsp.diagnostic.set_loclist()<CR>
+nnoremap <silent> <space>e :lua vim.diagnostic.open_float()<CR>
+nnoremap <silent> d[ :lua vim.diagnostic.goto_prev()<CR>
+nnoremap <silent> d] :lua vim.diagnostic.goto_next()<CR>
+nnoremap <silent> <space>q :lua vim.diagnostic.setloclist()<CR>
 nnoremap <silent> <C-LeftMouse> :lua vim.lsp.buf.definition()<CR>
 
 " Format Stuff
-nnoremap <silent> <space>f :lua vim.lsp.buf.formatting()<CR>
+nnoremap <silent> <space>F :lua vim.lsp.buf.formatting()<CR>
 
 " Builtin Terminal
 tnoremap <Esc> <C-\><C-n>
@@ -166,11 +160,6 @@ nnoremap <M-S-right> <Cmd>WinShift right<CR>
 " Kinda like monecle
 nnoremap <silent> <space><space> :ZoomWinTabToggle<CR>
 
-" Remane
-inoremap <silent> <F2> <cmd>lua require('renamer').rename()<cr>
-nnoremap <silent> <F2> <cmd>lua require('renamer').rename()<cr>
-vnoremap <silent> <F2> <cmd>lua require('renamer').rename()<cr>
-
 " Debug
 nnoremap <F4> <cmd>lua require('dapui').toggle()<CR>
 nnoremap <F5> <cmd>lua require('dap').toggle_breakpoint()<CR>
@@ -200,11 +189,20 @@ vnoremap <Leader>de <Cmd>lua require("dapui").eval()<CR>
 " Nice Search
 nnoremap <leader>S <cmd>SearchBoxIncSearch clear_matches=true<CR>
 nnoremap <leader>R <cmd>SearchBoxReplace clear_matches=true confirm=menu<CR>
-nnoremap <leader>r <cmd>SearchBoxReplace clear_matches=true<CR>
 vnoremap <leader>vs <cmd>SearchBoxIncSearch visual_mode=true<CR>
 
 " Select Treesitter unit
-xnoremap iu :lua require"treesitter-unit".select()<CR>
-xnoremap au :lua require"treesitter-unit".select(true)<CR>
-onoremap iu :<c-u>lua require"treesitter-unit".select()<CR>
-onoremap au :<c-u>lua require"treesitter-unit".select(true)<CR>
+xnoremap <silent>iu :lua require"treesitter-unit".select()<CR>
+xnoremap <silent>au :lua require"treesitter-unit".select(true)<CR>
+onoremap <silent>iu :<c-u>lua require"treesitter-unit".select()<CR>
+onoremap <silent>au :<c-u>lua require"treesitter-unit".select(true)<CR>
+
+" increment or decrement
+imap <silent> <C-a> <Plug>(increment-activator-increment)
+imap <silent> <C-x> <Plug>(increment-activator-decrement)
+nmap <silent> <C-a> <Plug>(increment-activator-increment)
+nmap <silent> <C-x> <Plug>(increment-activator-decrement)
+
+" Change case
+nnoremap <silent> <C-u> vu<esc>
+nnoremap <silent> <C-S-u> vU<esc>

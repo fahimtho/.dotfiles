@@ -11,7 +11,7 @@ window {
     padding: 						2;
     width: 							8%;
     x-offset:                       840;
-    y-offset:                       -507;
+    y-offset:                       -497;
 }
 
 listview {

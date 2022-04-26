@@ -41,7 +41,7 @@ whereis mpv > /dev/null || echoexit "'mpv' not found."
 menu (){
     # Dynamic menu command. Should read from stdin and output to stdout.
 
-    rofi -dmenu -p " " -width "100%" -yoffset "-507"  -lines "6" -i -theme ~/.config/rofi/reverse.rasi -no-fixed-num-lines
+    rofi -dmenu -p " " -width "1908" -yoffset "-497"  -lines "6" -i -theme ~/.config/rofi/reverse.rasi -no-fixed-num-lines
 }
 
 input (){

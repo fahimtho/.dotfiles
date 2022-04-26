@@ -12,11 +12,11 @@ bspc config window_gap               6
 
 # split,border color
 bspc config split_ratio              0.50
-bspc config borderless_monocle       true
-bspc config gapless_monocle          true
+bspc config borderless_monocle       false
+bspc config gapless_monocle          false
 bspc config focus_follows_pointer    true
-bspc config single_monocle	 	       true
-bspc config paddingless_monocle      true
+bspc config single_monocle	 	       false
+bspc config paddingless_monocle      false
 bspc config presel_feedback	 	       true
 bspc config pointer_follows_focus 	 false
 bspc config initial_polarity 		     second_child
@@ -38,11 +38,11 @@ bspc rule -r *:*
 bspc rule -a Gcolor3                  state=floating border=off
 bspc rule -a float                    state=floating
 bspc rule -a Rofi                     state=floating
-bspc rule -a watch                    desktop=^3 state=floating rectangle=661x406+18+49
-bspc rule -a music                    state=floating rectangle=816x378+15+47
-bspc rule -a lyrics                   state=floating rectangle=519x536+1131+58
-bspc rule -a ncmpcpp                  state=floating rectangle=1909x510+6+37
-bspc rule -a calendar                 state=floating rectangle=709x301+631+34
+bspc rule -a watch                    desktop=^3 state=floating rectangle=661x406+18+49 follow=on
+bspc rule -a music                    state=floating rectangle=816x378+12+50
+bspc rule -a lyrics                   state=floating rectangle=498x801+1402+118
+bspc rule -a ncmpcpp                  state=floating rectangle=1906x513+7+45
+bspc rule -a calendar                 state=floating rectangle=709x301+645+43
 bspc rule -a Blueman-manager          state=floating
 bspc rule -a Pavucontrol              state=floating border=off
 bspc rule -a Sxiv                     state=floating
@@ -92,10 +92,11 @@ for i in ${office[@]}; do
    bspc rule -a $i desktop='^8' follow=on focus=on; done
 
 # Startup Scirpts
-/home/fh1m/.config/bspwm/startup/clipboard.sh
-/home/fh1m/.config/bspwm/startup/compositor.sh
-/home/fh1m/.config/bspwm/startup/desktop.sh
-/home/fh1m/.config/bspwm/startup/mpd.sh
-/home/fh1m/.config/bspwm/startup/mpris.sh
-/home/fh1m/.config/bspwm/startup/statusbar.sh
-/home/fh1m/.config/bspwm/startup/mpd-mpris.sh
+/home/fh1m/.config/bspwm/startup/clipboard.sh &
+/home/fh1m/.config/bspwm/startup/compositor.sh &
+/home/fh1m/.config/bspwm/startup/desktop.sh &
+/home/fh1m/.config/bspwm/startup/mpd.sh &
+/home/fh1m/.config/bspwm/startup/mpris.sh &
+/home/fh1m/.config/bspwm/startup/statusbar.sh &
+/home/fh1m/.config/bspwm/startup/mpd-mpris.sh &
+/home/fh1m/.scripts/check_num_of_packages &

@@ -36,8 +36,8 @@ window {
     border-radius: 					3px;
     padding: 						8;
     width: 							20%;
-    x-offset:                       -751;
-    y-offset:                       -490;
+    x-offset:                       -752;
+    y-offset:                       -488;
 }
 
 prompt {

@@ -62,7 +62,7 @@ done <<< $(bspc query -N -n $win_cmd)
 }
 
 # Get user choice
-choice=$(printf "%s\n" "${!windows[@]}" | rofi -no-fixed-num-lines -yoffset "-491" -xoffset "-744" -width "400" -dmenu -i -p "")
+choice=$(printf "%s\n" "${!windows[@]}" | rofi -no-fixed-num-lines -yoffset "-488" -xoffset "-744" -width "400" -dmenu -i -p "")
 
 # If no choice, exit
 [ -z "$choice" ] && exit 1

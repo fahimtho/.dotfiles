@@ -6,7 +6,7 @@
     width = (0, )
     height = (0, )
     origin = top-right
-    offset = 16x48
+    offset = 14x52
     scale = 0
     notification_limit = 0
 
@@ -26,8 +26,8 @@
     show_indicators = no
 
 # Padding
-    padding = 13
-    horizontal_padding = 13
+    padding = 15
+    horizontal_padding = 15
     text_icon_padding = 20
 
 # Frame & Misc
@@ -41,18 +41,18 @@
 
 # Font
     font = Iosevka 11
-    line_height = 0
+    line_height = 5
 
 # Markup and text
     markup = full
-    format = "<b>%s</b>\n\n%b"
+    format = "<b>%s</b>\n%b"
     alignment = center
     vertical_alignment = center
 
 # Icons
     icon_position = left
-    min_icon_size = 30
-    max_icon_size = 40
+    min_icon_size = 40
+    max_icon_size = 50
     icon_path = /usr/share/icons/Reversal-blue/apps/scalable:/usr/share/icons/Adwaita/256x256/legacy/
 
 # History

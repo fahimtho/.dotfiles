@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-MENU="rofi -dmenu -no-fixed-num-lines -i -columns 2 -width "350" -xoffset  "-769" -yoffset "-491" -l 8 -p "
+MENU="rofi -dmenu -no-fixed-num-lines -i -width "220" -xoffset  "-834" -yoffset "-488" -l 8 -p "
 
 declare -A confedit_list
 confedit_list[  bash]="$HOME/.bashrc"

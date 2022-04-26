@@ -10,7 +10,7 @@ class Rofi:
 
   def select(self, prompt, options, selected):
     items = "\n".join(options)
-    ans = os.popen(f"echo '{items}' | rofi -no-fixed-num-lines -yoffset '-493' -xoffset '-845' -dmenu -i -p '{prompt}' -format i \
+    ans = os.popen(f"echo '{items}' | rofi -no-fixed-num-lines -yoffset '-489' -xoffset '-845' -dmenu -i -p '{prompt}' -format i \
       -selected-row {selected} -me-select-entry ''\
       -me-accept-entry 'MousePrimary' {self.args}").read().strip()
 

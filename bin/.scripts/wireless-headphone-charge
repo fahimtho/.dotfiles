@@ -1,0 +1,3 @@
+#!/usr/bin/env sh
+
+notify-send  "System Status" "Sensei, Your Wireless headphone charge is at $(upower -i /org/freedesktop/UPower/devices/headphones_dev_41_42_9C_45_44_F3 | grep percentage | awk '{print $2}')" -i ~/Pictures/.icons/ai.png

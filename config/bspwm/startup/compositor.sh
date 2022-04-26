@@ -1,2 +1,2 @@
 # Picom [compositor]
-picom --config ~/.config/picom/picom.conf &
+picom --experimental-backends --config ~/.config/picom/picom.conf &
