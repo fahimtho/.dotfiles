@@ -154,6 +154,7 @@ use {
 -- Smart Commenting
 use {
   'numToStr/Comment.nvim',
+  event = 'BufEnter',
   config = function()
     require "plugins.comment"
   end
@@ -180,6 +181,7 @@ use {
 -- Autocomplete Pairs
 use {
   'windwp/nvim-autopairs',
+  event = 'InsertEnter',
   config = function()
     require "plugins.pairs"
   end
@@ -229,6 +231,7 @@ use {
 -- Nice search
 use {
   'rktjmp/highlight-current-n.nvim',
+  event = 'InsertLeave',
   config = function()
   require("highlight_current_n").setup({
     highlight_group = "Visual"
@@ -247,6 +250,7 @@ use {
 -- Format QuickFix
 use {
   'https://gitlab.com/yorickpeterse/nvim-pqf.git',
+  ft = {"qf"},
   config = function ()
     require "plugins.pqf"
   end
@@ -275,6 +279,7 @@ use {
 use {
 	'xeluxee/competitest.nvim',
 	requires = 'MunifTanjim/nui.nvim',
+  cmd = {'CompetiTestAdd','CompetiTestEdit','CompetiTestDelete','CompetiTestRun','CompetiTestReceive','CompetiTestConvert','CompetiTestRunNE'},
 	config = function() require'competitest'.setup() end
 }
 
@@ -308,6 +313,7 @@ use {
 -- Nice Ui Search
 use {
   'VonHeikemen/searchbox.nvim',
+  cmd = {'SearchBoxMatchAll','SearchBoxIncSearch','SearchBoxSimple','SearchBoxReplace'},
   requires = {
     {'MunifTanjim/nui.nvim'}
   },
@@ -361,6 +367,7 @@ use {
 -- Code Action Menu
 use {
   'weilbith/nvim-code-action-menu',
+  opt = true,
   cmd = 'CodeActionMenu'
 }
 
@@ -418,6 +425,7 @@ use {
 -- Buffer switcher
 use {
   'matbme/JABS.nvim',
+  cmd = {'JABSOpen'},
   config = function()
     require "plugins.jabs"
   end
@@ -434,17 +442,17 @@ use {
 -- git diff view
 use {
   'sindrets/diffview.nvim',
+  cmd = {'DiffviewOpen','DiffviewClose','DiffviewToggleFiles','DiffviewFocusFiles','DiffviewRefresh','DiffviewFileHistory'},
   config = function()
     require "plugins.diff"
   end
 }
 
-
 -- Telescope
-use 'nvim-telescope/telescope-media-files.nvim' -- Preview Media
-use 'nvim-telescope/telescope-github.nvim' -- telescope Github
-use 'jvgrootveld/telescope-zoxide' -- Folder DB
-use "nvim-telescope/telescope-file-browser.nvim" -- nicer file picker
+use 'nvim-telescope/telescope-media-files.nvim' -- Media Files
+use 'nvim-telescope/telescope-github.nvim' -- Github
+use 'jvgrootveld/telescope-zoxide' -- File DB
+use "nvim-telescope/telescope-file-browser.nvim" -- File Browser
 
 -- Cmp
 use 'hrsh7th/cmp-nvim-lsp' -- cmp lsp source
@@ -471,22 +479,47 @@ use 'lewis6991/impatient.nvim' -- Start Quickly
 use "nathom/filetype.nvim" -- Filetype Faster
 use 'antoinemadec/FixCursorHold.nvim' -- Fix
 
+-- undo Tree
+use {
+  'mbbill/undotree',
+  cmd = {'UndotreeToggle'}
+}
+
+-- Move Windows
+use {
+  'sindrets/winshift.nvim',
+  cmd = {'WinShift'}
+}
+
+-- kinda like bspwm moncle
+use {
+  'troydm/zoomwintab.vim',
+  cmd = {'ZoomWinTabToggle'}
+}
+
 -- Utils
-use 'voldikss/vim-floaterm' -- Floating Terminal
-use 'mbbill/undotree' -- undo Tree
-use 'sindrets/winshift.nvim' -- Move Windows
-use 'troydm/zoomwintab.vim' -- kinda like bspwm moncle
 use 'pbrisbin/vim-mkdir' -- Make directory if non-existent
 use 'wakatime/vim-wakatime' -- meaning full insight
 use 'andymass/vim-matchup' -- Enhance Matchit
 use 'terryma/vim-expand-region' -- Cool
 use 'tpope/vim-surround' -- Surround Stuff
 use 'nishigori/increment-activator' -- good enhance
+use 'voldikss/vim-floaterm' -- Floating Terminal
 
 -- Lsp, Treesitter
 use 'kosayoda/nvim-lightbulb' -- Code Actions Indicator
 use 'David-Kunz/treesitter-unit' -- Select quickly
-use 'sbdchd/neoformat' -- Format Code
-use 'mizlan/iswap.nvim' -- Swap Args and stuff
+
+-- Format Code
+use {
+  'sbdchd/neoformat',
+  cmd = {'Neoformat'}
+}
+
+-- Swap Args and stuff
+use {
+  'mizlan/iswap.nvim',
+  cmd = {'ISwap','ISwapWith'}
+}
 
 end)
