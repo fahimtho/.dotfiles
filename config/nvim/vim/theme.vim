@@ -7,10 +7,10 @@ let g:tokyonight_italic_functions = 1
 colorscheme tokyonight " set theme
 
 " Ui Configuration
-hi Normal guibg=NONE guifg=NONE
+hi Normal guibg=#000000 guifg=None
 hi pmenusbar guibg=#0d0d1a
-hi Pmenu guibg=#000000 guifg=#004eff
-hi PmenuSel guibg=#101824 guifg=#004eff
+hi Pmenu guibg=none guifg=#004eff
+hi PmenuSel guibg=#10171a guifg=#004eff
 hi Directory guifg=#004eff
 hi CursorLine gui=none guibg=none
 hi CursorLineNr guifg=#004eff gui=none
@@ -42,6 +42,9 @@ hi Folded guifg=#000000 guibg=#004eff
 hi dosiniLabel guifg=#368dff
 hi dosiniHeader guifg=#368dff
 hi VertSplit guifg=#002766
+hi BufferLineSeparator guifg=#002766
+hi BufferLineSeparatorVisible guifg=#002766
+hi BufferLineSeparatorSelected guifg=#063c93
 hi BufferLineFill guifg=none guibg=none
 hi NvimTreeWindowPicker guifg=#000000 guibg=#004eff
 
@@ -80,17 +83,17 @@ highlight link NotifyDEBUGBody Normal
 highlight link NotifyTRACEBody Normal
 
 " Cmp
-highlight! link CmpItemAbbr Pmenu
-highlight! link CmpItemKind Pmenu
-highlight! link CmpItemMenu Pmenu
-highlight! link CmpItemKindUnit Pmenu
-highlight! link CmpItemKindProperty Pmenu
-highlight! link CmpItemKindKeyword Pmenu
-highlight! link CmpItemKindMethod Pmenu
-highlight! link CmpItemKindFunction Pmenu
-highlight! link CmpItemKindText Pmenu
-highlight! link CmpItemKindInterface Pmenu
-highlight! link CmpItemKindVariable Pmenu
-highlight! link CmpItemAbbrMatchFuzzy Pmenu
-highlight! link CmpItemAbbrMatch Pmenu
-highlight! link CmpItemAbbrDeprecated Pmenu
+highlight CmpItemAbbr guibg=none guifg=#004eff
+highlight CmpItemKind guibg=none guifg=#004eff
+" highlight CmpItemMenu guibg=none guifg=#004eff
+highlight CmpItemKindUnit guibg=none guifg=#004eff
+highlight CmpItemKindProperty guibg=none guifg=#004eff
+highlight CmpItemKindKeyword guibg=none guifg=#004eff
+highlight CmpItemKindMethod guibg=none guifg=#004eff
+highlight CmpItemKindFunction guibg=none guifg=#004eff
+highlight CmpItemKindText guibg=none guifg=#004eff
+highlight CmpItemKindInterface guibg=none guifg=#004eff
+highlight CmpItemKindVariable guibg=none guifg=#004eff
+highlight CmpItemAbbrMatchFuzzy guibg=none guifg=#004eff
+highlight CmpItemAbbrMatch guibg=none guifg=#004eff
+highlight CmpItemAbbrDeprecated guibg=none guifg=#004eff

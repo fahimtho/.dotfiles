@@ -5,7 +5,6 @@ highlight clear TabLineFill " Transparent Tabline Background
 highlight clear Error " Dont need Error highlight
 autocmd VimEnter * set autochdir " set vim pwd as the file
 autocmd FileType qf set nonumber " Hide line numbers in qf
-autocmd FileType harpoon set nonumber " Hide line numbers in harpoon
 autocmd FileType qf set nobuflisted " Hide Qucikfix window from bufferlist
 autocmd FileType dap-repl set nobuflisted " Hide dap-repl window from bufferlist
 autocmd FileType dap-repl startinsert " start dap-repl insertmode
@@ -25,7 +24,7 @@ function! QuickfixToggle()
     botright cclose
     let g:quickfix_is_open = 0
   else
-    botright copen
+    botright copen 15
     let g:quickfix_is_open = 1
   endif
 endfunction

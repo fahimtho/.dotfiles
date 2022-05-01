@@ -1,0 +1,22 @@
+#!/usr/bin/env sh
+n=1
+time="$(rofi -dmenu -no-fixed-num-lines -xoffset "-744" -yoffset "-488" -width "400" -i -p '')"
+if [[ -z "$time" ]];
+then
+  exit 1
+else
+  msg="$(rofi -dmenu -no-fixed-num-lines -xoffset "-744" -yoffset "-488" -width "400" -i -p '')"
+  if [[ -z "$msg" ]];
+  then
+    exit
+  else
+    sleep $time
+    notify-send -i ~/Pictures/.icons/ai.png "Sensei, Here is Something to Remember" "<u><i><b>$msg</b></i></u>"
+    while [ $n -le 6 ]
+    do
+      sleep 20s
+      notify-send -i ~/Pictures/.icons/ai.png "Sensei, Here is Something to Remember" "<u><i><b>$msg</b></i></u>"
+      n=$(( $n + 1 ))
+     done
+  fi
+fi

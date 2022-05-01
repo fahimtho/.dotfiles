@@ -66,7 +66,13 @@
   {
     "name": "爵 Urban-Dictionary",
     "command": "bash ~/.scripts/urban-dictionary"
+  },
+  {
+    "name": " Reminder",
+    "command": "bash ~/.scripts/reminder"
+  },
+  {
+    "name": "  Money-Cxchange",
+    "command": "bash ~/.scripts/exchange"
   }
-
-
 ]

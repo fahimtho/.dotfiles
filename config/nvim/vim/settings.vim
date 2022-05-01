@@ -70,7 +70,7 @@ let g:netrw_banner = 0
 " Run Files
 let g:asyncrun_trim = 1
 let g:asyncrun_save = 1
-let g:asyncrun_open = 13
+let g:asyncrun_open = 15
 let g:asyncrun_qfid = 0
 
 " Nvim Tree Settings
@@ -103,7 +103,7 @@ let g:nvim_tree_icons = {
         \ 'folder': {
           \   'arrow_open': "",
           \   'arrow_closed': "",
-          \   'default': "",
+          \   'default': "",
           \   'open': "",
           \   'empty': "",
           \   'empty_open': "",
@@ -124,8 +124,7 @@ let g:floaterm_autoclose = 1
 let g:floaterm_width = 0.9
 let g:floaterm_height = 0.3
 let g:floaterm_borderchars = '─│─│╭╮╯╰'
-let g:floaterm_keymap_toggle = '<C-d>'
-let g:floaterm_keymap_kill = '<C-k>'
+let g:floaterm_keymap_toggle = '<M-d>'
 let g:floaterm_position = 'botright'
 let g:floaterm_wintype = 'split'
 

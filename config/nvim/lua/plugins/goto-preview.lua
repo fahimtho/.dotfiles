@@ -1,8 +1,8 @@
 -- Floating preview
 require('goto-preview').setup {
-  width = 100;
-  height = 30;
-  border = {"↖", "─" ,"╮", "│", "╯", "─", "╰", "│"};
+  width = 80;
+  height = 20;
+  border = {"", "─" ,"╮", "│", "╯", "─", "╰", "│"};
   default_mappings = false;
   debug = false;
   opacity = nil;

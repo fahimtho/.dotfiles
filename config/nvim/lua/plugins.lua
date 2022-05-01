@@ -411,7 +411,6 @@ use {
   'iamcco/markdown-preview.nvim',
   run = 'cd app && yarn install',
   ft = {"markdown"}
-
 }
 
 -- Nice UI
@@ -439,6 +438,14 @@ use {
   end
 }
 
+-- Symbols Outline
+use {
+  'simrat39/symbols-outline.nvim',
+  config = function()
+    require "plugins.outline"
+  end
+}
+
 -- git diff view
 use {
   'sindrets/diffview.nvim',
@@ -448,11 +455,56 @@ use {
   end
 }
 
+-- Format Code
+use {
+  'sbdchd/neoformat',
+  cmd = {'Neoformat'}
+}
+
+-- Swap Args and stuff
+use {
+  'mizlan/iswap.nvim',
+  cmd = {'ISwap','ISwapWith'}
+}
+
+-- undo Tree
+use {
+  'mbbill/undotree',
+  cmd = {'UndotreeToggle'}
+}
+
+-- Move Windows
+use {
+  'sindrets/winshift.nvim',
+  cmd = {'WinShift'}
+}
+
+-- kinda like bspwm moncle
+use {
+  'troydm/zoomwintab.vim',
+  cmd = {'ZoomWinTabToggle'}
+}
+
+-- Nice Telescope
+use {
+  "nvim-telescope/telescope-frecency.nvim",
+  requires = {"tami5/sqlite.lua"}
+}
+
+use {
+  'karb94/neoscroll.nvim',
+  config = function()
+    require('neoscroll').setup()
+  end
+}
+
 -- Telescope
 use 'nvim-telescope/telescope-media-files.nvim' -- Media Files
 use 'nvim-telescope/telescope-github.nvim' -- Github
 use 'jvgrootveld/telescope-zoxide' -- File DB
 use "nvim-telescope/telescope-file-browser.nvim" -- File Browser
+use 'crispgm/telescope-heading.nvim'
+use {'nvim-telescope/telescope-fzf-native.nvim', run = 'make' } -- Telescope FZF marriage
 
 -- Cmp
 use 'hrsh7th/cmp-nvim-lsp' -- cmp lsp source
@@ -479,24 +531,6 @@ use 'lewis6991/impatient.nvim' -- Start Quickly
 use "nathom/filetype.nvim" -- Filetype Faster
 use 'antoinemadec/FixCursorHold.nvim' -- Fix
 
--- undo Tree
-use {
-  'mbbill/undotree',
-  cmd = {'UndotreeToggle'}
-}
-
--- Move Windows
-use {
-  'sindrets/winshift.nvim',
-  cmd = {'WinShift'}
-}
-
--- kinda like bspwm moncle
-use {
-  'troydm/zoomwintab.vim',
-  cmd = {'ZoomWinTabToggle'}
-}
-
 -- Utils
 use 'pbrisbin/vim-mkdir' -- Make directory if non-existent
 use 'wakatime/vim-wakatime' -- meaning full insight
@@ -505,21 +539,13 @@ use 'terryma/vim-expand-region' -- Cool
 use 'tpope/vim-surround' -- Surround Stuff
 use 'nishigori/increment-activator' -- good enhance
 use 'voldikss/vim-floaterm' -- Floating Terminal
+use 'andrewradev/splitjoin.vim' -- joint code
+use 'RishabhRD/nvim-cheat.sh' -- quick help
+use 'elkowar/yuck.vim' -- yuck language support
 
 -- Lsp, Treesitter
 use 'kosayoda/nvim-lightbulb' -- Code Actions Indicator
 use 'David-Kunz/treesitter-unit' -- Select quickly
-
--- Format Code
-use {
-  'sbdchd/neoformat',
-  cmd = {'Neoformat'}
-}
-
--- Swap Args and stuff
-use {
-  'mizlan/iswap.nvim',
-  cmd = {'ISwap','ISwapWith'}
-}
+use 'p00f/nvim-ts-rainbow' -- Rainbow
 
 end)

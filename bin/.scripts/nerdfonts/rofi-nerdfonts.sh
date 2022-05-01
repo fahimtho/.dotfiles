@@ -17,7 +17,7 @@ readarray chars < "${chars_csv}"
 char_entry=$(
     for char in "${chars[@]}";{
         echo ${char/,/ }
-    }|rofi -dmenu -no-fixed-num-lines -lines 6 -columns 2 -i -width 600 -p   -xoffset "-643" -yoffset "-493"
+    }|rofi -dmenu -no-fixed-num-lines -lines 6 -columns 2 -i -width 600 -p   -xoffset "-643" -yoffset "-488"
 )
 
 # If user cancelled rofi, exit
@@ -29,3 +29,4 @@ char="${char_entry% *}"
 codepoint=U$(printf %x\\n \'"${char}")
 # use xdotool to enter character
 xdotool key "${codepoint}"
+echo "${char}" | tr -d '\n' | xclip -selection clipboard -in

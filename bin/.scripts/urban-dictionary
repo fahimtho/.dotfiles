@@ -1,2 +1,10 @@
 #!/usr/bin/env sh
-notify-send "$(ud -n 1 $(rofi -dmenu -no-fixed-num-lines -i -width "300" -p "﬜" -yoffset "-490" -xoffset "-795") | sed 's/\x1b\[[0-9;]*m//g')" -i "lol" -t 1000000
+
+word=$(rofi -dmenu -no-fixed-num-lines -i -width "300" -p "﬜" -yoffset "-490" -xoffset "-795")
+
+if [[ -z "$word" ]];
+then
+  exit 1
+else
+  notify-send "$(ud -n 1 $word | sed 's/\x1b\[[0-9;]*m//g')" -i "lol" -t 1000000
+fi

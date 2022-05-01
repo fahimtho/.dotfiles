@@ -6,12 +6,12 @@ require("notify").setup({
   render = "default",
   timeout = 5000,
   background_colour = "#000000",
-  minimum_width = 50,
+  minimum_width = 60,
   icons = {
-    ERROR = "",
-    WARN = "",
-    INFO = "",
-    DEBUG = "",
-    TRACE = "✎",
+    ERROR = "  ",
+    WARN = " ",
+    INFO = "  ",
+    DEBUG = " ",
+    TRACE = "✎ ",
   },
 })

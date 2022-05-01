@@ -34,7 +34,7 @@ require('bufferline').setup {
     show_close_icon = false,
     show_tab_indicators = false,
     persist_buffer_sort = true,
-    separator_style = "thin",
+    separator_style = "thick",
     enforce_regular_tabs = false,
     always_show_bufferline = false,
     sort_by = 'id',

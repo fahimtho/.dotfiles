@@ -182,10 +182,6 @@ super + {_,shift + }{1-9,0}
 super + alt + {Left,Right}
     id=$(bspc query --nodes --node); bspc node --to-desktop {prev,next}; bspc desktop --focus next; bspc node --focus ${id}
 
-# toggle layouts
-alt + l
-	bsp-layout cycle && notify-send -i ~/Pictures/.icons/layout.png "$(bsp-layout get $(bspc query -D -d focused --names))" --hint=string:x-dunst-stack-tag:layout
-
 # Change Orientation
 super + shift + o
 	bspc node '@parent.vertical' -R  90 \
@@ -287,7 +283,7 @@ alt + g
   ~/.scripts/Search/google-suggest
 
 # Look words [dictionary]
-alt + d
+alt + l
   notify-send "$(~/.scripts/dict $(xclip -selection clipboard -out) | sed 's/\x1b\[[0-9;]*m//g' )" -i "lol" -t 1000000
 
 # Look words [urban Dictionary]
@@ -414,16 +410,16 @@ alt + 4
 
 # Increase Volumn by 5 (mpd)
 control + Up
-  mpc volume +5 && dunstify -i "$(playerctl --player=mpd metadata mpris:artUrl)" -a System -t 10000 -h string:x-dunst-stack-tag:volume -h int:value:$(mpc volume | tr -dc '0-9' | awk '\{print $1;\}') "Music Volume: $(mpc volume | tr -dc '0-9')%" && canberra-gtk-play -i audio-volume-change
+  mpc volume +5 && dunstify -r 1337 -i "$(playerctl --player=mpd metadata mpris:artUrl)" -a System -t 10000 -h string:x-dunst-stack-tag:volume -h int:value:$(mpc volume | tr -dc '0-9' | awk '\{print $1;\}') "Music Volume: $(mpc volume | tr -dc '0-9')%" && canberra-gtk-play -i audio-volume-change
 
 # Decrease Volumn by 5 (mpd)
 control + Down
-  mpc volume -5 && dunstify -i "$(playerctl --player=mpd metadata mpris:artUrl)" -a System -t 10000 -h string:x-dunst-stack-tag:volume -h int:value:$(mpc volume | tr -dc '0-9' | awk '\{print $1;\}') "Music Volume: $(mpc volume | tr -dc '0-9')%" && canberra-gtk-play -i audio-volume-change
+  mpc volume -5 && dunstify -r 1337 -i "$(playerctl --player=mpd metadata mpris:artUrl)" -a System -t 10000 -h string:x-dunst-stack-tag:volume -h int:value:$(mpc volume | tr -dc '0-9' | awk '\{print $1;\}') "Music Volume: $(mpc volume | tr -dc '0-9')%" && canberra-gtk-play -i audio-volume-change
 
 # Skip 5 second ahead (mpd)
 control + shift + Right
-  mpc seek +5 && dunstify -i "$(playerctl --player=mpd metadata mpris:artUrl)" -a System -t 10000 -h string:x-dunst-stack-tag:volume -h int:value:$(mpc | awk 'FNR==2 \{print $4\}' | tr -d '()') "$(mpc --format=%title% current)" "$(mpc | awk 'FNR==2 \{print $3\}' | cut -c 1-4) / $(mpc | awk 'FNR==2 \{print $3\}' | cut -c 6-)\n$(mpc | awk 'FNR==2 \{print $1\}')"
+  mpc seek +5 && dunstify -r 1337 -i "$(playerctl --player=mpd metadata mpris:artUrl)" -a System -t 10000 -h string:x-dunst-stack-tag:volume -h int:value:$(mpc | awk 'FNR==2 \{print $4\}' | tr -d '()') "$(mpc --format=%title% current)" "$(mpc | awk 'FNR==2 \{print $3\}' | cut -c 1-4) / $(mpc | awk 'FNR==2 \{print $3\}' | cut -c 6-)\n$(mpc | awk 'FNR==2 \{print $1\}')"
 
 # Skip 5 second previous (mpd)
 control + shift + Left
-  mpc seek -5 && dunstify -i "$(playerctl --player=mpd metadata mpris:artUrl)" -a System -t 10000 -h string:x-dunst-stack-tag:volume -h int:value:$(mpc | awk 'FNR==2 \{print $4\}' | tr -d '()') "$(mpc --format=%title% current)" "$(mpc | awk 'FNR==2 \{print $3\}' | cut -c 1-4) / $(mpc | awk 'FNR==2 \{print $3\}' | cut -c 6-)\n$(mpc | awk 'FNR==2 \{print $1\}')"
+  mpc seek -5 && dunstify -r 1337 -i "$(playerctl --player=mpd metadata mpris:artUrl)" -a System -t 10000 -h string:x-dunst-stack-tag:volume -h int:value:$(mpc | awk 'FNR==2 \{print $4\}' | tr -d '()') "$(mpc --format=%title% current)" "$(mpc | awk 'FNR==2 \{print $3\}' | cut -c 1-4) / $(mpc | awk 'FNR==2 \{print $3\}' | cut -c 6-)\n$(mpc | awk 'FNR==2 \{print $1\}')"

@@ -38,7 +38,7 @@ nnoremap <leader>lr <cmd>Telescope lsp_references<cr>
 nnoremap <leader>gc <cmd>Telescope git_commits<cr>
 nnoremap <leader>s <cmd>Telescope lsp_document_symbols<cr>
 nnoremap "" <cmd>Telescope registers<cr>
-nnoremap <leader>H <cmd>Telescope oldfiles<cr>
+nnoremap <leader>H <cmd>Telescope frecency<cr>
 nnoremap <silent><leader>a :CodeActionMenu<CR>
 nnoremap <silent><leader>\ :Telescope file_browser<CR>
 nnoremap <silent><leader>bf :Telescope current_buffer_fuzzy_find<CR>
@@ -206,3 +206,9 @@ nmap <silent> <C-x> <Plug>(increment-activator-decrement)
 " Change case
 nnoremap <silent> <C-u> vu<esc>
 nnoremap <silent> <C-S-u> vU<esc>
+
+" Mouse mappings
+map <ScrollWheelUp> <C-Y>
+map <ScrollWheelDown> <C-E>
+map <S-ScrollWheelUp> <C-U>
+map <S-ScrollWheelDown> <C-D>

@@ -62,8 +62,8 @@ viewer (){
     channel="$1"
     url="https://twitch.tv/$channel"
     resolutions="$(youtube-dl -F "$url" | grep -v "\[" | tail -n +2)"
-    resolution="$(printf "%s" "$resolutions" | menu | cut -d " " -f 1)"
-    [ -n "$resolution" ] && youtube-dl "$url" -f "$resolution" -o - | mpv -
+    resolution="$(printf "%s" "$resolutions" | menu | cut -d " " -f 1 | tr -d '__source_')"
+    [ -n "$resolution" ] && /home/fh1m/.local/bin/streamlink --url "$url" --default-stream "$resolution" --player mpv --twitch-disable-hosting --twitch-disable-ads &
 }
 
 usage() {

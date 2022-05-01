@@ -1,6 +1,8 @@
 #!/usr/bin/env sh
 sleep 3s # wait
 
+mpdas & # what am I listening(last.fm)
+
 mpc update # update Database
 
 mpc load "$(mpc lsplaylists | sort | uniq | shuf -n 1)" # load random playlist
