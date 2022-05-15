@@ -414,7 +414,7 @@ def load_settings(  # pylint: disable=too-many-locals,too-many-branches,too-many
         plugindir = fm.confpath('plugins')
         try:
             plugin_files = os.listdir(plugindir)
-        except OSError:
+        except OS:
             LOG.debug('Unable to access plugin directory: %s', plugindir)
         else:
             plugins = []

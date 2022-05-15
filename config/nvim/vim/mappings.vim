@@ -1,6 +1,3 @@
-"  mapings
-" --------
-
 " Hide Line numbers for writing
 nmap <silent><F4> :set invnumber<CR>
 
@@ -38,12 +35,11 @@ nnoremap <leader>lr <cmd>Telescope lsp_references<cr>
 nnoremap <leader>gc <cmd>Telescope git_commits<cr>
 nnoremap <leader>s <cmd>Telescope lsp_document_symbols<cr>
 nnoremap "" <cmd>Telescope registers<cr>
-nnoremap <leader>H <cmd>Telescope frecency<cr>
+nnoremap <leader>h <cmd>Telescope oldfiles<cr>
 nnoremap <silent><leader>a :CodeActionMenu<CR>
 nnoremap <silent><leader>\ :Telescope file_browser<CR>
 nnoremap <silent><leader>bf :Telescope current_buffer_fuzzy_find<CR>
 nnoremap <silent>q: :Telescope command_history<CR>
-nnoremap <silent><Tab> :JABSOpen<CR>
 
 " Move between Buffers
 nnoremap <silent><M-.> :BufferLineCycleNext<CR>
@@ -57,7 +53,7 @@ nnoremap <silent><leader>F :NvimTreeFindFile<CR>
 nnoremap <silent><F3> :TSHighlightCapturesUnderCursor<CR>
 
 " Show Problem With code
-nnoremap <silent> <leader>D :TroubleToggle<CR>
+nnoremap <silent> <leader>d :TroubleToggle<CR>
 nnoremap <silent> <leader>L :TroubleToggle lsp_references<CR>
 
 " Cool Snippets using TAB & Shift-TAB
@@ -106,7 +102,7 @@ nnoremap <silent> <space>wa :lua vim.lsp.buf.add_workspace_folder()<CR>
 nnoremap <silent> <space>wr :lua vim.lsp.buf.remove_workspace_folder()<CR>
 nnoremap <silent> <space>wl :lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>
 nnoremap <silent> <space>D :lua vim.lsp.buf.type_definition()<CR>
-nnoremap <silent> <space>rn :lua vim.lsp.buf.rename()<CR>
+nnoremap <silent> <space>rn :LspRename<CR>
 nnoremap <silent> <space>ca :lua vim.lsp.buf.code_action()<CR>
 nnoremap <silent> gr :lua vim.lsp.buf.references()<CR>
 nnoremap <silent> <space>e :lua vim.diagnostic.open_float()<CR>
@@ -114,12 +110,13 @@ nnoremap <silent> d[ :lua vim.diagnostic.goto_prev()<CR>
 nnoremap <silent> d] :lua vim.diagnostic.goto_next()<CR>
 nnoremap <silent> <space>q :lua vim.diagnostic.setloclist()<CR>
 nnoremap <silent> <C-LeftMouse> :lua vim.lsp.buf.definition()<CR>
+nnoremap <silent> <M-e> :SymbolsOutline<CR>
 
 " Format Stuff
-nnoremap <silent> <space>F :lua vim.lsp.buf.formatting()<CR>
+nnoremap <silent> <space>f :lua vim.lsp.buf.formatting()<CR>
 
 " Builtin Terminal
-tnoremap <Esc> <C-\><C-n>
+tnoremap <C-x> <C-\><C-n>
 
 " Select All
 nnoremap <C-M-a> ggVG
@@ -141,8 +138,8 @@ vnoremap J :m '>+1<CR>gv=gv
 vnoremap K :m '<-2<CR>gv=gv
 
 " Map keys
-nmap n <Plug>(highlight-current-n-n)
-nmap N <Plug>(highlight-current-n-N)
+nmap <silent> n :lua require("highlight_current_n").n()<CR>
+nmap <silent> N :lua require("highlight_current_n").N()<CR>
 nmap * *N
 
 " Move splits
@@ -151,40 +148,8 @@ nnoremap <silent> <C-M-down> <C-w><down>
 nnoremap <silent> <C-M-left> <C-w><left>
 nnoremap <silent> <C-M-right> <C-w><right>
 
-" Move windows
-nnoremap <M-S-left> <Cmd>WinShift left<CR>
-nnoremap <M-S-down> <Cmd>WinShift down<CR>
-nnoremap <M-S-up> <Cmd>WinShift up<CR>
-nnoremap <M-S-right> <Cmd>WinShift right<CR>
-
 " Kinda like monecle
 nnoremap <silent> <space><space> :ZoomWinTabToggle<CR>
-
-" Debug
-nnoremap <F4> <cmd>lua require('dapui').toggle()<CR>
-nnoremap <F5> <cmd>lua require('dap').toggle_breakpoint()<CR>
-nnoremap <F9> <cmd>lua require('dap').continue()<CR><CR>
-nnoremap <F1> <cmd>lua require('dap').step_over()<CR>
-nnoremap <F2> <cmd>lua require('dap').step_into()<CR>
-nnoremap <F3> <cmd>lua require('dap').step_out()<CR>
-
-nnoremap <Leader>dsc <cmd>lua require('dap').continue()<CR><CR>
-nnoremap <Leader>dsv <cmd>lua require('dap').step_over()<CR>
-nnoremap <Leader>dsi <cmd>lua require('dap').step_into()<CR>
-nnoremap <Leader>dso <cmd>lua require('dap').step_out()<CR>
-
-nnoremap <Leader>duh <cmd>lua require('dap.ui.widgets').hover()<CR>
-nnoremap <Leader>duf <cmd>lua local widgets=require('dap.ui.widgets');widgets.centered_float(widgets.scopes)<CR>
-nnoremap <Leader>dro <cmd>lua require('dap').repl.open()<CR>
-nnoremap <Leader>drl <cmd>lua require('dap').repl.run_last()<CR>
-
-nnoremap <Leader>dbc <cmd>lua require('dap').set_breakpoint(vim.fn.input('Breakpoint condition: '))<CR>
-nnoremap <Leader>dbm <cmd>lua require('dap').set_breakpoint({ nil, nil, vim.fn.input('Log point message: ') })<CR>
-nnoremap <Leader>dbt <cmd>lua require('dap').toggle_breakpoint()<CR>
-
-nnoremap <Leader>di" <cmd>lua require('dapui').toggle()<CR>
-nnoremap <Leader>df <cmd>require("dapui").float_element()<CR>
-vnoremap <Leader>de <Cmd>lua require("dapui").eval()<CR>
 
 " Nice Search
 nnoremap <leader>S <cmd>SearchBoxIncSearch clear_matches=true<CR>
@@ -206,9 +171,3 @@ nmap <silent> <C-x> <Plug>(increment-activator-decrement)
 " Change case
 nnoremap <silent> <C-u> vu<esc>
 nnoremap <silent> <C-S-u> vU<esc>
-
-" Mouse mappings
-map <ScrollWheelUp> <C-Y>
-map <ScrollWheelDown> <C-E>
-map <S-ScrollWheelUp> <C-U>
-map <S-ScrollWheelDown> <C-D>

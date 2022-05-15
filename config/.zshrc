@@ -70,7 +70,7 @@ ex ()
 }
 
 # alias
-alias grep='grep --color=auto'
+alias grep='rg --color=auto'
 alias cdir="pwd | xclip -selection clipboard"
 alias cf="copyfile"
 alias ls="lsd"
@@ -127,6 +127,8 @@ alias ytdl="youtube-dl -f best -o '%(title)s.%(ext)s' --external-downloader=aria
 alias ytpdl="youtube-dl -f best -o '%(playlist_index)s. %(title)s.%(ext)s' --external-downloader=aria2c"
 alias bt="sudo modprobe -r btusb && sudo modprobe btusb"
 alias bcat="/usr/bin/bat"
+alias man="export MANLESS='' && man"
+
 
 # Cool cd
 eval "$(zoxide init zsh)"
@@ -153,3 +155,4 @@ echo | fzf -q "$*" --preview-window=up:99% --preview="eval {q}"
 # calc
 calculate() python3 -c "from math import *; print($*);"
 alias c="noglob calculate"
+export PATH=$PATH:/home/fh1m/.spicetify

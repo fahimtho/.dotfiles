@@ -136,3 +136,13 @@ require'lspconfig'.vimls.setup{
   handlers=handlers,
   capabilities = capabilities,
 }
+
+require'lspconfig'.ltex.setup{
+  handlers=handlers,
+  capabilities = capabilities,
+}
+
+require'lspconfig'.sqlls.setup{
+  handlers=handlers,
+  capabilities = capabilities,
+}

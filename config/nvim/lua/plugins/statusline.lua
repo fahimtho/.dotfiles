@@ -6,6 +6,7 @@ local vim_components = require('windline.components.vim')
 local b_components = require('windline.components.basic')
 local state = _G.WindLine.state
 local lsp_comps = require('windline.components.lsp')
+local git_components = require('windline.components.git')
 
 -- Main Colors
 local hl_list = {
@@ -33,6 +34,7 @@ basic.lsp_diagnos = {
         yellow = { 'yellow', 'black' },
         red = { 'red', 'black' },
         blue = { 'blue', 'black' },
+        light_blue = { 'light_blue', 'black' },
     },
     text = function(bufnr)
         if lsp_comps.check_lsp(bufnr) then
@@ -40,6 +42,7 @@ basic.lsp_diagnos = {
                 { lsp_comps.lsp_error({ format = ' %s  ' }), 'red' },
                 { lsp_comps.lsp_warning({ format = ' %s  ' }), 'yellow' },
                 { lsp_comps.lsp_hint({ format = ' %s  ' }), 'blue' },
+                { lsp_comps.lsp_info({ format = ' %s  ' }), 'light_blue' },
             }
         end
         return ''
@@ -56,7 +59,7 @@ basic.file = {
             { ' ', 'default' },
             {b_components.cache_file_icon({ default = '' }), 'default'},
             { ' ', 'default' },
-            { b_components.cache_file_name('No Name', ''), '' },
+            { b_components.cache_file_name(' No Name ', ''), '' },
             { b_components.file_modified(' '), '' },
         }
     end,
@@ -83,7 +86,7 @@ basic.gps = {
     },
     text = function()
         return {
-            { ' %{NvimGps()}', 'text' },
+          {' %{NvimGps()}', 'text'},
         }
       end,
     }
@@ -166,6 +169,7 @@ windline.setup({
         colors.red = "#ff1767"
         colors.yellow = "#ffac00"
         colors.blue = "#004eff"
+        colors.light_blue = "#368dff"
         return colors
     end,
 

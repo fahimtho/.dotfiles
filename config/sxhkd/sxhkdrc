@@ -22,8 +22,12 @@ super + b
 super + w
   jump 'mpv' 'kitty -1 --class=watch ./.scripts/ranger/ranger.py /home/fh1m/See/'
 
+# VSCODE
+super + v
+  jump 'Code' 'code'
+
 # File Manager
-super + r
+super + f
   kitty -1 --class=float ./.scripts/ranger/ranger.py
 
 # Terminal with Tmux
@@ -110,6 +114,10 @@ super + p
 Print
   ~/.scripts/rofi-screenshot
 
+# VSCODE projetcs
+super + alt + c
+  rofi-code -r "rofi -dmenu -p '' -i -width '300' -xoffset '-795' -yoffset '-488'  -no-fixed-num-lines"
+
 ##############
 ## One Task ##
 ##############
@@ -119,7 +127,7 @@ control + Escape
 	pkill -USR1 -x sxhkd && notify-send "System Status" "Sensei, We are restarting <i><b>Sxhkd</b></i>" -i ~/Pictures/.icons/ai.png
 
 # Restart Bspwm
-super + shift + r
+super + r
 	bspc wm -r && notify-send "System Status" "Sensei, We are restarting <i><b>Bspwm</b></i>" -i ~/Pictures/.icons/ai.png
 
 # Make Current Window full
@@ -333,7 +341,7 @@ super + space
     fi
 
 # Toggle Fullscreen
-super + f
+super + shift + f
     if [ -z "$(bspc query -N -n focused.fullscreen)" ]; then \
         bspc node focused -t fullscreen; \
     else \

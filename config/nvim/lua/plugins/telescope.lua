@@ -30,7 +30,6 @@ require('telescope').setup{
     entry_prefix = "  ",
     initial_mode = "insert",
     selection_strategy = "reset",
-    sorting_strategy = "ascending",
     layout_strategy = "horizontal",
     file_sorter = require("telescope.sorters").get_fuzzy_file,
     file_ignore_patterns = { "node_modules", ".git/", "dist/" },
@@ -42,7 +41,7 @@ require('telescope').setup{
     color_devicons = true,
     use_less = true,
     layout_config = {
-      horizontal = { width = 0.9 , height = 0.9, prompt_position = "top"},
+      horizontal = { width = 0.9 , height = 0.9},
     },
     pickers = {
       find_files = {
@@ -61,12 +60,8 @@ require('telescope').setup{
     },
   }
 
-
-require('telescope').load_extension('media_files')
+-- Extentions
 require('telescope').load_extension('gh')
 require("telescope").load_extension('file_browser')
-require'telescope'.load_extension('zoxide')
 require("telescope").load_extension("notify")
-require('telescope').load_extension('heading')
 require('telescope').load_extension('fzf')
-require('telescope').load_extension('frecency')

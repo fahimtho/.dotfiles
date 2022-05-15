@@ -14,9 +14,6 @@ au BufEnter,BufWinEnter,WinEnter term://* startinsert " Enter Terminal in insert
 au BufLeave term://* stopinsert " Leave Terminal after stoping insert mode
 au FocusGained,BufEnter * checktime " Auto Read
 
-" Code Action
-autocmd CursorHold,CursorHoldI * lua require'nvim-lightbulb'.update_lightbulb()
-
 " Toggle Quickfix Window
 let g:quickfix_is_open = 0
 function! QuickfixToggle()

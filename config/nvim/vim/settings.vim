@@ -157,6 +157,16 @@ let g:cursorhold_updatetime = 100
 " ui
 let g:popui_border_style = "rounded"
 
+" Glow
+let g:glow_border = "rounded"
+let g:glow_width = 120
+let g:glow_use_pager = v:true
+let g:glow_style = "dark"
+
+" Git balme
+let g:gitblame_enabled = 0
+let g:gitblame_message_template = '<summary> • <date> • <author>'
+
 " Enhance <C-a> and <C-x>
 let g:increment_activator_filetype_candidates = {
   \   '_' : [

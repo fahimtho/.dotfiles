@@ -48,7 +48,7 @@ TEMP_FONT_CODE=1
 # Wind settings _______________________________________________________________
 
 # Display info about the wind or not. yes/no
-DISPLAY_WIND="yes"
+DISPLAY_WIND="no"
 
 # Display in knots. yes/no
 KNOTS="no"
@@ -73,10 +73,10 @@ DISPLAY_WIND_UNIT="yes"
 # Thermometer settings ________________________________________________________
 
 # When the thermometer icon turns red
-HOT_TEMP=25
+HOT_TEMP=35
 
 # When the thermometer icon turns blue
-COLD_TEMP=0
+COLD_TEMP=25
 
 # Other settings ______________________________________________________________
 

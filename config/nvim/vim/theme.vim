@@ -25,8 +25,9 @@ hi StatusLineNC gui=none guibg=none
 hi QuickFixLine guibg=none
 hi Conceal guibg=none
 hi FloatermBorder guibg=none guifg=#192d4d
+hi Beacon guifg=none guibg=#192d4d
 hi NvimTreeOpenedFile guifg=#ff1767
-hi TelescopeSelection guibg=#10171a guifg=none
+hi TelescopeSelection guibg=#07141f guifg=none
 hi TelescopeNormal guibg=none
 hi TelescopeBorder guibg=none
 hi qfPosition guifg=#ff1767
@@ -47,6 +48,9 @@ hi BufferLineSeparatorVisible guifg=#002766
 hi BufferLineSeparatorSelected guifg=#063c93
 hi BufferLineFill guifg=none guibg=none
 hi NvimTreeWindowPicker guifg=#000000 guibg=#004eff
+hi FocusedSymbol guibg=NONE guifg=#004eff
+hi SymbolsOutlineConnector guibg=NONE guifg=#002866
+
 
 " Change treesitter Elements
 hi TSKeyword guifg=#004eff

@@ -8,17 +8,16 @@
  */
 
 configuration {
-    font: 							"SF Mono 9";
-    fixed-num-lines: 				true;
-    show-icons: 					false;
-    sidebar-mode: 					false;
-    scroll-method: 					0;
-    window-format: 					"[{w}] ··· {c}";
-    click-to-exit: 					true;
+    fixed-num-lines: 				    true;
+    show-icons: 					      false;
+    sidebar-mode: 					    false;
+    scroll-method: 					    0;
+    window-format: 					    "[{w}] ··· {c}";
+    click-to-exit: 					    true;
     combi-hide-mode-prefix: 		true;
-    display-drun: 					" ";
-    drun-display-format:            "{name}";
-    location:                       1;
+    display-drun: 					    " ";
+    drun-display-format:        "{name}";
+    location:                   1;
 }
 
 
@@ -30,7 +29,7 @@ window {
     border: 					1px;
     border-color: 					#000d4d;
     border-radius: 					5px;
-    padding: 						8;
+    padding: 						5;
     width: 							15%;
     x-offset:                       15;
     y-offset:                       51;
@@ -62,7 +61,7 @@ case-indicator {
 inputbar {
     spacing:    					0px;
     text-color: 					#004eff;
-    padding:    					5px;
+    padding:    					12px;
     children: 						[ prompt,textbox-prompt-colon,entry ];
 }
 

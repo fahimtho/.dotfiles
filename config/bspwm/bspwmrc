@@ -4,7 +4,7 @@
 pgrep -x sxhkd > /dev/null || sxhkd &
 
 # defining workspaces
-bspc monitor -d Code Web Watch Note Read Write Design Work Chat Music Apps Run
+bspc monitor -d Term Web Watch Code Note Read Write Design Work Chat Music Apps Run
 
 # border and gap
 bspc config border_width             0
@@ -38,7 +38,7 @@ bspc rule -r *:*
 bspc rule -a Gcolor3                  state=floating border=off
 bspc rule -a float                    state=floating
 bspc rule -a Rofi                     state=floating
-bspc rule -a watch                    desktop=^3 state=floating rectangle=661x406+18+49 follow=on
+bspc rule -a watch                    desktop=^3 state=floating rectangle=1040x401+13+50 follow=on
 bspc rule -a music                    state=floating rectangle=816x378+12+50
 bspc rule -a lyrics                   state=floating rectangle=498x801+1402+118
 bspc rule -a ncmpcpp                  state=floating rectangle=1906x513+7+45
@@ -50,29 +50,29 @@ bspc rule -a '*:*:Picture in picture' state=floating
 
 # Specefic
 bspc rule -a tmux                     desktop=^1 follow=on
-bspc rule -a qBittorrent              desktop=^12 follow=off
+bspc rule -a Code                     desktop=^4 follow=on
+bspc rule -a qBittorrent              desktop=^13 follow=off
 bspc rule -a mpv                      desktop=^3 follow=on state=floating
-bspc rule -a discord                  desktop=^9 follow=off
-bspc rule -a obs                      desktop=^11 follow=off
-bspc rule -a Audacity                 desktop=^11 follow=off
+bspc rule -a discord                  desktop=^10 follow=off
+bspc rule -a obs                      desktop=^12 follow=off
+bspc rule -a Audacity                 desktop=^12 follow=off
 bspc rule -a "VirtualBox Manager"     desktop=^12 follow=on
 bspc rule -a Vivaldi-stable           desktop=^2 follow=off
-bspc rule -a Chromium                 desktop=^2 follow=off
-bspc rule -a Pyroom                   desktop=^6 follow=on
-bspc rule -a libreoffice-writer       desktop=^6 follow=on
-bspc rule -a notion-app-enhanced      desktop=^4 follow=on
-bspc rule -a Inkscape                 desktop=^7 follow=on
-bspc rule -a Gimp-2.10                desktop=^7 follow=on
-bspc rule -a krita                    desktop=^7 follow=on
-bspc rule -a Mpdevil                  desktop=^10 follow=on
-bspc rule -a Ymuse                    desktop=^10 follow=off
-bspc rule -a Easytag                  desktop=^10 follow=off
-bspc rule -a Nemo                     desktop=^11 follow=on border=off
-bspc rule -a Zathura                  desktop=^5 state=tiled follow=on
-bspc rule -a sioyek                   desktop=^5 state=tiled follow=on
-bspc rule -a Atril                    desktop=^5 state=tiled follow=on
-bspc rule -a Evince                   desktop=^5 state=tiled follow=on
-bspc rule -a Blender                  desktop=^7 state=tiled follow=on
+bspc rule -a Pyroom                   desktop=^7 follow=on
+bspc rule -a libreoffice-writer       desktop=^7 follow=on
+bspc rule -a notion-app-enhanced      desktop=^5 follow=off
+bspc rule -a Inkscape                 desktop=^8 follow=on
+bspc rule -a Gimp-2.10                desktop=^8 follow=on
+bspc rule -a krita                    desktop=^8 follow=on
+bspc rule -a Mpdevil                  desktop=^11 follow=on
+bspc rule -a Ymuse                    desktop=^11 follow=off
+bspc rule -a Easytag                  desktop=^11 follow=off
+bspc rule -a Nemo                     desktop=^12 follow=on border=off
+bspc rule -a Zathura                  desktop=^6 state=tiled follow=on
+bspc rule -a sioyek                   desktop=^6 state=tiled follow=on
+bspc rule -a Atril                    desktop=^6 state=tiled follow=on
+bspc rule -a Evince                   desktop=^6 state=tiled follow=on
+bspc rule -a Blender                  desktop=^8 state=tiled follow=on
 
 # Spcefic States
 bspc desktop '^7'  -l monocle
@@ -84,12 +84,12 @@ bspc desktop '^12'  -l monocle
 # Same type of apps
 declare -a apps=(Lxappearance Nitrogen Gprename stacer qt5ct)
 for i in ${apps[@]}; do
-   bspc rule -a $i desktop='^11' follow=on focus=on; done
+   bspc rule -a $i desktop='^12' follow=on focus=on; done
 
 declare -a office=(libreoffice-calc libreoffice-impress \
 libreoffice-startcenter libreoffice Soffice *:libreofficedev *:soffice)
 for i in ${office[@]}; do
-   bspc rule -a $i desktop='^8' follow=on focus=on; done
+   bspc rule -a $i desktop='^9' follow=on focus=on; done
 
 # Startup Scirpts
 /home/fh1m/.config/bspwm/startup/clipboard.sh &

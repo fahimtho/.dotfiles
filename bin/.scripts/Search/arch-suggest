@@ -1,0 +1,10 @@
+#!/usr/bin/env sh
+
+text=$(~/.scripts/Search/suggest archwiki)
+
+if [[ -z "$text" ]];
+then
+  exit 1
+else
+  vivaldi-stable https://wiki.archlinux.org/index.php?search="$text"
+fi

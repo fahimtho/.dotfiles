@@ -16,7 +16,7 @@ else
     then
       exit 1
     else
-      notify-send "Currency Exchange" "$(forx $from $to -q $amount)" -i ~/Pictures/.icons/exchange.png -t 100000
+      notify-send "Currency Exchange" "$amount $from is $(forx $from $to -q $amount) $to" -i ~/Pictures/.icons/exchange.png -t 100000
     fi
   fi
 fi

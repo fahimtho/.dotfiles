@@ -136,7 +136,7 @@ use {
         error = "",
         warning = "",
         hint = "",
-        information = "",
+        information = "",
         other = ""
       },
     }
@@ -218,9 +218,11 @@ use {
     require "plugins.gps"
   end
 }
+
 -- Separate cut and paste
 use {
   "gbprod/cutlass.nvim",
+  event = 'InsertEnter',
   config = function()
     require("cutlass").setup({
         cut_key = "m"
@@ -242,7 +244,7 @@ end
 -- Buffers & tabs
 use {
   'akinsho/bufferline.nvim',
-  config = function ()
+  config = function()
     require "plugins.bufferline"
   end
 }
@@ -271,6 +273,7 @@ use {
 -- Delete Buffer
 use {
   'famiu/bufdelete.nvim',
+  event = 'InsertLeave',
   opt = true,
   cmd = {'Bdelete','Bwipeout'}
 }
@@ -322,61 +325,12 @@ use {
   end
 }
 
--- stabilize Events
-use {
-	"luukvbaal/stabilize.nvim",
-	config = function() require("stabilize").setup() end
-}
-
--- Git
-use {
-  'lewis6991/gitsigns.nvim',
-  requires = {
-    'nvim-lua/plenary.nvim'
-  },
-  config = function()
-    require "plugins.gitsigns"
-  end
-}
-
--- Debug
-use {
-  'mfussenegger/nvim-dap',
-  config = function()
-    require "plugins.dap"
-  end
-}
-
--- Dap UI
-use {
-  "rcarriga/nvim-dap-ui",
-  requires = {"mfussenegger/nvim-dap"},
-  config = function()
-    require "plugins.dapui"
-  end
-}
-
--- Peek Lines
-use {
-  'nacro90/numb.nvim',
-  config = function()
-    require('numb').setup()
-  end,
-}
 
 -- Code Action Menu
 use {
   'weilbith/nvim-code-action-menu',
   opt = true,
   cmd = 'CodeActionMenu'
-}
-
--- DAP Text
-use {
-  'theHamsta/nvim-dap-virtual-text',
-  config = function ()
-    require "plugins.dap-text"
-  end
 }
 
 -- Statusbar
@@ -395,17 +349,6 @@ use {
   end
 }
 
--- Toggle chars
-use {
-  "saifulapm/chartoggle.nvim",
-  config = function()
-    require('chartoggle').setup ({
-      leader = '<localleader>',
-      keys = {',',';','[',']','(',')','{','}','.','"'}
-    })
-  end
-}
-
 -- Markdown
 use {
   'iamcco/markdown-preview.nvim',
@@ -421,15 +364,6 @@ use {
   end
 }
 
--- Buffer switcher
-use {
-  'matbme/JABS.nvim',
-  cmd = {'JABSOpen'},
-  config = function()
-    require "plugins.jabs"
-  end
-}
-
 -- Cool notifications
 use {
   'rcarriga/nvim-notify',
@@ -438,45 +372,10 @@ use {
   end
 }
 
--- Symbols Outline
-use {
-  'simrat39/symbols-outline.nvim',
-  config = function()
-    require "plugins.outline"
-  end
-}
-
--- git diff view
-use {
-  'sindrets/diffview.nvim',
-  cmd = {'DiffviewOpen','DiffviewClose','DiffviewToggleFiles','DiffviewFocusFiles','DiffviewRefresh','DiffviewFileHistory'},
-  config = function()
-    require "plugins.diff"
-  end
-}
-
--- Format Code
-use {
-  'sbdchd/neoformat',
-  cmd = {'Neoformat'}
-}
-
--- Swap Args and stuff
-use {
-  'mizlan/iswap.nvim',
-  cmd = {'ISwap','ISwapWith'}
-}
-
 -- undo Tree
 use {
   'mbbill/undotree',
   cmd = {'UndotreeToggle'}
-}
-
--- Move Windows
-use {
-  'sindrets/winshift.nvim',
-  cmd = {'WinShift'}
 }
 
 -- kinda like bspwm moncle
@@ -485,25 +384,15 @@ use {
   cmd = {'ZoomWinTabToggle'}
 }
 
--- Nice Telescope
+-- quick help
 use {
-  "nvim-telescope/telescope-frecency.nvim",
-  requires = {"tami5/sqlite.lua"}
-}
-
-use {
-  'karb94/neoscroll.nvim',
-  config = function()
-    require('neoscroll').setup()
-  end
+  'RishabhRD/nvim-cheat.sh',
+  cmd = {'Cheat'}
 }
 
 -- Telescope
-use 'nvim-telescope/telescope-media-files.nvim' -- Media Files
 use 'nvim-telescope/telescope-github.nvim' -- Github
-use 'jvgrootveld/telescope-zoxide' -- File DB
 use "nvim-telescope/telescope-file-browser.nvim" -- File Browser
-use 'crispgm/telescope-heading.nvim'
 use {'nvim-telescope/telescope-fzf-native.nvim', run = 'make' } -- Telescope FZF marriage
 
 -- Cmp
@@ -512,13 +401,8 @@ use 'dcampos/nvim-snippy' -- snippet manager
 use 'dcampos/cmp-snippy' -- snippet for cmp
 use 'onsails/lspkind-nvim' -- icons for menu
 use 'honza/vim-snippets' -- Snippets
-use 'hrsh7th/cmp-buffer' -- cmp buffer source
 use "lukas-reineke/cmp-under-comparator" -- Sort good
 use 'hrsh7th/cmp-path' -- Cmp path source
-use 'dmitmel/cmp-cmdline-history' -- Cmp cmd source
-use 'hrsh7th/cmp-nvim-lua' -- cmp lua nvim source
-use 'hrsh7th/cmp-cmdline' -- cmp cmdline source
-use {'tzachar/cmp-tabnine', run='./install.sh', requires = 'hrsh7th/nvim-cmp'} -- cmp tabnine source
 
 -- UI
 use 'folke/tokyonight.nvim' -- Colorscheme
@@ -529,22 +413,15 @@ use 'RishabhRD/popfix' -- Nice UI
 -- Fix
 use 'lewis6991/impatient.nvim' -- Start Quickly
 use "nathom/filetype.nvim" -- Filetype Faster
-use 'antoinemadec/FixCursorHold.nvim' -- Fix
 
 -- Utils
-use 'pbrisbin/vim-mkdir' -- Make directory if non-existent
-use 'wakatime/vim-wakatime' -- meaning full insight
-use 'andymass/vim-matchup' -- Enhance Matchit
-use 'terryma/vim-expand-region' -- Cool
 use 'tpope/vim-surround' -- Surround Stuff
 use 'nishigori/increment-activator' -- good enhance
 use 'voldikss/vim-floaterm' -- Floating Terminal
-use 'andrewradev/splitjoin.vim' -- joint code
-use 'RishabhRD/nvim-cheat.sh' -- quick help
-use 'elkowar/yuck.vim' -- yuck language support
+use 'f-person/git-blame.nvim' -- Git Blame
+use 'wakatime/vim-wakatime' -- stats
 
 -- Lsp, Treesitter
-use 'kosayoda/nvim-lightbulb' -- Code Actions Indicator
 use 'David-Kunz/treesitter-unit' -- Select quickly
 use 'p00f/nvim-ts-rainbow' -- Rainbow
 

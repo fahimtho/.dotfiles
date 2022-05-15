@@ -4,7 +4,7 @@ text=$(~/.scripts/Search/suggest youtube)
 
 if [[ -z "$text" ]];
 then
-  echo ""
+  exit 1
 else
-  vivaldi-stable https://www.youtube.com/results?search_query="$text"
+  ytfzf -DNf "$text"
 fi
