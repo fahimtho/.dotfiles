@@ -3,7 +3,7 @@
 # License: GNU GPL version 3, see the file "AUTHORS" for details.
 # Author: Wojciech Siewierski <wojciech.siewierski@onet.pl>, 2015
 
-from __future__ import (absolute_import, division, print_function)
+from __future__ import absolute_import, division, print_function
 
 from abc import ABCMeta, abstractproperty, abstractmethod
 from datetime import datetime
@@ -26,6 +26,7 @@ class LinemodeBase(object):
             If any of these metadata fields are absent, fall back to
             the default linemode
     """
+
     __metaclass__ = ABCMeta
 
     uses_metadata = False
@@ -74,8 +75,8 @@ class TitleLinemode(LinemodeBase):
     def infostring(self, fobj, metadata):
         if metadata.authors:
             authorstring = metadata.authors
-            if ',' in authorstring:
-                authorstring = authorstring[0:authorstring.find(",")]
+            if "," in authorstring:
+                authorstring = authorstring[0 : authorstring.find(",")]
             return authorstring
         return ""
 
@@ -85,7 +86,11 @@ class PermissionsLinemode(LinemodeBase):
 
     def filetitle(self, fobj, metadata):
         return "%s %s %s %s" % (
-            fobj.get_permission_string(), fobj.user, fobj.group, fobj.relative_path)
+            fobj.get_permission_string(),
+            fobj.user,
+            fobj.group,
+            fobj.relative_path,
+        )
 
     def infostring(self, fobj, metadata):
         return ""
@@ -100,6 +105,7 @@ class FileInfoLinemode(LinemodeBase):
     def infostring(self, fobj, metadata):
         if not fobj.is_directory:
             from subprocess import CalledProcessError
+
             try:
                 fileinfo = spawn.check_output(["file", "-Lb", fobj.path]).strip()
             except CalledProcessError:
@@ -117,7 +123,7 @@ class MtimeLinemode(LinemodeBase):
 
     def infostring(self, fobj, metadata):
         if fobj.stat is None:
-            return '?'
+            return "?"
         return datetime.fromtimestamp(fobj.stat.st_mtime).strftime("%Y-%m-%d %H:%M")
 
 
@@ -129,9 +135,11 @@ class SizeMtimeLinemode(LinemodeBase):
 
     def infostring(self, fobj, metadata):
         if fobj.stat is None:
-            return '?'
-        return "%s %s" % (human_readable(fobj.size),
-                          datetime.fromtimestamp(fobj.stat.st_mtime).strftime("%Y-%m-%d %H:%M"))
+            return "?"
+        return "%s %s" % (
+            human_readable(fobj.size),
+            datetime.fromtimestamp(fobj.stat.st_mtime).strftime("%Y-%m-%d %H:%M"),
+        )
 
 
 class HumanReadableMtimeLinemode(LinemodeBase):
@@ -142,7 +150,7 @@ class HumanReadableMtimeLinemode(LinemodeBase):
 
     def infostring(self, fobj, metadata):
         if fobj.stat is None:
-            return '?'
+            return "?"
         return human_readable_time(fobj.stat.st_mtime)
 
 
@@ -154,6 +162,6 @@ class SizeHumanReadableMtimeLinemode(LinemodeBase):
 
     def infostring(self, fobj, metadata):
         if fobj.stat is None:
-            return '?'
+            return "?"
         size = human_readable(fobj.size)
         return "%s %11s" % (size, human_readable_time(fobj.stat.st_mtime))

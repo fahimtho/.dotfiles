@@ -32,7 +32,7 @@ window {
     padding: 						5;
     width: 							15%;
     x-offset:                       15;
-    y-offset:                       51;
+    y-offset:                       49;
 }
 
 prompt {

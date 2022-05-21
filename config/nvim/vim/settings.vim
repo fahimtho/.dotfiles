@@ -103,9 +103,9 @@ let g:nvim_tree_icons = {
         \ 'folder': {
           \   'arrow_open': "",
           \   'arrow_closed': "",
-          \   'default': "",
-          \   'open': "",
-          \   'empty': "",
+          \   'default': "",
+          \   'open': "ﱮ",
+          \   'empty': "",
           \   'empty_open': "",
           \   'symlink': "",
           \   'symlink_open': "",

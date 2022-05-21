@@ -4,7 +4,7 @@
 pgrep -x sxhkd > /dev/null || sxhkd &
 
 # defining workspaces
-bspc monitor -d Term Web Watch Code Note Read Write Design Work Chat Music Apps Run
+bspc monitor -d Terminal Browser Watch Code Note Read Write Design Work Chat Music Apps Run
 
 # border and gap
 bspc config border_width             0
@@ -35,14 +35,15 @@ bspc config external_rules_command   ~/.config/bspwm/rule.sh
 bspc rule -r *:*
 
 # window/class rules --> Only States
-bspc rule -a Gcolor3                  state=floating border=off
+bspc rule -a Gcolor3                  state=floating
 bspc rule -a float                    state=floating
 bspc rule -a Rofi                     state=floating
-bspc rule -a watch                    desktop=^3 state=floating rectangle=1040x401+13+50 follow=on
-bspc rule -a music                    state=floating rectangle=816x378+12+50
-bspc rule -a lyrics                   state=floating rectangle=498x801+1402+118
-bspc rule -a ncmpcpp                  state=floating rectangle=1906x513+7+45
-bspc rule -a calendar                 state=floating rectangle=709x301+645+43
+bspc rule -a todos                    state=floating rectangle=558x400+689+43
+bspc rule -a focus                    state=floating rectangle=407x165+748+41
+bspc rule -a music                    state=floating rectangle=782x942+22+68
+bspc rule -a lyrics                   state=floating rectangle=492x941+1389+66
+bspc rule -a ncmpcpp                  state=floating rectangle=1909x512+5+39
+bspc rule -a calendar                 state=floating rectangle=712x295+611+42
 bspc rule -a Blueman-manager          state=floating
 bspc rule -a Pavucontrol              state=floating border=off
 bspc rule -a Sxiv                     state=floating
@@ -53,6 +54,7 @@ bspc rule -a tmux                     desktop=^1 follow=on
 bspc rule -a Code                     desktop=^4 follow=on
 bspc rule -a qBittorrent              desktop=^13 follow=off
 bspc rule -a mpv                      desktop=^3 follow=on state=floating
+bspc rule -a watch                    desktop=^3 state=floating rectangle=1040x401+13+50 follow=on
 bspc rule -a discord                  desktop=^10 follow=off
 bspc rule -a obs                      desktop=^12 follow=off
 bspc rule -a Audacity                 desktop=^12 follow=off
@@ -75,9 +77,9 @@ bspc rule -a Evince                   desktop=^6 state=tiled follow=on
 bspc rule -a Blender                  desktop=^8 state=tiled follow=on
 
 # Spcefic States
-bspc desktop '^7'  -l monocle
-bspc desktop '^8'  -l monocle
-bspc desktop '^9'  -l monocle
+bspc desktop '^7'   -l monocle
+bspc desktop '^8'   -l monocle
+bspc desktop '^9'   -l monocle
 bspc desktop '^11'  -l monocle
 bspc desktop '^12'  -l monocle
 
@@ -99,4 +101,4 @@ for i in ${office[@]}; do
 /home/fh1m/.config/bspwm/startup/mpris.sh &
 /home/fh1m/.config/bspwm/startup/statusbar.sh &
 /home/fh1m/.config/bspwm/startup/mpd-mpris.sh &
-/home/fh1m/.scripts/check_num_of_packages &
+/home/fh1m/.config/bspwm/startup/check_num_of_packages &

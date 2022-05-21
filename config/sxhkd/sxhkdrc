@@ -116,7 +116,7 @@ Print
 
 # VSCODE projetcs
 super + alt + c
-  rofi-code -r "rofi -dmenu -p '' -i -width '300' -xoffset '-795' -yoffset '-488'  -no-fixed-num-lines"
+  rofi-code -r "rofi -dmenu -p '' -i -width '300' -xoffset '-795' -yoffset '-491'  -no-fixed-num-lines"
 
 ##############
 ## One Task ##
@@ -269,7 +269,7 @@ alt + space
 
 # Open Files with Rofi
 super + o
-  rofi -show file-browser-extended -file-browser-dir ~ -lines 29 -xoffset -694 -yoffset -488 -width 500 -no-fixed-num-lines
+  rofi -show file-browser-extended -file-browser-dir ~ -lines 29 -xoffset -694 -yoffset -488 -width 500 -no-fixed-num-lines -show-icons
 
 super + c
   ~/.scripts/econfig
@@ -298,7 +298,6 @@ alt + l
 super + u
   notify-send "$(ud $(xclip -selection clipboard -out) | sed 's/\x1b\[[0-9;]*m//g' )" -i "lol" -t 1000000
 
-
 # Turn down volumn
 XF86AudioLowerVolume
   ponymix decrease 5 --max-volume 200 && dunstify -i ~/Pictures/.icons/audio.png -a System -t 10000 -h string:x-dunst-stack-tag:volume -h int:value:$( ponymix get-volume) " System Volume: $(ponymix get-volume)% " && canberra-gtk-play -i audio-volume-change
@@ -314,7 +313,6 @@ XF86MonBrightnessUp
 # Turn down brightness
 XF86MonBrightnessDown
   xbacklight -dec 5 && dunstify -i ~/Pictures/.icons/brightness.png -a System -t 10000 -h string:x-dunst-stack-tag:volume -h int:value:$(xbacklight -get) " System Brightness: $(xbacklight -get | awk '\{print int($1+0.5)\}')% " && canberra-gtk-play -i audio-volume-change
-
 
 # Mute Mic
 XF86AudioMicMute

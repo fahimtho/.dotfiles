@@ -9,9 +9,9 @@ window {
     border-color: 					#000d4d;
     border-radius: 					5px;
     padding: 						2;
-    width: 							8%;
-    x-offset:                       840;
-    y-offset:                       -497;
+    width: 							10%;
+    x-offset:                       713;
+    y-offset:                       -500;
 }
 
 listview {
@@ -30,4 +30,9 @@ element-icon {
     vertical-align:                0.5;
     size:                          0px;
     border:                        0px;
+}
+
+element {
+    border-radius:                5;
+    padding:                      2px ;
 }

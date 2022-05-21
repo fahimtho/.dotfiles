@@ -11,7 +11,7 @@ elif [[ "$connected" =~ "disabled" ]]; then
 fi
 
 # Use rofi to select wifi network
-chosen_network=$(echo -e "$toggle\n$wifi_list" | uniq -u | rofi -dmenu -lines "100" -no-fixed-num-lines -width "250" -yoffset "42" -xoffset "-6" -location "3" -i -selected-row 1 -p "直" )
+chosen_network=$(echo -e "$toggle\n$wifi_list" | uniq -u | rofi -dmenu -lines "100" -no-fixed-num-lines -width "250" -yoffset "40" -xoffset "-40" -location "3" -i -selected-row 1 -p "直" )
 # Get name of connection
 chosen_id=$(echo "${chosen_network:3}" | xargs)
 

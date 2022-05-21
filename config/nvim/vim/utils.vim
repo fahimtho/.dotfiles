@@ -94,29 +94,29 @@ func! Run()
   exec "w"
   exec "let g:floaterm_title = ' Run '"
   if &filetype == 'c'
-    exec "AsyncRun -strip -mode=term -pos=floaterm -position=bottomright -width=0.6 -height=0.3 gcc -Wall % -o %< && ./%<"
+    exec "AsyncRun -strip -mode=term -pos=floaterm -position=bottomright -width=0.5 -height=0.4 gcc -Wall % -o %< && ./%<"
   elseif &filetype == 'cpp'
-    exec "AsyncRun -strip -mode=term -pos=floaterm -position=bottomright -width=0.6 -height=0.3 g++ -Wall % -o %< && ./%<"
+    exec "AsyncRun -strip -mode=term -pos=floaterm -position=bottomright -width=0.5 -height=0.4 g++ -Wall % -o %< && ./%<"
   elseif &filetype == 'sh'
-    exec "AsyncRun -strip -mode=term -pos=floaterm -position=bottomright -width=0.6 -height=0.3 bash %"
+    exec "AsyncRun -strip -mode=term -pos=floaterm -position=bottomright -width=0.5 -height=0.4 bash %"
   elseif &filetype == 'python'
-    exec "AsyncRun -strip -mode=term -pos=floaterm -position=bottomright -width=0.6 -height=0.3 python3 %"
+    exec "AsyncRun -strip -mode=term -pos=floaterm -position=bottomright -width=0.5 -height=0.4 python3 %"
   elseif &filetype == 'go'
-    exec "AsyncRun -strip -mode=term -pos=floaterm -position=bottomright -width=0.6 -height=0.3 go build % && ./%<"
+    exec "AsyncRun -strip -mode=term -pos=floaterm -position=bottomright -width=0.5 -height=0.4 go build % && ./%<"
   elseif &filetype == 'javascript'
-    exec "AsyncRun -strip -mode=term -pos=floaterm -position=bottomright -width=0.6 -height=0.3 node %"
+    exec "AsyncRun -strip -mode=term -pos=floaterm -position=bottomright -width=0.5 -height=0.4 node %"
   elseif &filetype == 'typescript'
-    exec "AsyncRun -strip -mode=term -pos=floaterm -position=bottomright -width=0.6 -height=0.3 tsc % && node %<.js"
+    exec "AsyncRun -strip -mode=term -pos=floaterm -position=bottomright -width=0.5 -height=0.4 tsc % && node %<.js"
   elseif &filetype == 'julia'
-    exec "AsyncRun -strip -mode=term -pos=floaterm -position=bottomright -width=0.6 -height=0.3 julia %"
+    exec "AsyncRun -strip -mode=term -pos=floaterm -position=bottomright -width=0.5 -height=0.4 julia %"
   elseif &filetype == 'rust'
-    exec "AsyncRun -strip -mode=term -pos=floaterm -position=bottomright -width=0.6 -height=0.3 rustc % && ./%<"
+    exec "AsyncRun -strip -mode=term -pos=floaterm -position=bottomright -width=0.5 -height=0.4 rustc % && ./%<"
   elseif &filetype == 'haskell'
-    exec "AsyncRun -strip -mode=term -pos=floaterm -position=bottomright -width=0.6 -height=0.3 ghc % && ./%<"
+    exec "AsyncRun -strip -mode=term -pos=floaterm -position=bottomright -width=0.5 -height=0.4 ghc % && ./%<"
   elseif &filetype == 'lua'
-    exec "AsyncRun -strip -mode=term -pos=floaterm -position=bottomright -width=0.6 -height=0.3 lua %"
+    exec "AsyncRun -strip -mode=term -pos=floaterm -position=bottomright -width=0.5 -height=0.4 lua %"
   elseif &filetype == 'arduino'
-    exec "AsyncRun -strip -mode=term -pos=floaterm -position=bottomright -width=0.6 -height=0.3 arduino-cli compile -b arduino:avr:uno %<"
+    exec "AsyncRun -strip -mode=term -pos=floaterm -position=bottomright -width=0.5 -height=0.4 arduino-cli compile -b arduino:avr:uno %<"
   endif
   exec "let g:floaterm_title = ''"
 endfunc

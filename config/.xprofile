@@ -1,3 +1,5 @@
+nitrogen --restore &
+
 dunst &
 
 lxpolkit &
@@ -5,6 +7,8 @@ lxpolkit &
 xsetroot -cursor_name left_ptr &
 
 xmodmap ~/.Xmodmap &
+
+dex -a
 
 tmux start-server &
 tmux new-session -d -s Main &

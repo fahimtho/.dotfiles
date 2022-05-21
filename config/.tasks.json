@@ -17,7 +17,7 @@
   },
   {
     "name": " Download Songs",
-    "command": "bash ~/.scripts/download_songs.sh"
+    "command": "bspc desktop -f 'Apps' && kitty --hold --class=float -e bash ~/.scripts/download_songs"
   },
     {
     "name": " Lofi Beats",
@@ -52,14 +52,6 @@
     "command": "rofi -show emoji -lines 6 -no-fixed-num-lines -xoffset -463 -yoffset -493"
   },
   {
-    "name": "  Headphone Charge",
-    "command": "bash ~/.scripts/headphone-charge"
-  },
-  {
-    "name": "  Wireless Headphone Charge",
-    "command": "bash ~/.scripts/wireless-headphone-charge"
-  },
-  {
     "name": "﬜ Dictionary",
     "command": "bash ~/.scripts/dictionary"
   },
@@ -72,7 +64,7 @@
     "command": "bash ~/.scripts/reminder"
   },
   {
-    "name": "  Money-Cxchange",
+    "name": " Money-Cxchange",
     "command": "bash ~/.scripts/exchange"
   }
 ]

@@ -7,15 +7,15 @@ import sys
 
 
 def getCurrent():
-    return check_output(["mpc", "current" , "--format=%title% by %artist%"])
+    return check_output(["mpc", "current" , "--format= %title% by %artist%"])
 current = getCurrent().decode(encoding='UTF-8')
 if not current:
     current = " No Chill"
 else:
-    current = " " + current.rstrip()
-commands = b" Songs\nArtists\nPlaylists\nShuffle\n"
+    current = "" + current.rstrip()
+commands = b"    Songs\n    Artists\n   Playlists\n    Shuffle\n"
 rofi = Popen(["rofi", "-theme", "/home/fh1m/.config/rofi/mpd.rasi", "-width", "27",
-             "-yoffset", "-444", "1", "-mesg", current, "-i", "-dmenu", "-xoffset","-685"], stdout=PIPE, stdin=PIPE)
+             "-yoffset", "-448", "-mesg", current, "-i", "-dmenu", "-xoffset","-685"], stdout=PIPE, stdin=PIPE)
 tmp = rofi.communicate(input=commands)[0].decode().rstrip()
 if tmp == "Play/Pause":
     check_call(["mpc", "toggle"])
@@ -23,13 +23,13 @@ if tmp == "Next":
     check_call(["mpc", "next"])
 if tmp == "Prev":
     check_call(["mpc", "prev"])
-if tmp == "Shuffle":
+if tmp == "    Shuffle":
     check_call(["mpc", "shuffle"])
 if tmp == "Loop":
     check_call(["mpc", "repeat" , "&&" , "mpc"  , "single"])
-if tmp == "Playlists":
+if tmp == "   Playlists":
     check_call(["/home/fh1m/.scripts/mpd_playlists"])
-if tmp == "Artists":
+if tmp == "    Artists":
     check_call(["/home/fh1m/.scripts/mpd_albums"])
 if tmp == "Volume 50%":
     check_call(["mpc", "volume", "50"])
@@ -37,8 +37,8 @@ if tmp == "Volume 75%":
     check_call(["mpc", "volume", "75"])
 if tmp == "Volume 100%":
     check_call(["mpc", "volume", "100"])
-if tmp == " Songs":
-    titles = check_output(["mpc", "playlist"])
+if tmp == "    Songs":
+    titles = check_output(["mpc", "playlist", "-f" , "%title% - %artist%"])
     track = 0
     tlist = ""
     for line in titles.splitlines():
@@ -47,7 +47,7 @@ if tmp == " Songs":
     if track > 1:
         tlist.rstrip()
         tlist = "[Playlists]\n" + tlist
-        rofi = Popen(["rofi", "-width", "30", "-lines", "30", "-yoffset", "-488", "-xoffset", "-656", "1", "-i", "-dmenu", "-p", "蘿", "-no-fixed-num-lines"], stdout=PIPE, stdin=PIPE)
+        rofi = Popen(["rofi", "-width", "30", "-lines", "11", "-yoffset", "-490", "-xoffset", "-656", "1", "-i", "-dmenu", "-p", "蘿", "-no-fixed-num-lines"], stdout=PIPE, stdin=PIPE)
         tmp = rofi.communicate(input=tlist.encode())[0].decode().rstrip()
         tmp = tmp[tmp.find("[")+1:tmp.find("]")]
     else:
@@ -59,7 +59,7 @@ if tmp == " Songs":
         playlists = check_output(["mpc", "lsplaylists"])
         for line in playlists.splitlines():
             commands = commands + line.decode() + "\n"
-        rofi = Popen(["rofi", "-width", "20","-yoffset","-488" , "-xoffset","-753","-lines","20", current, "-i", "-dmenu", "-p", "蘿" , "-no-fixed-num-lines"], stdout=PIPE, stdin=PIPE)
+        rofi = Popen(["rofi", "-width", "20","-yoffset","-491" , "-xoffset","-753","-lines","11", current, "-i", "-dmenu", "-p", "蘿" , "-no-fixed-num-lines"], stdout=PIPE, stdin=PIPE)
         tmp = rofi.communicate(input=commands.encode())[0].decode().rstrip()
         if not tmp:
             sys.exit(0)

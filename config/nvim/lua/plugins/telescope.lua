@@ -29,6 +29,7 @@ require('telescope').setup{
     selection_caret = "  ",
     entry_prefix = "  ",
     initial_mode = "insert",
+    borderchars = { "─", "│", "─", "│", "┌", "╮", "╯", "╰" },
     selection_strategy = "reset",
     layout_strategy = "horizontal",
     file_sorter = require("telescope.sorters").get_fuzzy_file,
@@ -37,7 +38,7 @@ require('telescope').setup{
     path_display = { "absolute" },
     winblend = 0,
     border = {},
-    borderchars = { "─", "│", "─", "│", "╭", "╮", "╯", "╰" },
+    borderchars = { "─", "│", "─", "│", "┌", "┐", "┘", "└" },
     color_devicons = true,
     use_less = true,
     layout_config = {

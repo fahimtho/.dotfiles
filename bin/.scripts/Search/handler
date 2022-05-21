@@ -7,7 +7,7 @@
 ## Author: https://github.com/BelkaDev
 
 ############# SETTINGS
-refreshrate=100 # refresh suggestions every n characters hit
+refreshrate=10 # refresh suggestions every n characters hit
 ddg_api=$(dirname $0)/APIs/ddg # path to ddg API script
 baidu_api=$(dirname $0)/APIs/baidu # path to baidu API script
 lastfm_api=$(dirname $0)/APIs/lastfm # path to lastfm API script

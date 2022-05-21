@@ -10,7 +10,7 @@ colorscheme tokyonight " set theme
 hi Normal guibg=#000000 guifg=None
 hi pmenusbar guibg=#0d0d1a
 hi Pmenu guibg=none guifg=#004eff
-hi PmenuSel guibg=#10171a guifg=#004eff
+hi PmenuSel guibg=#02061a guifg=#004eff
 hi Directory guifg=#004eff
 hi CursorLine gui=none guibg=none
 hi CursorLineNr guifg=#004eff gui=none
@@ -25,7 +25,6 @@ hi StatusLineNC gui=none guibg=none
 hi QuickFixLine guibg=none
 hi Conceal guibg=none
 hi FloatermBorder guibg=none guifg=#192d4d
-hi Beacon guifg=none guibg=#192d4d
 hi NvimTreeOpenedFile guifg=#ff1767
 hi TelescopeSelection guibg=#07141f guifg=none
 hi TelescopeNormal guibg=none
@@ -50,6 +49,7 @@ hi BufferLineFill guifg=none guibg=none
 hi NvimTreeWindowPicker guifg=#000000 guibg=#004eff
 hi FocusedSymbol guibg=NONE guifg=#004eff
 hi SymbolsOutlineConnector guibg=NONE guifg=#002866
+hi TelescopeBorder guifg=#002766 guibg=NONE
 
 
 " Change treesitter Elements
@@ -58,11 +58,17 @@ hi TSInclude guifg=#004eff
 hi TSVariableBuiltin guifg=#ff1767
 hi TSParameter guifg=#004eff
 hi TSNumber guifg=#ff1767
-hi TSConstant guifg=#00c5ff
+hi TSConstant guifg=#3b77fc
 hi TSBoolean guifg=#ff1767
-hi TSRepeat guifg=#63c6f1
-hi TSKeywordFunction guifg=#00b8ff
+hi TSRepeat guifg=#3b77fc
+hi TSKeywordFunction guifg=#3b77fc
 hi TSType guifg=#368dff
+hi TSFunction guifg=#004eff
+hi TSFuncBuiltin guifg=#004eff
+hi TSField guifg=#3b77fc
+hi TSConstBuiltin guifg=#3b77fc
+hi TSKeywordOperator guifg=#368dff
+hi TSProperty guifg=#368dff
 
 " Notifications color
 highlight NotifyERRORBorder guifg=#F70067

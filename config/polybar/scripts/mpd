@@ -1,11 +1,11 @@
 #!/bin/sh
 if ! mpc >/dev/null 2>&1; then
-  echo No Chill
+  echo "%{o#000000}%{u#000000}%{B#004eff}%{F#000000}%{+u}%{+o} MUSIC %{B- F- -u -o} is %{o#000000}%{u#000000}%{B#004eff}%{F#000000}%{+u}%{+o} OFF %{B- F- -u -o}"
   exit 1
 elif mpc status | grep -q playing; then
-  ( mpc current -f '%title%' | zscroll --before-text "" --delay .5 -l 30 --match-command "mpc status" --match-text "playing" "--before-text ''" --match-text "paused" "--before-text '' --scroll 0" --update-check true "mpc current -f '%title%'") &
+  ( mpc current -f "%{o#000000}%{u#000000}%{B#004eff}%{F#000000}%{+u}%{+o} SONG %{B- F- -u -o} %title% %{o#000000}%{u#000000}%{B#004eff}%{F#000000}%{+u}%{+o} BY %{B- F- -u -o} %artist% " | zscroll --before-text "" --delay .5 -l 500 --match-command "mpc status" --match-text "playing" "--before-text ''" --match-text "paused" "--before-text '' --scroll 0" --update-check true "mpc current -f '%{o#000000}%{u#000000}%{B#004eff}%{F#000000}%{+u}%{+o} SONG %{B- F- -u -o} %title% %{o#000000}%{u#000000}%{B#004eff}%{F#000000}%{+u}%{+o} BY %{B- F- -u -o} %artist% '") &
 else
-  echo Not Playing
+  echo "%{o#000000}%{u#000000}%{B#004eff}%{F#000000}%{+u}%{+o} MUSIC %{B- F- -u -o} is %{o#000000}%{u#000000}%{B#004eff}%{F#000000}%{+u}%{+o} PAUSED %{B- F- -u -o} now "
 fi
 # Block until an event is emitted
 mpc idle >/dev/null

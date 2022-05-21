@@ -5,14 +5,14 @@ cmp.setup({
 
   completion = { -- Only Comeplete When I want
      completeopt = "menu,menuone,noinsert",
-     autocomplete = false,
+     autocomplete = true,
      keyword_pattern = [[\%(-\?\d\+\%(\.\d\+\)\?\|\h\w*\%(-\w*\)*\)]],
      keyword_length = 1,
   },
 
   window = {
     documentation = { -- Border for Documentation
-      border = {"╭", "─", "╮", "│", "╯", "─", "╰", "│"},
+      -- border = {"╭", "─", "╮", "│", "╯", "─", "╰", "│"},
       winhighlight = 'NormalFloat:NormalFloat,FloatBorder:NormalFloat',
       maxwidth = 1000,
       maxheight = 1000,
@@ -47,6 +47,7 @@ cmp.setup({
     { name = 'nvim_lsp' },
     { name = 'snippy' },
     { name = 'latex_symbols' },
+    { name = 'buffer' },
     { name = 'path' }
   }, {
   })
@@ -54,8 +55,6 @@ cmp.setup({
 
 local cmp = require "cmp"
 cmp.setup {
-    -- ... rest of your setup ...
-
     sorting = {
         comparators = {
             require "cmp-under-comparator".under,
@@ -72,31 +71,31 @@ cmp.setup {
 
 -- icons for cmp
 local kind_icons = {
-      Text = " ",
-      Method = " ",
-      Function = " ",
-      Constructor = " ",
-      Field = "ﰮ ",
-      Variable = " ",
-      Class = "ﴯ ",
-      Interface = " ",
-      Module = " ",
-      Property = "ﰠ ",
-      Unit = "塞 ",
-      Value = " ",
-      Enum = "  ",
-      Keyword = " ",
-      Snippet = " ",
-      Color = " ",
-      File = " ",
-      Reference = "渚 ",
-      Folder = "  ",
-      EnumMember = "  ",
-      Constant = " ",
-      Struct = "פּ ",
-      Event = " ",
-      Operator = " ",
-      TypeParameter = " "
+      Text = " Text",
+      Method = " Method",
+      Function = " Function",
+      Constructor = " Constructor",
+      Field = "ﰮ Field",
+      Variable = "[] Variable",
+      Class = "ﴯ Class",
+      Interface = "  Interface",
+      Module = " Module",
+      Property = "ﰠ Property",
+      Unit = "塞 Unit",
+      Value = "  Value",
+      Enum = "  Enum",
+      Keyword = "  Keyword",
+      Snippet = " Snip",
+      Color = " Color",
+      File = " File",
+      Reference = "渚 Reference",
+      Folder = "  Folder",
+      EnumMember = "  EnumMember",
+      Constant = " Constant",
+      Struct = "פּ Struct",
+      Event = " Event",
+      Operator = "  Operator",
+      TypeParameter = " TypeParameter"
     }
 
 local cmp = require('cmp')

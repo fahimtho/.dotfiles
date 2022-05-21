@@ -22,12 +22,13 @@ t: run application in a new terminal window
 (An uppercase key negates the respective lower case flag)
 """
 
-from __future__ import (absolute_import, division, print_function)
+from __future__ import absolute_import, division, print_function
 
 import logging
 import os
 import sys
 from subprocess import Popen, PIPE, STDOUT
+from numpy import setxor1d
 from ranger.ext.get_executables import get_executables, get_term
 from ranger.ext.popen_forked import Popen_forked
 
@@ -37,7 +38,7 @@ LOG = logging.getLogger(__name__)
 
 # TODO: Remove unused parts of runner.py
 # ALLOWED_FLAGS = 'sdpwcrtSDPWCRT'
-ALLOWED_FLAGS = 'cfrtCFRT'
+ALLOWED_FLAGS = "cfrtCFRT"
 
 
 def press_enter():
@@ -69,8 +70,17 @@ class Context(object):  # pylint: disable=too-many-instance-attributes
     """
 
     def __init__(  # pylint: disable=redefined-builtin,too-many-arguments
-            self, action=None, app=None, mode=None, flags=None,
-            files=None, file=None, fm=None, wait=None, popen_kws=None):
+        self,
+        action=None,
+        app=None,
+        mode=None,
+        flags=None,
+        files=None,
+        file=None,
+        fm=None,
+        wait=None,
+        popen_kws=None,
+    ):
         self.action = action
         self.app = app
         self.mode = mode
@@ -98,11 +108,10 @@ class Context(object):  # pylint: disable=too-many-instance-attributes
         for flag in self.flags:
             if ord(flag) <= 90:
                 bad = flag + flag.lower()
-                self.flags = ''.join(c for c in self.flags if c not in bad)
+                self.flags = "".join(c for c in self.flags if c not in bad)
 
 
 class Runner(object):  # pylint: disable=too-few-public-methods
-
     def __init__(self, ui=None, logfunc=None, fm=None):
         self.ui = ui
         self.fm = fm
@@ -132,11 +141,18 @@ class Runner(object):  # pylint: disable=too-few-public-methods
                     LOG.exception(ex)
 
     def __call__(
-            # pylint: disable=too-many-branches,too-many-statements
-            # pylint: disable=too-many-arguments,too-many-locals
-            self, action=None, try_app_first=False,
-            app='default', files=None, mode=0,
-            flags='', wait=True, **popen_kws):
+        # pylint: disable=too-many-branches,too-many-statements
+        # pylint: disable=too-many-arguments,too-many-locals
+        self,
+        action=None,
+        try_app_first=False,
+        app="default",
+        files=None,
+        mode=0,
+        flags="",
+        wait=True,
+        **popen_kws
+    ):
         """Run the application in the way specified by the options.
 
         Returns False if nothing can be done, None if there was an error,
@@ -149,9 +165,16 @@ class Runner(object):  # pylint: disable=too-few-public-methods
         # creating a Context object and passing it to
         # an Application object.
 
-        context = Context(app=app, files=files, mode=mode, fm=self.fm,
-                          flags=flags, wait=wait, popen_kws=popen_kws,
-                          file=files and files[0] or None)
+        context = Context(
+            app=app,
+            files=files,
+            mode=mode,
+            fm=self.fm,
+            flags=flags,
+            wait=wait,
+            popen_kws=popen_kws,
+            file=files and files[0] or None,
+        )
 
         if action is None:
             return self._log("No way of determining the action!")
@@ -166,67 +189,69 @@ class Runner(object):  # pylint: disable=too-few-public-methods
         wait_for_enter = False
         devnull = None
 
-        if 'shell' not in popen_kws:
-            popen_kws['shell'] = isinstance(action, str)
+        if "shell" not in popen_kws:
+            popen_kws["shell"] = isinstance(action, str)
 
         # Set default shell for Popen
-        if popen_kws['shell']:
+        if popen_kws["shell"]:
             # This doesn't work with fish, see #300
-            if 'fish' not in os.environ['SHELL']:
-                popen_kws['executable'] = os.environ['SHELL']
+            if "fish" not in os.environ["SHELL"]:
+                popen_kws["executable"] = os.environ["SHELL"]
 
-        if 'stdout' not in popen_kws:
-            popen_kws['stdout'] = sys.stdout
-        if 'stderr' not in popen_kws:
-            popen_kws['stderr'] = sys.stderr
+        if "stdout" not in popen_kws:
+            popen_kws["stdout"] = sys.stdout
+        if "stderr" not in popen_kws:
+            popen_kws["stderr"] = sys.stderr
 
         # Evaluate the flags to determine keywords
         # for Popen() and other variables
 
-        if 'p' in context.flags:
-            popen_kws['stdout'] = PIPE
-            popen_kws['stderr'] = STDOUT
+        if "p" in context.flags:
+            popen_kws["stdout"] = PIPE
+            popen_kws["stderr"] = STDOUT
             toggle_ui = False
             pipe_output = True
             context.wait = False
-        if 's' in context.flags:
-            devnull_writable = open(os.devnull, 'w')
-            devnull_readable = open(os.devnull, 'r')
-            for key in ('stdout', 'stderr'):
+        if "s" in context.flags:
+            devnull_writable = open(os.devnull, "w")
+            devnull_readable = open(os.devnull, "r")
+            for key in ("stdout", "stderr"):
                 popen_kws[key] = devnull_writable
             toggle_ui = False
-            popen_kws['stdin'] = devnull_readable
-        if 'f' in context.flags:
+            popen_kws["stdin"] = devnull_readable
+        if "f" in context.flags:
             toggle_ui = False
             context.wait = False
-        if 'w' in context.flags:
+        if "w" in context.flags:
             if not pipe_output and context.wait:  # <-- sanity check
                 wait_for_enter = True
-        if 'r' in context.flags:
+        if "r" in context.flags:
             # TODO: make 'r' flag work with pipes
-            if 'sudo' not in get_executables():
+            if "sudo" not in get_executables():
                 return self._log("Can not run with 'r' flag, sudo is not installed!")
-            f_flag = ('f' in context.flags)
+            f_flag = "f" in context.flags
             if isinstance(action, str):
-                action = 'sudo ' + (f_flag and '-b ' or '') + action
+                action = "sudo " + (f_flag and "-b " or "") + action
             else:
-                action = ['sudo'] + (f_flag and ['-b'] or []) + action
+                action = ["sudo"] + (f_flag and ["-b"] or []) + action
             toggle_ui = True
             context.wait = True
-        if 't' in context.flags:
-            if not ('WAYLAND_DISPLAY' in os.environ
-                    or sys.platform == 'darwin'
-                    or 'DISPLAY' in os.environ):
+        if "t" in context.flags:
+            if not (
+                "WAYLAND_DISPLAY" in os.environ
+                or sys.platform == "darwin"
+                or "DISPLAY" in os.environ
+            ):
                 return self._log("Can not run with 't' flag, no display found!")
             term = get_term()
             if isinstance(action, str):
-                action = term + ' -e ' + action
+                action = term + " -e " + action
             else:
-                action = [term, '-e'] + action
+                action = [term, "-e"] + action
             toggle_ui = False
             context.wait = False
 
-        popen_kws['args'] = action
+        popen_kws["args"] = action
         # Finally, run it
 
         if toggle_ui:
@@ -234,10 +259,11 @@ class Runner(object):  # pylint: disable=too-few-public-methods
         try:
             error = None
             process = None
-            self.fm.signal_emit('runner.execute.before',
-                                popen_kws=popen_kws, context=context)
+            self.fm.signal_emit(
+                "runner.execute.before", popen_kws=popen_kws, context=context
+            )
             try:
-                if 'f' in context.flags and 'r' not in context.flags:
+                if "f" in context.flags and "r" not in context.flags:
                     # This can fail and return False if os.fork() is not
                     # supported, but we assume it is, since curses is used.
                     Popen_forked(**popen_kws)
@@ -254,13 +280,21 @@ class Runner(object):  # pylint: disable=too-few-public-methods
                 if wait_for_enter:
                     press_enter()
         finally:
-            self.fm.signal_emit('runner.execute.after',
-                                popen_kws=popen_kws, context=context, error=error)
+            self.fm.signal_emit(
+                "runner.execute.after",
+                popen_kws=popen_kws,
+                context=context,
+                error=error,
+            )
             if devnull:
                 devnull.close()
             if toggle_ui:
                 self._activate_ui(True)
             if pipe_output and process:
-                return self(action='less', app='pager',  # pylint: disable=lost-exception
-                            try_app_first=True, stdin=process.stdout)
+                return self(
+                    action="less",
+                    app="pager",  # pylint: disable=lost-exception
+                    try_app_first=True,
+                    stdin=process.stdout,
+                )
             return process  # pylint: disable=lost-exception

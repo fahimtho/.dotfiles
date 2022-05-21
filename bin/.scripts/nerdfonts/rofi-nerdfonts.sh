@@ -17,7 +17,7 @@ readarray chars < "${chars_csv}"
 char_entry=$(
     for char in "${chars[@]}";{
         echo ${char/,/ }
-    }|rofi -dmenu -no-fixed-num-lines -lines 6 -columns 2 -i -width 600 -p   -xoffset "-643" -yoffset "-488"
+    }|rofi -dmenu -no-fixed-num-lines -lines 6 -columns 2 -i -width 600 -p   -xoffset "-644" -yoffset "-491"
 )
 
 # If user cancelled rofi, exit

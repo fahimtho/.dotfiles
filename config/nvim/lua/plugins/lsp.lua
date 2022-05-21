@@ -11,16 +11,27 @@ vim.diagnostic.config({
   })
 
 -- Border for Documentation
+-- local border = {
+--       {"╭", "FloatBorder"},
+--       {"─", "FloatBorder"},
+--       {"╮", "FloatBorder"},
+--       {"│", "FloatBorder"},
+--       {"╯", "FloatBorder"},
+--       {"─", "FloatBorder"},
+--       {"╰", "FloatBorder"},
+--       {"│", "FloatBorder"},
+-- }
 local border = {
-      {"╭", "FloatBorder"},
+      {"┌", "FloatBorder"},
       {"─", "FloatBorder"},
-      {"╮", "FloatBorder"},
+      {"┐", "FloatBorder"},
       {"│", "FloatBorder"},
-      {"╯", "FloatBorder"},
+      {"┘", "FloatBorder"},
       {"─", "FloatBorder"},
-      {"╰", "FloatBorder"},
+      {"└", "FloatBorder"},
       {"│", "FloatBorder"},
 }
+
 
 local handlers =  {
   ["textDocument/hover"] =  vim.lsp.with(vim.lsp.handlers.hover, {border = border}),
@@ -137,12 +148,20 @@ require'lspconfig'.vimls.setup{
   capabilities = capabilities,
 }
 
+-- MD,LaTex
 require'lspconfig'.ltex.setup{
   handlers=handlers,
   capabilities = capabilities,
 }
 
+-- SQL
 require'lspconfig'.sqlls.setup{
+  handlers=handlers,
+  capabilities = capabilities,
+}
+
+-- emmet
+require'lspconfig'.emmet_ls.setup{
   handlers=handlers,
   capabilities = capabilities,
 }

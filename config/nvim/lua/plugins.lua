@@ -390,6 +390,14 @@ use {
   cmd = {'Cheat'}
 }
 
+-- icons
+use {
+  'kyazdani42/nvim-web-devicons',
+  config = function()
+    require "plugins.icons"
+  end
+}
+
 -- Telescope
 use 'nvim-telescope/telescope-github.nvim' -- Github
 use "nvim-telescope/telescope-file-browser.nvim" -- File Browser
@@ -403,10 +411,10 @@ use 'onsails/lspkind-nvim' -- icons for menu
 use 'honza/vim-snippets' -- Snippets
 use "lukas-reineke/cmp-under-comparator" -- Sort good
 use 'hrsh7th/cmp-path' -- Cmp path source
+use 'hrsh7th/cmp-buffer' -- Cmp source for buffer
 
 -- UI
 use 'folke/tokyonight.nvim' -- Colorscheme
-use 'kyazdani42/nvim-web-devicons' -- icons
 use 'hood/popui.nvim' -- Nice UI
 use 'RishabhRD/popfix' -- Nice UI
 

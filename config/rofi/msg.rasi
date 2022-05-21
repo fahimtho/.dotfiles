@@ -37,7 +37,7 @@ window {
     padding: 						8;
     width: 							20%;
     x-offset:                       -752;
-    y-offset:                       -488;
+    y-offset:                       -490;
 }
 
 prompt {

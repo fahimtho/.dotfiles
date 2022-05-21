@@ -35,7 +35,7 @@ def main(
     from ranger.ext.openstruct import OpenStruct
 
     ranger.args = args = parse_arguments()
-    ranger.arg = OpenStruct(args.__dict__)  # COMPAT
+    ranger.args = OpenStruct(args.__dict__)  # COMPAT
     setup_logging(debug=args.debug, logfile=args.logfile)
 
     for line in VERSION_MSG:
@@ -255,7 +255,6 @@ def get_paths(args):
 
 def __get_home_directory():
     return os.path.expanduser('~')
-
 
 def xdg_path(env_var):
     path = os.environ.get(env_var)

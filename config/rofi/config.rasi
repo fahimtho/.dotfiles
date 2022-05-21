@@ -1,9 +1,9 @@
 configuration {
-    show-icons:                   true;
-    icon-theme:                   "Kora";
-    window-format: 				        "{w} ··· {t}";
-    display-window: 				" ";
-    display-emoji: 				" ";
+    show-icons:                      false;
+    icon-theme:                      "We";
+    window-format: 				           "{w} ··· {t}";
+    display-window: 				         " ";
+    display-emoji: 				           " ";
     display-file-browser-extended:   " ";
 
 }
@@ -18,9 +18,7 @@ configuration {
     selected-active-background:   @active-background;
     separatorcolor:               @active-background;
     bordercolor:                  @active-background;
-    show-icons:                   true;
     show-match:                   true;
-    fixed-num-lines:              true;
     sidebar-mode:                 true;
     separator-style: 				      "none";
     padding:                      0;
@@ -62,7 +60,7 @@ listview {
 
 element {
     border-radius:                5;
-    padding:                      3px ;
+    padding:                      4px ;
 }
 
 element.normal.normal {

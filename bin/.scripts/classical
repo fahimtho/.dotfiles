@@ -35,7 +35,7 @@ menu(){
 }
 
 main() {
-	choice=$(menu | rofi -dmenu -p "ﱯ" -no-fixed-num-lines -i -width "300" -yoffset "-490" -xoffset "-795" -lines "7" | cut -d. -f1)
+	choice=$(menu | rofi -dmenu -p "ﱯ" -no-fixed-num-lines -i -width "300" -yoffset "-492" -xoffset "-795" -lines "7" | cut -d. -f1)
 
 	case $choice in
 		1)

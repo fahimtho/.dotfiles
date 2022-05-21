@@ -18,7 +18,7 @@ export FZF_DEFAULT_COMMAND='fd --type file --hidden --no-ignore --follow --exclu
 export FZF_DEFAULT_OPTS='--height 50% --layout=reverse --prompt="❱ "'
 export FZF_DEFAULT_OPTS=$FZF_DEFAULT_OPTS'
  --color=bg:-1,hl:#0084ff
- --color=fg+:#1f6dff,bg+:#000037,hl+:#006fff
+ --color=fg+:#1f6dff,bg+:#11112e,hl+:#006fff
  --color=info:#006fff,prompt:#ff002f,pointer:#ff002f
  --color=marker:#87ff00,spinner:#ff002f,header:#0044ff'
 
@@ -128,6 +128,7 @@ alias ytpdl="youtube-dl -f best -o '%(playlist_index)s. %(title)s.%(ext)s' --ext
 alias bt="sudo modprobe -r btusb && sudo modprobe btusb"
 alias bcat="/usr/bin/bat"
 alias man="export MANLESS='' && man"
+alias diff="difft"
 
 
 # Cool cd
@@ -155,4 +156,3 @@ echo | fzf -q "$*" --preview-window=up:99% --preview="eval {q}"
 # calc
 calculate() python3 -c "from math import *; print($*);"
 alias c="noglob calculate"
-export PATH=$PATH:/home/fh1m/.spicetify

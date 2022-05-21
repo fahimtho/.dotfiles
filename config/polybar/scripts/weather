@@ -229,7 +229,7 @@ function setIcons {
                 fi
             fi
         fi
-        WIND="$WIND  %{F#002866}·%{F-} "
+        WIND="$WIND"
     fi
     if [ "$UNITS" = "metric" ]; then
         TEMP_ICON=" 糖 "
@@ -242,16 +242,16 @@ function setIcons {
     TEMP=`echo "$TEMP" | cut -d "." -f 1`
 
     if [ "$TEMP" -le $COLD_TEMP ]; then
-        TEMP="%{F$COLOR_COLD}%{T$TEMP_FONT_CODE}%{T-}%{F-} $TEMP%{T$TEMP_FONT_CODE}$TEMP_ICON%{T-}"
+        TEMP="%{F$COLOR_COLD}%{T$TEMP_FONT_CODE}%{T-}%{F-} $TEMP%{T$TEMP_FONT_CODE}$TEMP_ICON%{T-}"
     elif [ `echo "$TEMP >= $HOT_TEMP" | bc` -eq 1 ]; then
-        TEMP="%{F$COLOR_HOT}%{T$TEMP_FONT_CODE}%{T-}%{F-} $TEMP%{T$TEMP_FONT_CODE}$TEMP_ICON%{T-}"
+        TEMP="%{F$COLOR_HOT}%{T$TEMP_FONT_CODE}%{T-}%{F-} $TEMP%{T$TEMP_FONT_CODE}$TEMP_ICON%{T-}"
     else
-        TEMP="%{F$COLOR_NORMAL_TEMP}%{T$TEMP_FONT_CODE}%{T-}%{F-} $TEMP%{T$TEMP_FONT_CODE}$TEMP_ICON%{T-}"
+        TEMP="%{F$COLOR_NORMAL_TEMP}%{T$TEMP_FONT_CODE}%{T-}%{F-} $TEMP%{T$TEMP_FONT_CODE}$TEMP_ICON%{T-}"
     fi
 }
 
 function outputCompact {
-    OUTPUT="$WIND %{T$WEATHER_FONT_CODE}%{F$ICON_COLOR}$ICON%{F-}%{T-} $ERR_MSG$DESCRIPTION %{F#002866}·%{F-}  $TEMP"
+    OUTPUT="%{o#000000}%{u#000000}%{B#004eff}%{F#000000}%{+u}%{+o} TMP %{B- F- -u -o}$TEMP %{T$WEATHER_FONT_CODE}%{F$ICON_COLOR}%{o#000000}%{u#000000}%{B#004eff}%{F#000000}%{+u}%{+o} WEATHER %{B- F- -u -o}%{F-}%{T-} $ERR_MSG$DESCRIPTION"
     # echo "Output: $OUTPUT" >> "$HOME/.weather.log"
     echo "$OUTPUT"
 }
