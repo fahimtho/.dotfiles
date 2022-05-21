@@ -1,0 +1,78 @@
+* {
+	font-family: "Iosevka" !important;
+  font-size: 15px;
+  font-weight: 700;
+}
+
+header { display: none !important; }
+
+/* Demolish Vivaldi button */
+:-webkit-any(.native, .maximized)#browser .vivaldi  {
+	display: none !important;
+}
+
+/* Remove header */
+:-webkit-any(.native, .maximized)#browser #header {
+    min-height: 0 !important;
+}
+
+/* Keep horizontal menu */
+:-webkit-any(.native, .maximized)#browser .topmenu {
+    position: relative;
+}
+
+.newtab {display: none}
+
+#tabs-container.top {
+    margin-left: -1.9%;
+    margin-top: 0;
+}
+
+.tab-position .tab.active .tab-header .favicon {
+    filter: none !important;
+}
+
+#switch button.webviewbtn img,
+.tab-position .tab .favicon {
+	background-color: transparent !important;
+}
+.tab-position .tab.active .tab-header .favicon {
+	filter: none !important;
+}
+
+/*Addressbar settings*/
+.toolbar-addressbar {
+	position: absolute;
+	transform: translateY(-200%);
+}
+
+.toolbar-addressbar:focus-within, .toolbar-addressbar:hover, .toolbar-addressbar:focus {
+	position: absolute;
+	width: 100%;
+	transform: translateY(0%);
+	filter: drop-shadow(0 1mm 2mm #000000);
+}
+
+.addressfield .pageload:not(.unstarted).progressing {
+  opacity: 1;
+  position: absolute;
+  left: 0;
+  top: 0;
+  transform: translate(-190%, 200%);
+  display: block;
+  width: auto;
+  background-color: white;
+  box-shadow: 2px 2px 2px 0px #535251cf;
+}
+
+.addressfield .pageload .pageload-ticker {
+    padding-left: 5px;
+    text-align: left;
+    border-right: 0;
+}
+
+.tab.active
+{filter: brightness(1.2) contrast(1.0) !important;}
+
+.tab:not(.active)
+{filter: brightness(0.7) contrast(1.0) !important;}
