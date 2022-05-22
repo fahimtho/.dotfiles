@@ -41,7 +41,7 @@ set statusbar-fg                "#004eff" # Foreground
 set highlight-color             "#004eff"
 set highlight-active-color      "#004eff"
 
-set default-bg                  rgba(0,0,0,0.92)
+set default-bg                  rgba(0,0,0,0.93)
 set default-fg                  "#8bb9f6" # Foreground
 
 set render-loading              true

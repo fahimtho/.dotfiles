@@ -1,0 +1,10 @@
+#!/usr/bin/env sh
+
+alive=$(wmctrl -lx | grep 'ncmpcpp' | awk 'NR==1{print $3}')
+
+if [[ -z $alive ]];
+then
+   kitty --class=ncmpcpp -e "/home/fh1m/.config/ncmpcpp/ncmpcpp-ueberzug/ncmpcpp-ueberzug"
+else
+  pkill -f ncmpcpp
+fi

@@ -51,7 +51,6 @@ hi FocusedSymbol guibg=NONE guifg=#004eff
 hi SymbolsOutlineConnector guibg=NONE guifg=#002866
 hi TelescopeBorder guifg=#002766 guibg=NONE
 
-
 " Change treesitter Elements
 hi TSKeyword guifg=#004eff
 hi TSInclude guifg=#004eff

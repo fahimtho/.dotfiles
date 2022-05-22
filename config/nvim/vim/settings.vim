@@ -70,7 +70,6 @@ let g:netrw_banner = 0
 " Run Files
 let g:asyncrun_trim = 1
 let g:asyncrun_save = 1
-let g:asyncrun_open = 15
 let g:asyncrun_qfid = 0
 
 " Nvim Tree Settings
@@ -104,7 +103,7 @@ let g:nvim_tree_icons = {
           \   'arrow_open': "",
           \   'arrow_closed': "",
           \   'default': "",
-          \   'open': "ﱮ",
+          \   'open': "",
           \   'empty': "",
           \   'empty_open': "",
           \   'symlink': "",
@@ -132,12 +131,6 @@ let g:floaterm_wintype = 'split'
 let g:undotree_SetFocusWhenToggle = 1
 let g:undotree_HelpLine = 0
 
-" Neoformat
-let g:neoformat_basic_format_align = 1
-let g:neoformat_basic_format_retab = 1
-let g:neoformat_basic_format_trim = 1
-let g:neoformat_only_msg_on_error = 1
-
 " Providers
 let g:python3_host_prog=expand('/usr/bin/python')
 
@@ -146,22 +139,11 @@ let g:code_action_menu_window_border = 'rounded'
 let g:code_action_menu_show_details = v:true
 let g:code_action_menu_show_diff = v:true
 
-" Matchit
-let g:loaded_matchit = 1
-let g:matchup_matchparen_enabled = 0
-let g:matchup_transmute_enabled = 1
-
 " Bug
 let g:cursorhold_updatetime = 100
 
-" ui
+" UI
 let g:popui_border_style = "rounded"
-
-" Glow
-let g:glow_border = "rounded"
-let g:glow_width = 120
-let g:glow_use_pager = v:true
-let g:glow_style = "dark"
 
 " Git balme
 let g:gitblame_enabled = 0

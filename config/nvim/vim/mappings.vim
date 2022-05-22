@@ -102,7 +102,7 @@ nnoremap <silent> <space>wa :lua vim.lsp.buf.add_workspace_folder()<CR>
 nnoremap <silent> <space>wr :lua vim.lsp.buf.remove_workspace_folder()<CR>
 nnoremap <silent> <space>wl :lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>
 nnoremap <silent> <space>D :lua vim.lsp.buf.type_definition()<CR>
-nnoremap <silent> <space>rn :LspRename<CR>
+nnoremap <silent> <F2> :LspRename<CR>
 nnoremap <silent> <space>ca :lua vim.lsp.buf.code_action()<CR>
 nnoremap <silent> gr :lua vim.lsp.buf.references()<CR>
 nnoremap <silent> <space>e :lua vim.diagnostic.open_float()<CR>
@@ -110,7 +110,6 @@ nnoremap <silent> d[ :lua vim.diagnostic.goto_prev()<CR>
 nnoremap <silent> d] :lua vim.diagnostic.goto_next()<CR>
 nnoremap <silent> <space>q :lua vim.diagnostic.setloclist()<CR>
 nnoremap <silent> <C-LeftMouse> :lua vim.lsp.buf.definition()<CR>
-nnoremap <silent> <M-e> :SymbolsOutline<CR>
 
 " Format Stuff
 nnoremap <silent> <space>f :lua vim.lsp.buf.formatting()<CR>

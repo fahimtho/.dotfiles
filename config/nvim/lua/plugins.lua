@@ -325,7 +325,6 @@ use {
   end
 }
 
-
 -- Code Action Menu
 use {
   'weilbith/nvim-code-action-menu',
@@ -347,13 +346,6 @@ use {
   config = function()
     require "plugins.lsp"
   end
-}
-
--- Markdown
-use {
-  'iamcco/markdown-preview.nvim',
-  run = 'cd app && yarn install',
-  ft = {"markdown"}
 }
 
 -- Nice UI
@@ -398,6 +390,13 @@ use {
   end
 }
 
+-- Nice Json
+use {
+  'gennaro-tedesco/nvim-jqx',
+  opt = true,
+  cmd = {"JqxList","JqxQuery"}
+}
+
 -- Telescope
 use 'nvim-telescope/telescope-github.nvim' -- Github
 use "nvim-telescope/telescope-file-browser.nvim" -- File Browser
@@ -428,6 +427,7 @@ use 'nishigori/increment-activator' -- good enhance
 use 'voldikss/vim-floaterm' -- Floating Terminal
 use 'f-person/git-blame.nvim' -- Git Blame
 use 'wakatime/vim-wakatime' -- stats
+use "axieax/urlview.nvim"
 
 -- Lsp, Treesitter
 use 'David-Kunz/treesitter-unit' -- Select quickly

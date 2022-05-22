@@ -1,5 +1,6 @@
 " setting options(internal)
 set number
+colorscheme elflord
 syntax on
 
 " mapings

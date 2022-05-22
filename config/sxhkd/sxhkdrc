@@ -32,7 +32,7 @@ super + f
 
 # Terminal with Tmux
 super + Return
-	jump 'tmux' 'kitty --class=tmux -1 /home/fh1m/.scripts/Main'
+	jump 'Main' 'kitty --class=Main -1 /home/fh1m/.scripts/Main'
 
 # Normal Terminal
 alt + Return
@@ -56,7 +56,7 @@ control + m
 
 # Music Player 2
 alt + control + m
-  ~/.config/polybar/scripts/ncmpcpp-player
+  ~/.scripts/ncmpcpp-player
 
 # Notion
 alt + n
@@ -141,6 +141,10 @@ alt + F1
 # kill using mouse (aka) xkill
 shift + F1
 	xkill
+
+# Move Current Window To Extra Workspace
+control + alt + e
+  bspc node -d Ext
 
 # Lockscreen
 super + l
