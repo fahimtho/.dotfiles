@@ -32,7 +32,7 @@ super + f
 
 # Terminal with Tmux
 super + Return
-	jump 'Main' 'kitty --class=Main -1 /home/fh1m/.scripts/Main'
+	jump 'tmux' 'kitty --class=tmux -1 /home/fh1m/.scripts/Main'
 
 # Normal Terminal
 alt + Return
@@ -59,7 +59,7 @@ alt + control + m
   ~/.scripts/ncmpcpp-player
 
 # Notion
-alt + n
+super + n
   jump 'notion-app-enhanced' 'notion-app-enhanced'
 
 # Blender
@@ -124,7 +124,7 @@ super + b
 
 # Open Files with Rofi
 super + o
-  rofi -show file-browser-extended -file-browser-dir ~ -lines 29 -xoffset -694 -yoffset -488 -width 500 -no-fixed-num-lines -show-icons
+  rofi -show file-browser-extended -file-browser-dir ~ -lines 11 -xoffset -694 -yoffset -488 -width 500 -no-fixed-num-lines -show-icons
 
 # Youtube Suggest stuff
 alt + y
@@ -142,6 +142,9 @@ super + y
 super + c
   ~/.scripts/econfig
 
+# List Sinks
+super + shift + s
+  ~/.scripts/list_sinks
 
 ##############
 ## One Task ##

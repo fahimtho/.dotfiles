@@ -7,7 +7,7 @@ inputbar {
 window {
     border: 					1px;
     border-color: 					#000d4d;
-    border-radius: 					5px;
+    border-radius: 					2px;
     padding: 						2;
     width: 							10%;
     x-offset:                       713;

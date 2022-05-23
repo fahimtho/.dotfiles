@@ -10,7 +10,7 @@ colorscheme tokyonight " set theme
 hi Normal guibg=#000000 guifg=None
 hi pmenusbar guibg=#0d0d1a
 hi Pmenu guibg=none guifg=#004eff
-hi PmenuSel guibg=#02061a guifg=#004eff
+hi PmenuSel guibg=#10171a guifg=#004eff
 hi Directory guifg=#004eff
 hi CursorLine gui=none guibg=none
 hi CursorLineNr guifg=#004eff gui=none

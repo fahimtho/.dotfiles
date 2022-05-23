@@ -9,7 +9,7 @@ if [[ -z "$artist" ]];
 then
   exit 1
 else
-  album=$(ls $top"$artist" | rofi -dmenu -p  -i -lines '11' -no-fixed-num-lines -width "400" -yoffset "-488" -xoffset "-743" -no-fixed-num-lines)
+  album=$(ls $top"$artist" | rofi -dmenu -p  -i -lines '11' -no-fixed-num-lines -width "400" -yoffset "-491" -xoffset "-743" -no-fixed-num-lines)
   if [[ -z "$album" ]];
   then
     exit 1

@@ -4,7 +4,7 @@ alive=$(wmctrl -lx | grep 'music' | awk 'NR==1{print $3}')
 
 if [[ -z $alive ]];
 then
-  kitty --class=player miniplayer
+  kitty --class=music -e ncmpcpp -c '~/.config/ncmpcpp/config-2'
 else
   pkill -f player
 fi

@@ -44,14 +44,15 @@ bspc rule -a Sxiv                     state=floating
 bspc rule -a '*:*:Picture in picture' state=floating
 bspc rule -a todos                    state=floating rectangle=558x400+689+43
 bspc rule -a focus                    state=floating rectangle=407x165+748+41
-bspc rule -a music                    state=floating rectangle=782x942+22+68
-bspc rule -a lyrics                   state=floating rectangle=1047x692+832+186
+bspc rule -a player                   state=floating rectangle=782x942+22+68
+bspc rule -a music                    state=floating rectangle=1047x463+839+57
+bspc rule -a lyrics                   state=floating rectangle=1049x482+839+547
 bspc rule -a ncmpcpp                  state=floating rectangle=1909x512+5+39
 bspc rule -a calendar                 state=floating rectangle=712x295+611+42
 bspc rule -a typing                   state=floating rectangle=917x275+491+409
 
 # Specefic
-bspc rule -a Main                     desktop=^1 follow=on
+bspc rule -a tmux                     desktop=^1 follow=on
 bspc rule -a Code                     desktop=^4 follow=on
 bspc rule -a qBittorrent              desktop=^13 follow=off
 bspc rule -a discord                  desktop=^10 follow=off
