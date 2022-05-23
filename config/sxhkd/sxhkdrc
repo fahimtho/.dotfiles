@@ -118,6 +118,31 @@ Print
 super + alt + c
   rofi-code -r "rofi -dmenu -p '' -i -width '300' -xoffset '-795' -yoffset '-491'  -no-fixed-num-lines"
 
+# Books Menu
+super + b
+  ~/.scripts/Books
+
+# Open Files with Rofi
+super + o
+  rofi -show file-browser-extended -file-browser-dir ~ -lines 29 -xoffset -694 -yoffset -488 -width 500 -no-fixed-num-lines -show-icons
+
+# Youtube Suggest stuff
+alt + y
+  ~/.scripts/Search/youtube-suggest
+
+# Google Suggest Stuff
+alt + g
+  ~/.scripts/Search/google-suggest
+
+# Watch Youtube
+super + y
+  ytfzf -D -N -f &
+
+# Edit Confs Quickly
+super + c
+  ~/.scripts/econfig
+
+
 ##############
 ## One Task ##
 ##############
@@ -263,43 +288,20 @@ alt + s
 super + alt + s
   ~/.scripts/snip
 
-# Books Menu
-super + b
-  ~/.scripts/Books
-
 # Promte The current window
 alt + space
   ~/.scripts/window-master
-
-# Open Files with Rofi
-super + o
-  rofi -show file-browser-extended -file-browser-dir ~ -lines 29 -xoffset -694 -yoffset -488 -width 500 -no-fixed-num-lines -show-icons
-
-super + c
-  ~/.scripts/econfig
 
 # Color [ HEX ]
 super + shift + c
   farge --notify
 
-# Youtube Suggest stuff
-alt + y
-  ~/.scripts/Search/youtube-suggest
-
-# Watch Youtube
-super + y
-  ytfzf -D -N -f &
-
-# Google Suggest Stuff
-alt + g
-  ~/.scripts/Search/google-suggest
-
 # Look words [dictionary]
-alt + l
+alt + i
   notify-send "$(~/.scripts/dict $(xclip -selection clipboard -out) | sed 's/\x1b\[[0-9;]*m//g' )" -i "lol" -t 1000000
 
 # Look words [urban Dictionary]
-super + u
+alt + u
   notify-send "$(ud $(xclip -selection clipboard -out) | sed 's/\x1b\[[0-9;]*m//g' )" -i "lol" -t 1000000
 
 # Turn down volumn

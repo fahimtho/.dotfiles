@@ -65,7 +65,7 @@
 # Window
     title = Dunst
     class = Dunst
-    corner_radius = 5
+    corner_radius = 1
     ignore_dbusclose = false
     force_xwayland = false
     force_xinerama = false

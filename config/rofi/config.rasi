@@ -28,7 +28,7 @@ configuration {
 window {
     background-color:             @background;
     border:                       1px;
-    border-radius:                5px;
+    border-radius:                1px;
     border-color:                 @bordercolor;
     padding:                      3;
 }

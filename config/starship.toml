@@ -1,23 +1,23 @@
-# General Settings
-format = """$directory$jobs$git_branch$character"""
-add_newline = false
+format =                     """$directory$jobs$character"""
+right_format =               """$git_branch"""
+add_newline =                false
 
 
 [directory]
-format = "[$path]($style)[$read_only]($read_only_style) " 
-truncation_length = 1
-truncate_to_repo = true
-style = "bold blue"
-home_symbol = "~"
-truncation_symbol = ""
-read_only = " "
-read_only_style = "blue"
-fish_style_pwd_dir_length = 1
+format =                     "[$path]($style)[$read_only]($read_only_style) "
+truncation_length =          1
+truncate_to_repo =           true
+style =                      "bold blue"
+home_symbol =                "~"
+truncation_symbol =          ""
+read_only =                  " "
+read_only_style =            "blue"
+fish_style_pwd_dir_length =  1
 
 [character]
-success_symbol = "[❱](bold blue)"
-error_symbol = "[❱](bold blue)"
+success_symbol =             "[❱](bold blue)"
+error_symbol =               "[❱](bold blue)"
 
-
-
-
+[git_branch]
+format =                     "[$symbol$branch(:$remote_branch)]($style)"
+symbol =                     " "

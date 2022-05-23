@@ -1,10 +1,10 @@
 [credentials]
 ; spotify username, can be found on your 'account overview'
-username = 
+username = tm9cregokrmgw1rr8uiok117y
 ; the client id for your application, should be found on the application page on developer.spotify.com/dashboard/application
-client_id = 
+client_id = bf90bb3c376a4f24945ad7857061c865
 ; the client secret for your application, should be found on the application page on developer.spotify.com/dashboard/application
-client_secret = 
+client_secret = e97a86fa80ca43e495390d283f8856ec
 redirect_uri = http://localhost:8888/callback
 cache_path = /home/fh1m/.cache/rofify/spotify_token.cache
 
