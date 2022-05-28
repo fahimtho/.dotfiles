@@ -1,0 +1,10 @@
+status=$(bluetoothctl info | wc -l)
+
+if [[ $status == 1 ]];
+then
+  printf " %%{o#DE000000}%%{u#DE000000}%%{B#004eff}%%{F#000000}%%{+u}%%{+o} BT %%{B- F- -u -o} alone"
+  exit 0
+else
+  printf " %%{o#DE000000}%%{u#DE000000}%%{B#004eff}%%{F#000000}%%{+u}%%{+o} BT %%{B- F- -u -o}$(rofi-bluetooth --status)"
+  exit 0
+fi

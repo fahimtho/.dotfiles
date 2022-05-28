@@ -7,4 +7,6 @@ mpc update # update Database
 
 mpc load "$(mpc lsplaylists | sort | uniq | shuf -n 1)" # load random playlist
 
+mpc volume 70 # set volumn
+
 mpc random true # Randomise
