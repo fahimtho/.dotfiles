@@ -428,6 +428,7 @@ use 'voldikss/vim-floaterm' -- Floating Terminal
 use 'f-person/git-blame.nvim' -- Git Blame
 use 'wakatime/vim-wakatime' -- stats
 use "axieax/urlview.nvim"
+use 'nanotee/zoxide.vim'
 
 -- Lsp, Treesitter
 use 'David-Kunz/treesitter-unit' -- Select quickly

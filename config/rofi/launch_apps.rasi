@@ -15,8 +15,8 @@ configuration {
     window-format: 					    "[{w}] ··· {c}";
     click-to-exit: 					    true;
     combi-hide-mode-prefix: 		true;
-    display-drun: 					    " ";
-    drun-display-format:        "{name}";
+    display-drun: 					    " Apps ";
+    drun-display-format:        " {name} ";
     location:                   1;
 }
 
@@ -36,9 +36,9 @@ window {
 }
 
 prompt {
-    spacing: 						5;
+    spacing: 						2;
     border: 						0;
-    text-color: 					#004eff;
+    text-color: 					#000000;
 }
 
 textbox-prompt-colon {
@@ -48,20 +48,10 @@ textbox-prompt-colon {
     text-color: 					inherit;
 }
 
-entry {
-    spacing:    					0;
-    text-color: 					#8bb9f6;
-}
-
-case-indicator {
-    spacing:    					0;
-    text-color: 					#004eff;
-}
-
 inputbar {
     spacing:    					0px;
-    text-color: 					#004eff;
-    padding:    					12px;
+    text-color: 					#000000;
+    padding:    					5px;
     children: 						[ prompt,textbox-prompt-colon,entry ];
 }
 
@@ -82,15 +72,11 @@ listview {
     padding: 						5px 5px 5px 5px;
 }
 
-element-text, element-icon {
-    background-color: #00000000;
-    text-color:       inherit;
-}
 
 element {
     border: 						0px;
-    border-radius: 					4px;
-    padding: 						5px;
+    border-radius: 				4px;
+    padding: 						  5px;
 }
 element normal.normal {
     background-color: 				#000000;
@@ -147,8 +133,4 @@ message {
     border: 						0px;
     border-color: 					#004eff;
     padding: 						1px;
-}
-
-textbox {
-    text-color: 					#004eff;
 }

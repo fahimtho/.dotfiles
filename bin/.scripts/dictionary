@@ -1,2 +1,2 @@
 #!/usr/bin/env sh
-notify-send "$(~/.scripts/dict $(rofi -dmenu -no-fixed-num-lines -i -width "300" -p "﬜" -yoffset "-492" -xoffset "-795") | sed 's/\x1b\[[0-9;]*m//g')" -i "lol" -t 1000000
+notify-send "$(~/.scripts/dict $(rofi -dmenu -no-fixed-num-lines -i -width "300" -p " Define " -yoffset "-492" -xoffset "-795") | sed 's/\x1b\[[0-9;]*m//g')" -i "lol" -t 1000000

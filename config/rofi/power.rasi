@@ -35,16 +35,10 @@ window {
     border: 					1px;
     border-color: 					#000d4d;
     border-radius: 					1px;
-    padding: 						8;
+    padding: 						5;
     width: 							20%;
     x-offset:                       -752;
     y-offset:                       -442;
-}
-
-prompt {
-    spacing: 						5;
-    border: 						0;
-    text-color: 					#004eff;
 }
 
 textbox-prompt-colon {
@@ -67,8 +61,8 @@ case-indicator {
 inputbar {
     spacing:    					0px;
     text-color: 					#004eff;
-    padding:    					5px;
-    children: 						[ prompt ];
+    padding:    					0px;
+    children: 						[];
 }
 
 mainbox {
@@ -171,8 +165,9 @@ scrollbar {
 
 message {
     border: 						0px;
-    border-color: 					#004eff;
-    padding: 						1px;
+    border-color: 			#004eff;
+    padding: 						7px;
+
 }
 
 textbox {

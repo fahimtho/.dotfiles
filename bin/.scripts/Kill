@@ -1,14 +1,14 @@
 #!/usr/bin/env bash
 
-MENU="rofi -theme ~/.config/rofi/reverse.rasi -dmenu -i  -width "1913" -yoffset "-504"  -l 10 -p   -no-fixed-num-lines -selected-row 1"
+MENU="rofi -theme ~/.config/rofi/reverse.rasi -dmenu -i  -width "1913" -yoffset "-504"  -l 10 -no-fixed-num-lines -selected-row 1 -p"
 
 main() {
     selected="$(ps aux --user "$USER" --sort -rss | \
-                ${MENU} "kill" "$@" | \
+                $MENU " Kill Process " "$@" | \
                 awk '{print $2" "$11}')";
 
     if [[ -n $selected ]]; then
-        answer="$(echo -e "Yes\nNo" | ${MENU} "Kill $selected?" "$@")"
+        answer="$(echo -e "Yes\nNo" | $MENU "Kill $selected?" "$@")"
 
         if [[ $answer == "Yes" ]]; then
             kill -9 "${selected%% *}"

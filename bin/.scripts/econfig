@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-MENU="rofi -dmenu -no-fixed-num-lines -i -width "420" -xoffset  "-734" -yoffset "-491" -l 5 -columns 2 -p "
+MENU="rofi -dmenu -no-fixed-num-lines -i -width "420" -xoffset  "-734" -yoffset "-491" -l 5 -columns 2 -p"
 
 declare -A confedit_list
 confedit_list[  bash]="$HOME/.bashrc"
@@ -44,7 +44,7 @@ main() {
 
   # Piping the above array (cleaned) into dmenu.
   # We use "printf '%s\n'" to format the array one item to a line.
-  choice=$(printf '%s\n' "${!_clean_list[@]}" | sort | ${MENU} 'Edit config:' "$@")
+  choice=$(printf '%s\n' "${!_clean_list[@]}" | sort | ${MENU} ' Confs ' "$@")
 
   # What to do when/if we choose a file to edit.
   if [ "$choice" ]; then

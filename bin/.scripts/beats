@@ -31,7 +31,7 @@ menu(){
 }
 
 main() {
-	choice=$(menu | rofi -dmenu -p "" -no-fixed-num-lines -i -width "300" -xoffset "-795" -yoffset "-490" -lines 7 | cut -d. -f1)
+	choice=$(menu | rofi -dmenu -p " Lofi Beats " -no-fixed-num-lines -i -width "300" -xoffset "-795" -yoffset "-490" -lines 7 | cut -d. -f1)
 
 	case $choice in
 		1)

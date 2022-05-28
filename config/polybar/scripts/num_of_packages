@@ -19,7 +19,7 @@ fi
 updates=$((updates_arch + updates_aur))
 
 if [ "$updates" -gt 0 ]; then
-    echo "$updates"
+    echo "%{o#000000}%{u#000000}%{B#004eff}%{F#000000}%{+u}%{+o} UP %{B- F- -u -o} $updates "
 else
     echo "Wait"
 fi

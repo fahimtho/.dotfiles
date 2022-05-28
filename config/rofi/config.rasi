@@ -2,13 +2,13 @@ configuration {
     show-icons:                      false;
     icon-theme:                      "We";
     window-format: 				           "{w} ··· {t}";
-    display-window: 				         " ";
-    display-emoji: 				           " ";
-    display-file-browser-extended:   " ";
+    display-window: 				         " Windows ";
+    display-emoji: 				           " Emojis ";
+    display-file-browser-extended:   " Files ";
 
 }
 * {
-    font:                         "Liga Iosevka Nerd Font 10";
+    font:                         "Iosevka Heavy 10";
     foreground:                   #8bb9f6;
     background-color:             #000000;
     active-background:            #000d4d;
@@ -28,9 +28,9 @@ configuration {
 window {
     background-color:             @background;
     border:                       1px;
-    border-radius:                1px;
+    border-radius:                0px;
     border-color:                 @bordercolor;
-    padding:                      3;
+    padding:                      5;
 }
 
 mainbox {
@@ -55,7 +55,7 @@ listview {
     border-color:                 @bordercolor;
     spacing:                      5px;
     scrollbar:                    false;
-    padding:                      5px 5px 5px 5px ;
+    padding:                      3px 3px 3px 3px ;
 }
 
 element {
@@ -110,25 +110,26 @@ sidebar {
     border-color:                 @separatorcolor;
 }
 
-#case-indicator {
+case-indicator {
     spacing:                      0;
     text-color:                   @foreground;
 }
 
 entry {
-    spacing:                      5;
     text-color:                   @foreground;
-    padding:                      0% 0% 0% 0%;
+    padding:                      2px 0px 0px 0px;
 }
 
 prompt {
-    spacing:                      0;
-    text-color:                   #004eff;
+    spacing:                      2;
+    padding:                      2px;
+    text-color:                   #000000;
+    background-color:             #004eff;
 }
 
 inputbar {
-    spacing:                      10px;
-    padding:                      10px;
+    spacing:                      5px;
+    padding:                      5px;
     children:                     [ prompt,textbox-prompt-colon,entry,case-indicator ];
 }
 
@@ -151,7 +152,7 @@ element-icon {
 element selected {
     text-color:                    #000000;
 	  border:							             0% 0% 0% 0%;
-    border-radius:                 1px;
+    border-radius:                 0px;
 }
 
 element-text {

@@ -6,7 +6,7 @@ config_file="${1:-"/home/fh1m/.tasks.json"}"
 tasks=$(cat $config_file)
 
 # Pass tasks to rofi, and get the output as the selected option
-selected=$(echo $tasks | jq -j 'map(.name) | join("\n")' | rofi -dmenu -matching fuzzy -i -p "" -lines 5 -columns 2 -width "430" -yoffset "-492" -xoffset "-729" -no-fixed-num-lines)
+selected=$(echo $tasks | jq -j 'map(.name) | join("\n")' | rofi -dmenu -matching fuzzy -i -p " Tasks " -lines 5 -columns 2 -width "430" -yoffset "-492" -xoffset "-729" -no-fixed-num-lines)
 task=$(echo $tasks | jq ".[ ] | select(.name == \"$selected\")")
 
 # Exit if no task was found

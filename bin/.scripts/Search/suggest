@@ -10,15 +10,15 @@ handler=$(dirname $0)/handler
 
  [ ! -f "$handler" ] && echo "invalid path to handler script" && exit 1
 case "$API" in
-"google") prompt="" ;;
+"google") prompt=" Google " ;;
 "deezer") prompt="Music: " ;;
-"youtube") prompt="" ;;
+"youtube") prompt=" Youtube " ;;
 "lastfm") prompt="Music: " ;;
 "books") prompt="Books: " ;;
 "wikipedia") prompt="Wikipedia: " ;;
 "ddg") prompt="Ddg: " ;;
 "amazon") prompt="Amazon: " ;;
-"archwiki") prompt="" ;;
+"archwiki") prompt=" ArchWiki " ;;
 "baidu") prompt="Baidu: " ;;
 *) echo "unrecognized API" && exit 1 ;;
 esac

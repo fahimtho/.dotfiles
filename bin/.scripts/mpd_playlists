@@ -1,6 +1,6 @@
 #!/usr/bin/env sh
 
-playlist=$(mpc lsplaylists | rofi -dmenu -p 蘿 -i -no-fixed-num-lines -width "20" -yoffset "-491" -xoffset "-753")
+playlist=$(mpc lsplaylists | rofi -dmenu -p " Playlists " -i -no-fixed-num-lines -width "20" -yoffset "-491" -xoffset "-753")
 
 if [[ -z $playlist ]];
 then

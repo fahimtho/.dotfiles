@@ -47,7 +47,7 @@ if tmp == "    Songs":
     if track > 1:
         tlist.rstrip()
         tlist = "[Playlists]\n" + tlist
-        rofi = Popen(["rofi", "-width", "30", "-lines", "11", "-yoffset", "-490", "-xoffset", "-656", "1", "-i", "-dmenu", "-p", "蘿", "-no-fixed-num-lines"], stdout=PIPE, stdin=PIPE)
+        rofi = Popen(["rofi", "-width", "30", "-lines", "25", "-yoffset", "-490", "-xoffset", "-656", "1", "-i", "-dmenu", "-p", "蘿", "-no-fixed-num-lines"], stdout=PIPE, stdin=PIPE)
         tmp = rofi.communicate(input=tlist.encode())[0].decode().rstrip()
         tmp = tmp[tmp.find("[")+1:tmp.find("]")]
     else:

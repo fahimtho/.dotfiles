@@ -16,7 +16,7 @@ confirm_exit() {
 	rofi -dmenu\
 		-i\
 		-no-fixed-num-lines\
-		-p "Are You Sure ? "\
+		-p " Are You Sure "\
 		-theme ~/.config/rofi/msg.rasi
 }
 
@@ -28,7 +28,7 @@ msg() {
 # Variable passed to rofi
 options="$suspend\n$reboot\n$shutdown\n$lock\n$logout"
 
-chosen="$(echo -e "$options" | $rofi_command -p "$uptime" -dmenu -selected-row 2)"
+chosen="$(echo -e "$options" | $rofi_command -mesg "$uptime" -dmenu -selected-row 2)"
 case $chosen in
     $shutdown)
 		ans=$(confirm_exit &)

@@ -1,0 +1,4 @@
+#!/usr/bin/env sh
+process=$( ps --user "$USER" | sed '1d' | awk '{ print $4 }' | sort | uniq | rofi -theme ~/.config/rofi/reverse.rasi -dmenu -i  -width "220" -yoffset "-480" -xoffset "-835"  -l 5 -p ' Kill '  -no-fixed-num-lines )
+pid=$(pidof $process)
+kill -9 $pid

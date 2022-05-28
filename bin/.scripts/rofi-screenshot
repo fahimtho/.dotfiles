@@ -145,7 +145,7 @@ main() {
   fi
 
   # Get choice from rofi
-  choice=$( (get_options) | rofi -xoffset "-794" -yoffset "-404" -width "300" -lines "4" -dmenu -i -fuzzy -p " " )
+  choice=$( (get_options) | rofi -xoffset "-794" -yoffset "-404" -width "300" -lines "4" -dmenu -i -fuzzy -p " Screenshot Utils " )
 
   # If user has not picked anything, exit
   if [[ -z "${choice// }" ]]; then

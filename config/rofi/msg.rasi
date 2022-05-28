@@ -40,12 +40,6 @@ window {
     y-offset:                       -490;
 }
 
-prompt {
-    spacing: 						5;
-    border: 						0;
-    text-color: 					#004eff;
-}
-
 textbox-prompt-colon {
     expand: 						false;
     str: 							" ";

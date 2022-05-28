@@ -30,7 +30,7 @@ gen_list(){
 
 main() {
   get_books
-  book=$( (gen_list) | rofi -dmenu -lines "100" -width "1913" -yoffset "-504" -theme ~/.config/rofi/reverse.rasi -i -matching fuzzy -no-custom -location 0 -p "龎" -no-fixed-num-lines )
+  book=$( (gen_list) | rofi -dmenu -lines "100" -width "1913" -yoffset "-504" -theme ~/.config/rofi/reverse.rasi -i -matching fuzzy -no-custom -location 0 -p " Books " -no-fixed-num-lines )
   if [ -n "$book" ]; then
     zathura "${BOOKS[$book]}"
   fi

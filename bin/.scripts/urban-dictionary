@@ -1,6 +1,6 @@
 #!/usr/bin/env sh
 
-word=$(rofi -dmenu -no-fixed-num-lines -i -width "300" -p "﬜" -yoffset "-490" -xoffset "-795")
+word=$(rofi -dmenu -no-fixed-num-lines -i -width "300" -p " Urban Dictionary " -yoffset "-490" -xoffset "-795")
 
 if [[ -z "$word" ]];
 then

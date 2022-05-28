@@ -1,0 +1,9 @@
+#!/bin/sh
+
+time=$((20 - $(date '+%-M') % 20))
+
+if [ $time -eq 20 ]; then
+   echo '%{o#000000}%{u#000000}%{B#004eff}%{F#000000}%{+u}%{+o} EYE %{B- F- -u -o} Look Away' &
+fi
+
+echo "%{o#000000}%{u#000000}%{B#004eff}%{F#000000}%{+u}%{+o} EYE %{B- F- -u -o} $time min "

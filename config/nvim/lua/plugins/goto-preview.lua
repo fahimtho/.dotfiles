@@ -2,7 +2,7 @@
 require('goto-preview').setup {
   width = 80;
   height = 20;
-  border = {"", "─" ,"╮", "│", "╯", "─", "╰", "│"};
+  border = {"", "─", "┐", "│", "┘", "─", "└", "│" },
   default_mappings = false;
   debug = false;
   opacity = nil;

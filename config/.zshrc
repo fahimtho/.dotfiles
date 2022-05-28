@@ -156,3 +156,4 @@ echo | fzf -q "$*" --preview-window=up:99% --preview="eval {q}"
 # calc
 calculate() python3 -c "from math import *; print($*);"
 alias c="noglob calculate"
+export PATH=$PATH:/home/fh1m/.spicetify

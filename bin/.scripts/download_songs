@@ -1,7 +1,9 @@
+#!/usr/bin/env sh
+
 export SPOTIPY_CLIENT_ID='bf90bb3c376a4f24945ad7857061c865'
 export SPOTIPY_CLIENT_SECRET='e97a86fa80ca43e495390d283f8856ec'
 
-link=$(rofi -dmenu -p 螺 -no-fixed-num-lines -i -width "800" -yoffset "-50")
+link=$(rofi -dmenu -p " Download Songs " -no-fixed-num-lines -i -width "800" -yoffset "-50")
 
 if [[ -z "$link" ]];
 then

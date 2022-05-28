@@ -1,7 +1,12 @@
 * {
 	font-family: "Iosevka" !important;
   font-size: 15px;
-  font-weight: 700;
+  font-weight: 1000;
+}
+
+body {
+  background-color: rgba(0,0,0,0) !important;
+  foreground-color: #000000 !important;
 }
 
 header { display: none !important; }

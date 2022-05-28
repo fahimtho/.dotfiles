@@ -59,8 +59,8 @@ basic.file = {
             { ' ', 'default' },
             {b_components.cache_file_icon({ default = '' }), 'default'},
             { ' ', 'default' },
-            { b_components.cache_file_name(' No Name ', ''), '' },
-            { b_components.file_modified(' '), '' },
+            { b_components.cache_file_name('No Name', ''), '' },
+            { b_components.file_modified(' '), '' },
         }
     end,
 }

@@ -1,11 +1,11 @@
 #!/usr/bin/env sh
 n=1
-time="$(rofi -dmenu -no-fixed-num-lines -xoffset "-744" -yoffset "-491" -width "400" -i -p '')"
+time="$(rofi -dmenu -no-fixed-num-lines -xoffset "-744" -yoffset "-491" -width "400" -i -p ' Time ')"
 if [[ -z "$time" ]];
 then
   exit 1
 else
-  msg="$(rofi -dmenu -no-fixed-num-lines -xoffset "-744" -yoffset "-491" -width "400" -i -p '')"
+  msg="$(rofi -dmenu -no-fixed-num-lines -xoffset "-744" -yoffset "-491" -width "400" -i -p ' Msg ')"
   if [[ -z "$msg" ]];
   then
     exit

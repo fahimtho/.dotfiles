@@ -94,6 +94,10 @@ shift + space
 super + k
   ~/.scripts/Kill
 
+# Kill All General
+alt + k
+ ~/.scripts/killall
+
 # Twitch
 alt + control + s
  notify-send "Let's Go!!!" "Sensei, We will be watching some twitch" -i ~/Pictures/.icons/twitch.png && ~/.scripts/rofi-ttv followed
@@ -116,7 +120,7 @@ Print
 
 # VSCODE projetcs
 super + alt + c
-  rofi-code -r "rofi -dmenu -p '' -i -width '300' -xoffset '-795' -yoffset '-491'  -no-fixed-num-lines"
+  rofi-code -r "rofi -dmenu -p ' Projects ' -i -width '300' -xoffset '-795' -yoffset '-491'  -no-fixed-num-lines"
 
 # Books Menu
 super + b
@@ -124,7 +128,7 @@ super + b
 
 # Open Files with Rofi
 super + o
-  rofi -show file-browser-extended -file-browser-dir ~ -lines 11 -xoffset -694 -yoffset -488 -width 500 -no-fixed-num-lines -show-icons
+  rofi -show file-browser-extended -file-browser-dir ~ -lines 11 -xoffset -694 -yoffset -490 -width 500 -no-fixed-num-lines -show-icons
 
 # Youtube Suggest stuff
 alt + y
