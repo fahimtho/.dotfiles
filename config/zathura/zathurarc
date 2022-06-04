@@ -29,7 +29,7 @@ set completion-highlight-bg     "#004eff" # Selection
 set completion-highlight-fg     "#000000" # Foreground
 
 set index-bg                    rgb(0,0,0,0) # Background
-set index-fg                    "#004eff" # Foreground
+set index-fg                    "#8bb9f6" # Foreground
 set index-active-bg             "#004eff" # Current Line
 set index-active-fg             "#000000" # Foreground
 

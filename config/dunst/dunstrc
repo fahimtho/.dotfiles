@@ -40,7 +40,7 @@
     ignore_newline = no
 
 # Font
-    font = Iosevka 11
+    font = Iosevka Medium 11
     line_height = 5
 
 # Markup and text

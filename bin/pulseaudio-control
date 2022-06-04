@@ -16,7 +16,7 @@ SINK_NICKNAMES_PROP=
 VOLUME_STEP=2
 VOLUME_MAX=130
 # shellcheck disable=SC2016
-FORMAT='%{o#000000}%{u#000000}%{B#004eff}%{F#000000}%{+u}%{+o} $SINK_NICKNAME %{B- F- -u -o} $VOL_LEVEL%   '
+FORMAT='%{o#DE000000}%{u#DE000000}%{B#004eff}%{F#000000}%{+u}%{+o} $SINK_NICKNAME %{B- F- -u -o} $VOL_LEVEL%   '
 declare -A SINK_NICKNAMES
 declare -a ICONS_VOLUME
 declare -a SINK_BLACKLIST
@@ -337,7 +337,7 @@ function output() {
     if [ "$IS_MUTED" = "yes" ]; then
         # shellcheck disable=SC2034
         VOL_ICON=$ICON_MUTED
-        echo "${COLOR_MUTED}$(eval echo "%{o#000000}%{u#000000}%{B#004eff}%{F#000000}%{+u}%{+o} MUTED %{B- F- -u -o} $VOL_LEVEL%")${END_COLOR}"
+        echo "${COLOR_MUTED}$(eval echo "%{o#DE000000}%{u#DE000000}%{B#004eff}%{F#000000}%{+u}%{+o} MUTED %{B- F- -u -o} $VOL_LEVEL%")${END_COLOR}"
     else
         eval echo "$FORMAT"
     fi

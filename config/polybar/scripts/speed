@@ -6,7 +6,7 @@ KEYBOARD_ID="AT Translated Set 2 keyboard"
 # cpm: characters per minute
 # wpm: words per minute (1 word = 5 characters)
 METRIC=wpm
-FORMAT="%%{o#000000}%%{u#000000}%%{B#004eff}%%{F#000000}%%{+u}%%{+o} TS %%{B- F- -u -o} %d $METRIC "
+FORMAT="%%{o#010411}%%{u#010411}%%{B#004eff}%%{F#000000}%%{+u}%%{+o} TS %%{B- F- -u -o} %d $METRIC "
 
 INTERVAL=20
 

@@ -11,7 +11,7 @@ then
 fi
 
 location=$(zenity --file-selection --directory --filename=/home/fh1m/Music/)
-spotify_dl -k -l "$link" -o "$location"
+/home/fh1m/.local/bin/spotify_dl -k -l "$link" -o "$location"
 mpc update
 
 notify-send "System Status" "Sensei, Music download has been finished." -i ~/Pictures/.icons/ai.png

@@ -4,11 +4,14 @@ configuration {
     window-format: 				           "{w} ··· {t}";
     display-window: 				         " Windows ";
     display-emoji: 				           " Emojis ";
+    display-run: 				             " Run ";
+    display-ssh: 				             " SSH ";
+    display-drun: 				           " drun ";
     display-file-browser-extended:   " Files ";
 
 }
 * {
-    font:                         "Iosevka Heavy 10";
+    font:                         "MyFont Iosevka Nerd Font Mono 10";
     foreground:                   #8bb9f6;
     background-color:             #000000;
     active-background:            #000d4d;

@@ -104,10 +104,10 @@ rvstf() {
 }
 
 get_options() {
-  echo "  Capture Region   Clipboard"
-  echo "  Capture Region   File"
-  echo "  Capture Screen   Clipboard"
-  echo "  Capture Screen   File"
+  echo "  Capture Region ->  Clipboard"
+  echo "  Capture Region ->  File"
+  echo "  Capture Screen ->  Clipboard"
+  echo "  Capture Screen ->  File"
 }
 
 check_deps() {
@@ -154,19 +154,19 @@ main() {
 
   # run the selected command
   case $choice in
-    '  Capture Region   Clipboard')
+    '  Capture Region ->  Clipboard')
       crtc
       ;;
-    '  Capture Region   File')
+    '  Capture Region ->  File')
       crtf
       ;;
-    '  Capture Screen   Clipboard')
+    '  Capture Screen ->  Clipboard')
       cstc
       ;;
-    '  Capture Screen   File')
+    '  Capture Screen ->  File')
       cstf
       ;;
-    '  Record Region   File (GIF)')
+    '  Record Region ->  File (GIF)')
       rgrtf
       ;;
     '  Record Screen   File (GIF)')

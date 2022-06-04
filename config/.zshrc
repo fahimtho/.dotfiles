@@ -26,7 +26,7 @@ export FZF_DEFAULT_OPTS=$FZF_DEFAULT_OPTS'
 fpath=($HOME/.oh-my-zsh/plugins/arduino_completion_zsh $fpath)
 
 # Plugins
-plugins=(sudo fzf fzf-tab copy-pasta zsh-autopair last-working-dir copyfile colored-man-pages zsh-autosuggestions zsh-gitcd undollar zsh-lazyload copybuffer pip)
+plugins=(sudo fzf fzf-tab copy-pasta zsh-autopair last-working-dir copyfile colored-man-pages zsh-autosuggestions undollar zsh-lazyload copybuffer pip)
 
 # this line
 source $ZSH/oh-my-zsh.sh

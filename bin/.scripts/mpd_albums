@@ -3,13 +3,13 @@
 mpc update >/dev/null 2>/dev/null
 
 top=~/Music/Albums/
-artist=$(ls $top | rofi -dmenu -p " Artists " -i -width "250" -yoffset "-491" -xoffset "-818" -lines '11' -no-fixed-num-lines -lines 20)
+artist=$(ls $top | rofi -dmenu -p " Artists " -i -width "250" -yoffset "-491" -xoffset "-818" -lines '30' -no-fixed-num-lines)
 
 if [[ -z "$artist" ]];
 then
   exit 1
 else
-  album=$(ls $top"$artist" | rofi -dmenu -p " Albums " -i -lines '11' -no-fixed-num-lines -width "400" -yoffset "-491" -xoffset "-743" -no-fixed-num-lines)
+  album=$(ls $top"$artist" | rofi -dmenu -p " Albums " -i -lines '30' -no-fixed-num-lines -width "400" -yoffset "-491" -xoffset "-743" -no-fixed-num-lines)
   if [[ -z "$album" ]];
   then
     exit 1

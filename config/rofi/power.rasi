@@ -36,8 +36,8 @@ window {
     border-color: 					#000d4d;
     border-radius: 					1px;
     padding: 						5;
-    width: 							20%;
-    x-offset:                       -752;
+    width: 							30%;
+    x-offset:                       -652;
     y-offset:                       -442;
 }
 
@@ -94,7 +94,7 @@ element {
 }
 element normal.normal {
     background-color: 				#000000;
-    text-color:       				#004eff;
+    text-color:       				#8bb9f6;
 }
 element normal.urgent {
     background-color: 				#000000;
@@ -102,7 +102,7 @@ element normal.urgent {
 }
 element normal.active {
     background-color: 				#000000;
-    text-color:       				#004eff;
+    text-color:       				#8bb9f6;
 }
 element selected.normal {
     background-color: 				#004eff;
@@ -118,7 +118,7 @@ element selected.active {
 }
 element alternate.normal {
     background-color: 				#000000;
-    text-color:       				#004eff;
+    text-color:       				#8bb9f6;
 }
 element alternate.urgent {
     background-color: 				#000000;
@@ -165,11 +165,11 @@ scrollbar {
 
 message {
     border: 						0px;
-    border-color: 			#004eff;
+    border-color: 			#8bb9f6;
     padding: 						7px;
 
 }
 
 textbox {
-    text-color: 					#004eff;
+    text-color: 					#8bb9f6;
 }

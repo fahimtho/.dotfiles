@@ -4,7 +4,7 @@
 pgrep -x sxhkd > /dev/null || sxhkd &
 
 # defining workspaces
-bspc monitor -d TERMINAL BROWSER WATCH CODE NOTE READ WRITE DESIGN WORK CHAT MUSIC APPS RUN EXT
+bspc monitor -d Terminal Browser Watch Code Note Read Write Design Work Chat Music Apps Run Ext
 
 # border and gap
 bspc config border_width             0
@@ -42,8 +42,7 @@ bspc rule -a Blueman-manager          state=floating
 bspc rule -a Pavucontrol              state=floating
 bspc rule -a Sxiv                     state=floating
 bspc rule -a '*:*:Picture in picture' state=floating
-bspc rule -a todos                    state=floating rectangle=558x400+689+43
-bspc rule -a focus                    state=floating rectangle=407x165+748+41
+bspc rule -a todos                    state=floating rectangle=558x400+59+640
 bspc rule -a player                   state=floating rectangle=782x942+22+68
 bspc rule -a music                    state=floating rectangle=1047x463+839+57
 bspc rule -a lyrics                   state=floating rectangle=1049x482+839+547

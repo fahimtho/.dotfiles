@@ -1,0 +1,10 @@
+#!/usr/bin/env sh
+
+case $1 in
+  cpu)
+    notify-send "Sensei The culprit for cpu is " "$(ps -eo cmd,%mem,%cpu --sort=-%cpu | head -n 2 |  awk 'NR==2{ print $1 }')" -i ~/Pictures/.icons/ai.png
+    ;;
+  memory)
+    notify-send "Sensei The culprit for memory is " "$(ps -eo cmd,%mem,%cpu --sort=-%mem | head -n 2 |  awk 'NR==2{ print $1 }')" -i ~/Pictures/.icons/ai.png
+    ;;
+esac

@@ -1,0 +1,16 @@
+#!/usr/bin/env sh
+
+# menu Items
+chosen=$(echo -e "Youtube\nHistory\nAudio" | rofi -dmenu -i -p " YT " -width "200" -no-fixed-num-lines -yoffset "-490" -xoffset "-843")
+
+case $chosen in
+  Youtube)
+    ~/.scripts/Search/youtube-suggest
+    ;;
+  History)
+    ytfzf -DHNf
+    ;;
+  Audio)
+    ytfzf -NDfm
+    ;;
+esac

@@ -1,7 +1,7 @@
 * {
 	font-family: "Iosevka" !important;
-  font-size: 15px;
-  font-weight: 1000;
+  font-size: 14px;
+  font-weight: 900;
 }
 
 body {
@@ -47,7 +47,7 @@ header { display: none !important; }
 
 /*Addressbar settings*/
 .toolbar-addressbar {
-	position: absolute;
+	position: relative;
 	transform: translateY(-200%);
 }
 

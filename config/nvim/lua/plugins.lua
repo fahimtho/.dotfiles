@@ -252,7 +252,6 @@ use {
 -- Format QuickFix
 use {
   'https://gitlab.com/yorickpeterse/nvim-pqf.git',
-  ft = {"qf"},
   config = function ()
     require "plugins.pqf"
   end

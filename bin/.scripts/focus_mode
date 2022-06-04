@@ -18,7 +18,7 @@ then
   polybar-msg cmd hide
 else
   polybar-msg cmd show
-  bspc config window_gap 6
+  bspc config window_gap 3
 fi
 
 # Restore Location

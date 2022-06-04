@@ -23,17 +23,17 @@ if [ -n "$aqi" ]; then
         aqi=$(echo "$aqi" | jq '.data.aqi')
 
         if [ "$aqi" -lt 50 ]; then
-            echo " %{o#000000}%{u#000000}%{B#004eff}%{F#000000}%{+u}%{+o} AIR %{B- F- -u -o} $aqi"
+            echo " %{o#DE000000}%{u#DE000000}%{B#004eff}%{F#000000}%{+u}%{+o} AIR %{B- F- -u -o} $aqi"
         elif [ "$aqi" -lt 100 ]; then
-            echo " %{o#000000}%{u#000000}%{B#004eff}%{F#000000}%{+u}%{+o} AIR %{B- F- -u -o} $aqi"
+            echo " %{o#DE000000}%{u#DE000000}%{B#004eff}%{F#000000}%{+u}%{+o} AIR %{B- F- -u -o} $aqi"
         elif [ "$aqi" -lt 150 ]; then
-            echo " %{o#000000}%{u#000000}%{B#004eff}%{F#000000}%{+u}%{+o} AIR %{B- F- -u -o} $aqi"
+            echo " %{o#DE000000}%{u#DE000000}%{B#004eff}%{F#000000}%{+u}%{+o} AIR %{B- F- -u -o} $aqi"
         elif [ "$aqi" -lt 200 ]; then
-            echo " %{o#000000}%{u#000000}%{B#004eff}%{F#000000}%{+u}%{+o} AIR %{B- F- -u -o} $aqi"
+            echo " %{o#DE000000}%{u#DE000000}%{B#004eff}%{F#000000}%{+u}%{+o} AIR %{B- F- -u -o} $aqi"
         elif [ "$aqi" -lt 300 ]; then
-            echo " %{o#000000}%{u#000000}%{B#004eff}%{F#000000}%{+u}%{+o} AIR %{B- F- -u -o} $aqi"
+            echo " %{o#DE000000}%{u#DE000000}%{B#004eff}%{F#000000}%{+u}%{+o} AIR %{B- F- -u -o} $aqi"
         else
-            echo " %{o#000000}%{u#000000}%{B#004eff}%{F#000000}%{+u}%{+o} AIR %{B- F- -u -o} $aqi"
+            echo " %{o#DE000000}%{u#DE000000}%{B#004eff}%{F#000000}%{+u}%{+o} AIR %{B- F- -u -o} $aqi"
         fi
     else
         echo "$aqi" | jq -r '.data'

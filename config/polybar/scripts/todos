@@ -1,0 +1,9 @@
+#!/bin/sh
+
+todos=$(printf $(cat ~/.todos | wc -l))
+
+if [ $todos -eq 0 ]; then
+   echo '%{o#010411}%{u#010411}%{B#004eff}%{F#000000}%{+u}%{+o} TODOS %{B- F- -u -o} Chill '
+else
+  echo "%{o#010411}%{u#010411}%{B#004eff}%{F#000000}%{+u}%{+o} TODOS %{B- F- -u -o} $todos "
+fi

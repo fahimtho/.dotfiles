@@ -17,7 +17,7 @@
   },
   {
     "name": " Download Songs",
-    "command": "bspc desktop -f 'Apps' && kitty --hold --class=float -e bash ~/.scripts/download_songs"
+    "command": "bspc desktop -f 'APPS' && kitty --hold --class=float -e bash ~/.scripts/download_songs"
   },
     {
     "name": " Lofi Beats",
@@ -66,5 +66,13 @@
   {
     "name": " Money-Cxchange",
     "command": "bash ~/.scripts/exchange"
+  },
+  {
+    "name": " Word Suggetions",
+    "command": "bash ~/.scripts/word"
+  },
+  {
+    "name": " Youtube",
+    "command": "bash ~/.scripts/yt"
   }
 ]
