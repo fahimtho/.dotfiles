@@ -2,10 +2,10 @@
 local actions = require("telescope.actions")
 local action_layout = require("telescope.actions.layout")
 
-require('telescope').setup{
+require('telescope').setup {
   picker = {
-        hidden = false,
-    },
+    hidden = false,
+  },
   defaults = {
     mappings = {
       i = {
@@ -15,21 +15,22 @@ require('telescope').setup{
       },
     },
     vimgrep_arguments = {
-            "rg",
-            "--color=never",
-            "--no-heading",
-            "--with-filename",
-            "--line-number",
-            "--column",
-            "--no-ignore",
-            "--smart-case",
-            "--hidden",
-        },
+      "rg",
+      "--color=never",
+      "--no-heading",
+      "--with-filename",
+      "--line-number",
+      "--column",
+      "--no-ignore",
+      "--smart-case",
+      "--hidden",
+    },
     prompt_prefix = "   ",
+    prompt_position = "top",
+    preview_height = 0.6,
     selection_caret = "  ",
     entry_prefix = "  ",
     initial_mode = "insert",
-    borderchars = { "─", "│", "─", "│", "┌", "╮", "╯", "╰" },
     selection_strategy = "reset",
     layout_strategy = "horizontal",
     file_sorter = require("telescope.sorters").get_fuzzy_file,
@@ -38,11 +39,10 @@ require('telescope').setup{
     path_display = { "absolute" },
     winblend = 0,
     border = {},
-    borderchars = { "─", "│", "─", "│", "┌", "┐", "┘", "└" },
     color_devicons = true,
     use_less = true,
     layout_config = {
-      horizontal = { width = 0.9 , height = 0.9},
+      horizontal = { width = vim.o.columns , height = vim.o.lines },
     },
     pickers = {
       find_files = {
@@ -50,19 +50,22 @@ require('telescope').setup{
       },
     },
     extensions = {
-    fzf = {
-      fuzzy = true,
-      override_generic_sorter = true,
-      override_file_sorter = true,
-      case_mode = "smart_case",
+      fzf = {
+        fuzzy = true,
+        override_generic_sorter = true,
+        override_file_sorter = true,
+        case_mode = "smart_case",
 
-        },
       },
     },
-  }
+  },
+}
 
 -- Extentions
 require('telescope').load_extension('gh')
 require("telescope").load_extension('file_browser')
 require("telescope").load_extension("notify")
 require('telescope').load_extension('fzf')
+require('telescope').load_extension('zoxide')
+require('telescope').load_extension('projects')
+require('telescope').load_extension('dap')

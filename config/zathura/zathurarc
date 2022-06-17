@@ -59,7 +59,7 @@ set recolor-darkcolor           "#8bb9f6" # Foreground
 set adjust-open width
 set recolor true
 set guioptions none
-set font "Iosevka Custom 11"
+set font "MyFont Iosevka Nerd Font Mono 11"
 set n-completion-items 30
 set show-recent 30
 set selection-notification false

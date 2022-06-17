@@ -40,8 +40,8 @@
     ignore_newline = no
 
 # Font
-    font = Iosevka Medium 11
-    line_height = 5
+    font = Iosevka Nerd Font Mono 11
+    line_height = 4
 
 # Markup and text
     markup = full
@@ -65,7 +65,7 @@
 # Window
     title = Dunst
     class = Dunst
-    corner_radius = 1
+    corner_radius = 5
     ignore_dbusclose = false
     force_xwayland = false
     force_xinerama = false

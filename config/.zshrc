@@ -15,7 +15,7 @@ export VISUAL="nvim"
 export TERM=screen-256color
 export KEYTIMEOUT=1
 export FZF_DEFAULT_COMMAND='fd --type file --hidden --no-ignore --follow --exclude .git'
-export FZF_DEFAULT_OPTS='--height 50% --layout=reverse --prompt="❱ "'
+export FZF_DEFAULT_OPTS='--height 80% --layout=reverse --prompt="❱ "'
 export FZF_DEFAULT_OPTS=$FZF_DEFAULT_OPTS'
  --color=bg:-1,hl:#0084ff
  --color=fg+:#1f6dff,bg+:#11112e,hl+:#006fff

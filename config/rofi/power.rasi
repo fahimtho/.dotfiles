@@ -34,7 +34,7 @@ configuration {
 window {
     border: 					1px;
     border-color: 					#000d4d;
-    border-radius: 					1px;
+    border-radius: 					5px;
     padding: 						5;
     width: 							30%;
     x-offset:                       -652;

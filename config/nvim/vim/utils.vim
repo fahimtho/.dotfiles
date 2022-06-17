@@ -121,8 +121,8 @@ endfunc
 
 " Showing code context using treesitter
 func! NvimGps() abort
-	return luaeval("require'nvim-gps'.is_available()") ?
-		\ luaeval("require'nvim-gps'.get_location()") : ''
+	return luaeval("require'nvim-navic'.is_available()") ?
+		\ luaeval("require'nvim-navic'.get_location()") : ''
 endf
 
 " setting filetype

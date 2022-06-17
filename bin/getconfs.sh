@@ -8,6 +8,7 @@ cp -r ~/.bashrc ~/Files/dotfiles/config
 cp -r ~/.tabliss.json ~/Files/dotfiles/config
 cp -r ~/.tasks.json ~/Files/dotfiles/config
 cp -r ~/.tmux.conf ~/Files/dotfiles/config
+cp -r ~/.tasks ~/Files/dotfiles/config
 cp -r ~/.vimium-options.json ~/Files/dotfiles/config
 cp -r ~/.vimrc ~/Files/dotfiles/config
 cp -r ~/.Xmodmap ~/Files/dotfiles/config

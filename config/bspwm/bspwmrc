@@ -4,17 +4,17 @@
 pgrep -x sxhkd > /dev/null || sxhkd &
 
 # defining workspaces
-bspc monitor -d Terminal Browser Watch Code Note Read Write Design Work Chat Music Apps Run Ext
+bspc monitor -d Terminal Browser Watch Code Note Read Write Design Work Chat Music Apps Run
 
 # border and gap
 bspc config border_width             0
-bspc config window_gap               3
+bspc config window_gap               5
 
 # split,border color
 bspc config split_ratio              0.50
 bspc config borderless_monocle       false
 bspc config gapless_monocle          false
-bspc config focus_follows_pointer    true
+bspc config focus_follows_pointer    false
 bspc config single_monocle	 	       false
 bspc config paddingless_monocle      false
 bspc config presel_feedback	 	       true

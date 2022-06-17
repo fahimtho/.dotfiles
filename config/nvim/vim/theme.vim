@@ -3,7 +3,7 @@ let g:tokyonight_style = 'night' " Theme Variant
 let g:tokyonight_transparent = v:true " make it transparent
 let g:tokyonight_transparent_sidebar = v:true " make it transparent
 let g:tokyonight_terminal_colors = v:false
-let g:tokyonight_italic_functions = 1
+let b:tokyonight_italic_functions = v:true
 colorscheme tokyonight " set theme
 
 " Ui Configuration
@@ -50,6 +50,8 @@ hi NvimTreeWindowPicker guifg=#000000 guibg=#004eff
 hi FocusedSymbol guibg=NONE guifg=#004eff
 hi SymbolsOutlineConnector guibg=NONE guifg=#002866
 hi TelescopeBorder guifg=#002766 guibg=NONE
+hi CopilotSuggestion guifg=#565f89
+hi MatchParen guifg=#000000 guibg=#002766
 
 
 " Change treesitter Elements
@@ -95,7 +97,6 @@ highlight link NotifyTRACEBody Normal
 " Cmp
 highlight CmpItemAbbr guibg=none guifg=#004eff
 highlight CmpItemKind guibg=none guifg=#004eff
-" highlight CmpItemMenu guibg=none guifg=#004eff
 highlight CmpItemKindUnit guibg=none guifg=#004eff
 highlight CmpItemKindProperty guibg=none guifg=#004eff
 highlight CmpItemKindKeyword guibg=none guifg=#004eff

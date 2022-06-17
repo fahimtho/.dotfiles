@@ -1,0 +1,29 @@
+# vim: set fenc=utf-8 ft=dosini:
+
+[file-build]
+command=gcc "$(VIM_FILEPATH)" -o "$(VIM_FILEDIR)/$(VIM_FILENOEXT)"
+command:python=python "$(VIM_FILENAME)"
+cwd=$(VIM_FILEDIR)
+output=quickfix
+errorformat=%f:%l:%m
+save=1
+
+[file-run]
+command="$(VIM_FILEPATH)"
+command:c,cpp="$(VIM_PATHNOEXT)"
+command:go="$(VIM_PATHNOEXT)"
+command:python=python "$(VIM_FILENAME)"
+command:javascript=node "$(VIM_FILENAME)"
+command:sh=sh "$(VIM_FILENAME)"
+command:lua=lua "$(VIM_FILENAME)"
+output=terminal
+pos=floaterm
+cwd=$(VIM_FILEDIR)
+save=2
+
+[task1]
+command=echo hello $(-name), you are a $(-gender).
+output=terminal
+pos=floaterm
+
+[project-init]

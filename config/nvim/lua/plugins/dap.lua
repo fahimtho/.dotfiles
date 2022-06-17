@@ -1,20 +1,18 @@
--- Debug Signs
+-- Dap Signs
 require('dap')
-    vim.fn.sign_define('DapBreakpoint', {text='', texthl='String', linehl='', numhl=''})
-    vim.fn.sign_define('DapBreakpointCondition', {text='', texthl='String', linehl='', numhl=''})
-    vim.fn.sign_define('DapLogPoint', {text='', texthl='String', linehl='', numhl=''})
-    vim.fn.sign_define('DapStopped', {text='', texthl='String', linehl='', numhl=''})
-    vim.fn.sign_define('DapBreakpointRejected', {text='', texthl='String', linehl='', numhl=''})
+vim.fn.sign_define('DapBreakpoint', {text='', texthl='String', linehl='', numhl=''})
+vim.fn.sign_define('DapBreakpointCondition', {text='', texthl='String', linehl='', numhl=''})
+vim.fn.sign_define('DapStopped', {text='栗', texthl='String', linehl='', numhl=''})
+vim.fn.sign_define('DapBreakpointRejected', {text='', texthl='String', linehl='', numhl=''})
 
--- Debug Python adpator
+-- Python Adpter
 local dap = require('dap')
 dap.adapters.python = {
   type = 'executable';
-  command = '/bin/python';
+  command = '/usr/bin/python';
   args = { '-m', 'debugpy.adapter' };
 }
 
-local dap = require('dap')
 dap.configurations.python = {
   {
     type = 'python';
@@ -33,28 +31,3 @@ dap.configurations.python = {
     end;
   },
 }
-
--- Debug C,CPP,Rust Adptor
-local dap = require('dap')
-dap.adapters.lldb = {
-  type = 'executable',
-  command = '/usr/bin/lldb-vscode',
-  name = "lldb"
-}
-
-local dap = require('dap')
-dap.configurations.cpp = {
-  {
-    name = "Launch",
-    type = "lldb",
-    request = "launch",
-    program = "${fileBasenameNoExtension}",
-    cwd = '${workspaceFolder}',
-    stopOnEntry = false,
-    args = {},
-    runInTerminal = false,
-    postRunCommands = {'process handle -p true -s false -n false SIGWINCH'}
-  },
-}
-dap.configurations.c = dap.configurations.cpp
-dap.configurations.rust = dap.configurations.cpp

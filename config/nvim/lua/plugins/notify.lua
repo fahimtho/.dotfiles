@@ -8,10 +8,10 @@ require("notify").setup({
   background_colour = "#000000",
   minimum_width = 50,
   icons = {
-    ERROR = "  ",
-    WARN = " ",
-    INFO = "  ",
-    DEBUG = " ",
+    ERROR = "",
+    WARN = "",
+    INFO = "",
+    DEBUG = "",
     TRACE = "✎ ",
   },
 })

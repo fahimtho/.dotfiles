@@ -138,10 +138,6 @@ alt + y
 alt + g
   ~/.scripts/Search/google-suggest
 
-# Watch Youtube
-super + y
-  ytfzf -D -N -f &
-
 # Edit Confs Quickly
 super + c
   ~/.scripts/econfig

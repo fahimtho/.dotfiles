@@ -67,10 +67,17 @@ let g:tex_conceal='abdmg'
 let loaded_matchparen = 0
 let g:netrw_banner = 0
 
+" Web Dev
+let g:bracey_refresh_on_save = 1
+
+" Copilot
+let b:copilot_enabled = v:true
+
 " Run Files
 let g:asyncrun_trim = 1
 let g:asyncrun_save = 1
 let g:asyncrun_qfid = 0
+let g:asyncrun_open = 15
 
 " Nvim Tree Settings
 let g:nvim_tree_git_hl = 1
@@ -134,6 +141,13 @@ let g:undotree_HelpLine = 0
 " Providers
 let g:python3_host_prog=expand('/usr/bin/python')
 
+" Neoformat
+let g:neoformat_try_formatprg = 1
+let g:neoformat_basic_format_align = 1
+let g:neoformat_basic_format_retab = 1
+let g:neoformat_basic_format_trim = 1
+let g:neoformat_only_msg_on_error = 1
+
 " Code Action Menu
 let g:code_action_menu_window_border = 'rounded'
 let g:code_action_menu_show_details = v:true
@@ -145,38 +159,39 @@ let g:cursorhold_updatetime = 100
 " UI
 let g:popui_border_style = "rounded"
 
-" Git balme
-let g:gitblame_enabled = 0
-let g:gitblame_message_template = '<summary> • <date> • <author>'
+" Glow
+let g:glow_border = "rounded"
+let g:glow_width = 300
+let g:glow_use_pager = v:true
 
 " Enhance <C-a> and <C-x>
 let g:increment_activator_filetype_candidates = {
-  \   '_' : [
-  \     ['Pythonista', 'PHPer', 'Gopher'],
-  \     ['info', 'warning', 'notice', 'error'],
-  \   ],
-  \   'cucumber': [
-  \     ['Given', 'And', 'When', 'Then'],
-  \   ],
-  \   'erlang': [
-  \     ['module', 'export'],
-  \     [
-  \       'is_alive', 'is_atom', 'is_binary', 'is_bitstring',
-  \       'is_boolean', 'is_float', 'is_function',
-  \       'is_integer', 'is_list', 'is_number',
-  \       'is_pid', 'is_port', 'is_process_alive',
-  \       'is_record', 'is_reference', 'is_tuple',
-  \     ],
-  \   ],
-  \   'git-rebase-todo': [
-  \     ['pick', 'reword', 'edit', 'squash', 'fixup', 'exec'],
-  \   ],
-  \   'go': [
-  \     ['true', 'false', 'iota', 'nil'],
-  \     ['byte', 'complex64', 'complex128'],
-  \     ['int', 'int8', 'int16', 'int32', 'int64'],
-  \     ['uint', 'uint8', 'uint16', 'uint32', 'uint64'],
-  \     ['float32', 'float64'],
-  \     ['interface', 'struct'],
-  \   ],
-  \ }
+      \   '_' : [
+        \     ['Pythonista', 'PHPer', 'Gopher'],
+        \     ['info', 'warning', 'notice', 'error'],
+        \   ],
+        \   'cucumber': [
+          \     ['Given', 'And', 'When', 'Then'],
+          \   ],
+          \   'erlang': [
+            \     ['module', 'export'],
+            \     [
+              \       'is_alive', 'is_atom', 'is_binary', 'is_bitstring',
+              \       'is_boolean', 'is_float', 'is_function',
+              \       'is_integer', 'is_list', 'is_number',
+              \       'is_pid', 'is_port', 'is_process_alive',
+              \       'is_record', 'is_reference', 'is_tuple',
+              \     ],
+              \   ],
+              \   'git-rebase-todo': [
+                \     ['pick', 'reword', 'edit', 'squash', 'fixup', 'exec'],
+                \   ],
+                \   'go': [
+                  \     ['true', 'false', 'iota', 'nil'],
+                  \     ['byte', 'complex64', 'complex128'],
+                  \     ['int', 'int8', 'int16', 'int32', 'int64'],
+                  \     ['uint', 'uint8', 'uint16', 'uint32', 'uint64'],
+                  \     ['float32', 'float64'],
+                  \     ['interface', 'struct'],
+                  \   ],
+                  \ }

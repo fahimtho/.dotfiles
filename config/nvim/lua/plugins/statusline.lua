@@ -96,20 +96,23 @@ local default = {
     filetypes = { 'default' },
     -- Active bar
     active = {
+        { sep.left_rounded, { 'black_light', 'black' } },
         basic.file,
-        { sep.slant_right, { 'black_light', 'black' } },
+        { sep.right_rounded, { 'black_light', 'black' } },
         basic.gps,
         basic.divider,
         { ' ', hl_list.Black },
         basic.lsp_diagnos,
         { ' ', hl_list.Black },
-        { sep.slant_left, { 'black_light', 'black' } },
+        { sep.left_rounded, { 'black_light', 'black' } },
         basic.right,
+        { sep.right_rounded, { 'black_light', 'black' } },
     },
     -- Inactive bar
     inactive = {
+        { sep.left_rounded, { 'black_light', 'black' } },
         basic.file,
-        { sep.slant_right, { 'black_light', 'black' } },
+        { sep.right_rounded, { 'black_light', 'black' } },
 
     },
 }
