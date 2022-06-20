@@ -80,13 +80,13 @@ basic.right = {
 }
 
 -- Show Code Context
-basic.gps = {
+basic.location = {
     hl_colors = {
         text = { 'black_light', 'black' },
     },
     text = function()
         return {
-          {'%{NvimGps()}', 'text'},
+          {'%{Location()}', 'text'},
         }
       end,
     }
@@ -99,7 +99,7 @@ local default = {
         { sep.left_rounded, { 'black_light', 'black' } },
         basic.file,
         { sep.right_rounded, { 'black_light', 'black' } },
-        basic.gps,
+        basic.location,
         basic.divider,
         { ' ', hl_list.Black },
         basic.lsp_diagnos,

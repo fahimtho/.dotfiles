@@ -1,12 +1,9 @@
 -- Code Complete by cmp using lsp
 local cmp = require 'cmp'
 
+-- Nice Menu
 cmp.setup({
-  completion = { -- Only Comeplete When I want
-  completeopt = "menu,menuone,noinsert",
-  autocomplete = true,
-  keyword_pattern = [[\%(-\?\d\+\%(\.\d\+\)\?\|\h\w*\%(-\w*\)*\)]],
-  keyword_length = 1,
+  completion = {
   winhighlight = "Normal:Pmenu,FloatBorder:Pmenu,Search:None",
   col_offset = -3,
   side_padding = 0,
@@ -35,7 +32,6 @@ cmp.setup({
   mapping = cmp.mapping.preset.insert({ -- What to do when menu comes
     ['<C-b>'] = cmp.mapping(cmp.mapping.scroll_docs(-4), { 'i', 'c' }),
     ['<C-f>'] = cmp.mapping(cmp.mapping.scroll_docs(4), { 'i', 'c' }),
-    ['<S-Tab>'] = cmp.mapping(cmp.mapping.complete(), { 'i', 'c' }),
     ['<C-y>'] = cmp.config.disable,
     ['<C-e>'] = cmp.mapping({
       i = cmp.mapping.abort(),
@@ -48,13 +44,13 @@ cmp.setup({
     { name = 'nvim_lsp' },
     { name = 'snippy' },
     { name = 'latex_symbols' },
-    { name = 'buffer' },
     { name = 'path' },
 
   }, {
   })
 })
 
+-- Cmp Menu Order
 local cmp = require "cmp"
 cmp.setup {
   sorting = {
@@ -62,42 +58,12 @@ cmp.setup {
       cmp.config.compare.offset,
       cmp.config.compare.exact,
       cmp.config.compare.score,
-      require "cmp-under-comparator".under,
       cmp.config.compare.kind,
       cmp.config.compare.sort_text,
       cmp.config.compare.length,
       cmp.config.compare.order,
     },
   },
-}
-
--- icons for cmp
-local kind_icons = {
-  Text = " Text",
-  Method = " Method",
-  Function = " Function",
-  Constructor = " Constructor",
-  Field = "ﰮ Field",
-  Variable = "[] Variable",
-  Class = "ﴯ Class",
-  Interface = "  Interface",
-  Module = " Module",
-  Property = "ﰠ Property",
-  Unit = "塞 Unit",
-  Value = "  Value",
-  Enum = "  Enum",
-  Keyword = "  Keyword",
-  Snippet = " Snip",
-  Color = " Color",
-  File = " File",
-  Reference = "渚 Reference",
-  Folder = "  Folder",
-  EnumMember = "  EnumMember",
-  Constant = " Constant",
-  Struct = "פּ Struct",
-  Event = " Event",
-  Operator = "  Operator",
-  TypeParameter = " TypeParameter"
 }
 
 -- Menu Look and Feel
@@ -109,7 +75,7 @@ formatting = {
       local kind = require("lspkind").cmp_format({ mode = "symbol_text", maxwidth = 50 })(entry, vim_item)
       local strings = vim.split(kind.kind, "%s", { trimempty = true })
       kind.kind = " " .. strings[1] .. " "
-      kind.menu = "    (" .. strings[2] .. ")"
+      kind.menu = "    " .. strings[2] .. ""
       return kind
     end,
   },

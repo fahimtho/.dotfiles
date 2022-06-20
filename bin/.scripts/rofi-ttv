@@ -41,7 +41,7 @@ whereis mpv > /dev/null || echoexit "'mpv' not found."
 menu (){
     # Dynamic menu command. Should read from stdin and output to stdout.
 
-    rofi -dmenu -p " Twitch Streams " -width "1913" -yoffset "-504"  -lines "100" -i -theme ~/.config/rofi/reverse.rasi -no-fixed-num-lines
+    rofi -dmenu -p " Twitch Streams " -width "1909" -yoffset "-500"  -lines "100" -i -theme ~/.config/rofi/reverse.rasi -no-fixed-num-lines
 }
 
 input (){

@@ -4,6 +4,6 @@ require('Comment').setup{
   sticky = true,
   toggler = {
         line = '<C-c>',
-        block = '<C-b>',
+        block = 'gc',
     },
 }

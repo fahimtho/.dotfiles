@@ -8,13 +8,13 @@ colorscheme tokyonight " set theme
 
 " Ui Configuration
 hi Normal guibg=#000000 guifg=None
-hi pmenusbar guibg=#0d0d1a
+hi pmenusbar guibg=#19121f
 hi Pmenu guibg=none guifg=#004eff
 hi PmenuSel guibg=#10171a guifg=#004eff
 hi Directory guifg=#004eff
 hi CursorLine gui=none guibg=none
 hi CursorLineNr guifg=#004eff gui=none
-hi Visual guibg=#10171a guifg=NONE
+hi Visual guibg=#19121f  guifg=NONE
 hi IncSearch guibg=#10171a guifg=none
 hi NormalFloat guibg=none guifg=#004eff
 hi String guifg=#ff1767
@@ -26,7 +26,7 @@ hi QuickFixLine guibg=none
 hi Conceal guibg=none
 hi FloatermBorder guibg=none guifg=#192d4d
 hi NvimTreeOpenedFile guifg=#ff1767
-hi TelescopeSelection guibg=#07141f guifg=none
+hi TelescopeSelection guibg=#19121f guifg=none
 hi TelescopeNormal guibg=none
 hi TelescopeBorder guibg=none
 hi qfPosition guifg=#ff1767
@@ -51,8 +51,14 @@ hi FocusedSymbol guibg=NONE guifg=#004eff
 hi SymbolsOutlineConnector guibg=NONE guifg=#002866
 hi TelescopeBorder guifg=#002766 guibg=NONE
 hi CopilotSuggestion guifg=#565f89
-hi MatchParen guifg=#000000 guibg=#002766
-
+hi MatchParen guifg=#000000 guibg=#004eff
+hi IndentBlankLineChar guifg=#19121f
+hi IndentBlankLineContextChar guifg=#473559
+hi LspReferenceText guibg=#19121f guifg=NONE
+hi LspReferenceWrite guibg=#19121f guifg=NONE
+hi LspReferenceRead guibg=#19121f guifg=NONE
+hi illuminatedWord guibg=#19121f guifg=NONE
+hi illuminatedCurWord guibg=#19121f guifg=NONE
 
 " Change treesitter Elements
 hi TSKeyword guifg=#004eff

@@ -10,6 +10,40 @@ vim.diagnostic.config({
   },
 })
 
+
+-- Menu Icons
+require('lspkind').init({
+    mode = 'symbol_text',
+    preset = 'codicons',
+    symbol_map = {
+    Text = "",
+    Method = "",
+    Function = "",
+    Constructor = "",
+    Field = "ﰮ",
+    Variable = "[]",
+    Class = "ﴯ",
+    Interface = "",
+    Module = "",
+    Property = "ﰠ",
+    Unit = "塞",
+    Value = "",
+    Enum = "",
+    Keyword = "",
+    Snippet = "",
+    Color = "",
+    File = "",
+    Reference = "渚",
+    Folder = "",
+    EnumMember = "",
+    Constant = "",
+    Struct = "פּ",
+    Event = "",
+    Operator = "",
+    TypeParameter = ""
+    },
+})
+
 -- Lsp Code Location
 local navic = require("nvim-navic")
 navic.setup {
@@ -30,7 +64,7 @@ navic.setup {
     Constant      = "  ",
     String        = "  ",
     Number        = "  ",
-    Boolean       = "◩ ",
+    Boolean       = " ◩ ",
     Array         = "  ",
     Object        = "  ",
     Key           = "  ",
@@ -74,6 +108,7 @@ require("lspconfig").pyright.setup {
   handlers = handlers,
   capabilities = capabilities,
   on_attach = function(client, bufnr)
+    require 'illuminate'.on_attach(client)
     navic.attach(client, bufnr)
   end
 }
@@ -83,6 +118,7 @@ require 'lspconfig'.clangd.setup {
   handlers = handlers,
   capabilities = capabilities,
   on_attach = function(client, bufnr)
+    require 'illuminate'.on_attach(client)
     navic.attach(client, bufnr)
   end
 }
@@ -92,6 +128,7 @@ require 'lspconfig'.texlab.setup {
   handlers = handlers,
   capabilities = capabilities,
   on_attach = function(client, bufnr)
+    require 'illuminate'.on_attach(client)
     navic.attach(client, bufnr)
   end
 }
@@ -110,6 +147,7 @@ require 'lspconfig'.arduino_language_server.setup({
   handlers = handlers,
   capabilities = capabilities,
   on_attach = function(client, bufnr)
+    require 'illuminate'.on_attach(client)
     navic.attach(client, bufnr)
   end
 })
@@ -118,9 +156,9 @@ require 'lspconfig'.arduino_language_server.setup({
 require 'lspconfig'.bashls.setup {
   handlers = handlers,
   capabilities = capabilities,
-  on_attach = function(client, bufnr)
-    navic.attach(client, bufnr)
-  end
+  on_attach = function(client)
+      require 'illuminate'.on_attach(client)
+    end,
 }
 
 -- Go
@@ -128,6 +166,7 @@ require 'lspconfig'.gopls.setup {
   handlers = handlers,
   capabilities = capabilities,
   on_attach = function(client, bufnr)
+    require 'illuminate'.on_attach(client)
     navic.attach(client, bufnr)
   end
 }
@@ -137,6 +176,7 @@ require 'lspconfig'.hls.setup {
   handlers = handlers,
   capabilities = capabilities,
   on_attach = function(client, bufnr)
+    require 'illuminate'.on_attach(client)
     navic.attach(client, bufnr)
   end
 }
@@ -146,18 +186,27 @@ require 'lspconfig'.rust_analyzer.setup {
   handlers = handlers,
   capabilities = capabilities,
   on_attach = function(client, bufnr)
+    require 'illuminate'.on_attach(client)
     navic.attach(client, bufnr)
   end
 }
 
 -- typescript and javascript
-require "plugins.ts"
+require 'lspconfig'.tsserver.setup {
+  handlers = handlers,
+  capabilities = capabilities,
+  on_attach = function(client, bufnr)
+    require 'illuminate'.on_attach(client)
+    navic.attach(client, bufnr)
+  end
+}
 
 -- Javascript
 require 'lspconfig'.eslint.setup {
   handlers = handlers,
   capabilities = capabilities,
   on_attach = function(client, bufnr)
+    require 'illuminate'.on_attach(client)
     navic.attach(client, bufnr)
   end
 }
@@ -167,6 +216,7 @@ require 'lspconfig'.grammarly.setup {
   handlers = handlers,
   capabilities = capabilities,
   on_attach = function(client, bufnr)
+    require 'illuminate'.on_attach(client)
     navic.attach(client, bufnr)
   end
 }
@@ -175,18 +225,18 @@ require 'lspconfig'.grammarly.setup {
 require 'lspconfig'.html.setup {
   handlers = handlers,
   capabilities = capabilities,
-  on_attach = function(client, bufnr)
-    navic.attach(client, bufnr)
-  end
+  on_attach = function(client)
+      require 'illuminate'.on_attach(client)
+    end,
 }
 
 -- CSS
 require 'lspconfig'.cssls.setup {
   handlers = handlers,
   capabilities = capabilities,
-  on_attach = function(client, bufnr)
-    navic.attach(client, bufnr)
-  end
+  on_attach = function(client)
+      require 'illuminate'.on_attach(client)
+    end,
 }
 
 -- JSON
@@ -194,6 +244,7 @@ require 'lspconfig'.jsonls.setup {
   handlers = handlers,
   capabilities = capabilities,
   on_attach = function(client, bufnr)
+    require 'illuminate'.on_attach(client)
     navic.attach(client, bufnr)
   end
 }
@@ -203,6 +254,7 @@ require 'lspconfig'.sumneko_lua.setup {
   handlers = handlers,
   capabilities = capabilities,
   on_attach = function(client, bufnr)
+    require 'illuminate'.on_attach(client)
     navic.attach(client, bufnr)
   end
 }
@@ -212,6 +264,7 @@ require 'lspconfig'.vimls.setup {
   handlers = handlers,
   capabilities = capabilities,
   on_attach = function(client, bufnr)
+    require 'illuminate'.on_attach(client)
     navic.attach(client, bufnr)
   end
 }
@@ -221,6 +274,7 @@ require 'lspconfig'.sqlls.setup {
   handlers = handlers,
   capabilities = capabilities,
   on_attach = function(client, bufnr)
+    require 'illuminate'.on_attach(client)
     navic.attach(client, bufnr)
   end
 }
@@ -229,9 +283,6 @@ require 'lspconfig'.sqlls.setup {
 require 'lspconfig'.emmet_ls.setup {
   handlers = handlers,
   capabilities = capabilities,
-  on_attach = function(client, bufnr)
-    navic.attach(client, bufnr)
-  end
 }
 
 -- Markdown
@@ -239,6 +290,7 @@ require 'lspconfig'.marksman.setup {
   handlers = handlers,
   capabilities = capabilities,
   on_attach = function(client, bufnr)
+    require 'illuminate'.on_attach(client)
     navic.attach(client, bufnr)
   end
 }

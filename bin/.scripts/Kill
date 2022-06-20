@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-MENU="rofi -theme ~/.config/rofi/reverse.rasi -dmenu -i  -width "1913" -yoffset "-504"  -l 10 -no-fixed-num-lines -selected-row 1 -p"
+MENU="rofi -theme ~/.config/rofi/reverse.rasi -dmenu -i  -width "1909" -yoffset "-500"  -l 10 -no-fixed-num-lines -selected-row 1 -p"
 
 main() {
     selected="$(ps aux --user "$USER" --sort -rss | \
@@ -8,7 +8,7 @@ main() {
                 awk '{print $2" "$11}')";
 
     if [[ -n $selected ]]; then
-        answer="$(echo -e "Yes\nNo" | $MENU "Kill $selected?" "$@")"
+        answer="$(echo -e "Yes\nNo" | $MENU " Kill $selected " "$@")"
 
         if [[ $answer == "Yes" ]]; then
             kill -9 "${selected%% *}"

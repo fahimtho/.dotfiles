@@ -31,6 +31,12 @@ return require('packer').startup(
       },
     }
 
+    -- Use a protected call so we don't error out on first use
+    local status_ok, packer = pcall(require, "packer")
+    if not status_ok then
+      return
+    end
+
     -- Packer Popup Window
     local status_ok, packer = pcall(require, "packer")
     packer.init {
@@ -98,7 +104,6 @@ return require('packer').startup(
               vim.fn.inputsave()
               local name = vim.fn.input('Name: ')
               vim.fn.inputrestore()
-
               if name == nil or name == '' then
                 return os.date('%y-%m-%d-%H-%M-%S')
               end
@@ -247,16 +252,16 @@ return require('packer').startup(
     }
 
     -- Clean
-    use {
-      "McAuleyPenney/tidy.nvim",
-      event = "BufWritePre"
-    }
+    use({
+    "mcauley-penney/tidy.nvim",
+    config = function()
+        require("tidy").setup()
+    end
+    })
 
     -- Delete Buffer
     use {
       'famiu/bufdelete.nvim',
-      event = 'InsertLeave',
-      opt = true,
       cmd = { 'Bdelete', 'Bwipeout' }
     }
 
@@ -266,33 +271,8 @@ return require('packer').startup(
       requires = 'MunifTanjim/nui.nvim',
       cmd = { 'CompetiTestAdd', 'CompetiTestEdit', 'CompetiTestDelete', 'CompetiTestRun', 'CompetiTestReceive',
         'CompetiTestConvert', 'CompetiTestRunNE' },
-      config = function() require 'competitest'.setup() end
-    }
-
-    -- Highlight Fucntion args
-    use {
-      'm-demare/hlargs.nvim',
-      requires = { 'nvim-treesitter/nvim-treesitter' },
       config = function()
-        require('hlargs').setup {
-          color = "#004eff",
-          excluded_filetypes = {},
-          paint_arg_declarations = true,
-          paint_arg_usages = true,
-          hl_priority = 10000,
-          performance = {
-            parse_delay = 1,
-            slow_parse_delay = 50,
-            max_iterations = 400,
-            max_concurrent_partial_parses = 30,
-            debounce = {
-              partial_parse = 3,
-              partial_insert_mode = 100,
-              total_parse = 700,
-              slow_parse = 5000
-            }
-          }
-        }
+        require 'competitest'.setup()
       end
     }
 
@@ -340,7 +320,7 @@ return require('packer').startup(
       end
     }
 
-    -- undo Tree
+    -- UndoTree
     use {
       'mbbill/undotree',
       cmd = { 'UndotreeToggle' }
@@ -374,88 +354,25 @@ return require('packer').startup(
       ft = { 'json' }
     }
 
-    -- Clangd Extention
-    use {
-      "p00f/clangd_extensions.nvim",
-      ft = { "c", "cpp", "h", "hpp" },
-      config = function()
-        require "plugins.clangd"
-      end
-    }
-
-    -- Rust Tools
-    use {
-      'simrat39/rust-tools.nvim',
-      opt = true,
-      ft = { 'rust' },
-      config = function()
-        require "plugins.rust"
-      end
-    }
-
-    -- Run Parts of Code
-    use {
-      'michaelb/sniprun',
-      opt = true,
-      cmd = { 'SnipRun' },
-      run = 'bash ./install.sh',
-      config = function()
-        require "plugins.snip"
-      end
-    }
-
-    -- Go
-    use {
-      'ray-x/go.nvim',
-      ft = { 'go' },
-      config = function()
-        require "plugins.go"
-      end
-    }
-
-    -- Old File Database
-    use {
-      "nvim-telescope/telescope-frecency.nvim",
-      config = function()
-        require"telescope".load_extension("frecency")
-      end,
-      requires = {"tami5/sqlite.lua"}
-    }
-
     -- Git
     use {
      'lewis6991/gitsigns.nvim',
-        config = function()
-          require "plugins.git"
-        end
-    }
-
-
-
-    -- Project
-    use {
-      "ahmedkhalf/project.nvim",
       config = function()
-        require("project_nvim").setup {
-          manual_mode = false,
-          detection_methods = { "lsp", "pattern" },
-          patterns = { ".git", "_darcs", ".hg", ".bzr", ".svn", "Makefile", "package.json" },
-          silent_chdir = false,
-          datapath = vim.fn.stdpath("data"),
-        }
+        require "plugins.git"
       end
     }
 
     -- Task System
      use {
        'skywind3000/asynctasks.vim',
-       ft = { 'c', 'cpp', 'sh', 'python', 'go', 'javascript', 'typescript', 'julia', 'rust', 'haskell', 'arduino' }
+       ft = { 'c', 'cpp', 'sh', 'python', 'go', 'javascript', 'typescript', 'julia', 'rust', 'haskell', 'arduino' },
+       cmd = {'AsyncTask'}
      }
 
      -- End Is coming soon
      use {
        'github/copilot.vim',
-       event = 'InsertLeave',
+       event = 'InsertLeave'
      }
 
      -- Markdown Preview
@@ -466,13 +383,6 @@ return require('packer').startup(
        cmd = { 'Glow' }
      }
 
-    -- Formmater
-    use {
-      'sbdchd/neoformat',
-      opt = true,
-      cmd = { 'Neoformat' }
-    }
-
     -- Sort urls
     use {
       "axieax/urlview.nvim",
@@ -480,27 +390,145 @@ return require('packer').startup(
       cmd = { "UrlView" }
     }
 
-    -- DAP [ Debug ]
+    -- Buffer Switcher
     use {
-      'mfussenegger/nvim-dap',
+      'matbme/JABS.nvim',
       config = function()
-        require "plugins.dap"
+        require "plugins.jabs"
       end
     }
 
-    -- Dap UI
+    -- Code Outline
     use {
-      'rcarriga/nvim-dap-ui',
+      'simrat39/symbols-outline.nvim',
       config = function()
-        require "plugins.dapui"
+        require "plugins.symbols-outline"
       end
     }
 
-    -- DAP info in VT
+    -- Stablize Content
     use {
-      'theHamsta/nvim-dap-virtual-text',
+	    "luukvbaal/stabilize.nvim",
+	    config = function()
+        require("stabilize").setup()
+      end
+    }
+
+    -- Magit Clone
+    use {
+      'TimUntersberger/neogit',
+      opt = true,
+      cmd = { 'Neogit' },
+      requires = 'nvim-lua/plenary.nvim',
       config = function()
-        require "plugins.daptext"
+        require "plugins.magit"
+      end
+    }
+
+    -- Generate annotaions
+    use {
+      "danymat/neogen",
+      cmd = { "Neogen" },
+      opt = true,
+      requires = "nvim-treesitter/nvim-treesitter",
+      config = function()
+        require('neogen').setup {snippet_engine = "snippy"}
+      end,
+    }
+
+    -- I am Speed
+    use {
+      'phaazon/hop.nvim',
+      branch = 'v1',
+      config = function()
+        require'hop'.setup { keys = 'etovxqpdygfblzhckisuran' }
+      end
+    }
+
+    -- Separate Delete and cut
+    use {
+      "gbprod/cutlass.nvim",
+      config = function()
+        require("cutlass").setup({
+          cut_key = "m"
+        })
+      end
+    }
+
+    -- Substitute Text
+    use({
+      "gbprod/substitute.nvim",
+      config = function()
+        require("substitute").setup()
+      end
+    })
+
+    -- Peek Lines
+    use {
+      'nacro90/numb.nvim',
+      config = function()
+        require('numb').setup()
+      end
+    }
+
+    -- Zen Mode
+    use {
+      "folke/zen-mode.nvim",
+      cmd = { "ZenMode" },
+      opt = true,
+      config = function()
+        require "plugins.zen"
+      end
+    }
+
+    -- Tabout
+    use {
+      'abecodes/tabout.nvim',
+      config = function()
+        require "plugins.tabout"
+      end,
+      wants = {'nvim-treesitter'},
+      after = {'nvim-cmp'}
+    }
+
+    -- Cool QuickFix
+    use {
+      'kevinhwang91/nvim-bqf',
+      ft = 'qf',
+      config = function()
+        require "plugins.quickfix"
+      end
+    }
+
+    -- See Doc in Split
+    use {
+      "amrbashir/nvim-docs-view",
+      opt = true,
+      cmd = { "DocsViewToggle" },
+      config = function()
+        require("docs-view").setup {
+          position = "right",
+          width = 100,
+        }
+      end
+    }
+
+    -- Indent Guides
+    use {
+      "lukas-reineke/indent-blankline.nvim",
+      config = function()
+        require("indent_blankline").setup({
+          show_current_context = true,
+          show_current_context_start = true,
+        })
+      end
+    }
+
+    -- Projects
+    use {
+      "ahmedkhalf/project.nvim",
+      config = function()
+        require("project_nvim").setup()
       end
     }
 
@@ -509,7 +537,6 @@ return require('packer').startup(
     use "nvim-telescope/telescope-file-browser.nvim" -- File Browser
     use { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' } -- Telescope FZF marriage
     use 'jvgrootveld/telescope-zoxide' -- Quick Folders
-    use 'nvim-telescope/telescope-dap.nvim' -- DAP Source
 
     -- Cmp
     use 'hrsh7th/cmp-nvim-lsp' -- cmp lsp source
@@ -517,9 +544,7 @@ return require('packer').startup(
     use 'dcampos/cmp-snippy' -- snippet for cmp
     use 'onsails/lspkind-nvim' -- icons for menu
     use 'honza/vim-snippets' -- Snippets
-    use "lukas-reineke/cmp-under-comparator" -- Sort good
     use 'hrsh7th/cmp-path' -- Cmp path source
-    use 'hrsh7th/cmp-buffer' -- Cmp source for buffer
 
     -- UI
     use 'folke/tokyonight.nvim' -- Colorscheme
@@ -535,11 +560,18 @@ return require('packer').startup(
     use 'nishigori/increment-activator' -- good enhance
     use 'voldikss/vim-floaterm' -- Floating Terminal
     use 'wakatime/vim-wakatime' -- stats
-    use 'ray-x/guihua.lua' -- Req
     use 'ThePrimeagen/harpoon' -- Project File util
     use 'wellle/targets.vim' -- Extra text objects
     use 'gaborvecsei/memento.nvim' -- Where I Have been
     use 'tpope/vim-fugitive' -- Git
+    use 'jghauser/mkdir.nvim' -- Make Directory if Non-Existent
+    use 'sindrets/diffview.nvim' -- Git Diff View
+    use 'JoseConseco/vim-case-change' -- Change Case
+    use 'sbdchd/neoformat' -- Format Code
+    use 'aperezdc/vim-template' -- Code Template
+    use 'jremmen/vim-ripgrep'
+    use 'andymass/vim-matchup'
+    use 'RRethy/vim-illuminate'
 
     -- Lsp, Treesitter
     use 'David-Kunz/treesitter-unit' -- Select quickly
@@ -547,6 +579,5 @@ return require('packer').startup(
     use 'haringsrob/nvim_context_vt' -- Code Contex in VT
     use "SmiteshP/nvim-navic" -- Code Location
     use 'nvim-treesitter/nvim-treesitter-textobjects' -- Text Objects
-    use 'jose-elias-alvarez/nvim-lsp-ts-utils' -- Typescript utils
 
   end)

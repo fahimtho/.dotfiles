@@ -11,7 +11,7 @@ nnoremap r :redo<cr>
 inoremap <C-z> <Esc>ui
 
 " Replace All matches
-nnoremap S :%s///gI<Left><Left><Left><Left>
+nnoremap R :%s///gI<Left><Left><Left><Left>
 
 " Move Between Splits
 tnoremap ~ <C-\><C-n><C-w><C-w>
@@ -30,13 +30,20 @@ nnoremap <silent><leader>r :call Run()<CR>
 nnoremap <silent><M-a> <esc>:%y+<cr>
 
 " Telescope Pickers
-nnoremap <leader>lg <cmd>Telescope live_grep<cr>
-nnoremap <leader>lr <cmd>Telescope lsp_references<cr>
-nnoremap <leader>gc <cmd>Telescope git_commits<cr>
-nnoremap <leader>s <cmd>Telescope lsp_document_symbols<cr>
-nnoremap "" <cmd>Telescope registers<cr>
-nnoremap <leader>h <cmd>Telescope frecency<cr>
-nnoremap <silent>; :Telescope file_browser<CR>
+nnoremap <silent><leader>lg <cmd>Telescope live_grep<cr>
+nnoremap <silent><leader>gs <cmd>Telescope grep_string<cr>
+nnoremap <silent><leader>lr <cmd>Telescope lsp_references<cr>
+nnoremap <silent><leader>gc <cmd>Telescope git_commits<cr>
+nnoremap <silent><leader>t <cmd>Telescope treesitter<cr>
+nnoremap <silent><leader>gb <cmd>Telescope git_branches<cr>
+nnoremap <silent><leader>s <cmd>Telescope lsp_document_symbols<cr>
+nnoremap <silent><leader>S <cmd>Telescope lsp_workspace_symbols<cr>
+nnoremap <silent><leader><space> <cmd>Telescope resume<cr>
+nnoremap <silent>"" <cmd>Telescope registers<cr>
+nnoremap <silent><leader>h <cmd>Telescope oldfiles<cr>
+nnoremap <silent><leader>p <cmd>Telescope projects<cr>
+nnoremap <silent><leader>z <cmd>Telescope zoxide list<cr>
+nnoremap <silent>; :Telescope file_browser display_stat=false grouped=true<CR>
 nnoremap <silent><leader>bf :Telescope current_buffer_fuzzy_find<CR>
 nnoremap <silent>q: :Telescope command_history<CR>
 
@@ -55,16 +62,6 @@ nnoremap <silent><F3> :TSHighlightCapturesUnderCursor<CR>
 nnoremap <silent> <leader>d :TroubleToggle<CR>
 nnoremap <silent> <leader>L :TroubleToggle lsp_references<CR>
 
-" Cool Snippets using TAB & Shift-TAB
-imap <expr> <Tab> snippy#can_expand_or_advance() ? '<Plug>(snippy-expand-or-next)' : '<Tab>'
-imap <expr> <S-Tab> snippy#can_jump(-1) ? '<Plug>(snippy-previous)' : '<Tab>'
-smap <expr> <Tab> snippy#can_jump(1) ? '<Plug>(snippy-next)' : '<Tab>'
-smap <expr> <S-Tab> snippy#can_jump(-1) ? '<Plug>(snippy-previous)' : '<Tab>'
-xmap <Tab> <Plug>(snippy-cut-text)
-
-" Delete Current Buffers
-nnoremap <silent><space>x :Bdelete<CR>
-
 " copy easily
 vmap <cr> y
 
@@ -77,12 +74,6 @@ autocmd filetype markdown nnoremap <leader>m :!echo % \| entr -n pandoc % -o %:r
 autocmd filetype tex inoremap <C-l> <c-g>u<Esc>[s1z=`]a<c-g>u
 autocmd filetype markdown inoremap <C-l> <c-g>u<Esc>[s1z=`]a<c-g>u
 
-" Template for C,C++ for CP
-autocmd filetype c nnoremap <silent><leader>t :0r ~/.config/nvim/templates/Template.c<cr>
-autocmd filetype cpp nnoremap <silent><leader>t :0r ~/.config/nvim/templates/Template.cpp<cr>
-autocmd filetype c nnoremap <silent><leader>T :0r ~/.config/nvim/templates/
-autocmd filetype cpp nnoremap <silent><leader>T :0r ~/.config/nvim/templates/
-
 " Paste Images Quickly in Markdown
 autocmd filetype markdown nnoremap <silent><leader>p :PasteImg<CR>
 autocmd filetype markdown nnoremap <silent><leader>s :Telescope spell_suggest<CR>
@@ -92,7 +83,7 @@ command! Q qa!
 command! W wa!
 
 " LSP Mappings
-nnoremap <silent> gd :lua vim.lsp.buf.definition()<CR>
+nnoremap <silent> gd :Telescope lsp_definitions<CR>
 nnoremap <silent> gD :lua vim.lsp.buf.declaration()<CR>
 nnoremap <silent> K :lua vim.lsp.buf.hover()<CR>
 nnoremap <silent> gi :lua vim.lsp.buf.implementation()<CR>
@@ -150,7 +141,7 @@ nnoremap <silent> <C-M-right> <C-w><right>
 nnoremap <silent> <space><space> :ZoomWinTabToggle<CR>
 
 " Nice Search
-nnoremap <leader>S <cmd>SearchBoxIncSearch clear_matches=true<CR>
+nnoremap <leader>\ <cmd>SearchBoxIncSearch clear_matches=true<CR>
 nnoremap <leader>R <cmd>SearchBoxReplace clear_matches=true confirm=menu<CR>
 vnoremap <leader>vs <cmd>SearchBoxIncSearch visual_mode=true<CR>
 
@@ -184,15 +175,18 @@ nnoremap <leader>m <cmd>lua require('memento').toggle()<CR>
 nnoremap <leader>u :UndotreeToggle<CR>
 
 " Change Perssion
-nnoremap <leader>x :silent !chmod +x %<CR>
+nnoremap <silent> <leader>x :Chmod +x<CR>
+nnoremap <silent> <leader>X :SudoWrite<CR>
 
-" Dap Mappings
-nnoremap <silent> <F4> <Cmd>lua require("dapui").toggle()<CR>
-nnoremap <silent> <F5> <Cmd>lua require'dap'.continue()<CR>
-nnoremap <silent> <F6> <Cmd>lua require'dap'.step_into()<CR>
-nnoremap <silent> <F7> <Cmd>lua require'dap'.step_over()<CR>
-nnoremap <silent> <F8> <Cmd>lua require'dap'.step_out()<CR>
-nnoremap <silent> <F1> <Cmd>lua require'dap'.toggle_breakpoint()<CR>
-nnoremap <silent> <F2> <Cmd>lua require'dap'.set_breakpoint(vim.fn.input('Breakpoint condition: '))<CR>
-nnoremap <silent> <Leader>B <Cmd>lua require'dap'.set_breakpoint(nil, nil, vim.fn.input('Log point message: '))<CR>
-vnoremap <M-e> <Cmd>lua require("dapui").eval()<CR>
+" Switch Buffer
+nnoremap <silent> <F1> :JABSOpen<CR>
+
+" Hop keybindings
+nnoremap <silent> 1 :HopChar1<CR>
+nnoremap <silent> 2 :HopChar2<CR>
+nnoremap <silent> f :HopChar1CurrentLine<CR>
+nnoremap <silent> F :HopWord<CR>
+nnoremap <silent> <leader>/ :HopPattern<CR>
+
+" Delete Current Buffers
+nnoremap <silent><space>x :Bdelete<CR>

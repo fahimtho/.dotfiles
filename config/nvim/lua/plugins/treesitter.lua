@@ -135,3 +135,10 @@ require'nvim-treesitter.configs'.setup {
     },
   },
 }
+
+-- Matchup
+require'nvim-treesitter.configs'.setup {
+  matchup = {
+    enable = true,
+  },
+}

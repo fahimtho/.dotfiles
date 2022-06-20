@@ -24,14 +24,6 @@ confedit_list[zsh]="/home/fh1m/.config/rofi/config.rasi"
 confedit_list[ncmpcpp]="/home/fh1m/.config/ncmpcpp/config"
 confedit_list[player]="/home/fh1m/.config/miniplayer/config"
 confedit_list[zathura]="/home/fh1m/.config/zathura/zathurarc"
-confedit_list[zsh]="$HOME/.zshrc"
-confedit_list[zsh]="$HOME/.zshrc"
-confedit_list[zsh]="$HOME/.zshrc"
-confedit_list[zsh]="$HOME/.zshrc"
-confedit_list[zsh]="$HOME/.zshrc"
-confedit_list[zsh]="$HOME/.zshrc"
-confedit_list[zsh]="$HOME/.zshrc"
-confedit_list[zsh]="$HOME/.zshrc"
 
 main() {
   # Clean options array making sure that the files exist

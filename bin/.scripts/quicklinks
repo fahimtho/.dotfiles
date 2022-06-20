@@ -1,0 +1,38 @@
+#!/usr/bin/env sh
+
+link=$(echo -e " Youtube\n Reddit\n Messages\n Facebook\n Twitter\n Instagram\n Chess\n Chess Games\n Gmail\n Protonmail" | rofi -dmenu -no-fixed-num-lines -i -width "420" -xoffset  "-734" -yoffset "-491" -l 5 -columns 2 -p " Lets Goo! ")
+
+if [[ -z "$link" ]];
+then
+  exit 1
+elif [[ "$link" == " Youtube" ]];
+then
+  vivaldi-stable "www.youtube.com"
+elif [[ "$link" == " Chess Games" ]];
+then
+  vivaldi-stable "https://lichess.org/broadcast"
+elif [[ "$link" == " Instagram" ]];
+then
+  vivaldi-stable "https://instagram.com"
+elif [[ "$link" == " Facebook" ]];
+then
+  vivaldi-stable "www.facebook.com"
+elif [[ "$link" == " Twitter" ]];
+then
+  vivaldi-stable "www.twitter.com"
+elif [[ "$link" == " Reddit" ]];
+then
+  vivaldi-stable "www.reddit.com"
+elif [[ "$link" == " Chess" ]];
+then
+  vivaldi-stable "https://chess.com"
+elif [[ "$link" == " Gmail" ]];
+then
+  vivaldi-stable "mail.google.com"
+elif [[ "$link" == " Protonmail" ]];
+then
+  vivaldi-stable "https://mail.proton.me/u/0/inbox"
+elif [[ "$link" == " Messages" ]];
+then
+  vivaldi-stable "https://www.messenger.com/t/3799923546747115/"
+fi

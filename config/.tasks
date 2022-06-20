@@ -26,4 +26,13 @@ command=echo hello $(-name), you are a $(-gender).
 output=terminal
 pos=floaterm
 
+[custom]
+command=$(-Command)
+output=terminal
+pos=floaterm
+
+
 [project-init]
+command="git init"
+command:javascript="npm init -y"
+command:rust="cargo init"

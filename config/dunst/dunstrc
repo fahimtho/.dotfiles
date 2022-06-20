@@ -51,8 +51,8 @@
 
 # Icons
     icon_position = left
-    min_icon_size = 40
-    max_icon_size = 50
+    min_icon_size = 30
+    max_icon_size = 40
     icon_path = /usr/share/icons/Reversal-blue/apps/scalable:/usr/share/icons/Adwaita/256x256/legacy/
 
 # History

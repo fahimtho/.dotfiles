@@ -1,19 +1,22 @@
-local ui = vim.api.nvim_list_uis()[1]
-
+-- Buffer Switcher
 require 'jabs'.setup {
-    position = 'center',
-   	width = 50,
-   	height = 10,
-   	border = 'rounded',
-
-    -- Options for preview window
-    preview_position = 'left',
+    position = 'corner',
+    width = 60,
+    height = 15,
+    border = 'shadow',
+    preview_position = 'bottom',
     preview = {
         width = 40,
-        height = 30,
+        height = 60,
         border = 'rounded',
     },
 
-    col = ui.width,
-    row = ui.height/2,
+    highlight = {
+        current = "Title",
+        hidden = "StatusLineNC",
+        split = "WarningMsg",
+        alternate = "StatusLine"
+    },
+
+    use_devicons = true
 }

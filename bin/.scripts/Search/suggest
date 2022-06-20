@@ -25,7 +25,7 @@ esac
 ###############
 logfile="$(dirname $handler)/logfile.tmp" # logfile to communicate between two ends
 printf "$API" > "$logfile"
-rofi -xoffset "0" -yoffset "-504" -no-fixed-num-lines -width "1913" -lines "10" -modi blocks -show blocks -blocks-wrap $handler -display-blocks "$prompt" 2>/dev/null
+rofi -xoffset "0" -yoffset "-500" -no-fixed-num-lines -width "1909" -lines "10" -modi blocks -show blocks -blocks-wrap $handler -display-blocks "$prompt" 2>/dev/null
 [ -f $logfile ] && selection="$(cat "$logfile")" || exit 0
 echo "$selection"
 exit 0

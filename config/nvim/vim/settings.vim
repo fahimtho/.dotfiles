@@ -59,16 +59,10 @@ set wildignore+=**/android/*
 set wildignore+=**/ios/*
 set wildignore+=**/.git/*
 
-" setting-options(Plugings)
-" ------------------------
-"
 " In Built Settings
 let g:tex_conceal='abdmg'
 let loaded_matchparen = 0
 let g:netrw_banner = 0
-
-" Web Dev
-let g:bracey_refresh_on_save = 1
 
 " Copilot
 let b:copilot_enabled = v:true
@@ -78,46 +72,6 @@ let g:asyncrun_trim = 1
 let g:asyncrun_save = 1
 let g:asyncrun_qfid = 0
 let g:asyncrun_open = 15
-
-" Nvim Tree Settings
-let g:nvim_tree_git_hl = 1
-let g:nvim_tree_highlight_opened_files = 1
-let g:nvim_tree_group_empty = 1
-let g:nvim_tree_icon_padding = ' '
-let g:nvim_tree_symlink_arrow = ' >> '
-let g:nvim_tree_respect_buf_cwd = 0
-let g:nvim_tree_refresh_wait = 500
-let g:nvim_tree_special_files = { 'README.md': 1, 'Makefile': 1, 'MAKEFILE': 1 }
-let g:nvim_tree_show_icons = {
-      \ 'git': 1,
-      \ 'folders': 1,
-      \ 'files': 1,
-      \ 'folder_arrows': 1,
-      \ }
-let g:nvim_tree_icons = {
-      \ 'default': '',
-      \ 'symlink': '',
-      \ 'git': {
-        \   'unstaged': "✗",
-        \   'staged': "✓",
-        \   'unmerged': "",
-        \   'renamed': "➜",
-        \   'untracked': "★",
-        \   'deleted': "",
-        \   'ignored': "◌"
-        \   },
-        \ 'folder': {
-          \   'arrow_open': "",
-          \   'arrow_closed': "",
-          \   'default': "",
-          \   'open': "",
-          \   'empty': "",
-          \   'empty_open': "",
-          \   'symlink': "",
-          \   'symlink_open': "",
-          \   }
-          \ }
-
 
 " latex
 let g:tex_flavor='latex'
@@ -142,22 +96,35 @@ let g:undotree_HelpLine = 0
 let g:python3_host_prog=expand('/usr/bin/python')
 
 " Neoformat
-let g:neoformat_try_formatprg = 1
 let g:neoformat_basic_format_align = 1
 let g:neoformat_basic_format_retab = 1
 let g:neoformat_basic_format_trim = 1
-let g:neoformat_only_msg_on_error = 1
-
-" Code Action Menu
-let g:code_action_menu_window_border = 'rounded'
-let g:code_action_menu_show_details = v:true
-let g:code_action_menu_show_diff = v:true
 
 " Bug
 let g:cursorhold_updatetime = 100
 
+" Template
+let g:templates_no_autocmd = 1
+
 " UI
 let g:popui_border_style = "rounded"
+
+" Matchup
+let g:loaded_matchit = 1
+let g:matchup_matchparen_offscreen = {'method': 'popup'}
+let g:matchup_surround_enabled = 1
+let g:matchup_transmute_enabled = 1
+let g:matchup_delim_noskips = 2
+let g:matchup_matchparen_singleton = 0
+let g:matchup_matchparen_timeout = 200
+let g:matchup_matchparen_deferred = 1
+let g:matchup_matchparen_deferred_show_delay = 50
+let g:matchup_matchparen_deferred_hide_delay = 700
+let g:matchup_matchparen_insert_timeout = 60
+let g:matchup_motion_cursor_end = 0
+
+" Illuminate
+let g:Illuminate_highlightUnderCursor = 0
 
 " Glow
 let g:glow_border = "rounded"

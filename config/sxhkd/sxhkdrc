@@ -146,6 +146,9 @@ super + c
 super + shift + s
   ~/.scripts/list_sinks
 
+# Sites I Like
+alt + l
+  ~/.scripts/quicklinks
 ##############
 ## One Task ##
 ##############

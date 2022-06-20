@@ -6,6 +6,8 @@ lxpolkit &
 
 xsetroot -cursor_name left_ptr &
 
+xbanish &
+
 xmodmap ~/.Xmodmap &
 
 dex -a

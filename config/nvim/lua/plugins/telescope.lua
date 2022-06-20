@@ -16,7 +16,7 @@ require('telescope').setup {
     },
     vimgrep_arguments = {
       "rg",
-      "--color=never",
+      "--color=always",
       "--no-heading",
       "--with-filename",
       "--line-number",
@@ -36,7 +36,6 @@ require('telescope').setup {
     file_sorter = require("telescope.sorters").get_fuzzy_file,
     file_ignore_patterns = { "node_modules", ".git/", "dist/" },
     generic_sorter = require("telescope.sorters").get_generic_fuzzy_sorter,
-    path_display = { "absolute" },
     winblend = 0,
     border = {},
     color_devicons = true,
@@ -57,6 +56,9 @@ require('telescope').setup {
         case_mode = "smart_case",
 
       },
+      file_browser = {
+        hijack_netrw = true,
+      },
     },
   },
 }
@@ -68,4 +70,3 @@ require("telescope").load_extension("notify")
 require('telescope').load_extension('fzf')
 require('telescope').load_extension('zoxide')
 require('telescope').load_extension('projects')
-require('telescope').load_extension('dap')

@@ -155,7 +155,7 @@ vim.api.nvim_create_autocmd("BufWinEnter", {
  end
 
 
-
+ -- Lsp Rename
       function LspRename()
         local curr_name = vim.fn.expand("<cword>")
         local input_opts = {
@@ -193,3 +193,17 @@ vim.api.nvim_create_autocmd("BufWinEnter", {
         end)
       end
       vim.api.nvim_create_user_command('LspRename', LspRename, {})
+
+-- Lua Substitute keybindings
+vim.keymap.set("n", "s", "<cmd>lua require('substitute').operator()<cr>", { noremap = true })
+vim.keymap.set("n", "ss", "<cmd>lua require('substitute').line()<cr>", { noremap = true })
+vim.keymap.set("n", "S", "<cmd>lua require('substitute').eol()<cr>", { noremap = true })
+vim.keymap.set("x", "s", "<cmd>lua require('substitute').visual()<cr>", { noremap = true })
+vim.keymap.set("n", "sx", "<cmd>lua require('substitute.exchange').operator()<cr>", { noremap = true })
+vim.keymap.set("n", "sxx", "<cmd>lua require('substitute.exchange').line()<cr>", { noremap = true })
+vim.keymap.set("x", "X", "<cmd>lua require('substitute.exchange').visual()<cr>", { noremap = true })
+vim.keymap.set("n", "sxc", "<cmd>lua require('substitute.exchange').cancel()<cr>", { noremap = true })
+
+-- Lsp Word Highlight
+vim.api.nvim_set_keymap('n', '<a-n>', '<cmd>lua require"illuminate".next_reference{wrap=true}<cr>', {noremap=true})
+vim.api.nvim_set_keymap('n', '<a-N>', '<cmd>lua require"illuminate".next_reference{reverse=true,wrap=true}<cr>', {noremap=true})

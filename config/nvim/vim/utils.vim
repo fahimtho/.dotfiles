@@ -4,6 +4,7 @@ highlight clear SignColumn " clear SignColumn
 highlight clear TabLineFill " Transparent Tabline Background
 highlight clear Error " Dont need Error highlight
 autocmd VimEnter * set autochdir " set vim pwd as the file
+autocmd FileType nvim-docs-view set nonumber " Hide line numbers in Doc View
 autocmd FileType qf set nonumber " Hide line numbers in qf
 autocmd FileType qf set nobuflisted " Hide Qucikfix window from bufferlist
 au TermOpen * setlocal listchars= nonumber norelativenumber " hide numbers in Terminal
@@ -11,6 +12,7 @@ au TermOpen * startinsert " open Terminal in insert mode
 au BufEnter,BufWinEnter,WinEnter term://* startinsert " Enter Terminal in insert mode
 au BufLeave term://* stopinsert " Leave Terminal after stoping insert mode
 au FocusGained,BufEnter * checktime " Auto Read
+au BufEnter * ++nested if winnr('$') == 1 && bufname() == 'NvimTree_' . tabpagenr() | quit | endif " Close If Tree is last
 
 " Toggle Quickfix Window
 let g:quickfix_is_open = 0
@@ -120,10 +122,29 @@ func! Run()
 endfunc
 
 " Showing code context using treesitter
-func! NvimGps() abort
+func! Location() abort
 	return luaeval("require'nvim-navic'.is_available()") ?
 		\ luaeval("require'nvim-navic'.get_location()") : ''
 endf
+
+" Vim Terminal
+command! -nargs=? Terminal call s:Term(<q-args>)
+function! s:Term(args)
+  if has('nvim')
+    execute 'terminal ' . a:args
+    setlocal signcolumn=no
+    setlocal norelativenumber
+    setlocal nonumber
+    setlocal laststatus=0
+    setlocal hidden
+    autocmd! TermClose <buffer=abuf> if !v:event.status | exec 'bd! '..expand('<abuf>') | set laststatus=3 | endif | checktime
+    startinsert
+  elseif has('terminal')
+    execute 'tab terminal ++close ' . a:args
+  else
+    execute 'silent !( ' . (a:args != '' ? a:args : $SHELL) . ') || ( echo "Hit Enter"; read; )' | redraw!
+  endif
+endfunction
 
 " setting filetype
 autocmd BufRead,BufNewFile *.tex set filetype=tex

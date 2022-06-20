@@ -1,14 +1,13 @@
 -- File Nav
 require'nvim-tree'.setup {
-  disable_netrw       = true,
+  disable_netrw        = false,
   auto_reload_on_write = true,
-  hijack_netrw        = true,
-  open_on_setup       = true,
-  ignore_ft_on_setup  = {},
-  hijack_cursor       = true,
-  hijack_unnamed_buffer_when_opening = false,
+  hijack_netrw         = true,
+  open_on_setup        = true,
+  ignore_ft_on_setup   = {},
+  hijack_cursor        = true,
+  hijack_unnamed_buffer_when_opening = true,
   open_on_tab = false,
-  update_cwd          = false,
   update_to_buf_dir   = {
     enable = true,
     auto_open = true,
@@ -36,9 +35,9 @@ require'nvim-tree'.setup {
     timeout = 500,
   },
   view = {
-    width = 26,
+    width = 25,
     height = 30,
-    hide_root_folder = true,
+    hide_root_folder = false,
     side = 'left',
     auto_resize = true,
     mappings = {
@@ -55,7 +54,7 @@ require'nvim-tree'.setup {
   },
   update_focused_file = {
     enable = true,
-    update_cwd = false,
+    update_cwd = true,
     ignore_list = {},
   },
     renderer = {

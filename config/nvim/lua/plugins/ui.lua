@@ -1,3 +1,4 @@
+-- UI For Neovim
 require('dressing').setup({
   input = {
     enabled = true,
