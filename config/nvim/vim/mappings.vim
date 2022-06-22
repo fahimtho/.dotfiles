@@ -46,6 +46,7 @@ nnoremap <silent><leader>z <cmd>Telescope zoxide list<cr>
 nnoremap <silent>; :Telescope file_browser display_stat=false grouped=true<CR>
 nnoremap <silent><leader>bf :Telescope current_buffer_fuzzy_find<CR>
 nnoremap <silent>q: :Telescope command_history<CR>
+nnoremap <silent><leader>a :CodeActionMenu<CR>
 
 " Move between Buffers
 nnoremap <silent><M-.> :BufferLineCycleNext<CR>
@@ -75,7 +76,6 @@ autocmd filetype tex inoremap <C-l> <c-g>u<Esc>[s1z=`]a<c-g>u
 autocmd filetype markdown inoremap <C-l> <c-g>u<Esc>[s1z=`]a<c-g>u
 
 " Paste Images Quickly in Markdown
-autocmd filetype markdown nnoremap <silent><leader>p :PasteImg<CR>
 autocmd filetype markdown nnoremap <silent><leader>s :Telescope spell_suggest<CR>
 
 " Custom Commands
@@ -103,6 +103,8 @@ nnoremap <silent> <C-LeftMouse> :lua vim.lsp.buf.definition()<CR>
 
 " Format Stuff
 nnoremap <silent> <space>f :Neoformat<CR>
+nnoremap <silent> <space>F :lua vim.lsp.buf.format({ bufnr = bufnr })<CR>
+
 
 " Builtin Terminal
 tnoremap <C-x> <C-\><C-n>
@@ -160,9 +162,6 @@ nmap <silent> <C-x> <Plug>(increment-activator-decrement)
 " Change case
 nnoremap <silent> <C-u> vu<esc>
 nnoremap <silent> <C-S-u> vU<esc>
-
-" Run Code [ parts ]
-vnoremap <silent> <leader>e :'<,'>SnipRun<CR>
 
 " Harpoon
 nnoremap <silent> <space>a :lua require("harpoon.mark").add_file()<CR>

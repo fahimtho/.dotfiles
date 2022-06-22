@@ -34,7 +34,7 @@ bspc config external_rules_command    ~/.config/bspwm/rule.sh
 # Remove rules
 bspc rule -r *:*
 
-# window/class rules --> Only States
+# window/class rules
 bspc rule -a Gcolor3                  state=floating
 bspc rule -a float                    state=floating
 bspc rule -a Rofi                     state=floating
@@ -49,8 +49,6 @@ bspc rule -a lyrics                   state=floating rectangle=1049x482+839+547
 bspc rule -a ncmpcpp                  state=floating rectangle=1909x512+5+39
 bspc rule -a calendar                 state=floating rectangle=712x295+611+42
 bspc rule -a typing                   state=floating rectangle=917x275+491+409
-
-# Specefic
 bspc rule -a tmux                     desktop=^1 follow=on
 bspc rule -a Code                     desktop=^4 follow=on
 bspc rule -a qBittorrent              desktop=^13 follow=off
@@ -67,6 +65,7 @@ bspc rule -a Gimp-2.10                desktop=^8 follow=on
 bspc rule -a krita                    desktop=^8 follow=on
 bspc rule -a Mpdevil                  desktop=^11 follow=on
 bspc rule -a Ymuse                    desktop=^11 follow=off
+bspc rule -a insomnia                 desktop=^12 follow=on
 bspc rule -a Easytag                  desktop=^11 follow=off
 bspc rule -a Nemo                     desktop=^12 follow=on border=off
 bspc rule -a Zathura                  desktop=^6 state=tiled follow=on

@@ -21,7 +21,7 @@ require('lspkind').init({
     Function = "",
     Constructor = "",
     Field = "ﰮ",
-    Variable = "[]",
+    Variable = "",
     Class = "ﴯ",
     Interface = "",
     Module = "",
@@ -101,6 +101,7 @@ local handlers = {
 -- LSP Snippets
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities.textDocument.completion.completionItem.snippetSupport = true
+capabilities.offsetEncoding = { "utf-16" }
 -- use | capabilities = capabilities | to use snippet from lsp
 
 -- Python

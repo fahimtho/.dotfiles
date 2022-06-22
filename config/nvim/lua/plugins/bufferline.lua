@@ -2,8 +2,8 @@
 require('bufferline').setup {
   options = {
     numbers = "none" ,
-    close_command = "bdelete! %d",
-    right_mouse_command = "bdelete! %d",
+    close_command = "Bdelete! %d",
+    right_mouse_command = "Bdelete! %d",
     left_mouse_command = "buffer %d",
     middle_mouse_command = nil,
     indicator_icon = '',
@@ -14,8 +14,9 @@ require('bufferline').setup {
     right_trunc_marker = '',
     max_name_length = 40,
     max_prefix_length = 15,
+    show_buffer_default_icon = false,
     tab_size = 15,
-    diagnostics = "none",
+    diagnostics = "nvim_lsp",
     diagnostics_update_in_insert = false,
     custom_filter = function(buf_number)
       if vim.bo[buf_number].filetype ~= "<i-dont-want-to-see-this>" then
@@ -36,7 +37,14 @@ require('bufferline').setup {
     persist_buffer_sort = true,
     separator_style = "thin",
     enforce_regular_tabs = false,
-    always_show_bufferline = false,
+    always_show_bufferline = true,
     sort_by = 'id',
+    custom_areas = {
+  right = function()
+    local result = {}
+      table.insert(result, {text = "%{get(b:,'gitsigns_status','')}", guifg = "#A3BA5E"})
+    return result
+  end,
+    }
   }
 }

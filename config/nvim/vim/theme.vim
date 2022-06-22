@@ -59,6 +59,7 @@ hi LspReferenceWrite guibg=#19121f guifg=NONE
 hi LspReferenceRead guibg=#19121f guifg=NONE
 hi illuminatedWord guibg=#19121f guifg=NONE
 hi illuminatedCurWord guibg=#19121f guifg=NONE
+hi Beacon guibg=#19121f guifg=NONE
 
 " Change treesitter Elements
 hi TSKeyword guifg=#004eff

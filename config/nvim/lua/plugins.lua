@@ -532,11 +532,56 @@ return require('packer').startup(
       end
     }
 
+    -- Todo comments
+    use {
+      'folke/todo-comments.nvim',
+      config = function()
+        require "plugins.todo-comments"
+      end
+    }
+
+    -- Code Actions
+    use {
+      'weilbith/nvim-code-action-menu',
+      cmd = 'CodeActionMenu',
+    }
+
+    -- Code Acrtion Indicator
+    use {
+    'kosayoda/nvim-lightbulb',
+    requires = 'antoinemadec/FixCursorHold.nvim',
+    config = function()
+      require("nvim-lightbulb").setup({autocmd = {enabled = true}})
+    end
+    }
+
+    -- Lsp Auto signature
+    use {
+      "ray-x/lsp_signature.nvim",
+      config = function()
+        require("lsp_signature").setup({
+          bind = true,
+        handler_opts = {
+          border = "rounded"
+        }
+        })
+      end
+    }
+
+    -- Non-Lsp Lsp
+    use {
+      'jose-elias-alvarez/null-ls.nvim',
+      config = function()
+        require "plugins.null-ls"
+      end
+    }
+
     -- Telescope
     use 'nvim-telescope/telescope-github.nvim' -- Github
     use "nvim-telescope/telescope-file-browser.nvim" -- File Browser
     use { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' } -- Telescope FZF marriage
     use 'jvgrootveld/telescope-zoxide' -- Quick Folders
+    use 'nvim-telescope/telescope-media-files.nvim'
 
     -- Cmp
     use 'hrsh7th/cmp-nvim-lsp' -- cmp lsp source
@@ -569,9 +614,12 @@ return require('packer').startup(
     use 'JoseConseco/vim-case-change' -- Change Case
     use 'sbdchd/neoformat' -- Format Code
     use 'aperezdc/vim-template' -- Code Template
-    use 'jremmen/vim-ripgrep'
-    use 'andymass/vim-matchup'
-    use 'RRethy/vim-illuminate'
+    use 'jremmen/vim-ripgrep' -- Find Qucikly
+    use 'andymass/vim-matchup' -- Cooler Matchup
+    use 'RRethy/vim-illuminate' -- Highlight Same Words
+    use 'danilamihailov/beacon.nvim' -- Show Cursor Movement
+    use 'terryma/vim-expand-region' -- Cool Selection
+    use 'tpope/vim-unimpaired' -- Handy Brackets
 
     -- Lsp, Treesitter
     use 'David-Kunz/treesitter-unit' -- Select quickly

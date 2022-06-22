@@ -2,9 +2,13 @@
 ## Apps ##
 ##########
 
-# Web-Browser
+# Web-Browser [Jump]
 alt + w
   jump 'Vivaldi-stable' 'vivaldi-stable'
+
+# Web-Browser
+alt + shift + w
+  vivaldi-stable
 
 # Gui File Manager
 alt + f
@@ -37,6 +41,10 @@ super + Return
 # Normal Terminal
 alt + Return
    jump 'kitty' 'kitty'
+
+# Terminal
+alt + shift + Return
+  kitty
 
 # Call Discord
 super + d

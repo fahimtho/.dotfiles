@@ -1,3 +1,4 @@
+-- Nice Quickfix
 vim.cmd([[
     hi BqfPreviewBorder guifg=#004eff
     hi link BqfPreviewRange Search

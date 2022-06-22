@@ -6,7 +6,7 @@ local vim_components = require('windline.components.vim')
 local b_components = require('windline.components.basic')
 local state = _G.WindLine.state
 local lsp_comps = require('windline.components.lsp')
-local git_components = require('windline.components.git')
+local git_comps = require('windline.components.git')
 
 -- Main Colors
 local hl_list = {
@@ -103,6 +103,7 @@ local default = {
         basic.divider,
         { ' ', hl_list.Black },
         basic.lsp_diagnos,
+        { git_comps.git_branch({ icon = '  ' }), { 'green', 'black' }, 90 },
         { ' ', hl_list.Black },
         { sep.left_rounded, { 'black_light', 'black' } },
         basic.right,

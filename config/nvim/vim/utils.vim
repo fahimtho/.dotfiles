@@ -123,37 +123,37 @@ endfunc
 
 " Showing code context using treesitter
 func! Location() abort
-	return luaeval("require'nvim-navic'.is_available()") ?
-		\ luaeval("require'nvim-navic'.get_location()") : ''
-endf
+  return luaeval("require'nvim-navic'.is_available()") ?
+        \ luaeval("require'nvim-navic'.get_location()") : ''
+  endf
 
-" Vim Terminal
-command! -nargs=? Terminal call s:Term(<q-args>)
-function! s:Term(args)
-  if has('nvim')
-    execute 'terminal ' . a:args
-    setlocal signcolumn=no
-    setlocal norelativenumber
-    setlocal nonumber
-    setlocal laststatus=0
-    setlocal hidden
-    autocmd! TermClose <buffer=abuf> if !v:event.status | exec 'bd! '..expand('<abuf>') | set laststatus=3 | endif | checktime
-    startinsert
-  elseif has('terminal')
-    execute 'tab terminal ++close ' . a:args
-  else
-    execute 'silent !( ' . (a:args != '' ? a:args : $SHELL) . ') || ( echo "Hit Enter"; read; )' | redraw!
-  endif
-endfunction
+  " Vim Terminal
+  command! -nargs=? Terminal call s:Term(<q-args>)
+  function! s:Term(args)
+    if has('nvim')
+      execute 'terminal ' . a:args
+      setlocal signcolumn=no
+      setlocal norelativenumber
+      setlocal nonumber
+      setlocal laststatus=0
+      setlocal hidden
+      autocmd! TermClose <buffer=abuf> if !v:event.status | exec 'bd! '..expand('<abuf>') | set laststatus=3 | endif | checktime
+      startinsert
+    elseif has('terminal')
+      execute 'tab terminal ++close ' . a:args
+    else
+      execute 'silent !( ' . (a:args != '' ? a:args : $SHELL) . ') || ( echo "Hit Enter"; read; )' | redraw!
+    endif
+  endfunction
 
-" setting filetype
-autocmd BufRead,BufNewFile *.tex set filetype=tex
-au BufReadPost *.conf setl ft=conf
-au BufReadPost *.rasi setl ft=rasi
-au BufReadPost sxhkdrc setl ft=sh
+  " setting filetype
+  autocmd BufRead,BufNewFile *.tex set filetype=tex
+  au BufReadPost *.conf setl ft=conf
+  au BufReadPost *.rasi setl ft=rasi
+  au BufReadPost sxhkdrc setl ft=sh
 
-" Settings Settings For Tex filetype
-autocmd filetype tex setlocal spell
-autocmd filetype tex set spelllang=en_us
-autocmd filetype markdown setlocal spell
-autocmd filetype markdown set spelllang=en_us
+  " Settings Settings For Tex filetype
+  autocmd filetype tex setlocal spell
+  autocmd filetype tex set spelllang=en_us
+  autocmd filetype markdown setlocal spell
+  autocmd filetype markdown set spelllang=en_us

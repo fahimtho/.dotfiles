@@ -48,6 +48,7 @@ set mouse=ar                                              " mouse as it should b
 set conceallevel=1                                        " magic
 set completeopt=menu,menuone,noselect                     " autocomplete format
 set noshowcmd                                             " Do not show keys pressed
+set signcolumn=number                                     " show signs in column
 filetype plugin indent on                                 " filetype Plugin to set filetype
 
 " ignore Files
@@ -77,6 +78,9 @@ let g:asyncrun_open = 15
 let g:tex_flavor='latex'
 let g:vimtex_quickfix_mode=1
 let g:vimtex_view_method = 'zathura'
+
+" Code Action
+let g:code_action_menu_window_border = 'rounded'
 
 " Floating terminal
 let g:floaterm_title = ''
