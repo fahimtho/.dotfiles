@@ -189,3 +189,10 @@ nnoremap <silent> <leader>/ :HopPattern<CR>
 
 " Delete Current Buffers
 nnoremap <silent><space>x :Bdelete<CR>
+
+" Snippes
+imap <expr> <C-n> snippy#can_expand_or_advance() ? '<Plug>(snippy-expand-or-advance)' : '<Tab>'
+imap <expr> <C-p> snippy#can_jump(-1) ? '<Plug>(snippy-previous)' : '<S-Tab>'
+smap <expr> <C-n> snippy#can_jump(1) ? '<Plug>(snippy-next)' : '<Tab>'
+smap <expr> <C-p> snippy#can_jump(-1) ? '<Plug>(snippy-previous)' : '<S-Tab>'
+xmap <C-n> <Plug>(snippy-cut-text)
